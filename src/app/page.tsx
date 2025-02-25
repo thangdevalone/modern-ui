@@ -49,7 +49,7 @@ export default function Home() {
         </div>
       </header>
       <main className="flex-1">
-        <section className="relative overflow-hidden min-h-[100dvh] flex items-center">
+        <section className="relative overflow-hidden min-h-[90dvh] max-h-[1200px] flex items-center">
           <DoodleBackground/>
 
           {/* Content */}
