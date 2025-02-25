@@ -1,6 +1,6 @@
-# mordern-ui
+# Modern Ui
 
-🚀 **mordern-ui** là một thư viện UI component tùy chỉnh, giúp bạn xây dựng giao diện web hiện đại, đẹp mắt và dễ dàng sử dụng. 
+🚀 **Modern Ui** là một thư viện UI component tùy chỉnh, giúp bạn xây dựng giao diện web hiện đại, đẹp mắt và dễ dàng sử dụng. 
 
 ## ✨ Tính năng nổi bật
 
