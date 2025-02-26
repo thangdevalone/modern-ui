@@ -32,8 +32,14 @@ const DoodleBackground = () => {
           <motion.circle cx="850" cy="850" r="30" variants={draw}/>
 
           {/* Stars */}
-          <motion.path d="M500,100 L520,140 L560,150 L520,160 L500,200 L480,160 L440,150 L480,140 Z" variants={draw}/>
-          <motion.path d="M800,300 L820,340 L860,350 L820,360 L800,400 L780,360 L740,350 L780,340 Z" variants={draw}/>
+          <motion.path
+            d="M500,100 L520,140 L560,150 L520,160 L500,200 L480,160 L440,150 L480,140 Z"
+            variants={draw}
+            animate={{
+              rotate: [0, 360],
+              transition: { duration: 20, repeat: Number.POSITIVE_INFINITY, ease: "linear" },
+            }}
+          />
         </motion.g>
       </svg>
 

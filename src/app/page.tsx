@@ -1,10 +1,16 @@
 "use client";
 
 import Link from "next/link";
-import {Button} from "@/components/ui/button";
+import {Button, buttonVariants} from "@/components/ui/button";
 import {motion} from "framer-motion";
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
+import {cn} from '@/lib/utils';
+import {useTheme} from 'next-themes';
+import {ThemeToggle} from '@/components/theme-toggle';
+import githubWhite from "@/assets/github-mark-white.svg";
+import {RainbowButton} from '@/components/ui/rainbow-button';
+import {CommandMenu} from '@/components/command-menu';
 
 const DoodleBackground = dynamic(() => import("@/components/doodle-background"), {
   ssr: false,
@@ -26,11 +32,12 @@ const item = {
 };
 
 export default function Home() {
+  const {theme} = useTheme();
   return (
     <div className="flex flex-col min-h-dvh">
       <header
         className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container flex h-14 items-center">
+        <div className="container flex h-[70px] items-center justify-between">
           <Link href="/" className="flex items-center space-x-3">
             <Image src="/assets/favicon.png" width={24} height={24} alt="logo"/>
             <span className="font-bold">Modern UI</span>
@@ -46,6 +53,17 @@ export default function Home() {
               Documentation
             </Link>
           </nav>
+          <div className="flex items-center space-x-4">
+            <RainbowButton onClick={() => window.open("https://github.com/thangdevalone/modern-ui", '_blank')}
+                           className="h-9 text-sm">
+              <div>
+                <Image className="mr-2" src={githubWhite} width={16} height={16} alt="github"/>
+              </div>
+              Star on GitHub
+            </RainbowButton>
+            <CommandMenu/>
+            <ThemeToggle/>
+          </div>
         </div>
       </header>
       <main className="flex-1">
@@ -58,14 +76,11 @@ export default function Home() {
               variants={container}
               className="flex max-w-[64rem] flex-col items-center gap-4 text-center mx-auto"
             >
-              <motion.div
-                variants={item}
-                whileHover={{scale: 1.05}}
-                whileTap={{scale: 0.95}}
+              <div
                 className="inline-flex items-center rounded-2xl bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 px-4 py-1.5 text-sm font-medium text-white shadow-xl dark:from-pink-600 dark:via-purple-600 dark:to-blue-600 animate-gradient-x"
               >
                 Beautiful Components for Modern Web Apps
-              </motion.div>
+              </div>
               <motion.h1
                 variants={item}
                 className="font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl bg-clip-text text-transparent bg-gradient-to-r from-rose-500 via-fuchsia-500 to-indigo-500"
@@ -219,38 +234,43 @@ export default function Home() {
                   >
                     Get Started
                   </Button>
-                  <Button
-                    className="flex-1 hover:bg-gradient-to-r hover:from-rose-50 hover:to-indigo-50 dark:hover:from-rose-950 dark:hover:to-indigo-950 transition-all duration-300 hover:scale-105 active:scale-95"
-                    variant="outline"
-                    size="lg"
+                  <Link
+                    href="https://github.com/thangdevalone/modern-ui"
+                    className={cn(buttonVariants({
+                      variant: 'outline',
+                      size: "lg"
+                    }), "flex-1 hover:bg-gradient-to-r hover:from-rose-50 hover:to-indigo-50 dark:hover:from-rose-950 dark:hover:to-indigo-950 transition-all duration-300 hover:scale-105 active:scale-95")}
                   >
                     View on GitHub
-                  </Button>
+                  </Link>
                 </div>
               </div>
             </div>
           </motion.div>
         </section>
       </main>
+      ;
       <footer className="border-t py-6 md:py-0">
         <div className="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
           <div className="flex flex-col items-center gap-4 px-8 md:flex-row md:gap-2 md:px-0">
             <Image src="/assets/favicon.png" width={24} height={24} alt="logo"/>
             <p className="text-center text-sm leading-loose md:text-left">
               Built by{" "}
-              <Link href="#" className="font-medium underline underline-offset-4">
-                you
+              <Link href="https://github.com/thangdevalone" className="font-medium underline underline-offset-4">
+                @thangdevalone
               </Link>
               . The source code is available on{" "}
-              <Link href="#" className="font-medium underline underline-offset-4">
+              <Link href="https://github.com/thangdevalone/modern-ui"
+                    className="font-medium underline underline-offset-4">
                 GitHub
               </Link>
               .
             </p>
           </div>
         </div>
-      </footer>
+      </footer>;
     </div>
-  );
+  )
+    ;
 }
 
