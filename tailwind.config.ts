@@ -57,6 +57,12 @@ module.exports = {
         "color-4": "hsl(var(--color-4))",
         "color-5": "hsl(var(--color-5))",
       },
+      backgroundImage: {
+        "dot-pattern": "radial-gradient(circle, currentColor 1px, transparent 1px)",
+      },
+      backgroundSize: {
+        "dot-pattern": "20px 20px",
+      },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
@@ -73,12 +79,51 @@ module.exports = {
           },
         },
         rainbow: {
-          "0%": { "background-position": "0%" },
-          "100%": { "background-position": "200%" },
+          "0%": {"background-position": "0%"},
+          "100%": {"background-position": "200%"},
+        },
+      },
+      typography: {
+        DEFAULT: {
+          css: {
+            pre: false,
+            maxWidth: "100%",
+            color: "var(--foreground)",
+            a: {
+              color: "var(--primary)",
+              "&:hover": {
+                color: "var(--primary)",
+              },
+            },
+            h1: {
+              color: "var(--foreground)",
+            },
+            h2: {
+              color: "var(--foreground)",
+            },
+            h3: {
+              color: "var(--foreground)",
+            },
+            h4: {
+              color: "var(--foreground)",
+            },
+            code: {
+              color: "var(--foreground)",
+              backgroundColor: "var(--muted)",
+              borderRadius: "0.25rem",
+              padding: "0.25rem",
+            },
+            "code::before": {
+              content: '""',
+            },
+            "code::after": {
+              content: '""',
+            },
+          },
         },
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
 };
 

@@ -3,7 +3,7 @@
 import * as React from "react";
 import {Book, FileText, Settings} from "lucide-react";
 import {useRouter} from "next/navigation";
-import {Button} from "@/components/ui/button";
+import {Button} from "@/components/modern-ui/button";
 import {
   CommandDialog,
   CommandEmpty,
@@ -12,7 +12,7 @@ import {
   CommandItem,
   CommandList,
   CommandSeparator,
-} from "@/components/ui/command";
+} from "@/components/modern-ui/command";
 
 export function CommandMenu() {
   const [open, setOpen] = React.useState(false);

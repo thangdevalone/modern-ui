@@ -1,0 +1,10 @@
+# Button Component
+
+A versatile button component with multiple variants and sizes, built with accessibility in mind.
+
+## Installation
+
+The Button component is part of our UI library. You can import it directly from the components directory.
+
+```tsx
+import { Button } from "@/components/ui/button"
