@@ -3,6 +3,17 @@
 @tailwind utilities;
 @layer base {
   :root {
+
+    --sh-class: #7aa2f7;
+    --sh-sign: #89ddff;
+    --sh-string: #9ece6a;
+    --sh-keyword: #bb9af7;
+    --sh-comment: #565f89;
+    --sh-jsxliterals: #7aa2f7;
+    --sh-property: #73daca;
+    --sh-entity: #e0af68;
+
+
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
     --card: 0 0% 100%;
@@ -75,7 +86,6 @@
 @layer utilities {
 
 }
-
 .bg-grid-black {
   background-size: 40px 40px;
   background-image: linear-gradient(to right, rgb(0 0 0 / 0.1) 1px, transparent 1px),

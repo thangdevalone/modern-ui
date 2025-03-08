@@ -1,12 +1,14 @@
 "use client";
 
 import Link from 'next/link';
-import Logo from '@/components/assets-theme/logo';
 import {RainbowButton} from '@/components/modern-ui/rainbow-button';
-import Github from '@/components/assets-theme/github';
 import {CommandMenu} from '@/components/command-menu';
 import {ThemeToggle} from '@/components/theme-toggle';
 import Image from 'next/image';
+import dynamic from 'next/dynamic';
+
+const Logo = dynamic(() => import("@/components/assets-theme/logo"), {ssr: false});
+const Github = dynamic(() => import("@/components/assets-theme/github"), {ssr: false});
 
 export const Header = () => {
   return (
@@ -18,7 +20,8 @@ export const Header = () => {
           <span className="font-bold">Modern UI</span>
         </Link>
         <nav className="flex items-center space-x-6 ml-6">
-          <Link href="/docs/components" className="text-sm font-medium transition-colors hover:text-primary">
+          <Link href="/docs/components"
+                className="text-sm text-muted-foreground font-medium transition-colors hover:text-primary">
             Components
           </Link>
           <Link

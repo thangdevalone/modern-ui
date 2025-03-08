@@ -11,3 +11,10 @@ export function formatSlug(slug: string) {
     .map(word => word.charAt(0).toUpperCase() + word.slice(1))
     .join(" ");
 }
+
+export const generateId = (text: string) => {
+  return text
+    .toLowerCase()
+    .replace(/[^\w\s-]/g, "")
+    .replace(/\s+/g, "-");
+};

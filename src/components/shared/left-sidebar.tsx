@@ -5,7 +5,6 @@ import {usePathname} from "next/navigation";
 import {motion} from "framer-motion";
 import {Badge} from '@/components/modern-ui/badge';
 import clsx from "clsx";
-
 const containerVariants = {
   hidden: {opacity: 0},
   show: {
