@@ -1,7 +1,6 @@
 import type React from "react";
 import {Metadata} from 'next';
 import LeftSidebar from '@/components/shared/left-sidebar';
-import MdxLayout from '@/components/layouts/mdx-layout';
 
 export const metadata: Metadata = {
   title: "Docs | Modern UI",
@@ -11,9 +10,9 @@ export const metadata: Metadata = {
   },
 };
 
-export default function DocsLayout({
-                                     children,
-                                   }: {
+export default async function DocsLayout({
+                                           children,
+                                         }: {
   children: React.ReactNode
 }) {
   return (
@@ -24,10 +23,7 @@ export default function DocsLayout({
         >
           <LeftSidebar/>
         </aside>
-        <MdxLayout>
-          {children}
-        </MdxLayout>
-        {/*<TableOfContents content={contents}/>*/}
+        {children}
       </div>
     </div>
 
