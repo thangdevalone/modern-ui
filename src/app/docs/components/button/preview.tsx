@@ -1,6 +1,5 @@
 "use client";
-import Link from 'next/link';
-import {ChevronRight, RefreshCw} from 'lucide-react';
+import {RefreshCw} from 'lucide-react';
 import {useState} from 'react';
 import {Tabs, TabsContent, TabsList, TabsTrigger} from '@/components/modern-ui/tabs';
 import {Button} from '@/components/modern-ui/button';
@@ -22,13 +21,6 @@ export const PreviewButton = () => {
 
   return (
     <>
-      <div
-        className="mb-4 text-sm flex flex-row items-center gap-2 text-muted-foreground"
-      >
-        <Link className="no-underline" href={"/docs"}>Docs</Link> <ChevronRight className="w-4 h-4"/>
-        <Link className="no-underline" href={"/docs/components"}>Components</Link> <ChevronRight className="w-4 h-4"/>
-        <strong>Button</strong>
-      </div>
       <Tabs value={activeTab} className="mb-8" onValueChange={(value) => setActiveTab(value)}>
         <TabsList>
           <TabsTrigger value="preview">Preview</TabsTrigger>
