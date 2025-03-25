@@ -68,7 +68,7 @@ export default function Home() {
                 A collection of reusable components built with Radix UI and Tailwind CSS. Free. Open Source. And Next.js
                 14 Ready.
               </motion.p>
-              <motion.div variants={item} className="space-x-4">
+              <motion.div variants={item} className="md:gap-4 gap-2 flex md:flex-row flex-col">
                 <Link href="/components">
                   <Button
                     size="lg"
@@ -201,7 +201,7 @@ export default function Home() {
                 <p className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7">
                   Join thousands of developers creating amazing applications.
                 </p>
-                <div className="flex flex-col sm:flex-row gap-4 w-full max-w-md">
+                <div className="flex flex-row flex-wrap gap-4 w-full max-w-md">
                   <Button
                     className="flex-1 bg-gradient-to-r from-rose-500 via-fuchsia-500 to-indigo-500 hover:from-rose-600 hover:via-fuchsia-600 hover:to-indigo-600 transition-all duration-300 hover:scale-105 active:scale-95"
                     size="lg"

@@ -6,6 +6,8 @@ import {CommandMenu} from '@/components/command-menu';
 import {ThemeToggle} from '@/components/theme-toggle';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
+import {Button} from '@/components/modern-ui/button';
+import {Menu} from 'lucide-react';
 
 const Logo = dynamic(() => import("@/components/assets-theme/logo"), {ssr: false});
 const Github = dynamic(() => import("@/components/assets-theme/github"), {ssr: false});
@@ -14,12 +16,12 @@ export const Header = () => {
   return (
     <header
       className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-[70px] items-center justify-between">
-        <Link href="/" className="flex items-center space-x-3">
+      <div className="container flex sm:h-[70px] h-[60px] items-center justify-between pl-6 pr-4">
+        <Link href="/" className="flex items-center min-w-[35px] space-x-3">
           <Logo/>
-          <span className="font-bold">Modern UI</span>
+          <span className="font-bold hidden md:block">Modern UI</span>
         </Link>
-        <nav className="flex items-center space-x-6 ml-6">
+        <nav className="flex items-center space-x-6 ml-6 hidden md:flex">
           <Link href="/docs/components"
                 className="text-sm text-muted-foreground font-medium transition-colors hover:text-primary">
             Components
@@ -37,16 +39,24 @@ export const Header = () => {
             Blogs
           </Link>
         </nav>
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-2 lg:space-x-4 min-w-[250px] justify-end">
           <RainbowButton onClick={() => window.open("https://github.com/thangdevalone/modern-ui", '_blank')}
-                         className="h-9 text-sm">
-            <div>
-              <Github/>
-            </div>
+                         className="h-9 text-sm hidden lg:inline-flex gap-2 text-nowrap">
+            <Github/>
             Star on GitHub
           </RainbowButton>
-          <CommandMenu/>
+          <div className="flex-1 xs:block hidden">
+            <CommandMenu/>
+          </div>
+          <Button variant="icon" size="icon" className="flex lg:hidden items-center justify-center"
+                  onClick={() => window.open("https://github.com/thangdevalone/modern-ui", '_blank')}>
+            <Github isInvert/>
+          </Button>
           <ThemeToggle/>
+
+          <Button className="sm:hidden flex" variant="icon" size="icon">
+            <Menu className="!size-6"/>
+          </Button>
         </div>
       </div>
     </header>
