@@ -5,25 +5,32 @@ import {Check, Copy} from "lucide-react";
 import {cn} from "@/lib/utils";
 import {AnimatePresence, motion} from "framer-motion";
 
+interface Commands {
+  [key: string]: string;
+}
+
 interface TerminalBlockProps {
-  command: string;
-  activeTab?: "pnpm" | "npm" | "yarn" | "bun";
+  commands: Commands;
+  activeTab?: keyof Commands;
   showTypingAnimation?: boolean;
 }
 
-export function TerminalBlock({command, activeTab = "npm", showTypingAnimation = true}: TerminalBlockProps) {
+export function TerminalBlock({
+                                commands,
+                                activeTab = Object.keys(commands)[0],
+                                showTypingAnimation = true,
+                              }: TerminalBlockProps) {
   const [hasCopied, setHasCopied] = useState(false);
   const [displayedCommand, setDisplayedCommand] = useState("");
   const [isTyping, setIsTyping] = useState(showTypingAnimation);
-  const [currentTab, setCurrentTab] = useState(activeTab);
+  const [currentTab, setCurrentTab] = useState<keyof Commands>(activeTab);
 
   const handleCopy = async () => {
-    await navigator.clipboard.writeText(command);
+    await navigator.clipboard.writeText(commands[currentTab]);
     setHasCopied(true);
     setTimeout(() => setHasCopied(false), 2000);
   };
 
-  // Reset typing animation when tab changes
   useEffect(() => {
     if (showTypingAnimation) {
       setIsTyping(true);
@@ -31,35 +38,29 @@ export function TerminalBlock({command, activeTab = "npm", showTypingAnimation =
     }
   }, [currentTab, showTypingAnimation]);
 
-  // Typing animation effect
   useEffect(() => {
     if (!showTypingAnimation) {
-      setDisplayedCommand(command);
+      setDisplayedCommand(commands[currentTab]);
       return;
     }
 
     if (isTyping) {
       let i = 0;
       const typingInterval = setInterval(() => {
-        if (i <= command.length) {
-          setDisplayedCommand(command.slice(0, i));
+        if (i <= commands[currentTab].length) {
+          setDisplayedCommand(commands[currentTab].slice(0, i));
           i++;
         } else {
           clearInterval(typingInterval);
           setIsTyping(false);
         }
-      }, 30); // Adjust typing speed here
+      }, 30);
 
       return () => clearInterval(typingInterval);
     }
-  }, [command, isTyping, showTypingAnimation]);
+  }, [commands, currentTab, isTyping, showTypingAnimation]);
 
-  const tabs = [
-    {name: "pnpm", label: "pnpm"},
-    {name: "npm", label: "npm"},
-    {name: "yarn", label: "yarn"},
-    {name: "bun", label: "bun"},
-  ];
+  const tabs = Object.keys(commands);
 
   return (
     <motion.div
@@ -71,17 +72,19 @@ export function TerminalBlock({command, activeTab = "npm", showTypingAnimation =
       <div className="flex border-b border-zinc-800 bg-[#161b22]">
         {tabs.map((tab) => (
           <motion.button
-            key={tab.name}
-            onClick={() => setCurrentTab(tab.name as any)}
+            key={tab}
+            onClick={() => setCurrentTab(tab as keyof Commands)}
             className={cn(
               "relative px-6 py-3 text-sm font-medium transition-colors",
-              currentTab === tab.name ? "text-primary-foreground" : "text-zinc-500 hover:text-zinc-300",
+              currentTab === tab
+                ? "text-primary-foreground"
+                : "text-zinc-500 hover:text-zinc-300",
             )}
             whileHover={{backgroundColor: "rgba(255, 255, 255, 0.05)"}}
             whileTap={{scale: 0.97}}
           >
-            {tab.label}
-            {currentTab === tab.name && (
+            {tab}
+            {currentTab === tab && (
               <motion.span
                 className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#58a6ff]"
                 layoutId="activeTab"
@@ -95,10 +98,7 @@ export function TerminalBlock({command, activeTab = "npm", showTypingAnimation =
             onClick={handleCopy}
             className="group relative rounded-md p-1.5 text-zinc-400"
             aria-label="Copy command"
-            whileHover={{
-              backgroundColor: "rgba(255, 255, 255, 0.1)",
-              color: "#ffffff",
-            }}
+            whileHover={{backgroundColor: "rgba(255, 255, 255, 0.1)", color: "#ffffff"}}
             whileTap={{scale: 0.9}}
           >
             <AnimatePresence mode="wait">
@@ -158,4 +158,3 @@ export function TerminalBlock({command, activeTab = "npm", showTypingAnimation =
     </motion.div>
   );
 }
-

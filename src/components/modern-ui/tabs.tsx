@@ -18,7 +18,7 @@ const TabsList = React.forwardRef<
     width: 0,
     height: 0,
   });
-  const [isMounted, setIsMounted] = useState(false); // Thêm state kiểm tra mount
+  const [isMounted, setIsMounted] = useState(false);
   const tabsListRef = useRef<HTMLDivElement | null>(null);
 
   const updateIndicator = React.useCallback(() => {
@@ -91,7 +91,7 @@ const TabsTrigger = React.forwardRef<
   <TabsPrimitive.Trigger
     ref={ref}
     className={cn(
-      "inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:text-foreground z-10",
+      "inline-flex cursor-pointer items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:text-foreground z-10",
       className
     )}
     {...props}
