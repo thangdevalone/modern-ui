@@ -12,6 +12,7 @@ export function ButtonInstallation() {
   };
 
   return <>
-    <TerminalBlock command={commands[activeTab]} activeTab={activeTab} showTypingAnimation={true}/>
+    <TerminalBlock commands={commands} activeTab={activeTab}
+                   showTypingAnimation={true}/>
   </>;
 }
