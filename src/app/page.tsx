@@ -51,13 +51,13 @@ export default function Home() {
               className="flex max-w-[64rem] flex-col items-center gap-4 text-center mx-auto"
             >
               <div
-                className="inline-flex items-center rounded-2xl bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 px-4 py-1.5 text-sm font-medium text-white shadow-xl dark:from-pink-600 dark:via-purple-600 dark:to-blue-600 animate-gradient-x"
+                className="inline-flex items-center rounded-2xl bg-linear-to-r from-pink-500 via-purple-500 to-blue-500 px-4 py-1.5 text-sm font-medium text-white shadow-xl dark:from-pink-600 dark:via-purple-600 dark:to-blue-600 animate-gradient-x"
               >
                 Beautiful Components for Modern Web Apps
               </div>
               <motion.h1
                 variants={item}
-                className="font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl bg-clip-text text-transparent bg-gradient-to-r from-rose-500 via-fuchsia-500 to-indigo-500"
+                className="font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl bg-clip-text text-transparent bg-linear-to-r from-rose-500 via-fuchsia-500 to-indigo-500"
               >
                 Build Faster with Our UI Library
               </motion.h1>
@@ -72,7 +72,7 @@ export default function Home() {
                 <Link href="/components">
                   <Button
                     size="lg"
-                    className="bg-gradient-to-r from-rose-500 via-fuchsia-500 to-indigo-500 hover:from-rose-600 hover:via-fuchsia-600 hover:to-indigo-600 transition-all duration-300 hover:scale-105 active:scale-95"
+                    className="bg-linear-to-r from-rose-500 via-fuchsia-500 to-indigo-500 hover:from-rose-600 hover:via-fuchsia-600 hover:to-indigo-600 transition-all duration-300 hover:scale-105 active:scale-95"
                   >
                     Browse Components
                   </Button>
@@ -81,7 +81,7 @@ export default function Home() {
                   <Button
                     variant="outline"
                     size="lg"
-                    className="hover:bg-gradient-to-r hover:from-violet-50 hover:to-indigo-50 dark:hover:from-violet-950 dark:hover:to-indigo-950 transition-all duration-300 hover:scale-105 active:scale-95"
+                    className="hover:bg-linear-to-r hover:from-violet-50 hover:to-indigo-50 dark:hover:from-violet-950 dark:hover:to-indigo-950 transition-all duration-300 hover:scale-105 active:scale-95"
                   >
                     Documentation
                   </Button>
@@ -94,7 +94,7 @@ export default function Home() {
         {/* Rest of the sections */}
         <section className="container space-y-6 py-8 md:py-12 lg:py-24 relative">
           <div
-            className="absolute inset-0 bg-gradient-to-br from-rose-50/50 to-indigo-50/50 rounded-3xl dark:from-rose-950/10 dark:to-indigo-950/10"/>
+            className="absolute inset-0 bg-linear-to-br from-rose-50/50 to-indigo-50/50 rounded-3xl dark:from-rose-950/10 dark:to-indigo-950/10"/>
           <motion.div
             initial={{opacity: 0, y: 20}}
             whileInView={{opacity: 1, y: 0}}
@@ -139,7 +139,7 @@ export default function Home() {
                   className="group relative overflow-hidden rounded-lg border bg-background p-2"
                 >
                   <div
-                    className={`absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-100 transition-opacity duration-500 ${feature.gradient}`}
+                    className={`absolute inset-0 bg-linear-to-br opacity-0 group-hover:opacity-100 transition-opacity duration-500 ${feature.gradient}`}
                   />
                   <div className="relative flex h-[180px] flex-col justify-between rounded-md p-6">
                     <div className="space-y-2">
@@ -170,10 +170,10 @@ export default function Home() {
             ].map((stat, i) => (
               <motion.div key={i} variants={item} whileHover={{scale: 1.05}} className="relative group">
                 <div
-                  className="absolute inset-0 bg-gradient-to-br from-rose-100 via-fuchsia-100 to-indigo-100 rounded-2xl blur-xl opacity-25 group-hover:opacity-75 transition-opacity duration-500 dark:from-rose-900/50 dark:via-fuchsia-900/50 dark:to-indigo-900/50"/>
+                  className="absolute inset-0 bg-linear-to-br from-rose-100 via-fuchsia-100 to-indigo-100 rounded-2xl blur-xl opacity-25 group-hover:opacity-75 transition-opacity duration-500 dark:from-rose-900/50 dark:via-fuchsia-900/50 dark:to-indigo-900/50"/>
                 <div className="relative space-y-2 text-center p-6 bg-background rounded-2xl border">
                   <div
-                    className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-rose-500 via-fuchsia-500 to-indigo-500">
+                    className="text-4xl font-bold bg-clip-text text-transparent bg-linear-to-r from-rose-500 via-fuchsia-500 to-indigo-500">
                     {stat.number}
                   </div>
                   <div className="text-muted-foreground font-medium">{stat.label}</div>
@@ -191,11 +191,11 @@ export default function Home() {
             viewport={{once: true}}
             className="relative rounded-3xl overflow-hidden"
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-rose-500 via-fuchsia-500 to-indigo-500"/>
+            <div className="absolute inset-0 bg-linear-to-r from-rose-500 via-fuchsia-500 to-indigo-500"/>
             <div className="relative bg-background/[0.8] dark:bg-background/[0.9] backdrop-blur-xl p-8 md:p-12 lg:p-16">
               <div className="mx-auto max-w-[58rem] flex flex-col items-center space-y-4 text-center">
                 <h2
-                  className="font-bold text-3xl leading-[1.1] sm:text-3xl md:text-4xl bg-clip-text text-transparent bg-gradient-to-r from-rose-500 via-fuchsia-500 to-indigo-500">
+                  className="font-bold text-3xl leading-[1.1] sm:text-3xl md:text-4xl bg-clip-text text-transparent bg-linear-to-r from-rose-500 via-fuchsia-500 to-indigo-500">
                   Start Building Today
                 </h2>
                 <p className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7">
@@ -203,7 +203,7 @@ export default function Home() {
                 </p>
                 <div className="flex flex-row flex-wrap gap-4 w-full max-w-md">
                   <Button
-                    className="flex-1 bg-gradient-to-r from-rose-500 via-fuchsia-500 to-indigo-500 hover:from-rose-600 hover:via-fuchsia-600 hover:to-indigo-600 transition-all duration-300 hover:scale-105 active:scale-95"
+                    className="flex-1 bg-linear-to-r from-rose-500 via-fuchsia-500 to-indigo-500 hover:from-rose-600 hover:via-fuchsia-600 hover:to-indigo-600 transition-all duration-300 hover:scale-105 active:scale-95"
                     size="lg"
                   >
                     Get Started
@@ -213,7 +213,7 @@ export default function Home() {
                     className={cn(buttonVariants({
                       variant: 'outline',
                       size: "lg"
-                    }), "flex-1 hover:bg-gradient-to-r hover:from-rose-50 hover:to-indigo-50 dark:hover:from-rose-950 dark:hover:to-indigo-950 transition-all duration-300 hover:scale-105 active:scale-95")}
+                    }), "flex-1 hover:bg-linear-to-r hover:from-rose-50 hover:to-indigo-50 dark:hover:from-rose-950 dark:hover:to-indigo-950 transition-all duration-300 hover:scale-105 active:scale-95")}
                   >
                     View on GitHub
                   </Link>

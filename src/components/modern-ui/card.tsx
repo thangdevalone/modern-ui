@@ -7,10 +7,10 @@ import {cn} from "@/lib/utils";
 const cardVariants = cva("group relative overflow-hidden rounded-xl transition-all duration-300", {
   variants: {
     variant: {
-      default: "bg-background border border-border shadow-sm hover:bg-muted/50",
+      default: "bg-background border border-border shadow-xs hover:bg-muted/50",
       glass: "backdrop-blur-md bg-background/80 border border-white/20 shadow-lg",
       gradient:
-        "bg-background before:absolute before:inset-0 before:rounded-xl before:p-[1px] before:bg-gradient-to-r before:from-primary/50 before:via-secondary/50 before:to-primary/50 before:-z-10",
+        "bg-background before:absolute before:inset-0 before:rounded-xl before:p-[1px] before:bg-linear-to-r before:from-primary/50 before:via-secondary/50 before:to-primary/50 before:-z-10",
       outline: "bg-background border-2 border-primary/20 hover:border-primary/40",
       elevated:
         "bg-background shadow-[0_0_0_1px_rgba(0,0,0,0.05),0_2px_8px_rgba(0,0,0,0.08),0_4px_16px_rgba(0,0,0,0.04)] hover:shadow-[0_0_0_1px_rgba(0,0,0,0.05),0_4px_12px_rgba(0,0,0,0.1),0_8px_24px_rgba(0,0,0,0.06)]",

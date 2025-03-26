@@ -15,7 +15,7 @@ const Github = dynamic(() => import("@/components/assets-theme/github"), {ssr: f
 export const Header = () => {
   return (
     <header
-      className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur-sm supports-backdrop-filter:bg-background/60">
       <div className="container flex sm:h-[70px] h-[60px] items-center justify-between pl-6 pr-4">
         <Link href="/" className="flex items-center min-w-[35px] space-x-3">
           <Logo/>
@@ -55,7 +55,7 @@ export const Header = () => {
           <ThemeToggle/>
 
           <Button className="sm:hidden flex" variant="icon" size="icon">
-            <Menu className="!size-6"/>
+            <Menu className="size-6!"/>
           </Button>
         </div>
       </div>

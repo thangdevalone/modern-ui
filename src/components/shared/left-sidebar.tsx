@@ -75,7 +75,7 @@ export default function LeftSidebar() {
                     className={clsx(
                       "text-muted-foreground hover:text-foreground relative after:content-[''] after:absolute after:bottom-[-2px] after:left-0 after:w-0 after:h-[2px] after:bg-current after:transition-width after:duration-300 hover:after:w-full transition-colors block",
                       {
-                        "!text-foreground after:w-full": isActive,
+                        "text-foreground! after:w-full": isActive,
                         "opacity-50 pointer-events-none cursor-not-allowed": disabled,
                       }
                     )}
