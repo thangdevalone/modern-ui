@@ -23,7 +23,7 @@ const components = {
     return (
       <h1
         id={id}
-        className={cn("lg:text-4xl sm:text-3xl text-2xl font-bold mb-4 scroll-mt-16", className)}
+        className={cn("lg:text-4xl sm:text-3xl text-2xl font-bold mb-3 scroll-mt-16", className)}
         {...props}
       >
         {children}
@@ -35,7 +35,7 @@ const components = {
     return (
       <h2
         id={id}
-        className={cn("text-2xl font-semibold mb-4 mt-8 scroll-mt-16", className)}
+        className={cn("text-2xl font-semibold mb-4 mt-2 scroll-mt-16", className)}
         {...props}
       >
         {children}
@@ -47,7 +47,7 @@ const components = {
     return (
       <h3
         id={id}
-        className={cn("text-xl font-medium mb-3 mt-6 scroll-mt-16", className)}
+        className={cn("text-xl font-medium mb-3 mt-4 scroll-mt-16", className)}
         {...props}
       >
         {children}
@@ -68,7 +68,7 @@ const components = {
   },
   p: ({className, children, ...props}: ParagraphProps) => (
     <p
-      className={cn("mb-4 text-muted-foreground", className)}
+      className={cn("mb-4 mt-0 text-muted-foreground", className)}
       {...props}
     >
       {children}

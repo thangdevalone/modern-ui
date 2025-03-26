@@ -5,6 +5,7 @@ import {usePathname} from "next/navigation";
 import {motion} from "framer-motion";
 import {Badge} from '@/components/modern-ui/badge';
 import clsx from "clsx";
+
 const containerVariants = {
   hidden: {opacity: 0},
   show: {
@@ -35,7 +36,7 @@ const links: {
   {
     category: "Getting Started",
     items: [
-      {href: "/docs", label: "Introduction"},
+      {href: "/docs/introduction", label: "Introduction"},
       {href: "/docs/installation", label: "Installation"},
       {href: "/docs/cli", label: "CLI", disabled: true},
     ],
@@ -67,7 +68,7 @@ export default function LeftSidebar() {
           </motion.h2>
           <motion.ul className="space-y-2" variants={containerVariants} initial="hidden" animate="show">
             {items.map(({href, label, badge, disabled}) => {
-              const isActive = pathname === href;
+              const isActive = pathname.includes(href);
               return (
                 <motion.li key={href} className="flex items-center gap-2" variants={itemVariants}>
                   <Link

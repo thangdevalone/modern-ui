@@ -1,10 +1,10 @@
-import Contents from '@/mdx/installation.mdx';
+import Contents from '@/mdx/installation.nextjs.mdx';
 import MdxLayout from '@/components/layouts/mdx-layout';
 import TocWrapper from '@/components/providers/toc-wrapper';
 import {Metadata} from 'next';
 
 export const metadata: Metadata = {
-  title: "Installation | Modern UI",
+  title: "Installation - Nextjs | Modern UI",
   description: "A collection of reusable components built with Radix UI and Tailwind CSS. Free. Open Source. And Next.js 14 Ready.",
 };
 export default function page() {
@@ -12,6 +12,6 @@ export default function page() {
     <MdxLayout>
       <Contents/>
     </MdxLayout>
-    <TocWrapper file="installation"/>
+    <TocWrapper file="installation.nextjs"/>
   </>;
 }
