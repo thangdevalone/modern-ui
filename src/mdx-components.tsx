@@ -23,7 +23,7 @@ const components = {
     return (
       <h1
         id={id}
-        className={cn("lg:text-4xl sm:text-3xl text-2xl font-bold mb-3 scroll-mt-16", className)}
+        className={cn("lg:text-4xl sm:text-3xl text-2xl font-bold mb-4 scroll-mt-16", className)}
         {...props}
       >
         {children}
@@ -35,7 +35,7 @@ const components = {
     return (
       <h2
         id={id}
-        className={cn("text-2xl font-semibold mb-4 mt-2 scroll-mt-16", className)}
+        className={cn("text-2xl font-semibold mb-4 mt-4 scroll-mt-16", className)}
         {...props}
       >
         {children}
@@ -171,7 +171,7 @@ const components = {
   ),
   hr: ({className, ...props}: HrProps) => (
     <hr
-      className={cn("my-4 border-border", className)}
+      className={cn("!my-10 border-border", className)}
       {...props}
     />
   ),

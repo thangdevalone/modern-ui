@@ -1,6 +1,6 @@
 import {PreviewButton} from "@/app/docs/components/button/preview";
 import {BreadcrumbNav} from "@/components/breadcrumb-nav";
-import {ButtonContent} from "@/app/docs/components/button/button-content";
+import {ButtonInstallation} from "@/app/docs/components/button/components/button-installation";
 
 
 <BreadcrumbNav className="mb-4" items={[
@@ -15,8 +15,39 @@ import {ButtonContent} from "@/app/docs/components/button/button-content";
 
 A versatile button component with multiple variants and sizes, built with accessibility in mind.
 
+- Supports multiple variants: primary, secondary, outline, and ghost.
+
+- Available in various sizes: small, medium, and large.
+
+- Fully accessible with ARIA attributes.
+
+---
+
 ## Installation
 
 The Button component is part of our UI library. You can import it directly from the components directory.
 
-<ButtonContent/>
+<ButtonInstallation/>
+
+---
+
+## Usage
+
+Here is how to use the button in your project.
+
+```tsx
+import { Button } from "@/components/modern-ui/button"
+```
+
+<br/>
+
+```tsx
+<Button variant="outline">Button</Button>
+```
+
+---
+
+
+## Examples
+
+Our existing button types, You can have direct access to create as you wish
