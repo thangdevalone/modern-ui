@@ -64,7 +64,7 @@ export function TerminalBlock({
 
   return (
     <motion.div
-      className="my-6 overflow-hidden rounded-xl border border-zinc-800 bg-[#0d1117] shadow-lg"
+      className="my-4 overflow-hidden rounded-xl border border-zinc-800 bg-[#0d1117] shadow-lg"
       initial={{opacity: 0, y: 20}}
       animate={{opacity: 1, y: 0}}
       transition={{duration: 0.5, ease: "easeOut"}}
@@ -75,7 +75,7 @@ export function TerminalBlock({
             key={tab}
             onClick={() => setCurrentTab(tab as keyof Commands)}
             className={cn(
-              "relative px-6 py-3 text-sm font-medium transition-colors",
+              "relative px-6 py-3 text-sm font-medium cursor-pointer transition-colors",
               currentTab === tab
                 ? "text-primary-foreground"
                 : "text-zinc-500 hover:text-zinc-300",

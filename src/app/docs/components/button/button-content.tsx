@@ -1,9 +1,6 @@
-"use client";
 import {TerminalBlock} from '@/components/modern-ui/terminal-block';
-import {useState} from 'react';
 
-export function ButtonInstallation() {
-  const [activeTab, setActiveTab] = useState<"pnpm" | "npm" | "yarn" | "bun">("npm");
+export const ButtonContent = () => {
   const commands = {
     npm: 'npx @thangdevalone/button add button',
     pnpm: 'pnpm dlx @thangdevalone/button add button',
@@ -12,7 +9,7 @@ export function ButtonInstallation() {
   };
 
   return <>
-    <TerminalBlock commands={commands} activeTab={activeTab}
+    <TerminalBlock commands={commands} activeTab={'npm'}
                    showTypingAnimation={true}/>
   </>;
-}
+};

@@ -6,7 +6,7 @@ export default function page() {
   return <>
     <MdxLayout>
       <Contents/>
-    </MdxLayout>;
+    </MdxLayout>
     <TocWrapper file="button"/>
   </>;
 }

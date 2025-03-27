@@ -5,7 +5,7 @@ import {Tabs, TabsContent, TabsList, TabsTrigger} from '@/components/modern-ui/t
 import {Button} from '@/components/modern-ui/button';
 import {CodeBlock} from '@/components/code-block';
 
-const buttonCode = `import { Button } from "@/components/modern-ui/button";
+export const buttonCode = `import { Button } from "@/components/modern-ui/button";
             
 export function ButtonDemo() {
     return <Button>Click me</Button>;
