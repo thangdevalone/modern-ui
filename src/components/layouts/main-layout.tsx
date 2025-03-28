@@ -21,7 +21,7 @@ export const Header = () => {
           <Logo/>
           <span className="font-bold hidden md:block">Modern UI</span>
         </Link>
-        <nav className="flex items-center space-x-6 ml-6 hidden md:flex">
+        <nav className="items-center space-x-6 ml-6 hidden md:flex">
           <Link href="/docs/components"
                 className="text-sm text-muted-foreground font-medium transition-colors hover:text-primary">
             Components
