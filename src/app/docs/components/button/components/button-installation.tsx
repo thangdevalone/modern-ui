@@ -7,10 +7,10 @@ import fs from 'node:fs';
 
 const CLIContent = () => {
   const commands = {
-    npm: 'npx @thangdevalone/button add button',
-    pnpm: 'pnpm dlx @thangdevalone/button add button',
-    yarn: 'yarn dlx @thangdevalone/button add button',
-    bun: 'bunx --bun @thangdevalone/button add button',
+    npm: 'npx @thangdevalone/modern-ui add button',
+    pnpm: 'pnpm dlx @thangdevalone/modern-ui add button',
+    yarn: 'yarn dlx @thangdevalone/modern-ui add button',
+    bun: 'bunx --bun @thangdevalone/modern-ui add button',
   };
   return (
     (

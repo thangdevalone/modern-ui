@@ -1,0 +1,66 @@
+import {PreviewTabs} from "@/app/docs/components/fancy-tabs/preview";
+import {BreadcrumbNav} from "@/components/breadcrumb-nav";
+import {TabInstallation} from "@/app/docs/components/fancy-tabs/components/tab-installation";
+
+
+<BreadcrumbNav className="mb-4" items={[
+  {label: "Docs", href: "/docs"},
+  {label: "Components", href: "/docs/components"},
+  {label: "Fancy Tabs"},
+]}/>
+
+<PreviewTabs/>
+
+# Fancy Tabs Component
+
+A highly accessible tabs component with smooth animations, built with Radix UI and Framer Motion.
+
+- Smooth animation when switching between tabs
+- Fully keyboard accessible
+- Responsive design
+- Customizable styling
+
+---
+
+## Installation
+
+The Tabs component is part of our UI library. You can import it directly from the components directory.
+
+<TabInstallation/>
+
+---
+
+## Usage
+
+Here is how to use the tabs in your project.
+
+```tsx
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/modern-ui/tabs"
+```
+
+<br/>
+
+```tsx
+<Tabs defaultValue="account">
+  <TabsList>
+    <TabsTrigger value="account">Account</TabsTrigger>
+    <TabsTrigger value="password">Password</TabsTrigger>
+    <TabsTrigger value="settings">Settings</TabsTrigger>
+  </TabsList>
+  <TabsContent value="account">
+    Account tab content
+  </TabsContent>
+  <TabsContent value="password">
+    Password tab content
+  </TabsContent>
+  <TabsContent value="settings">
+    Settings tab content
+  </TabsContent>
+</Tabs>
+```
+
+---
+
+## Examples
+
+Our existing fancy tabs types, You can have direct access to create as you wish
