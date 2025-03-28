@@ -1,6 +1,6 @@
 "use client";
 import { TerminalBlock } from "@/components/modern-ui/terminal-block";
-import UnderlineTabs from "@/components/modern-ui/underline-tabs";
+import { UnderlineTabs } from "@/components/modern-ui/underline-tabs";
 
 const CLIContent = () => {
   const commands = {
@@ -58,5 +58,5 @@ const tabs = [
 ];
 
 export const TabInstallation = () => {
-  return <UnderlineTabs tabs={tabs} defaultTab="CLI" />;
+  return <UnderlineTabs tabs={tabs} defaultTabId="CLI" />;
 };

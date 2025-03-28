@@ -1,69 +1,102 @@
 "use client";
 
-import { ReactNode, useState } from "react";
-import { motion } from "framer-motion";
-import { cn } from "@/lib/utils";
-import type { LucideIcon } from "lucide-react";
+import type React from "react";
+
+import { useRef, useState, useEffect } from "react";
 
 interface Tab {
   id: string;
   label: string;
-  icon?: LucideIcon;
-  content: ReactNode;
+  content: React.ReactNode;
+  icon?: React.ReactNode;
 }
 
-interface TabsProps {
+interface UnderlineTabsProps {
   tabs: Tab[];
-  defaultTab?: string;
-  className?: string;
+  defaultTabId?: string;
 }
 
-export default function UnderlineTabs({
-  tabs,
-  defaultTab,
-  className,
-}: TabsProps) {
-  const [activeTab, setActiveTab] = useState(defaultTab || tabs[0]?.id);
+export const UnderlineTabs = ({ tabs, defaultTabId }: UnderlineTabsProps) => {
+  const [activeTab, setActiveTab] = useState<string>(
+    defaultTabId || tabs[0].id
+  );
+  const [underlineStyle, setUnderlineStyle] = useState({
+    left: 0,
+    width: 0,
+  });
+
+  const tabRefs = useRef<{ [key: string]: HTMLButtonElement | null }>({});
+
+  useEffect(() => {
+    const activeTabElement = tabRefs.current[activeTab];
+    if (activeTabElement) {
+      setUnderlineStyle({
+        left: activeTabElement.offsetLeft,
+        width: activeTabElement.offsetWidth,
+      });
+    }
+  }, [activeTab]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const activeTabElement = tabRefs.current[activeTab];
+      if (activeTabElement) {
+        setUnderlineStyle({
+          left: activeTabElement.offsetLeft,
+          width: activeTabElement.offsetWidth,
+        });
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [activeTab]);
 
   return (
-    <div className={cn("w-full", className)}>
-      <div className="border-b border-muted">
+    <div className="w-full">
+      <div className="relative border-b">
         <div className="flex">
-          {tabs.map((tab) => {
-            const Icon = tab?.icon;
-            return (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className={cn(
-                  "relative px-4 cursor-pointer py-2 text-sm font-medium transition-colors flex items-center gap-2",
-                  activeTab === tab.id
-                    ? "text-black"
-                    : "text-gray-500 hover:text-gray-700"
-                )}
-              >
-                {Icon && <Icon className="h-4 w-4" />}
-                {tab.label}
-                {activeTab === tab.id && (
-                  <motion.div
-                    layoutId="tab-indicator"
-                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-black"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.2 }}
-                  />
-                )}
-              </button>
-            );
-          })}
+          {tabs.map((tab) => (
+            <button
+              key={tab.id}
+              ref={(el) => {
+                tabRefs.current[tab.id] = el;
+              }}
+              className={`flex items-center cursor-pointer gap-2 px-4 py-2 text-sm font-medium transition-colors ${
+                activeTab === tab.id
+                  ? "text-primary"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+              onClick={() => setActiveTab(tab.id)}
+              role="tab"
+              aria-selected={activeTab === tab.id}
+            >
+              {tab.icon && tab.icon}
+              {tab.label}
+            </button>
+          ))}
         </div>
+
+        <div
+          className="absolute bottom-0 h-0.5 bg-primary transition-all duration-300 ease-in-out"
+          style={{
+            left: `${underlineStyle.left}px`,
+            width: `${underlineStyle.width}px`,
+          }}
+        />
       </div>
 
-      <div className="mt-6">
-        {tabs.map(
-          (tab) => activeTab === tab.id && <div key={tab.id}>{tab.content}</div>
-        )}
+      <div className="mt-4 p-2">
+        {tabs.map((tab) => (
+          <div
+            key={tab.id}
+            className={`${activeTab === tab.id ? "block" : "hidden"}`}
+            role="tabpanel"
+          >
+            {tab.content}
+          </div>
+        ))}
       </div>
     </div>
   );
-}
+};
