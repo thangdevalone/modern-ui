@@ -4,10 +4,10 @@ import UnderlineTabs from "@/components/modern-ui/underline-tabs";
 
 const CLIContent = () => {
   const commands = {
-    npm: "npx @thangdevalone/modern-ui add fancy-tab",
-    pnpm: "pnpm dlx @thangdevalone/modern-ui add fancy-tab",
-    yarn: "yarn dlx @thangdevalone/modern-ui add fancy-tab",
-    bun: "bunx --bun @thangdevalone/modern-ui add fancy-tab",
+    npm: "npx @thangdevalone/modern-ui add fancy-tabs",
+    pnpm: "pnpm dlx @thangdevalone/modern-ui add fancy-tabs",
+    yarn: "yarn dlx @thangdevalone/modern-ui add fancy-tabs",
+    bun: "bunx --bun @thangdevalone/modern-ui add fancy-tabs",
   };
   return (
     <div>

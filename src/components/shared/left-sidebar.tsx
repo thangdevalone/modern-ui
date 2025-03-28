@@ -53,6 +53,7 @@ const links: {
     items: [
       { href: "/docs/components/button", label: "Button" },
       { href: "/docs/components/fancy-tabs", label: "Fancy tab" },
+      { href: "/docs/components/underline-tabs", label: "Underline tab" },
     ],
   },
 ];
