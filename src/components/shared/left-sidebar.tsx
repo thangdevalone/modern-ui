@@ -55,6 +55,7 @@ const links: {
       { href: "/docs/components/fancy-tabs", label: "Fancy tab" },
       { href: "/docs/components/underline-tabs", label: "Underline tab" },
       { href: "/docs/components/fluid-dropdown", label: "Fluid Dropdown", badge: "new" },
+      { href: "/docs/components/date-picker", label: "Date Picker", badge: "new" },
     ],
   },
 ];

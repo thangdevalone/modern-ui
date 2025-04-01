@@ -1,0 +1,133 @@
+import { PreviewDatePicker } from "@/app/docs/components/date-picker/preview";
+import { BreadcrumbNav } from "@/components/breadcrumb-nav";
+import { DatePickerInstallation } from "@/app/docs/components/date-picker/components/date-picker-installation";
+
+<BreadcrumbNav className="mb-4" items={[
+  {label: "Docs", href: "/docs"},
+  {label: "Components", href: "/docs/components"},
+  {label: "Date Picker"},
+]}/>
+
+<PreviewDatePicker/>
+
+# Date Picker Component
+
+A customizable calendar component for date picking with multiple views, built with React Day Picker and Tailwind CSS.
+
+- Support for day and year views
+- Range selection capability
+- Customizable styling
+- Fully accessible with ARIA attributes
+- Responsive design
+
+---
+
+## Installation
+
+The Date Picker component is part of our UI library. You can import it directly from the components directory.
+
+<DatePickerInstallation/>
+
+---
+
+## Usage
+
+Here is how to use the date picker in your project.
+
+```tsx
+import { Calendar } from "@/components/modern-ui/date-picker"
+```
+
+<br/>
+
+### Basic Calendar
+
+```tsx
+const [date, setDate] = useState<Date | undefined>(new Date())
+
+<Calendar 
+  mode="single"
+  selected={date}
+  onSelect={setDate}
+  className="rounded-md border"
+/>
+```
+
+### Date Range Picker
+
+```tsx
+const [dateRange, setDateRange] = useState<DateRange>({
+  from: new Date(),
+  to: addDays(new Date(), 7),
+})
+
+<Calendar
+  mode="range"
+  selected={dateRange}
+  onSelect={(value) => value && setDateRange(value)}
+  className="rounded-md border"
+  numberOfMonths={2}
+/>
+```
+
+### With Year Navigation
+
+The Date Picker component allows users to switch between day view and year view for easier navigation through time.
+
+```tsx
+<Calendar
+  mode="single"
+  selected={date}
+  onSelect={setDate}
+  showYearSwitcher={true}
+  className="rounded-md border"
+/>
+```
+
+---
+
+## API Reference
+
+### Calendar Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `mode` | `"single"` \| `"range"` \| `"multiple"` | `"single"` | The selection mode of the calendar |
+| `selected` | `Date` \| `DateRange` \| `Date[]` | `undefined` | The selected date or dates |
+| `onSelect` | `(date: Date \| DateRange \| Date[] \| undefined) => void` | `undefined` | Function called when a date is selected |
+| `className` | `string` | `""` | Additional CSS classes |
+| `showOutsideDays` | `boolean` | `true` | Show days from the previous and next months |
+| `showYearSwitcher` | `boolean` | `true` | Show the year switcher in the caption |
+| `yearRange` | `number` | `12` | Number of years to display in year view |
+| `numberOfMonths` | `number` | `1` | Number of months to display side by side |
+| `disabled` | `Date[] \| ((date: Date) => boolean)` | `undefined` | Dates to disable or function to determine if a date should be disabled |
+| `fromDate` | `Date` | `undefined` | The earliest date that can be selected |
+| `toDate` | `Date` | `undefined` | The latest date that can be selected |
+| `defaultMonth` | `Date` | `undefined` | The month to display initially |
+
+### Custom Styling
+
+The Calendar component supports extensive customization through className props:
+
+- `monthsClassName`
+- `monthCaptionClassName`
+- `weekdaysClassName`
+- `weekdayClassName`
+- `monthClassName`
+- `captionClassName`
+- `captionLabelClassName`
+- `buttonNextClassName`
+- `buttonPreviousClassName`
+- `navClassName`
+- `monthGridClassName`
+- `weekClassName`
+- `dayClassName`
+- `dayButtonClassName`
+- `rangeStartClassName`
+- `rangeEndClassName`
+- `rangeMiddleClassName`
+- `selectedClassName`
+- `todayClassName`
+- `outsideClassName`
+- `disabledClassName`
+- `hiddenClassName` 
