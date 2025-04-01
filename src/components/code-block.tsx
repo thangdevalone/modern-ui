@@ -5,13 +5,13 @@ import { Check, ChevronDown, ChevronUp, Copy, Terminal } from "lucide-react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { coldarkDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { AnimatePresence, motion } from "framer-motion";
+import { cn } from "@/lib/utils";
 
 interface CodeBlockProps {
   code: string;
   language?: string;
   filename?: string;
   maxHeight?: number;
-  expandedHeight?: number;
   showLineNumbers?: boolean;
 }
 
@@ -20,19 +20,40 @@ export function CodeBlock({
   language = "js",
   filename,
   maxHeight = 300,
-  expandedHeight = 800,
   showLineNumbers = true,
 }: CodeBlockProps) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [shouldShowButton, setShouldShowButton] = useState(false);
-  const codeRef = useRef<HTMLDivElement>(null);
+  const highlighterRef = useRef<HTMLPreElement>(null);
   const [hasCopied, setHasCopied] = useState(false);
 
   useEffect(() => {
-    if (codeRef.current) {
-      const codeHeight = codeRef.current.scrollHeight;
-      setShouldShowButton(codeHeight > maxHeight);
+    const checkCodeHeight = () => {
+      if (highlighterRef.current) {
+        const codeHeight = highlighterRef.current.scrollHeight;
+        setShouldShowButton(codeHeight > maxHeight);
+      }
+    };
+
+    checkCodeHeight();
+
+    const timer = setTimeout(checkCodeHeight, 100);
+
+    const resizeObserver = new ResizeObserver(() => {
+      checkCodeHeight();
+    });
+
+    if (highlighterRef.current) {
+      resizeObserver.observe(highlighterRef.current);
     }
+
+    window.addEventListener("resize", checkCodeHeight);
+
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("resize", checkCodeHeight);
+      resizeObserver.disconnect();
+    };
   }, [maxHeight, code]);
 
   const handleCopy = async () => {
@@ -132,18 +153,33 @@ export function CodeBlock({
       <div
         className="relative h-full"
         style={{
-          maxHeight: isExpanded ? "100%" : maxHeight,
+          maxHeight: isExpanded ? "none" : `${maxHeight}px`,
+          transition: "max-height 0.3s ease-in-out",
         }}
       >
         <div
-          ref={codeRef}
-          className="h-full"
+          className={cn("h-full code-scrollbar")}
           style={{
             scrollbarWidth: "thin",
-            overflow: isExpanded ? "auto" : "hidden",
             scrollbarColor: "#4B5563 #1F2937",
           }}
         >
+          <style jsx global>{`
+            .code-scrollbar::-webkit-scrollbar {
+              width: 8px;
+              height: 8px;
+            }
+            .code-scrollbar::-webkit-scrollbar-track {
+              background: #1f2937;
+            }
+            .code-scrollbar::-webkit-scrollbar-thumb {
+              background: #4b5563;
+              border-radius: 4px;
+            }
+            .code-scrollbar::-webkit-scrollbar-thumb:hover {
+              background: #6b7280;
+            }
+          `}</style>
           <SyntaxHighlighter
             language={language}
             style={coldarkDark}
@@ -156,6 +192,10 @@ export function CodeBlock({
               background: "transparent",
               fontSize: "0.875rem",
               fontFamily: "JetBrains Mono, Menlo, Monaco, Consolas, monospace",
+              overflow: "auto",
+              height: "100%",
+              scrollbarWidth: "thin",
+              scrollbarColor: "#4B5563 #1F2937",
             }}
             codeTagProps={{
               style: {
@@ -163,36 +203,48 @@ export function CodeBlock({
                   "JetBrains Mono, Menlo, Monaco, Consolas, monospace",
               },
             }}
+            className="code-scrollbar"
+            ref={highlighterRef as any}
           >
             {code}
           </SyntaxHighlighter>
         </div>
 
         {shouldShowButton && !isExpanded && (
-          <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-[#0d1117] to-transparent pointer-events-none" />
+          <div
+            className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#0d1117] to-transparent pointer-events-none"
+            style={{ width: "calc(100% - 15px)" }}
+          />
         )}
 
         {shouldShowButton && (
-          <div className="absolute bottom-0 left-0 right-0 flex justify-center pb-2">
+          <motion.div
+            className="absolute bottom-1 left-0 right-0 flex justify-center pb-2"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.2 }}
+            style={{ pointerEvents: "none" }}
+          >
             <motion.button
               onClick={() => setIsExpanded(!isExpanded)}
-              className="flex items-center cursor-pointer gap-1 rounded-md bg-zinc-800 px-3 py-1 text-xs font-medium text-zinc-300 hover:bg-zinc-700 transition-colors z-10"
+              className="flex items-center cursor-pointer gap-1 rounded-md bg-zinc-800 px-3 py-1.5 text-xs font-medium text-zinc-300 hover:bg-zinc-700 transition-colors z-10"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              style={{ pointerEvents: "auto" }}
             >
               {isExpanded ? (
                 <>
                   <ChevronUp className="h-3.5 w-3.5" />
-                  <span>Collapse</span>
+                  <span>Collapse code</span>
                 </>
               ) : (
                 <>
                   <ChevronDown className="h-3.5 w-3.5" />
-                  <span>Expand</span>
+                  <span>Expand code</span>
                 </>
               )}
             </motion.button>
-          </div>
+          </motion.div>
         )}
       </div>
     </motion.div>

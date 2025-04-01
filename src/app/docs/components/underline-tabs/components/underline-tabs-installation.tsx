@@ -1,6 +1,10 @@
 "use client";
+
 import { TerminalBlock } from "@/components/modern-ui/terminal-block";
 import { UnderlineTabs } from "@/components/modern-ui/underline-tabs";
+import { CodeBlock } from "@/components/code-block";
+import { useComponentCode } from "@/hooks/use-component-code";
+import { useEffect } from "react";
 
 const CLIContent = () => {
   const commands = {
@@ -21,27 +25,17 @@ const CLIContent = () => {
 };
 
 const ManualContent = () => {
+  const { code: underlineTabsCode, isLoading } =
+    useComponentCode("underline-tabs");
   return (
-    <div className="my-4 space-y-4 text-sm">
-      <p>Follow these steps to manually add the UnderlineTabs component:</p>
-      <ol className="list-decimal ml-4 space-y-2">
-        <li>
-          Create a{" "}
-          <code className="bg-muted px-2 py-1 rounded-sm">
-            underline-tabs.tsx
-          </code>{" "}
-          file in your components directory
-        </li>
-        <li>Copy the UnderlineTabs code into the file</li>
-        <li>
-          Install the necessary dependencies:
-          <pre className="bg-muted p-4 rounded-md overflow-x-auto mt-2">
-            <code className="text-sm">
-              npm install framer-motion lucide-react
-            </code>
-          </pre>
-        </li>
-      </ol>
+    <div>
+      {isLoading ? (
+        <div className="mt-2 text-sm text-muted-foreground">
+          Loading component code...
+        </div>
+      ) : (
+        <CodeBlock code={underlineTabsCode} language={"tsx"} />
+      )}
     </div>
   );
 };

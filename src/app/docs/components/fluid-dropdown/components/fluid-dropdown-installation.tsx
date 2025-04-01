@@ -1,16 +1,16 @@
-"use client"
+"use client";
 
+import { UnderlineTabs } from "@/components/modern-ui/underline-tabs";
 import { CodeBlock } from "@/components/code-block";
 import { TerminalBlock } from "@/components/modern-ui/terminal-block";
-import { UnderlineTabs } from "@/components/modern-ui/underline-tabs";
 import { useComponentCode } from "@/hooks/use-component-code";
 
 const CLIContent = () => {
   const commands = {
-    npm: "npx @thangdevalone/modern-ui add fancy-tabs",
-    pnpm: "pnpm dlx @thangdevalone/modern-ui add fancy-tabs",
-    yarn: "yarn dlx @thangdevalone/modern-ui add fancy-tabs",
-    bun: "bunx --bun @thangdevalone/modern-ui add fancy-tabs",
+    npm: "npx @thangdevalone/modern-ui add fluid-dropdown",
+    pnpm: "pnpm dlx @thangdevalone/modern-ui add fluid-dropdown",
+    yarn: "yarn dlx @thangdevalone/modern-ui add fluid-dropdown",
+    bun: "bunx --bun @thangdevalone/modern-ui add fluid-dropdown",
   };
   return (
     <div>
@@ -24,8 +24,7 @@ const CLIContent = () => {
 };
 
 const ManualContent = () => {
-  const { code, isLoading } = useComponentCode("tabs");
-
+  const { code: fluidDropdownCode, isLoading } = useComponentCode("fluid-dropdown");
   return (
     <div>
       {isLoading ? (
@@ -33,7 +32,7 @@ const ManualContent = () => {
           Loading component code...
         </div>
       ) : (
-        <CodeBlock code={code} language={"tsx"} maxHeight={300} />
+        <CodeBlock code={fluidDropdownCode} language={"tsx"} />
       )}
     </div>
   );
@@ -52,6 +51,6 @@ const tabs = [
   },
 ];
 
-export const TabInstallation = () => {
+export const FluidDropdownInstallation = () => {
   return <UnderlineTabs tabs={tabs} defaultTabId="CLI" />;
 };

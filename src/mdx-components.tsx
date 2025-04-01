@@ -122,8 +122,7 @@ const components = {
   } & React.HTMLAttributes<HTMLElement>) => {
     const match = /language-(\w+)/.exec(className || "");
     const language = match ? match[1] : "";
-
-    if (inline) {
+    if (!language) {
       return (
         <code className={cn("bg-muted px-1 py-0.5 rounded text-sm font-mono", className)} {...props}>
           {children}

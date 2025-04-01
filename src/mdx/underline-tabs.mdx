@@ -74,71 +74,19 @@ const tabs = [
 
 Each tab is defined by a Tab object with the following properties:
 
-| Property | Type | Description |
-|----------|------|-------------|
-| `id` | `string` | Unique identifier for the tab |
-| `label` | `string` | Label text displayed on the tab |
-| `icon?` | `LucideIcon` | Optional Lucide icon to display next to the label |
-| `content` | `ReactNode` | Content to render when the tab is active |
+| Property  | Type        | Description                                      |
+|-----------|------------|--------------------------------------------------|
+| `id`      | `string`    | Unique identifier for the tab                  |
+| `label`   | `string`    | Label text displayed on the tab                |
+| `icon`   | `LucideIcon` | Optional Lucide icon to display next to the label |
+| `content` | `ReactNode` | Content to render when the tab is active       |
 
 ### UnderlineTabs Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `tabs` | `Tab[]` | Required | Array of tab objects |
-| `defaultTab` | `string` | First tab's ID | ID of the tab to show by default |
-| `className` | `string` | `''` | Additional CSS classes |
+| `defaultTab` | `string` | First tab's ID | ID of the tab to show by default |F
+| `className` | `string` | '' | Additional CSS classes |
 
 ---
-
-## Examples
-
-### Basic Usage
-
-```tsx
-const tabs = [
-  {
-    id: "tab1",
-    label: "Tab 1",
-    content: <div>Content for Tab 1</div>
-  },
-  {
-    id: "tab2",
-    label: "Tab 2",
-    content: <div>Content for Tab 2</div>
-  }
-];
-
-<UnderlineTabs tabs={tabs} defaultTab="tab1" />
-```
-
-### With Icons
-
-Add icons to your tabs for a more visual representation:
-
-```tsx
-import { FileText, MessageSquare, Bell } from "lucide-react";
-
-const tabs = [
-  {
-    id: "documents",
-    label: "Documents",
-    icon: FileText,
-    content: <div>Documents content</div>
-  },
-  {
-    id: "messages",
-    label: "Messages",
-    icon: MessageSquare,
-    content: <div>Messages content</div>
-  },
-  {
-    id: "notifications",
-    label: "Notifications",
-    icon: Bell,
-    content: <div>Notifications content</div>
-  }
-];
-
-<UnderlineTabs tabs={tabs} defaultTab="documents" />
-``` 

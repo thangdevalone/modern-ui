@@ -1,8 +1,9 @@
+"use client"
+
 import { TerminalBlock } from "@/components/modern-ui/terminal-block";
 import { UnderlineTabs } from "@/components/modern-ui/underline-tabs";
 import { CodeBlock } from "@/components/code-block";
-import path from "node:path";
-import fs from "node:fs";
+import { useComponentCode } from "@/hooks/use-component-code";
 
 const CLIContent = () => {
   const commands = {
@@ -23,26 +24,17 @@ const CLIContent = () => {
 };
 
 const ManualContent = () => {
-  let code = "";
-
-  try {
-    const filePath = path.join(
-      process.cwd(),
-      "src",
-      "components",
-      "modern-ui",
-      "button.tsx"
-    );
-
-    code = fs.readFileSync(filePath, "utf8");
-  } catch (error) {
-    code =
-      "// Unable to load code sample.\n// Please check the file path or permissions.";
-  }
+  const { code, isLoading } = useComponentCode("button");
 
   return (
     <div>
-      <CodeBlock code={code} language={"tsx"} />
+      {isLoading ? (
+        <div className="mt-2 text-sm text-muted-foreground">
+          Loading component code...
+        </div>
+      ) : (
+        <CodeBlock code={code} language={"tsx"} />
+      )}
     </div>
   );
 };

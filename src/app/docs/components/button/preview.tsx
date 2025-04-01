@@ -44,7 +44,7 @@ export const PreviewButton = () => {
           </div>
         </TabsContent>
         <TabsContent value="code" className="mt-2">
-          <CodeBlock code={buttonCode}/>
+          <CodeBlock code={buttonCode} language={"tsx"} />
         </TabsContent>
       </Tabs>
     </>

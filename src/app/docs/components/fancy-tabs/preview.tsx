@@ -96,7 +96,7 @@ export const PreviewTabs = () => {
           </div>
         </TabsContent>
         <TabsContent value="code" className="mt-2">
-          <CodeBlock code={tabsCode} />
+          <CodeBlock code={tabsCode} language={"tsx"}/>
         </TabsContent>
       </Tabs>
     </>

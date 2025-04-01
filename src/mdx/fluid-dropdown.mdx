@@ -1,0 +1,81 @@
+import {PreviewFluidDropdown} from "@/app/docs/components/fluid-dropdown/preview";
+import {BreadcrumbNav} from "@/components/breadcrumb-nav";
+import {FluidDropdownInstallation} from "@/app/docs/components/fluid-dropdown/components/fluid-dropdown-installation";
+
+
+<BreadcrumbNav className="mb-4" items={[
+  {label: "Docs", href: "/docs"},
+  {label: "Components", href: "/docs/components"},
+  {label: "Fluid Dropdown"},
+]}/>
+
+<PreviewFluidDropdown/>
+
+# Fluid Dropdown Component
+
+A modern and animated dropdown component with fluid transitions, built with Framer Motion.
+
+- Smooth opening and closing animations
+- Beautifully animated hover state
+- Support for icons in dropdown items
+- Clean and intuitive design
+
+---
+
+## Installation
+
+The FluidDropdown component is part of our UI library. You can import it directly from the components directory.
+
+<FluidDropdownInstallation/>
+
+---
+
+## Usage
+
+Here is how to use the fluid dropdown in your project:
+
+```tsx
+import { FluidDropdown } from "@/components/modern-ui/fluid-dropdown"
+import { Layers, Shirt, Briefcase, Smartphone, Home } from "lucide-react"
+```
+
+<br/>
+
+```tsx
+const categories = [
+  { id: "all", label: "All", icon: Layers, color: "#A06CD5" },
+  { id: "lifestyle", label: "Lifestyle", icon: Shirt, color: "#FF6B6B" },
+  { id: "desk", label: "Desk", icon: Briefcase, color: "#4ECDC4" },
+  { id: "tech", label: "Tech", icon: Smartphone, color: "#45B7D1" },
+  { id: "home", label: "Home", icon: Home, color: "#F9C74F" },
+];
+
+<FluidDropdown 
+  categories={categories}
+  defaultCategoryId="all"
+  className="max-w-xs"
+/>
+```
+
+---
+
+## API Reference
+
+### Category Object
+
+Each category is defined by a Category object with the following properties:
+
+| Property  | Type              | Description                                          |
+|-----------|-------------------|------------------------------------------------------|
+| `id`      | `string`          | Unique identifier for the category                   |
+| `label`   | `string`          | Label text displayed on the dropdown item            |
+| `icon`    | `React.ElementType` | Lucide icon to display next to the label           |
+| `color`   | `string`          | Color for the icon when hovered                      |
+
+### FluidDropdown Props
+
+| Prop            | Type           | Default       | Description                            |
+|-----------------|----------------|---------------|----------------------------------------|
+| `categories`    | `Category[]`   | Built-in array | Array of category objects             |
+| `defaultCategoryId` | `string`      | First category's ID | ID of the category to show by default |
+| `className`     | `string`       | '' | Additional CSS classes                    | 
