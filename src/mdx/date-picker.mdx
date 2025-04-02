@@ -14,7 +14,7 @@ import { DatePickerInstallation } from "@/app/docs/components/date-picker/compon
 
 A customizable calendar component for date picking with multiple views, built with React Day Picker and Tailwind CSS.
 
-- Support for day and year views
+- Support for day, month, quarter, and year views
 - Range selection capability
 - Customizable styling
 - Fully accessible with ARIA attributes
@@ -35,7 +35,12 @@ The Date Picker component is part of our UI library. You can import it directly 
 Here is how to use the date picker in your project.
 
 ```tsx
-import { Calendar } from "@/components/modern-ui/date-picker"
+import DatePicker, { 
+  DateRangePicker, 
+  MonthPicker, 
+  QuarterPicker, 
+  YearPicker 
+} from "@/components/modern-ui/date-picker"
 ```
 
 <br/>
@@ -55,12 +60,23 @@ const [date, setDate] = useState<Date | undefined>(new Date())
 
 ### Date Range Picker
 
+The DateRangePicker allows users to select a range of dates, which is ideal for booking applications, event planning, or any scenario that requires a date range selection.
+
 ```tsx
+// Import the DateRange type or define it locally
+import { DateRange } from "react-day-picker"
+// Alternatively:
+// interface DateRange {
+//   from: Date
+//   to?: Date
+// }
+
 const [dateRange, setDateRange] = useState<DateRange>({
   from: new Date(),
   to: addDays(new Date(), 7),
 })
 
+// Using the Calendar component directly with range mode
 <Calendar
   mode="range"
   selected={dateRange}
@@ -68,11 +84,61 @@ const [dateRange, setDateRange] = useState<DateRange>({
   className="rounded-md border"
   numberOfMonths={2}
 />
+
+// Using the convenience DateRangePicker component
+<DateRangePicker
+  dateRange={dateRange}
+  setDateRange={setDateRange}
+  placeholder="Select date range"
+  numberOfMonths={2}
+/>
+```
+
+### Month Picker
+
+Select an entire month instead of a specific date.
+
+```tsx
+const [month, setMonth] = useState<Date | undefined>(new Date())
+
+<MonthPicker
+  month={month}
+  setMonth={setMonth}
+  placeholder="Select month"
+/>
+```
+
+### Quarter Picker
+
+Select a quarter of a year.
+
+```tsx
+const [quarter, setQuarter] = useState<Date | undefined>(new Date())
+
+<QuarterPicker
+  quarter={quarter}
+  setQuarter={setQuarter}
+  placeholder="Select quarter"
+/>
+```
+
+### Year Picker
+
+Select an entire year.
+
+```tsx
+const [year, setYear] = useState<Date | undefined>(new Date())
+
+<YearPicker
+  year={year}
+  setYear={setYear}
+  placeholder="Select year"
+/>
 ```
 
 ### With Year Navigation
 
-The Date Picker component allows users to switch between day view and year view for easier navigation through time.
+The Date Picker component allows users to switch between day, month, quarter, and year views for easier navigation through time.
 
 ```tsx
 <Calendar
@@ -104,6 +170,53 @@ The Date Picker component allows users to switch between day view and year view 
 | `fromDate` | `Date` | `undefined` | The earliest date that can be selected |
 | `toDate` | `Date` | `undefined` | The latest date that can be selected |
 | `defaultMonth` | `Date` | `undefined` | The month to display initially |
+| `initialView` | `"days"` \| `"months"` \| `"quarters"` \| `"years"` | `"days"` | The initial view of the calendar |
+
+### DatePicker Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `date` | `Date` | `undefined` | The selected date |
+| `setDate` | `(date: Date \| undefined) => void` | `undefined` | Function called when a date is selected |
+| `className` | `string` | `undefined` | Additional CSS classes |
+| `placeholder` | `string` | `"Pick a date"` | Placeholder text to display when no date is selected |
+
+### DateRangePicker Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `dateRange` | `DateRange` | `undefined` | The selected date range |
+| `setDateRange` | `(dateRange: DateRange \| undefined) => void` | `undefined` | Function called when a date range is selected |
+| `className` | `string` | `undefined` | Additional CSS classes |
+| `placeholder` | `string` | `"Pick a date range"` | Placeholder text to display when no date range is selected |
+| `numberOfMonths` | `number` | `2` | Number of months to display side by side |
+
+### MonthPicker Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `month` | `Date` | `undefined` | The selected month |
+| `setMonth` | `(month: Date \| undefined) => void` | `undefined` | Function called when a month is selected |
+| `className` | `string` | `undefined` | Additional CSS classes |
+| `placeholder` | `string` | `"Pick a month"` | Placeholder text to display when no month is selected |
+
+### QuarterPicker Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `quarter` | `Date` | `undefined` | The selected quarter |
+| `setQuarter` | `(quarter: Date \| undefined) => void` | `undefined` | Function called when a quarter is selected |
+| `className` | `string` | `undefined` | Additional CSS classes |
+| `placeholder` | `string` | `"Pick a quarter"` | Placeholder text to display when no quarter is selected |
+
+### YearPicker Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `year` | `Date` | `undefined` | The selected year |
+| `setYear` | `(year: Date \| undefined) => void` | `undefined` | Function called when a year is selected |
+| `className` | `string` | `undefined` | Additional CSS classes |
+| `placeholder` | `string` | `"Pick a year"` | Placeholder text to display when no year is selected |
 
 ### Custom Styling
 
