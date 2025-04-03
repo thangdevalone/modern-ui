@@ -2,7 +2,7 @@
 
 import type React from "react";
 
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, memo } from "react";
 
 interface Tab {
   id: string;
@@ -16,46 +16,62 @@ interface UnderlineTabsProps {
   defaultTabId?: string;
 }
 
+const TabContent = ({
+  content,
+  isActive,
+}: {
+  content: React.ReactNode;
+  isActive: boolean;
+}) => {
+  if (!isActive) return null;
+  return <div role="tabpanel">{content}</div>;
+};
+TabContent.displayName = "TabContent";
+
 export const UnderlineTabs = ({ tabs, defaultTabId }: UnderlineTabsProps) => {
   const [activeTab, setActiveTab] = useState<string>(
     defaultTabId || tabs[0].id
   );
   const [underlineStyle, setUnderlineStyle] = useState({
-    left: 0,
+    transform: "translateX(0)",
     width: 0,
   });
 
   const tabRefs = useRef<{ [key: string]: HTMLButtonElement | null }>({});
+  const tabsContainerRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const activeTabElement = tabRefs.current[activeTab];
-    if (activeTabElement) {
+  const updateUnderlinePosition = (tabId: string) => {
+    const activeTabElement = tabRefs.current[tabId];
+    if (activeTabElement && tabsContainerRef.current) {
       setUnderlineStyle({
-        left: activeTabElement.offsetLeft,
+        transform: `translateX(${activeTabElement.offsetLeft}px)`,
         width: activeTabElement.offsetWidth,
       });
     }
+  };
+
+  useEffect(() => {
+    updateUnderlinePosition(activeTab);
   }, [activeTab]);
 
   useEffect(() => {
-    const handleResize = () => {
-      const activeTabElement = tabRefs.current[activeTab];
-      if (activeTabElement) {
-        setUnderlineStyle({
-          left: activeTabElement.offsetLeft,
-          width: activeTabElement.offsetWidth,
-        });
-      }
-    };
+    if (!tabsContainerRef.current) return;
 
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    const resizeObserver = new ResizeObserver(() => {
+      updateUnderlinePosition(activeTab);
+    });
+
+    resizeObserver.observe(tabsContainerRef.current);
+
+    return () => {
+      resizeObserver.disconnect();
+    };
   }, [activeTab]);
 
   return (
     <div className="w-full">
       <div className="relative border-b">
-        <div className="flex">
+        <div className="flex" ref={tabsContainerRef}>
           {tabs.map((tab) => (
             <button
               key={tab.id}
@@ -67,7 +83,16 @@ export const UnderlineTabs = ({ tabs, defaultTabId }: UnderlineTabsProps) => {
                   ? "text-primary"
                   : "text-muted-foreground hover:text-foreground"
               }`}
-              onClick={() => setActiveTab(tab.id)}
+              onClick={(e) => {
+                const el = e.currentTarget;
+                if (el && tabsContainerRef.current) {
+                  setUnderlineStyle({
+                    transform: `translateX(${el.offsetLeft}px)`,
+                    width: el.offsetWidth,
+                  });
+                }
+                setActiveTab(tab.id);
+              }}
               role="tab"
               aria-selected={activeTab === tab.id}
             >
@@ -78,23 +103,22 @@ export const UnderlineTabs = ({ tabs, defaultTabId }: UnderlineTabsProps) => {
         </div>
 
         <div
-          className="absolute bottom-0 h-0.5 bg-primary transition-all duration-300 ease-in-out"
+          className="absolute bottom-0 left-0 h-0.5 bg-primary will-change-transform"
           style={{
-            left: `${underlineStyle.left}px`,
+            transform: underlineStyle.transform,
             width: `${underlineStyle.width}px`,
+            transition: "transform 300ms cubic-bezier(0.4, 0, 0.2, 1)",
           }}
         />
       </div>
 
       <div className="mt-4 p-2">
         {tabs.map((tab) => (
-          <div
+          <TabContent
             key={tab.id}
-            className={`${activeTab === tab.id ? "block" : "hidden"}`}
-            role="tabpanel"
-          >
-            {tab.content}
-          </div>
+            content={tab.content}
+            isActive={activeTab === tab.id}
+          />
         ))}
       </div>
     </div>
