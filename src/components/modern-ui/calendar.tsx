@@ -7,7 +7,6 @@ import { ChevronLeft, ChevronRight } from "lucide-react"
 import * as React from "react"
 import {
   DayPicker,
-  DateRange,
   labelNext,
   labelPrevious,
   useDayPicker,
@@ -127,7 +126,7 @@ function Calendar({
     "relative mx-10 flex h-7 items-center justify-center",
     props.monthCaptionClassName
   )
-  const _weekdaysClassName = cn("flex flex-row gap-1", props.weekdaysClassName)
+  const _weekdaysClassName = cn("flex flex-row", props.weekdaysClassName)
   const _weekdayClassName = cn(
     "w-8 text-sm font-normal text-muted-foreground",
     props.weekdayClassName
@@ -158,7 +157,7 @@ function Calendar({
   )
   const _navClassName = cn("flex items-start", props.navClassName)
   const _monthGridClassName = cn("mx-auto mt-4", props.monthGridClassName)
-  const _weekClassName = cn("mt-2 flex w-max items-start gap-1", props.weekClassName)
+  const _weekClassName = cn("mt-2 flex w-max items-start", props.weekClassName)
   const _dayClassName = cn(
     "flex size-8 flex-1 items-center justify-center p-0 text-sm",
     props.dayClassName
@@ -202,8 +201,6 @@ function Calendar({
   )
   const _hiddenClassName = cn("invisible flex-1", props.hiddenClassName)
 
-  // We need to cast as any since TypeScript is being overly strict about the mode prop
-  // This is safe since we're only setting it to valid values "single", "multiple", or "range"
   return (
     <DayPicker
       {...(props as any)}
@@ -211,7 +208,7 @@ function Calendar({
       showOutsideDays={showOutsideDays}
       className={cn("p-3", className)}
       style={{
-        width: (248.8 + 24) * (columnsDisplayed ?? 1) + "px",
+        width: 248.8 * (columnsDisplayed ?? 1) + "px",
       }}
       classNames={{
         months: _monthsClassName,
@@ -471,7 +468,7 @@ function CaptionLabel({
         case "days":
           return "months"
         case "months":
-          return "quarters"
+          return "years"
         case "quarters":
           return "years"
         case "years":
@@ -613,8 +610,8 @@ function YearGrid({
   const yearsToShow = 12; // 3x4 grid
   
   return (
-    <div className="p-3 w-full" {...props}>
-      <div className="mb-4 px-1">
+    <div className="w-full" {...props}>
+      <div className="mt-2 px-1">
         <div className="grid grid-cols-4 gap-2">
           {Array.from({ length: yearsToShow }, (_, i) => {
             const year = startYear + i;
@@ -628,10 +625,8 @@ function YearGrid({
               
             const isDisabled = isBefore || isAfter;
             
-            // The date for this year (January 1st)
             const newDate = new Date(year, 0, 1);
             
-            // Check if this year is selected
             const isSelected = selected && 
               typeof selected === 'object' && 
               'getFullYear' in selected && 
@@ -647,13 +642,11 @@ function YearGrid({
                 )}
                 variant={isSelected ? "default" : "ghost"}
                 onClick={() => {
-                  // Use custom handler if available
                   if (typeof onYearSelect === 'function') {
                     onYearSelect(newDate);
                     return;
                   }
                   
-                  // Otherwise fallback to default behavior
                   setNavView("days");
                   goToMonth(
                     new Date(
@@ -698,9 +691,9 @@ function MonthViewGrid({
   const currentMonth = currentDate.getMonth()
   
   const monthNames = [
-    "January", "February", "March", "April", 
-    "May", "June", "July", "August",
-    "September", "October", "November", "December"
+    "Jan", "Feb", "Mar", "Apr", 
+    "May", "Jun", "Jul", "Aug",
+    "Sep", "Oct", "Nov", "Dec"
   ]
 
   return (
@@ -726,19 +719,17 @@ function MonthViewGrid({
           <Button
             key={index}
             className={cn(
-              "h-10 w-full text-sm font-normal text-foreground",
+              "h-9 w-full text-sm font-normal text-foreground",
               isCurrentMonth && "bg-accent font-medium text-accent-foreground"
             )}
             variant="ghost"
             onClick={() => {
               const newDate = new Date(displayYears.from, index, 1);
-              // Use custom handler if available
               if (typeof onMonthSelect === 'function') {
                 onMonthSelect(newDate);
                 return;
               }
               
-              // Otherwise fallback to default behavior
               setNavView("days");
               goToMonth(newDate);
             }}
@@ -805,7 +796,6 @@ function QuarterGrid({
     }
   ]
   
-  // Determine if a quarter is selected
   const getIsSelected = (quarterIndex: number) => {
     if (!selected || typeof selected !== 'object' || !('getMonth' in selected)) {
       return false;
@@ -815,7 +805,7 @@ function QuarterGrid({
   };
 
   return (
-    <div className="p-3 w-full" {...props}>
+    <div className="ư-full" {...props}>
       <div className="grid gap-3">
         {quarters.map((q, index) => {
           const isCurrentQuarter = currentYear === year && currentQuarter === index + 1;
@@ -847,10 +837,7 @@ function QuarterGrid({
                     isSelected && "text-primary",
                     isCurrentQuarter && !isSelected && "text-accent-foreground"
                   )}>
-                    {q.quarter} 
-                    <span className="text-xs ml-2 text-muted-foreground">
-                      {year}
-                    </span>
+                    ({q.monthNames[0]} - {q.monthNames[2]}) {year}
                   </div>
                   <div className="text-xs text-muted-foreground mt-1">
                     {q.name}
@@ -862,13 +849,11 @@ function QuarterGrid({
                   className="h-8"
                   onClick={() => {
                     const newDate = new Date(year, q.months[0], 1);
-                    // Use custom handler if available
                     if (typeof onQuarterSelect === 'function') {
                       onQuarterSelect(newDate);
                       return;
                     }
                     
-                    // Otherwise fallback to default behavior
                     setNavView("days");
                     goToMonth(newDate);
                   }}

@@ -1,6 +1,8 @@
 import { PreviewDatePicker } from "@/app/docs/components/date-picker/preview";
 import { BreadcrumbNav } from "@/components/breadcrumb-nav";
 import { DatePickerInstallation } from "@/app/docs/components/date-picker/components/date-picker-installation";
+import { DatePickerDemo, DateRangePickerDemo, MonthPickerDemo, QuarterPickerDemo, YearPickerDemo } from "@/app/docs/components/date-picker/components/date-picker-demos";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/modern-ui/tabs";
 
 <BreadcrumbNav className="mb-4" items={[
   {label: "Docs", href: "/docs"},
@@ -43,112 +45,176 @@ import DatePicker, {
 } from "@/components/modern-ui/date-picker"
 ```
 
-<br/>
+### Date Picker
 
-### Basic Calendar
+The DatePicker component allows users to select a single date.
 
-```tsx
-const [date, setDate] = useState<Date | undefined>(new Date())
-
-<Calendar 
-  mode="single"
-  selected={date}
-  onSelect={setDate}
-  className="rounded-md border"
-/>
-```
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[350px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+      <DatePickerDemo />
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { useState } from "react";
+    import DatePicker from "@/components/modern-ui/date-picker";
+    
+    export function DatePickerDemo() {
+      const [date, setDate] = useState<Date | undefined>(new Date());
+      
+      return (
+        <DatePicker 
+          date={date}
+          setDate={setDate}
+          placeholder="Select a date"
+        />
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
 
 ### Date Range Picker
 
 The DateRangePicker allows users to select a range of dates, which is ideal for booking applications, event planning, or any scenario that requires a date range selection.
 
-```tsx
-// Import the DateRange type or define it locally
-import { DateRange } from "react-day-picker"
-// Alternatively:
-// interface DateRange {
-//   from: Date
-//   to?: Date
-// }
-
-const [dateRange, setDateRange] = useState<DateRange>({
-  from: new Date(),
-  to: addDays(new Date(), 7),
-})
-
-// Using the Calendar component directly with range mode
-<Calendar
-  mode="range"
-  selected={dateRange}
-  onSelect={(value) => value && setDateRange(value)}
-  className="rounded-md border"
-  numberOfMonths={2}
-/>
-
-// Using the convenience DateRangePicker component
-<DateRangePicker
-  dateRange={dateRange}
-  setDateRange={setDateRange}
-  placeholder="Select date range"
-  numberOfMonths={2}
-/>
-```
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[350px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+      <DateRangePickerDemo />
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { useState } from "react";
+    import { DateRangePicker } from "@/components/modern-ui/date-picker";
+    import { DateRange } from "react-day-picker";
+    import { addDays } from "date-fns";
+    
+    export function DateRangePickerDemo() {
+      const [dateRange, setDateRange] = useState<DateRange>({
+        from: new Date(),
+        to: addDays(new Date(), 7),
+      });
+      
+      return (
+        <DateRangePicker 
+          dateRange={dateRange}
+          setDateRange={setDateRange}
+          placeholder="Select date range"
+          numberOfMonths={2}
+        />
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
 
 ### Month Picker
 
-Select an entire month instead of a specific date.
+The MonthPicker component is useful when you need users to select an entire month instead of a specific date.
 
-```tsx
-const [month, setMonth] = useState<Date | undefined>(new Date())
-
-<MonthPicker
-  month={month}
-  setMonth={setMonth}
-  placeholder="Select month"
-/>
-```
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[350px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+      <MonthPickerDemo />
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { useState } from "react";
+    import { MonthPicker } from "@/components/modern-ui/date-picker";
+    
+    export function MonthPickerDemo() {
+      const [month, setMonth] = useState<Date | undefined>(new Date());
+      
+      return (
+        <MonthPicker
+          month={month}
+          setMonth={setMonth}
+          placeholder="Select month"
+        />
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
 
 ### Quarter Picker
 
-Select a quarter of a year.
+The QuarterPicker component allows users to select a quarter of a year, which is useful for financial or business applications.
 
-```tsx
-const [quarter, setQuarter] = useState<Date | undefined>(new Date())
-
-<QuarterPicker
-  quarter={quarter}
-  setQuarter={setQuarter}
-  placeholder="Select quarter"
-/>
-```
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[350px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+      <QuarterPickerDemo />
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { useState } from "react";
+    import { QuarterPicker } from "@/components/modern-ui/date-picker";
+    
+    export function QuarterPickerDemo() {
+      const [quarter, setQuarter] = useState<Date | undefined>(new Date());
+      
+      return (
+        <QuarterPicker
+          quarter={quarter}
+          setQuarter={setQuarter}
+          placeholder="Select quarter"
+        />
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
 
 ### Year Picker
 
-Select an entire year.
+The YearPicker component is perfect for when you need users to select an entire year.
 
-```tsx
-const [year, setYear] = useState<Date | undefined>(new Date())
-
-<YearPicker
-  year={year}
-  setYear={setYear}
-  placeholder="Select year"
-/>
-```
-
-### With Year Navigation
-
-The Date Picker component allows users to switch between day, month, quarter, and year views for easier navigation through time.
-
-```tsx
-<Calendar
-  mode="single"
-  selected={date}
-  onSelect={setDate}
-  showYearSwitcher={true}
-  className="rounded-md border"
-/>
-```
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[350px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+      <YearPickerDemo />
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { useState } from "react";
+    import { YearPicker } from "@/components/modern-ui/date-picker";
+    
+    export function YearPickerDemo() {
+      const [year, setYear] = useState<Date | undefined>(new Date());
+      
+      return (
+        <YearPicker
+          year={year}
+          setYear={setYear}
+          placeholder="Select year"
+        />
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
 
 ---
 
@@ -243,4 +309,4 @@ The Calendar component supports extensive customization through className props:
 - `todayClassName`
 - `outsideClassName`
 - `disabledClassName`
-- `hiddenClassName` 
+- `hiddenClassName`
