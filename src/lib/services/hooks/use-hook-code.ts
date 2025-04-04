@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import axiosService from '@/services/axios.service';
+import axiosService from '@/lib/services/axios.service';
 
-export function useComponentCode(componentName: string) {
-  const [code, setCode] = useState<string>("// Loading component code...");
+export function useHookCode(hookName: string) {
+  const [code, setCode] = useState<string>("// Loading hook code...");
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -10,8 +10,8 @@ export function useComponentCode(componentName: string) {
     const fetchComponentCode = async () => {
       setIsLoading(true);
       try {
-        const response = await axiosService.get(`/api/component-code`, {
-          params: { name: componentName }
+        const response = await axiosService.get(`/api/hook-code`, {
+          params: { name: hookName }
         });
         
         if (response.data.code) {
@@ -22,7 +22,7 @@ export function useComponentCode(componentName: string) {
           setError(response.data.error || "Unknown error");
         }
       } catch (error: any) {
-        console.error(`Error fetching code for ${componentName}:`, error);
+        console.error(`Error fetching code for ${hookName}:`, error);
         setCode("// Error loading component code");
         setError(error?.message || "Failed to fetch component code");
       } finally {
@@ -31,7 +31,7 @@ export function useComponentCode(componentName: string) {
     };
 
     fetchComponentCode();
-  }, [componentName]);
+  }, [hookName]);
 
   return { code, isLoading, error };
 } 

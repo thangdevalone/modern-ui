@@ -1,0 +1,88 @@
+import {PreviewUseClickAway} from "@/app/docs/hooks/use-click-away/preview";
+import {BreadcrumbNav} from "@/components/breadcrumb-nav";
+import {UseClickAwayInstallation} from "@/app/docs/hooks/use-click-away/components/use-click-away-installation";
+
+<BreadcrumbNav className="mb-4" items={[
+  {label: "Docs", href: "/docs"},
+  {label: "Hooks", href: "/docs/hooks"},
+  {label: "useClickAway"},
+]}/>
+
+<PreviewUseClickAway/>
+
+# useClickAway
+
+A custom React hook for detecting clicks outside of a specified element.
+
+- Useful for closing modals, dropdowns, and other interactive components when clicking outside
+- Supports both mouse and touch events for better mobile compatibility
+- Highly optimized to prevent unnecessary re-renders
+
+---
+
+## Installation
+
+The useClickAway hook is part of our UI library. You can import it directly from the hooks directory.
+
+<UseClickAwayInstallation/>
+
+---
+
+## Usage
+
+Here is how to use the useClickAway hook in your project:
+
+```tsx
+import { useClickAway } from "@/hooks/use-click-away"
+```
+
+<br/>
+
+```tsx
+function Dropdown() {
+  const [isOpen, setIsOpen] = useState(false);
+  const ref = useRef(null);
+  
+  useClickAway(ref, () => {
+    if (isOpen) setIsOpen(false);
+  });
+  
+  return (
+    <div ref={ref}>
+      <button onClick={() => setIsOpen(!isOpen)}>Toggle Dropdown</button>
+      {isOpen && (
+        <div className="">
+          {/*Content here*/}
+        </div>
+      )}
+    </div>
+  );
+}
+```
+
+---
+
+## API Reference
+
+```tsx
+function useClickAway(
+  ref: React.RefObject<HTMLElement | null>,
+  handler: (event: MouseEvent | TouchEvent) => void
+): void
+```
+
+### Inputs
+
+- `ref`: A React ref object pointing to the DOM element to track clicks outside of
+- `handler`: The callback function that will be triggered when a click outside the referenced element is detected
+
+### Output
+
+- The hook doesn't return any value (void)
+
+### Behavior
+
+- When a click (`mousedown`) or touch event (`touchstart`) occurs outside the referenced element, the handler is called with the original event
+- The hook automatically manages event listeners (adding on mount and cleaning up on unmount)
+- Touch events are supported for mobile compatibility
+

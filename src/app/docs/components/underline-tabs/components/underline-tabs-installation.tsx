@@ -3,7 +3,7 @@
 import { TerminalBlock } from "@/components/modern-ui/terminal-block";
 import { UnderlineTabs } from "@/components/modern-ui/underline-tabs";
 import { CodeBlock } from "@/components/code-block";
-import { useComponentCode } from "@/hooks/use-component-code";
+import { useComponentCode } from "@/lib/services/hooks/use-component-code";
 import { useEffect } from "react";
 
 const CLIContent = () => {

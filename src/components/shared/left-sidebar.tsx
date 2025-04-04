@@ -58,6 +58,12 @@ const links: {
       { href: "/docs/components/date-picker", label: "Date Picker", badge: "new" },
     ],
   },
+  {
+    category: "React Hooks",
+    items: [
+      { href: "/docs/hooks/use-click-away", label: "useClickAway" },
+    ],
+  },
 ];
 
 export default function LeftSidebar() {

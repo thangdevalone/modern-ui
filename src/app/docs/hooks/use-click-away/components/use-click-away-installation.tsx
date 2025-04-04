@@ -1,16 +1,16 @@
-"use client"
+"use client";
 
-import { CodeBlock } from "@/components/code-block";
 import { TerminalBlock } from "@/components/modern-ui/terminal-block";
 import { UnderlineTabs } from "@/components/modern-ui/underline-tabs";
-import { useComponentCode } from "@/lib/services/hooks/use-component-code";
+import { CodeBlock } from "@/components/code-block";
+import { useHookCode } from "@/lib/services/hooks/use-hook-code";
 
 const CLIContent = () => {
   const commands = {
-    npm: "npx @thangdevalone/modern-ui add fancy-tabs",
-    pnpm: "pnpm dlx @thangdevalone/modern-ui add fancy-tabs",
-    yarn: "yarn dlx @thangdevalone/modern-ui add fancy-tabs",
-    bun: "bunx --bun @thangdevalone/modern-ui add fancy-tabs",
+    npm: "npx @thangdevalone/modern-ui add use-click-away",
+    pnpm: "pnpm dlx @thangdevalone/modern-ui add use-click-away",
+    yarn: "yarn dlx @thangdevalone/modern-ui add use-click-away",
+    bun: "bunx --bun @thangdevalone/modern-ui add use-click-away",
   };
   return (
     <div>
@@ -24,16 +24,16 @@ const CLIContent = () => {
 };
 
 const ManualContent = () => {
-  const { code, isLoading } = useComponentCode("tabs");
+  const { code, isLoading } = useHookCode("use-click-away");
 
   return (
     <div>
       {isLoading ? (
         <div className="mt-2 text-sm text-muted-foreground">
-          Loading component code...
+          Loading hook code...
         </div>
       ) : (
-        <CodeBlock code={code} language={"tsx"} maxHeight={300} />
+        <CodeBlock code={code} language={"ts"} />
       )}
     </div>
   );
@@ -52,6 +52,6 @@ const tabs = [
   },
 ];
 
-export const TabInstallation = () => {
+export const UseClickAwayInstallation = () => {
   return <UnderlineTabs tabs={tabs} defaultTabId="CLI" />;
 };
