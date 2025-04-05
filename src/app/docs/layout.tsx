@@ -19,7 +19,7 @@ export default async function DocsLayout({
     <div className="container mx-auto px-0">
       <div className="flex flex-col md:flex-row min-h-screen">
         <aside
-          className="md:block w-64 shrink-0 border-r h-screen sticky top-0 overflow-y-auto py-4 hidden no-scrollbar h-[calc(100vh_-_70px)] top-[70px] left-0 right-0 lg:block w-64 shrink-0 border-border sticky overflow-y-auto py-4 pl-4"
+          className="md:block w-64 shrink-0 border-r sticky overflow-y-auto py-4 hidden no-scrollbar h-[calc(100vh_-_70px)] top-[70px] left-0 right-0 lg:block  border-border pl-4"
         >
           <LeftSidebar/>
         </aside>

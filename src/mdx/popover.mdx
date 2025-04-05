@@ -1,0 +1,134 @@
+import {PreviewPopover} from "@/app/docs/components/popover/preview";
+import {BreadcrumbNav} from "@/components/breadcrumb-nav";
+import {PopoverInstallation} from "@/app/docs/components/popover/components/popover-installation";
+
+<BreadcrumbNav className="mb-4" items={[
+  {label: "Docs", href: "/docs"},
+  {label: "Components", href: "/docs/components"},
+  {label: "Popover"},
+]}/>
+
+<PreviewPopover/>
+
+# Popover Component
+
+A popover component that displays floating content when triggered.
+
+- Built on top of Radix UI's Popover primitive
+- Fully accessible with proper focus management
+- Customizable positioning and alignment
+- Ideal for displaying additional information or controls
+
+---
+
+## Installation
+
+The Popover component is part of our UI library. You can import it directly from the components directory.
+
+<PopoverInstallation/>
+
+---
+
+## Usage
+
+Here is how to use the popover in your project.
+
+```tsx
+import { Popover, PopoverTrigger, PopoverContent } from "@/components/modern-ui/popover"
+```
+
+<br/>
+
+```tsx
+<Popover>
+  <PopoverTrigger>Open popover</PopoverTrigger>
+  <PopoverContent>
+    Popover content
+  </PopoverContent>
+</Popover>
+```
+
+---
+
+## Examples
+
+### Basic Popover
+```tsx
+<Popover>
+  <PopoverTrigger asChild>
+    <Button>Open Popover</Button>
+  </PopoverTrigger>
+  <PopoverContent className="w-80">
+    <div className="grid gap-4">
+      <div className="space-y-2">
+        <h4 className="font-medium leading-none">Basic Popover</h4>
+        <p className="text-sm text-muted-foreground">
+          This is a simple popover with a title and description.
+        </p>
+      </div>
+    </div>
+  </PopoverContent>
+</Popover>
+```
+
+### Popover with Form
+```tsx
+<Popover>
+  <PopoverTrigger asChild>
+    <Button>Update Settings</Button>
+  </PopoverTrigger>
+  <PopoverContent className="w-80">
+    <div className="grid gap-4">
+      <div className="space-y-2">
+        <h4 className="font-medium leading-none">Dimensions</h4>
+        <p className="text-sm text-muted-foreground">
+          Set the dimensions for the layer.
+        </p>
+      </div>
+      <div className="grid gap-2">
+        <div className="grid grid-cols-3 items-center gap-4">
+          <Label htmlFor="width">Width</Label>
+          <Input id="width" defaultValue="100%" className="col-span-2 h-8" />
+        </div>
+        <div className="grid grid-cols-3 items-center gap-4">
+          <Label htmlFor="height">Height</Label>
+          <Input id="height" defaultValue="25px" className="col-span-2 h-8" />
+        </div>
+      </div>
+    </div>
+  </PopoverContent>
+</Popover>
+```
+
+## API Reference
+
+### Popover Component Parts
+
+The Popover component is composed of several parts:
+
+| Component | Description |
+|-----------|-------------|
+| `Popover` | The root component that manages the popover state |
+| `PopoverTrigger` | The button that triggers the popover |
+| `PopoverContent` | The container for the popover content |
+| `PopoverAnchor` | Optional component to anchor the popover without using the trigger |
+
+### PopoverContent Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `align` | `'start' \| 'center' \| 'end'` | `'center'` | Controls alignment of the popover relative to the trigger |
+| `sideOffset` | `number` | `4` | Distance in pixels from the trigger |
+| `className` | `string` | - | Additional CSS classes to apply to the popover content |
+| `forceMount` | `boolean` | - | When used, popover content will always render regardless of open state |
+
+Additionally, it accepts all the properties from Radix UI's PopoverContent component.
+
+### Accessibility
+
+The Popover component follows WAI-ARIA guidelines for accessibility:
+
+- Proper focus management when the popover opens and closes
+- Keyboard navigation support
+- ARIA attributes for screen readers
+- Proper labelling of the trigger element 

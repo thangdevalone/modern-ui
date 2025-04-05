@@ -1,0 +1,158 @@
+import {PreviewStepper} from "@/app/docs/components/stepper/preview";
+import {BreadcrumbNav} from "@/components/breadcrumb-nav";
+import {StepperInstallation} from "@/app/docs/components/stepper/components/stepper-installation";
+
+<BreadcrumbNav className="mb-4" items={[
+  {label: "Docs", href: "/docs"},
+  {label: "Components", href: "/docs/components"},
+  {label: "Stepper"},
+]}/>
+
+<PreviewStepper/>
+
+# Stepper Component
+
+A stepper component that guides users through a multi-step process or workflow.
+
+- Horizontal and vertical orientation options
+- Animated transitions between steps
+- Interactive state management
+- Visual indicators for completed, current, and upcoming steps
+
+---
+
+## Installation
+
+The Stepper component is part of our UI library. You can import it directly from the components directory.
+
+<StepperInstallation/>
+
+---
+
+## Usage
+
+Here is how to use the stepper in your project.
+
+```tsx
+import { Stepper } from "@/components/modern-ui/stepper"
+```
+
+<br/>
+
+```tsx
+const steps = [
+  { id: 1, title: "Step 1" },
+  { id: 2, title: "Step 2" },
+  { id: 3, title: "Step 3" }
+];
+
+<Stepper steps={steps} activeStep={1} />
+```
+
+---
+
+## Examples
+
+### Horizontal Stepper (Default)
+```tsx
+const steps = [
+  { id: 1, title: "Account Details" },
+  { id: 2, title: "Personal Information" },
+  { id: 3, title: "Review & Submit" }
+];
+
+<Stepper steps={steps} activeStep={1} />
+```
+
+### Vertical Stepper
+```tsx
+const steps = [
+  { id: 1, title: "Account Details" },
+  { id: 2, title: "Personal Information" },
+  { id: 3, title: "Review & Submit" }
+];
+
+<Stepper steps={steps} activeStep={1} orientation="vertical" />
+```
+
+### Stepper with Content
+```tsx
+const steps = [
+  { 
+    id: 1, 
+    title: "Account Details",
+    children: () => (
+      <div className="p-4 bg-background border rounded-md">
+        <h3 className="text-sm font-medium mb-2">Create your account</h3>
+        <p className="text-muted-foreground text-sm">
+          Enter your email and password to create your account.
+        </p>
+      </div>
+    )
+  },
+  { 
+    id: 2, 
+    title: "Personal Information",
+    children: () => (
+      <div className="p-4 bg-background border rounded-md">
+        <h3 className="text-sm font-medium mb-2">Your personal details</h3>
+        <p className="text-muted-foreground text-sm">
+          Provide your personal details to complete your profile.
+        </p>
+      </div>
+    )
+  },
+  { 
+    id: 3, 
+    title: "Review & Submit",
+    children: () => (
+      <div className="p-4 bg-background border rounded-md">
+        <h3 className="text-sm font-medium mb-2">Confirm submission</h3>
+        <p className="text-muted-foreground text-sm">
+          Review all your information before submitting.
+        </p>
+      </div>
+    )
+  }
+];
+
+<Stepper steps={steps} activeStep={1} />
+```
+
+## API Reference
+
+### Stepper Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `steps` | `StepperStep[]` | - | Array of step objects |
+| `activeStep` | `number` | - | Index of the current active step |
+| `orientation` | `'horizontal' \| 'vertical'` | `'horizontal'` | Orientation of the stepper |
+| `lineLast` | `boolean` | `false` | Whether to display a line after the last step |
+| `className` | `string` | - | Additional CSS classes to apply to the stepper |
+
+### StepperStep Props
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `id` | `string \| number` | Unique identifier for the step |
+| `title` | `string` | Title or label of the step |
+| `children` | `React.FC \| () => JSX.Element` | Optional content component to render for this step |
+
+### Styling
+
+The Stepper component applies different styles based on the state of each step:
+
+- **Active Step**: Highlighted with primary color
+- **Completed Steps**: Marked with a check icon
+- **Upcoming Steps**: Displayed with muted styling
+- **Connecting Lines**: Animated to show progress between steps
+
+### Animation
+
+The component uses Framer Motion to provide smooth transitions:
+
+- Animated progress indicator between steps
+- Scale animations for step circles
+- Transition effects when steps change
+- Smooth check mark appearance for completed steps 

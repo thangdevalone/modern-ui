@@ -18,7 +18,7 @@ const steps = [
         bun: 'bunx --bun @thangdevalone/modern-ui init',
       };
       return (
-        <>
+        <div className='space-y-2'>
           <div>
             Run the <Code>init</Code> command to create a new Next.js project or to setup an existing one:
           </div>
@@ -27,7 +27,7 @@ const steps = [
           <div>
             Follow the steps on your terminal to complete
           </div>
-        </>
+        </div>
       );
     }
   },
@@ -42,7 +42,7 @@ const steps = [
         bun: 'bunx --bun @thangdevalone/button add button',
       };
       return (
-        <>
+        <div className='space-y-2'>
           <div>
             You can now start adding components to your project.
           </div>
@@ -52,7 +52,7 @@ const steps = [
             The command above will add the Button component to your project. You can then import it like this:
           </div>
           <CodeBlock code={buttonCode}/>
-        </>
+        </div>
       );
     }
   },

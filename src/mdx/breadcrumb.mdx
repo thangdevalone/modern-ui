@@ -1,0 +1,173 @@
+import {PreviewBreadcrumb} from "@/app/docs/components/breadcrumb/preview";
+import {BreadcrumbNav} from "@/components/breadcrumb-nav";
+import {BreadcrumbInstallation} from "@/app/docs/components/breadcrumb/components/breadcrumb-installation";
+
+<BreadcrumbNav className="mb-4" items={[
+  {label: "Docs", href: "/docs"},
+  {label: "Components", href: "/docs/components"},
+  {label: "Breadcrumb"},
+]}/>
+
+<PreviewBreadcrumb/>
+
+# Breadcrumb Component
+
+A breadcrumb navigation component that helps users understand their location in a website hierarchy.
+
+- Responsive and accessible design
+- Customizable separators and styling
+- Works with various navigation libraries
+- Includes support for icons and home navigation
+
+---
+
+## Installation
+
+The Breadcrumb component is part of our UI library. You can import it directly from the components directory.
+
+<BreadcrumbInstallation/>
+
+---
+
+## Usage
+
+Here is how to use the breadcrumb in your project.
+
+```tsx
+import { 
+  Breadcrumb, 
+  BreadcrumbList, 
+  BreadcrumbItem, 
+  BreadcrumbLink, 
+  BreadcrumbSeparator,
+  BreadcrumbPage
+} from "@/components/modern-ui/breadcrumb"
+```
+
+<br/>
+
+```tsx
+<Breadcrumb>
+  <BreadcrumbList>
+    <BreadcrumbItem>
+      <BreadcrumbLink href="/">Home</BreadcrumbLink>
+    </BreadcrumbItem>
+    <BreadcrumbItem>
+      <BreadcrumbSeparator />
+      <BreadcrumbLink href="/docs">Docs</BreadcrumbLink>
+    </BreadcrumbItem>
+    <BreadcrumbItem>
+      <BreadcrumbSeparator />
+      <BreadcrumbPage>Current Page</BreadcrumbPage>
+    </BreadcrumbItem>
+  </BreadcrumbList>
+</Breadcrumb>
+```
+
+---
+
+## Examples
+
+### Basic Breadcrumb
+```tsx
+<Breadcrumb>
+  <BreadcrumbList>
+    <BreadcrumbItem>
+      <BreadcrumbLink href="/">Home</BreadcrumbLink>
+    </BreadcrumbItem>
+    <BreadcrumbItem>
+      <BreadcrumbSeparator />
+      <BreadcrumbLink href="/products">Products</BreadcrumbLink>
+    </BreadcrumbItem>
+    <BreadcrumbItem>
+      <BreadcrumbSeparator />
+      <BreadcrumbPage>Product Category</BreadcrumbPage>
+    </BreadcrumbItem>
+  </BreadcrumbList>
+</Breadcrumb>
+```
+
+### Breadcrumb with Home Icon
+```tsx
+import { Home } from "lucide-react";
+
+<Breadcrumb>
+  <BreadcrumbList>
+    <BreadcrumbItem>
+      <BreadcrumbLink href="/" className="flex items-center">
+        <Home className="h-4 w-4" />
+        <span className="sr-only">Home</span>
+      </BreadcrumbLink>
+    </BreadcrumbItem>
+    <BreadcrumbItem>
+      <BreadcrumbSeparator />
+      <BreadcrumbLink href="/dashboard">Dashboard</BreadcrumbLink>
+    </BreadcrumbItem>
+    <BreadcrumbItem>
+      <BreadcrumbSeparator />
+      <BreadcrumbPage>Settings</BreadcrumbPage>
+    </BreadcrumbItem>
+  </BreadcrumbList>
+</Breadcrumb>
+```
+
+### Breadcrumb with Ellipsis for Long Paths
+```tsx
+<Breadcrumb>
+  <BreadcrumbList>
+    <BreadcrumbItem>
+      <BreadcrumbLink href="/">Home</BreadcrumbLink>
+    </BreadcrumbItem>
+    <BreadcrumbItem>
+      <BreadcrumbSeparator />
+      <BreadcrumbLink href="/dashboard">Dashboard</BreadcrumbLink>
+    </BreadcrumbItem>
+    <BreadcrumbItem>
+      <BreadcrumbSeparator />
+      <BreadcrumbEllipsis />
+    </BreadcrumbItem>
+    <BreadcrumbItem>
+      <BreadcrumbSeparator />
+      <BreadcrumbLink href="/dashboard/settings">Settings</BreadcrumbLink>
+    </BreadcrumbItem>
+    <BreadcrumbItem>
+      <BreadcrumbSeparator />
+      <BreadcrumbPage>Profile</BreadcrumbPage>
+    </BreadcrumbItem>
+  </BreadcrumbList>
+</Breadcrumb>
+```
+
+## API Reference
+
+### Breadcrumb Component Parts
+
+The Breadcrumb component is composed of several parts:
+
+| Component | Description |
+|-----------|-------------|
+| `Breadcrumb` | The root container for the breadcrumb navigation |
+| `BreadcrumbList` | The list container for breadcrumb items |
+| `BreadcrumbItem` | Individual item in the breadcrumb navigation |
+| `BreadcrumbLink` | Link element for clickable breadcrumb items |
+| `BreadcrumbPage` | Current page element (not clickable) |
+| `BreadcrumbSeparator` | Visual separator between breadcrumb items |
+| `BreadcrumbEllipsis` | Ellipsis element for indicating truncated items |
+
+### Styling
+
+The Breadcrumb component comes with sensible default styling:
+
+- The current page is displayed in bold and uses a different color to indicate it's not a link
+- Links have hover effects to indicate interactivity
+- Separators are styled with a muted color to visually separate items
+- Icon support for the home item enhances visual recognition
+
+### Accessibility
+
+The Breadcrumb component follows accessibility best practices:
+
+- Uses semantic HTML elements
+- Includes appropriate ARIA attributes for screen readers
+- Clearly distinguishes between links and the current page
+- Provides visual cues for hover and focus states 

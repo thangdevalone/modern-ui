@@ -1,0 +1,166 @@
+import {PreviewTable} from "@/app/docs/components/table/preview";
+import {BreadcrumbNav} from "@/components/breadcrumb-nav";
+import {TableInstallation} from "@/app/docs/components/table/components/table-installation";
+
+<BreadcrumbNav className="mb-4" items={[
+  {label: "Docs", href: "/docs"},
+  {label: "Components", href: "/docs/components"},
+  {label: "Table"},
+]}/>
+
+<PreviewTable/>
+
+# Table Component
+
+A responsive table component for displaying structured data.
+
+- Clean, minimal design with customizable styling
+- Semantic HTML structure with proper accessibility
+- Support for captions, headers, and footers
+- Built to work well across device sizes
+
+---
+
+## Installation
+
+The Table component is part of our UI library. You can import it directly from the components directory.
+
+<TableInstallation/>
+
+---
+
+## Usage
+
+Here is how to use the table in your project.
+
+```tsx
+import { 
+  Table, 
+  TableHeader, 
+  TableBody, 
+  TableFooter,
+  TableHead, 
+  TableRow, 
+  TableCell,
+  TableCaption
+} from "@/components/modern-ui/table"
+```
+
+<br/>
+
+```tsx
+<Table>
+  <TableCaption>Table Caption</TableCaption>
+  <TableHeader>
+    <TableRow>
+      <TableHead>Header 1</TableHead>
+      <TableHead>Header 2</TableHead>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    <TableRow>
+      <TableCell>Cell 1</TableCell>
+      <TableCell>Cell 2</TableCell>
+    </TableRow>
+  </TableBody>
+</Table>
+```
+
+---
+
+## Examples
+
+### Basic Table
+```tsx
+<Table>
+  <TableHeader>
+    <TableRow>
+      <TableHead>Name</TableHead>
+      <TableHead>Email</TableHead>
+      <TableHead>Role</TableHead>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    <TableRow>
+      <TableCell className="font-medium">John Doe</TableCell>
+      <TableCell>john@example.com</TableCell>
+      <TableCell>Admin</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell className="font-medium">Jane Smith</TableCell>
+      <TableCell>jane@example.com</TableCell>
+      <TableCell>User</TableCell>
+    </TableRow>
+  </TableBody>
+</Table>
+```
+
+### Table with Caption and Footer
+```tsx
+<Table>
+  <TableCaption>List of recent orders with their status.</TableCaption>
+  <TableHeader>
+    <TableRow>
+      <TableHead>Order ID</TableHead>
+      <TableHead>Customer</TableHead>
+      <TableHead>Status</TableHead>
+      <TableHead className="text-right">Total</TableHead>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    <TableRow>
+      <TableCell className="font-medium">#12345</TableCell>
+      <TableCell>John Doe</TableCell>
+      <TableCell>Shipped</TableCell>
+      <TableCell className="text-right">$249.99</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell className="font-medium">#12346</TableCell>
+      <TableCell>Jane Smith</TableCell>
+      <TableCell>Processing</TableCell>
+      <TableCell className="text-right">$149.99</TableCell>
+    </TableRow>
+  </TableBody>
+  <TableFooter>
+    <TableRow>
+      <TableCell colSpan={3}>Total Orders: 2</TableCell>
+      <TableCell className="text-right">$399.98</TableCell>
+    </TableRow>
+  </TableFooter>
+</Table>
+```
+
+## API Reference
+
+### Table Component Parts
+
+The Table component is composed of several parts:
+
+| Component | Description |
+|-----------|-------------|
+| `Table` | The root table container |
+| `TableHeader` | Container for the table header row(s) |
+| `TableBody` | Container for table data rows |
+| `TableFooter` | Container for the table footer row(s) |
+| `TableRow` | Individual table row |
+| `TableHead` | Header cell (`<th>` element) |
+| `TableCell` | Table data cell (`<td>` element) |
+| `TableCaption` | Caption element for the table |
+
+### Styling
+
+The Table component comes with sensible default styling:
+
+- Clean borders and spacing between rows
+- Subtle hover effects on rows for better legibility
+- Proper alignment of header and data cells
+- Responsive by default with horizontal scrolling on small screens
+
+### Accessibility
+
+The Table component follows web accessibility best practices:
+
+- Uses semantic HTML table elements
+- Properly associates header cells with data cells
+- Supports captions for table descriptions
+- Maintains proper focus management 

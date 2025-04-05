@@ -1,64 +1,81 @@
 "use client";
-import React, {JSX} from 'react';
-import {cn} from '@/lib/utils';
-import {motion} from "framer-motion";
-import {Check} from 'lucide-react';
+import React, { JSX } from "react";
+import { cn } from "@/lib/utils";
+import { motion } from "framer-motion";
+import { Check } from "lucide-react";
 
 export interface StepperProps {
   steps: {
-    id: string | number
-    title: string
-    children?: React.FC | (() => JSX.Element)
-  }[],
-  activeStep?: number
-  orientation?: "horizontal" | "vertical"
-  className?: string,
-  lineLast?: boolean
+    id: string | number;
+    title: string;
+    children?: React.FC | (() => JSX.Element);
+  }[];
+  activeStep?: number;
+  orientation?: "horizontal" | "vertical";
+  className?: string;
+  lineLast?: boolean;
 }
 
-export const Stepper = ({steps, activeStep, orientation = "horizontal", lineLast = false, className}: StepperProps) => {
+export const Stepper = ({
+  steps,
+  activeStep = 0,
+  orientation = "horizontal",
+  lineLast = false,
+  className,
+}: StepperProps) => {
   const isVertical = orientation === "vertical";
 
   return (
     <div
       className={cn(
         "w-full not-prose",
-        isVertical ? "flex flex-col" : "flex flex-row items-center justify-between",
-        className,
+        isVertical
+          ? "flex flex-col"
+          : "flex flex-row items-center justify-between",
+        className
       )}
     >
       {steps.map((step, index) => {
-        const isCompleted = index < (activeStep ?? 0);
-        const isCurrent = index === (activeStep ?? 0);
+        const isCompleted = index < activeStep;
+        const isCurrent = index === activeStep;
         const isLast = index === steps.length - 1;
 
         return (
           <React.Fragment key={step.id}>
-            <div className={cn("flex", isVertical ? "flex-row items-center" : "flex-col items-center")}>
+            <div
+              className={cn(
+                "flex",
+                isVertical
+                  ? "flex-row items-center"
+                  : "flex-col items-center justify-center",
+                !isVertical && "flex-1 text-center"
+              )}
+            >
               <div className="relative">
                 <motion.div
                   className={cn(
                     "flex h-9 w-9 items-center justify-center rounded-full text-sm font-semibold",
-                    !activeStep ? "bg-muted" :
-                      isCompleted
-                        ? "border-primary bg-primary text-primary-foreground"
-                        : isCurrent
-                          ? "border-primary text-primary"
-                          : "border-muted-foreground/30 text-muted-foreground",
+                    !activeStep
+                      ? "bg-muted"
+                      : isCompleted
+                      ? "border-primary  bg-primary text-primary-foreground"
+                      : isCurrent
+                      ? "border-primary bg-primary text-primary-foreground"
+                      : "bg-muted text-muted-foreground"
                   )}
-                  initial={{scale: 0.8}}
+                  initial={{ scale: 0.8 }}
                   animate={{
-                    scale: (isCompleted && activeStep) ? 1.1 : 1,
-                    transition: {type: "spring", stiffness: 500, damping: 30},
+                    scale: isCompleted && activeStep ? 1.1 : 1,
+                    transition: { type: "spring", stiffness: 500, damping: 30 },
                   }}
                 >
                   {isCompleted ? (
                     <motion.div
-                      initial={{opacity: 0, scale: 0.5}}
-                      animate={{opacity: 1, scale: 1}}
-                      transition={{duration: 0.3}}
+                      initial={{ opacity: 0, scale: 0.5 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.3 }}
                     >
-                      <Check className="h-5 w-5"/>
+                      <Check className="h-5 w-5" />
                     </motion.div>
                   ) : (
                     <span>{index + 1}</span>
@@ -66,11 +83,20 @@ export const Stepper = ({steps, activeStep, orientation = "horizontal", lineLast
                 </motion.div>
               </div>
 
-              <div className={cn("flex flex-col", isVertical ? "ml-4" : "mt-2 text-center")}>
+              <div
+                className={cn(
+                  "flex flex-col",
+                  isVertical ? "ml-4" : "mt-2 text-center w-full"
+                )}
+              >
                 <span
                   className={cn(
                     "text-lg font-semibold",
-                    isCurrent ? "text-primary" : (isCompleted || !activeStep) ? "text-foreground" : "text-muted-foreground",
+                    isCurrent
+                      ? "text-primary"
+                      : isCompleted || !activeStep
+                      ? "text-foreground"
+                      : "text-muted-foreground"
                   )}
                 >
                   {step.title}
@@ -78,34 +104,57 @@ export const Stepper = ({steps, activeStep, orientation = "horizontal", lineLast
               </div>
             </div>
 
-            <div className="flex flex-row gap-4">
-              <div className="w-8">
-                {(!isLast || lineLast) && (
-                  <div className={cn("relative", isVertical ? "min-h-9 h-full w-full" : "h-0.5 flex-1 mx-2")}>
-                    <motion.div
-                      className={cn("absolute", isVertical ? "left-0 h-full w-full" : "top-0 h-full w-full")}
-                      initial={{
-                        backgroundColor: "var(hsl(--muted))",
-                      }}
-                    />
-                    <motion.div
-                      className={cn(
-                        "absolute",
-                        isVertical ? "left-1/2 h-0 w-0.5 -translation-x-1/2" : "top-0 h-full w-0",
-                        !activeStep ? "bg-muted" : "bg-primary",
-                      )}
-                      animate={{
-                        [isVertical ? "height" : "width"]: (isCompleted || !activeStep) ? "100%" : "0%",
-                      }}
-                      transition={{duration: 0.4}}
-                    />
-                  </div>
-                )}
+            {!isVertical && !isLast && (
+              <div className="flex-1 h-0.5 relative overflow-hidden">
+                <motion.div className="absolute top-0 h-full w-full bg-muted" />
+                <motion.div
+                  key={`line-${index}-${isCompleted}`}
+                  className={cn(
+                    "absolute top-0 h-full bg-primary"
+                  )}
+                  initial={{ width: isCompleted ? "0%" : "100%" }}
+                  animate={{ width: isCompleted ? "100%" : "0%" }}
+                  transition={{ duration: 0.4 }}
+                />
               </div>
-              <div className="flex-1 pt-2 pb-4">
-                {step?.children && <step.children/>}
+            )}
+
+            {isVertical && (
+              <div className="flex flex-row gap-4">
+                <div className="w-8">
+                  {(!isLast || lineLast) && (
+                    <div className="relative min-h-9 h-full w-full">
+                      <motion.div
+                        className="absolute left-1/2 -translate-x-1/2 h-full w-0.5 bg-muted"
+                      />
+                      <motion.div
+                        key={`v-line-${index}-${isCompleted}`}
+                        className="absolute left-1/2 -translate-x-1/2 w-0.5"
+                        initial={{
+                          height: isCompleted ? "0%" : "100%",
+                        }}
+                        animate={{
+                          height: isCompleted ? "100%" : "0%",
+                          backgroundColor: isCompleted
+                            ? "hsl(var(--primary))"
+                            : "hsl(var(--muted))",
+                        }}
+                        transition={{ duration: 0.4 }}
+                      />
+                    </div>
+                  )}
+                </div>
+                <div className="flex-1 pt-2 pb-4">
+                  {step?.children && <step.children />}
+                </div>
               </div>
-            </div>
+            )}
+
+            {!isVertical && step?.children && (
+              <div className="w-full mt-2">
+                <step.children />
+              </div>
+            )}
           </React.Fragment>
         );
       })}
