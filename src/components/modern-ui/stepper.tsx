@@ -1,5 +1,5 @@
 "use client";
-import React, { JSX } from "react";
+import React, { JSX, useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import { Check } from "lucide-react";
@@ -18,12 +18,17 @@ export interface StepperProps {
 
 export const Stepper = ({
   steps,
-  activeStep = 0,
+  activeStep = -1,
   orientation = "horizontal",
   lineLast = false,
   className,
 }: StepperProps) => {
   const isVertical = orientation === "vertical";
+  const [isFirstRender, setIsFirstRender] = useState(true);
+  
+  useEffect(() => {
+    setIsFirstRender(false);
+  }, []);
 
   return (
     <div
@@ -55,17 +60,17 @@ export const Stepper = ({
                 <motion.div
                   className={cn(
                     "flex h-9 w-9 items-center justify-center rounded-full text-sm font-semibold",
-                    !activeStep
+                    activeStep === -1
                       ? "bg-muted"
                       : isCompleted
-                      ? "border-primary  bg-primary text-primary-foreground"
+                      ? "border-primary bg-primary text-primary-foreground"
                       : isCurrent
                       ? "border-primary bg-primary text-primary-foreground"
                       : "bg-muted text-muted-foreground"
                   )}
                   initial={{ scale: 0.8 }}
                   animate={{
-                    scale: isCompleted && activeStep ? 1.1 : 1,
+                    scale: isCompleted && activeStep === -1 ? 1.1 : 1,
                     transition: { type: "spring", stiffness: 500, damping: 30 },
                   }}
                 >
@@ -94,7 +99,7 @@ export const Stepper = ({
                     "text-lg font-semibold",
                     isCurrent
                       ? "text-primary"
-                      : isCompleted || !activeStep
+                      : isCompleted || activeStep === -1
                       ? "text-foreground"
                       : "text-muted-foreground"
                   )}
@@ -109,12 +114,10 @@ export const Stepper = ({
                 <motion.div className="absolute top-0 h-full w-full bg-muted" />
                 <motion.div
                   key={`line-${index}-${isCompleted}`}
-                  className={cn(
-                    "absolute top-0 h-full bg-primary"
-                  )}
-                  initial={{ width: isCompleted ? "0%" : "100%" }}
+                  className={cn("absolute top-0 h-full bg-primary")}
+                  initial={{ width: isFirstRender ? (isCompleted ? "100%" : "0%") : (isCompleted ? "0%" : "100%") }}
                   animate={{ width: isCompleted ? "100%" : "0%" }}
-                  transition={{ duration: 0.4 }}
+                  transition={{ duration: isFirstRender ? 0 : 0.4 }}
                 />
               </div>
             )}
@@ -124,14 +127,12 @@ export const Stepper = ({
                 <div className="w-8">
                   {(!isLast || lineLast) && (
                     <div className="relative min-h-9 h-full w-full">
-                      <motion.div
-                        className="absolute left-1/2 -translate-x-1/2 h-full w-0.5 bg-muted"
-                      />
+                      <motion.div className="absolute left-1/2 -translate-x-1/2 h-full w-0.5 bg-muted" />
                       <motion.div
                         key={`v-line-${index}-${isCompleted}`}
                         className="absolute left-1/2 -translate-x-1/2 w-0.5"
                         initial={{
-                          height: isCompleted ? "0%" : "100%",
+                          height: isFirstRender ? (isCompleted ? "100%" : "0%") : (isCompleted ? "0%" : "100%"),
                         }}
                         animate={{
                           height: isCompleted ? "100%" : "0%",
@@ -139,7 +140,7 @@ export const Stepper = ({
                             ? "hsl(var(--primary))"
                             : "hsl(var(--muted))",
                         }}
-                        transition={{ duration: 0.4 }}
+                        transition={{ duration: isFirstRender ? 0 : 0.4 }}
                       />
                     </div>
                   )}

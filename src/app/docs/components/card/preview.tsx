@@ -1,10 +1,22 @@
 "use client";
-import {RefreshCw} from 'lucide-react';
-import {useState} from 'react';
-import {Tabs, TabsContent, TabsList, TabsTrigger} from '@/components/modern-ui/tabs';
-import {Button} from '@/components/modern-ui/button';
-import {CodeBlock} from '@/components/code-block';
-import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} from '@/components/modern-ui/card';
+import { RefreshCw } from "lucide-react";
+import { useState } from "react";
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@/components/modern-ui/tabs";
+import { Button } from "@/components/modern-ui/button";
+import { CodeBlock } from "@/components/code-block";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/modern-ui/card";
 
 export const cardCode = `import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/modern-ui/card";
             
@@ -18,9 +30,6 @@ export function CardDemo() {
       <CardContent>
         <p>Card content goes here</p>
       </CardContent>
-      <CardFooter>
-        <p>Card footer</p>
-      </CardFooter>
     </Card>
   );
 }`;
@@ -35,26 +44,31 @@ export const PreviewCard = () => {
 
   return (
     <>
-      <Tabs value={activeTab} className="mb-8" onValueChange={(value) => setActiveTab(value)}>
+      <Tabs
+        value={activeTab}
+        className="mb-8"
+        onValueChange={(value) => setActiveTab(value)}
+      >
         <TabsList>
           <TabsTrigger value="preview">Preview</TabsTrigger>
           <TabsTrigger value="code">Code</TabsTrigger>
         </TabsList>
-        <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[350px]">
-          <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50">
-          </div>
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+        <TabsContent
+          value="preview"
+          className="p-6 border rounded-md mt-2 relative min-h-[350px]"
+        >
+          <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 not-prose">
             <Card key={key} className="w-[350px]">
               <CardHeader>
-                <CardTitle>Card Title</CardTitle>
-                <CardDescription>Card Description</CardDescription>
+                <CardTitle>Default Card</CardTitle>
+                <CardDescription>
+                  This is the default card style
+                </CardDescription>
               </CardHeader>
               <CardContent>
-                <p>Card content goes here</p>
+                <p>This card uses the default variant with default size.</p>
               </CardContent>
-              <CardFooter>
-                <p>Card footer</p>
-              </CardFooter>
             </Card>
           </div>
           <div className="absolute top-4 right-4 flex gap-2">
@@ -64,7 +78,7 @@ export const PreviewCard = () => {
               className="h-8 w-8"
               onClick={handleRefresh}
             >
-              <RefreshCw className="h-4 w-4"/>
+              <RefreshCw className="h-4 w-4" />
             </Button>
           </div>
         </TabsContent>
@@ -74,4 +88,4 @@ export const PreviewCard = () => {
       </Tabs>
     </>
   );
-}; 
+};
