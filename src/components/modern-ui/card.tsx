@@ -8,10 +8,9 @@ const cardVariants = cva("group relative overflow-hidden rounded-xl transition-a
   variants: {
     variant: {
       default: "bg-background border border-border shadow-xs",
-      outline: "bg-background border-2 border-primary/20 hover:border-primary/40",
-      glass: "backdrop-blur-md bg-white/10 border border-white/20",
+      outline: "bg-background border-1 border-primary/20 hover:border-primary/40",
       destructive: "bg-destructive text-destructive-foreground",
-      dashed: "bg-background border-2 border-dashed border-border",
+      dashed: "bg-background border-1 border-dashed border-border",
       elevated: "bg-background border border-border shadow-lg",
       interactive: "bg-background border border-border hover:scale-[1.01] hover:shadow-md",
     },
@@ -36,7 +35,7 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
   ({ className, childClassname, variant, size, ...props }, ref) => {
     return (
       <div ref={ref} className={cn(cardVariants({ variant, size }), className)} {...props}>
-        <div className={cn("relative z-10", childClassname)}>{props.children}</div>
+        <div className={cn("relative z-10 not-prose", childClassname)}>{props.children}</div>
       </div>
     )
   },

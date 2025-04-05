@@ -1,6 +1,13 @@
 import {PreviewStepper} from "@/app/docs/components/stepper/preview";
 import {BreadcrumbNav} from "@/components/breadcrumb-nav";
 import {StepperInstallation} from "@/app/docs/components/stepper/components/stepper-installation";
+import {
+  HorizontalStepperDemo,
+  VerticalStepperDemo,
+  InteractiveStepperDemo,
+  StepperWithContentDemo
+} from "@/app/docs/components/stepper/components/stepper-demos";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/modern-ui/tabs";
 
 <BreadcrumbNav className="mb-4" items={[
   {label: "Docs", href: "/docs"},
@@ -37,87 +44,213 @@ Here is how to use the stepper in your project.
 import { Stepper } from "@/components/modern-ui/stepper"
 ```
 
-<br/>
-
-```tsx
-const steps = [
-  { id: 1, title: "Step 1" },
-  { id: 2, title: "Step 2" },
-  { id: 3, title: "Step 3" }
-];
-
-<Stepper steps={steps} activeStep={1} />
-```
-
 ---
 
 ## Examples
 
 ### Horizontal Stepper (Default)
-```tsx
-const steps = [
-  { id: 1, title: "Account Details" },
-  { id: 2, title: "Personal Information" },
-  { id: 3, title: "Review & Submit" }
-];
 
-<Stepper steps={steps} activeStep={1} />
-```
+A standard horizontal stepper with basic styling.
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[300px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full w-full z-10 min-h-[300px] relative inset-0">
+      <div className="w-full max-w-md px-4">
+        <HorizontalStepperDemo />
+      </div>
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { Stepper } from "@/components/modern-ui/stepper";
+
+    export function HorizontalStepperDemo() {
+      const steps = [
+        { id: 1, title: "Account Details" },
+        { id: 2, title: "Personal Information" },
+        { id: 3, title: "Review & Submit" }
+      ];
+
+      return (
+        <Stepper steps={steps} activeStep={1} />
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
 
 ### Vertical Stepper
-```tsx
-const steps = [
-  { id: 1, title: "Account Details" },
-  { id: 2, title: "Personal Information" },
-  { id: 3, title: "Review & Submit" }
-];
 
-<Stepper steps={steps} activeStep={1} orientation="vertical" />
-```
+A stepper with vertical orientation for longer processes.
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[300px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full w-full z-10 relative min-h-[300px] inset-0">
+      <div className="w-full max-w-md px-4">
+        <VerticalStepperDemo />
+      </div>
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { Stepper } from "@/components/modern-ui/stepper";
+
+    export function VerticalStepperDemo() {
+      const steps = [
+        { id: 1, title: "Account Details" },
+        { id: 2, title: "Personal Information" },
+        { id: 3, title: "Review & Submit" }
+      ];
+
+      return (
+        <Stepper steps={steps} activeStep={1} orientation="vertical" />
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+### Interactive Stepper
+
+A stepper with navigation controls for user interaction.
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[350px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full w-full z-10 min-h-[350px] relative inset-0">
+      <div className="w-full max-w-md px-4">
+        <InteractiveStepperDemo />
+      </div>
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { Stepper } from "@/components/modern-ui/stepper";
+    import { Button } from "@/components/modern-ui/button";
+    import { useState } from "react";
+
+    export function InteractiveStepperDemo() {
+      const [activeStep, setActiveStep] = useState(1);
+      
+      const steps = [
+        { id: 1, title: "Account Details" },
+        { id: 2, title: "Personal Information" },
+        { id: 3, title: "Review & Submit" }
+      ];
+
+      return (
+        <div className="space-y-6">
+          <Stepper steps={steps} activeStep={activeStep} />
+          
+          <div className="flex justify-center gap-4">
+            <Button 
+              onClick={() => setActiveStep((prev) => Math.max(0, prev - 1))}
+              disabled={activeStep === 0}
+              size="sm"
+            >
+              Previous
+            </Button>
+            <Button 
+              onClick={() => setActiveStep((prev) => Math.min(steps.length - 1, prev + 1))}
+              disabled={activeStep === steps.length - 1}
+              size="sm"
+            >
+              Next
+            </Button>
+          </div>
+        </div>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
 
 ### Stepper with Content
-```tsx
-const steps = [
-  { 
-    id: 1, 
-    title: "Account Details",
-    children: () => (
-      <div className="p-4 bg-background border rounded-md">
-        <h3 className="text-sm font-medium mb-2">Create your account</h3>
-        <p className="text-muted-foreground text-sm">
-          Enter your email and password to create your account.
-        </p>
-      </div>
-    )
-  },
-  { 
-    id: 2, 
-    title: "Personal Information",
-    children: () => (
-      <div className="p-4 bg-background border rounded-md">
-        <h3 className="text-sm font-medium mb-2">Your personal details</h3>
-        <p className="text-muted-foreground text-sm">
-          Provide your personal details to complete your profile.
-        </p>
-      </div>
-    )
-  },
-  { 
-    id: 3, 
-    title: "Review & Submit",
-    children: () => (
-      <div className="p-4 bg-background border rounded-md">
-        <h3 className="text-sm font-medium mb-2">Confirm submission</h3>
-        <p className="text-muted-foreground text-sm">
-          Review all your information before submitting.
-        </p>
-      </div>
-    )
-  }
-];
 
-<Stepper steps={steps} activeStep={1} />
-```
+A vertical stepper with content for each step.
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[500px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full w-full z-10 relative inset-0">
+      <div className="w-full max-w-md px-4">
+        <StepperWithContentDemo />
+      </div>
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { Stepper } from "@/components/modern-ui/stepper";
+    import { Button } from "@/components/modern-ui/button";
+    import { useState } from "react";
+
+    export function StepperWithContentDemo() {
+      const [activeStep, setActiveStep] = useState(0);
+      
+      const steps = [
+        { 
+          id: 1, 
+          title: "Account Details",
+          children: () => (
+            <div className="p-4 bg-background border rounded-md">
+              <h3 className="text-sm font-medium mb-2">Create your account</h3>
+              <p className="text-muted-foreground text-sm">
+                Enter your email and password to create your account.
+              </p>
+            </div>
+          )
+        },
+        { 
+          id: 2, 
+          title: "Personal Information",
+          children: () => (
+            <div className="p-4 bg-background border rounded-md">
+              <h3 className="text-sm font-medium mb-2">Your personal details</h3>
+              <p className="text-muted-foreground text-sm">
+                Provide your personal details to complete your profile.
+              </p>
+            </div>
+          )
+        },
+        { 
+          id: 3, 
+          title: "Review & Submit",
+          children: () => (
+            <div className="p-4 bg-background border rounded-md">
+              <h3 className="text-sm font-medium mb-2">Confirm submission</h3>
+              <p className="text-muted-foreground text-sm">
+                Review all your information before submitting.
+              </p>
+            </div>
+          )
+        }
+      ];
+
+      return (
+        <Stepper steps={steps} activeStep={activeStep} orientation="vertical" lineLast={true} />
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
 
 ## API Reference
 

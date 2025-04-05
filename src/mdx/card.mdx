@@ -1,6 +1,17 @@
-import {PreviewCard} from "@/app/docs/components/card/preview";
-import {BreadcrumbNav} from "@/components/breadcrumb-nav";
-import {CardInstallation} from "@/app/docs/components/card/components/card-installation";
+import { PreviewCard } from "@/app/docs/components/card/preview";
+import { BreadcrumbNav } from "@/components/breadcrumb-nav";
+import { CardInstallation } from "@/app/docs/components/card/components/card-installation";
+import {
+  DefaultCardDemo,
+  OutlineCardDemo,
+  GlassCardDemo,
+  ElevatedCardDemo,
+  InteractiveCardDemo,
+  CardWithBadgeDemo,
+  CardWithDecorationDemo,
+  DashedCardDemo
+} from "@/app/docs/components/card/components/card-demos";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/modern-ui/tabs";
 
 <BreadcrumbNav className="mb-4" items={[
   {label: "Docs", href: "/docs"},
@@ -37,68 +48,350 @@ Here is how to use the card in your project.
 import { Card, CardHeader, CardContent, CardFooter, CardTitle, CardDescription } from "@/components/modern-ui/card"
 ```
 
-<br/>
-
-```tsx
-<Card>
-  <CardHeader>
-    <CardTitle>Card Title</CardTitle>
-    <CardDescription>Card Description</CardDescription>
-  </CardHeader>
-  <CardContent>
-    Card content
-  </CardContent>
-  <CardFooter>
-    Card footer
-  </CardFooter>
-</Card>
-```
-
 ---
 
 ## Examples
 
 ### Default Card
-```tsx
-<Card>
-  <CardHeader>
-    <CardTitle>Default Card</CardTitle>
-    <CardDescription>This is a default card with standard styling</CardDescription>
-  </CardHeader>
-  <CardContent>
-    <p>This is the card content area.</p>
-  </CardContent>
-  <CardFooter>
-    <p>Footer content here</p>
-  </CardFooter>
-</Card>
-```
 
-### Card with Spotlight Effect
-```tsx
-<Card spotlight>
-  <CardHeader>
-    <CardTitle>Spotlight Card</CardTitle>
-    <CardDescription>This card has the spotlight effect on hover</CardDescription>
-  </CardHeader>
-  <CardContent>
-    <p>Hover over the card to see the spotlight effect.</p>
-  </CardContent>
-</Card>
-```
+A standard card with basic styling and layout.
 
-### Gradient Card
-```tsx
-<Card variant="gradient">
-  <CardHeader>
-    <CardTitle>Gradient Card</CardTitle>
-    <CardDescription>This card has a gradient border</CardDescription>
-  </CardHeader>
-  <CardContent>
-    <p>The gradient effect appears on the border of the card.</p>
-  </CardContent>
-</Card>
-```
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[300px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full z-10 relative">
+      <DefaultCardDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { 
+      Card, 
+      CardHeader, 
+      CardFooter, 
+      CardTitle, 
+      CardDescription, 
+      CardContent 
+    } from "@/components/modern-ui/card";
+    import { Button } from "@/components/modern-ui/button";
+
+    export function DefaultCardDemo() {
+      return (
+        <Card className="w-full max-w-sm">
+          <CardHeader>
+            <CardTitle>Default Card</CardTitle>
+            <CardDescription>This is a default card with standard styling</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <p>This is the card content area, which can contain any elements.</p>
+          </CardContent>
+          <CardFooter className="flex justify-between">
+            <Button variant="outline" size="sm">Cancel</Button>
+            <Button size="sm">Save</Button>
+          </CardFooter>
+        </Card>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+### Outline Card
+
+A card with a border outline that highlights on hover.
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[300px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full z-10 relative">
+      <OutlineCardDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { 
+      Card, 
+      CardHeader, 
+      CardFooter, 
+      CardTitle, 
+      CardDescription, 
+      CardContent 
+    } from "@/components/modern-ui/card";
+    import { Button } from "@/components/modern-ui/button";
+
+    export function OutlineCardDemo() {
+      return (
+        <Card variant="outline" className="w-full max-w-sm">
+          <CardHeader>
+            <CardTitle>Outline Card</CardTitle>
+            <CardDescription>Card with an outline border style</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <p>This card has a border that highlights when you hover over it.</p>
+          </CardContent>
+          <CardFooter className="flex justify-end">
+            <Button size="sm">Learn More</Button>
+          </CardFooter>
+        </Card>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+
+### Elevated Card
+
+A card with enhanced shadow effects for a raised appearance.
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[300px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full z-10 relative">
+      <ElevatedCardDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { 
+      Card, 
+      CardHeader, 
+      CardFooter, 
+      CardTitle, 
+      CardDescription, 
+      CardContent 
+    } from "@/components/modern-ui/card";
+    import { Button } from "@/components/modern-ui/button";
+
+    export function ElevatedCardDemo() {
+      return (
+        <Card variant="elevated" className="w-full max-w-sm">
+          <CardHeader>
+            <CardTitle>Elevated Card</CardTitle>
+            <CardDescription>Card with enhanced shadow effects</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <p>This card has a more prominent shadow to create a raised effect.</p>
+          </CardContent>
+          <CardFooter className="flex justify-end">
+            <Button size="sm">Explore</Button>
+          </CardFooter>
+        </Card>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+### Interactive Card
+
+A card that scales and adds shadow on hover.
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[300px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full z-10 relative">
+      <InteractiveCardDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { 
+      Card, 
+      CardHeader, 
+      CardFooter, 
+      CardTitle, 
+      CardDescription, 
+      CardContent 
+    } from "@/components/modern-ui/card";
+    import { Button } from "@/components/modern-ui/button";
+
+    export function InteractiveCardDemo() {
+      return (
+        <Card variant="interactive" className="w-full max-w-sm cursor-pointer">
+          <CardHeader>
+            <CardTitle>Interactive Card</CardTitle>
+            <CardDescription>This card has interactive hover effects</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <p>Hover over this card to see it slightly scale up and add a shadow effect.</p>
+          </CardContent>
+          <CardFooter className="flex justify-end">
+            <Button variant="outline" size="sm">Click Me</Button>
+          </CardFooter>
+        </Card>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+### Dashed Card
+
+A card with a dashed border style.
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[300px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full z-10 relative">
+      <DashedCardDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { 
+      Card, 
+      CardHeader, 
+      CardFooter, 
+      CardTitle, 
+      CardDescription, 
+      CardContent 
+    } from "@/components/modern-ui/card";
+    import { Button } from "@/components/modern-ui/button";
+
+    export function DashedCardDemo() {
+      return (
+        <Card variant="dashed" className="w-full max-w-sm">
+          <CardHeader>
+            <CardTitle>Dashed Card</CardTitle>
+            <CardDescription>A card with dashed border styling</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <p>This card uses a dashed border style to create a distinct look.</p>
+          </CardContent>
+          <CardFooter className="flex justify-end">
+            <Button size="sm">Add Content</Button>
+          </CardFooter>
+        </Card>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+### Card with Badge
+
+A card featuring the CardBadge component.
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[300px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full z-10 relative">
+      <CardWithBadgeDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { 
+      Card, 
+      CardHeader, 
+      CardFooter, 
+      CardTitle, 
+      CardDescription, 
+      CardContent,
+      CardBadge
+    } from "@/components/modern-ui/card";
+    import { Button } from "@/components/modern-ui/button";
+
+    export function CardWithBadgeDemo() {
+      return (
+        <Card className="w-full max-w-sm">
+          <CardHeader className="relative">
+            <div className="absolute right-0 top-0">
+              <CardBadge>New</CardBadge>
+            </div>
+            <CardTitle>Card with Badge</CardTitle>
+            <CardDescription>A card featuring a badge component</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <p>The CardBadge component can be placed anywhere within the card.</p>
+          </CardContent>
+          <CardFooter className="flex justify-end">
+            <Button size="sm">View More</Button>
+          </CardFooter>
+        </Card>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+### Card with Decoration
+
+A card with decorative visual elements.
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[300px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full z-10 relative">
+      <CardWithDecorationDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { 
+      Card, 
+      CardHeader, 
+      CardFooter, 
+      CardTitle, 
+      CardDescription, 
+      CardContent,
+      CardDecoration
+    } from "@/components/modern-ui/card";
+    import { Button } from "@/components/modern-ui/button";
+
+    export function CardWithDecorationDemo() {
+      return (
+        <Card className="max-w-sm border-purple-300 shadow-lg shadow-purple-200/50 hover:shadow-purple-300/50">
+          <CardHeader>
+            <CardTitle className="text-purple-700">Custom Card</CardTitle>
+            <CardDescription>Custom styling combination</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <p>This card uses custom class combinations with the interactive variant.</p>
+          </CardContent>
+          <CardFooter>
+        <CardBadge className="bg-purple-100 text-purple-700 border-purple-200">
+          Custom
+        </CardBadge>
+      </CardFooter>
+      <CardDecoration className="bg-purple-200/50" />
+    </Card>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+---
 
 ## API Reference
 
@@ -106,9 +399,8 @@ import { Card, CardHeader, CardContent, CardFooter, CardTitle, CardDescription }
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `variant` | `'default' \| 'glass' \| 'gradient' \| 'outline' \| 'elevated'` | `'default'` | Controls the visual style of the card |
-| `size` | `'default' \| 'sm' \| 'lg'` | `'default'` | Controls the size of the card |
-| `spotlight` | `boolean` | `false` | When true, adds a spotlight effect on hover |
+| `variant` | `'default' \| 'gradient' \| 'outline' \| 'elevated' \| 'dashed' \| 'interactive'` | `'default'` | Controls the visual style of the card |
+| `size` | `'default' \| 'sm' \| 'lg' \| 'xl'` | `'default'` | Controls the size of the card |
 | `childClassname` | `string` | - | Additional CSS classes to apply to the card content wrapper |
 | `className` | `string` | - | Additional CSS classes to apply to the card |
 | `children` | `ReactNode` | - | The content of the card |
@@ -125,18 +417,23 @@ The Card component comes with several sub-components for structuring content:
 - `CardBadge`: Small badge component that can be placed anywhere within the card
 - `CardDecoration`: Decorative element for adding visual interest
 
-### CSS Classes
+### Variant Classes
 
-The card uses the following CSS class variants:
+The card supports the following variants:
 
-#### Variant Classes
 - `default`: Standard card with background and subtle hover effect
+- `outline`: Card with a border that highlights on hover
 - `glass`: Card with backdrop blur and translucent background
-- `gradient`: Card with gradient border effect
-- `outline`: Card with a border and transparent background
-- `elevated`: Card with enhanced shadow effects and hover animations
+- `elevated`: Card with enhanced shadow effects
+- `interactive`: Card that scales slightly and adds shadow on hover
+- `dashed`: Card with a dashed border style
+- `destructive`: Card with destructive/error styling
 
-#### Size Classes
+### Size Classes
+
+The card supports the following size options:
+
 - `default`: Standard padding (p-6)
 - `sm`: Small padding (p-4)
-- `lg`: Large padding (p-8) 
+- `lg`: Large padding (p-8)
+- `xl`: Extra large padding (p-10) 

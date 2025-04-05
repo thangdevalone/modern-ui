@@ -36,7 +36,7 @@ export const Stepper = ({
         "w-full not-prose",
         isVertical
           ? "flex flex-col"
-          : "flex flex-row items-center justify-between",
+          : "flex flex-row items-center justify-between gap-2",
         className
       )}
     >
@@ -96,7 +96,7 @@ export const Stepper = ({
               >
                 <span
                   className={cn(
-                    "text-lg font-semibold",
+                    "text-base font-semibold",
                     isCurrent
                       ? "text-primary"
                       : isCompleted || activeStep === -1

@@ -1,0 +1,431 @@
+import { BreadcrumbNav } from "@/components/breadcrumb-nav";
+import { CommandPreview } from "@/app/docs/components/command/preview";
+import { CommandInstallation } from "@/app/docs/components/command/components/command-installation";
+import { BasicCommandDemo, CommandWithIconsDemo, CommandWithShortcutsDemo, CommandWithGroupsDemo, CommandDialogDemo } from "@/app/docs/components/command/components/command-demos";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/modern-ui/tabs";
+
+<BreadcrumbNav className="mb-4" items={[
+  {label: "Docs", href: "/docs"},
+  {label: "Components", href: "/docs/components"},
+  {label: "Command"},
+]}/>
+
+<CommandPreview/>
+
+# Command Component
+
+A command palette component with fuzzy search functionality, built on top of [cmdk](https://cmdk.paco.me/).
+
+- Provides a popup command dialog interface
+- Supports keyboard navigation
+- Built-in search functionality
+- Customizable command groups and items
+
+---
+
+## Installation
+
+The Command component is part of our UI library. You can import it directly from the components directory.
+
+<CommandInstallation/>
+
+---
+
+## Usage
+
+Here is how to use the command component in your project.
+
+```tsx
+import { 
+  Command,
+  CommandDialog,
+  CommandInput,
+  CommandList,
+  CommandEmpty,
+  CommandGroup,
+  CommandItem,
+  CommandShortcut,
+  CommandSeparator
+} from "@/components/modern-ui/command"
+```
+
+---
+
+## Examples
+
+### Basic Command
+
+A simple command menu with basic functionality.
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[350px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center z-10 relative">
+      <BasicCommandDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { 
+      Command,
+      CommandInput,
+      CommandList,
+      CommandEmpty,
+      CommandGroup,
+      CommandItem 
+    } from "@/components/modern-ui/command";
+
+    export function BasicCommandDemo() {
+      return (
+        <Command className="rounded-lg border shadow-md">
+          <CommandInput placeholder="Type a command or search..." />
+          <CommandList>
+            <CommandEmpty>No results found.</CommandEmpty>
+            <CommandGroup heading="Suggestions">
+              <CommandItem>Calendar</CommandItem>
+              <CommandItem>Search</CommandItem>
+              <CommandItem>Settings</CommandItem>
+            </CommandGroup>
+          </CommandList>
+        </Command>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+### Command with Icons
+
+Add icons to command items for better visual context.
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[350px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center z-10 relative">
+      <CommandWithIconsDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { 
+      Command,
+      CommandInput,
+      CommandList,
+      CommandEmpty,
+      CommandGroup,
+      CommandItem 
+    } from "@/components/modern-ui/command";
+    import { CalendarIcon, SearchIcon, SettingsIcon } from "lucide-react";
+
+    export function CommandWithIconsDemo() {
+      return (
+        <Command className="rounded-lg border shadow-md">
+          <CommandInput placeholder="Type a command or search..." />
+          <CommandList>
+            <CommandEmpty>No results found.</CommandEmpty>
+            <CommandGroup heading="Suggestions">
+              <CommandItem>
+                <CalendarIcon className="mr-2 h-4 w-4" />
+                Calendar
+              </CommandItem>
+              <CommandItem>
+                <SearchIcon className="mr-2 h-4 w-4" />
+                Search
+              </CommandItem>
+              <CommandItem>
+                <SettingsIcon className="mr-2 h-4 w-4" />
+                Settings
+              </CommandItem>
+            </CommandGroup>
+          </CommandList>
+        </Command>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+### Command with Shortcuts
+
+Display keyboard shortcuts next to command items.
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[350px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center z-10 relative">
+      <CommandWithShortcutsDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { 
+      Command,
+      CommandInput,
+      CommandList,
+      CommandEmpty,
+      CommandGroup,
+      CommandItem,
+      CommandShortcut
+    } from "@/components/modern-ui/command";
+    import { CalendarIcon, SearchIcon, SettingsIcon } from "lucide-react";
+
+    export function CommandWithShortcutsDemo() {
+      return (
+        <Command className="rounded-lg border shadow-md">
+          <CommandInput placeholder="Type a command or search..." />
+          <CommandList>
+            <CommandEmpty>No results found.</CommandEmpty>
+            <CommandGroup heading="Suggestions">
+              <CommandItem>
+                <CalendarIcon className="mr-2 h-4 w-4" />
+                Calendar
+                <CommandShortcut>⌘C</CommandShortcut>
+              </CommandItem>
+              <CommandItem>
+                <SearchIcon className="mr-2 h-4 w-4" />
+                Search
+                <CommandShortcut>⌘S</CommandShortcut>
+              </CommandItem>
+              <CommandItem>
+                <SettingsIcon className="mr-2 h-4 w-4" />
+                Settings
+                <CommandShortcut>⌘,</CommandShortcut>
+              </CommandItem>
+            </CommandGroup>
+          </CommandList>
+        </Command>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+### Command with Multiple Groups
+
+Organize commands into multiple groups separated by dividers.
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[450px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center z-10 relative">
+      <CommandWithGroupsDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { 
+      Command,
+      CommandInput,
+      CommandList,
+      CommandEmpty,
+      CommandGroup,
+      CommandItem,
+      CommandSeparator
+    } from "@/components/modern-ui/command";
+    import { 
+      CalendarIcon, 
+      SearchIcon, 
+      UserIcon, 
+      FileIcon,
+      SunIcon,
+      MoonIcon,
+      LaptopIcon 
+    } from "lucide-react";
+
+    export function CommandWithGroupsDemo() {
+      return (
+        <Command className="rounded-lg border shadow-md">
+          <CommandInput placeholder="Type a command or search..." />
+          <CommandList>
+            <CommandEmpty>No results found.</CommandEmpty>
+            <CommandGroup heading="Suggestions">
+              <CommandItem>
+                <CalendarIcon className="mr-2 h-4 w-4" />
+                Calendar
+              </CommandItem>
+              <CommandItem>
+                <SearchIcon className="mr-2 h-4 w-4" />
+                Search
+              </CommandItem>
+            </CommandGroup>
+            <CommandSeparator />
+            <CommandGroup heading="Settings">
+              <CommandItem>
+                <UserIcon className="mr-2 h-4 w-4" />
+                Profile
+              </CommandItem>
+              <CommandItem>
+                <FileIcon className="mr-2 h-4 w-4" />
+                Documents
+              </CommandItem>
+            </CommandGroup>
+            <CommandSeparator />
+            <CommandGroup heading="Theme">
+              <CommandItem>
+                <SunIcon className="mr-2 h-4 w-4" />
+                Light
+              </CommandItem>
+              <CommandItem>
+                <MoonIcon className="mr-2 h-4 w-4" />
+                Dark
+              </CommandItem>
+              <CommandItem>
+                <LaptopIcon className="mr-2 h-4 w-4" />
+                System
+              </CommandItem>
+            </CommandGroup>
+          </CommandList>
+        </Command>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+### Command Dialog
+
+A dialog version of the command menu that can be triggered with a button.
+
+> **Note**: For accessibility, always include a `DialogTitle` for screen readers. If you want to hide the title visually, use the `VisuallyHidden` component.
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[200px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center z-10 relative">
+      <CommandDialogDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { useState } from "react";
+    import { Button } from "@/components/modern-ui/button";
+    import { 
+      Command,
+      CommandDialog,
+      CommandInput,
+      CommandList,
+      CommandEmpty,
+      CommandGroup,
+      CommandItem,
+      CommandShortcut,
+      CommandSeparator
+    } from "@/components/modern-ui/command";
+    import { DialogTitle } from "@/components/modern-ui/dialog";
+    import { VisuallyHidden } from "@/components/modern-ui/visually-hidden";
+    import { 
+      CalendarIcon, 
+      SearchIcon, 
+      SettingsIcon,
+      SunIcon,
+      MoonIcon,
+      LaptopIcon 
+    } from "lucide-react";
+
+    export function CommandDialogDemo() {
+      const [open, setOpen] = useState(false);
+
+      return (
+        <div className="flex justify-center">
+          <Button onClick={() => setOpen(true)}>Open Command Menu</Button>
+          <CommandDialog open={open} onOpenChange={setOpen}>
+            <DialogTitle asChild>
+              <VisuallyHidden>Command Menu</VisuallyHidden>
+            </DialogTitle>
+            <CommandInput placeholder="Type a command or search..." />
+            <CommandList>
+              <CommandEmpty>No results found.</CommandEmpty>
+              <CommandGroup heading="Suggestions">
+                <CommandItem>
+                  <CalendarIcon className="mr-2 h-4 w-4" />
+                  Calendar
+                  <CommandShortcut>⌘C</CommandShortcut>
+                </CommandItem>
+                <CommandItem>
+                  <SearchIcon className="mr-2 h-4 w-4" />
+                  Search
+                  <CommandShortcut>⌘S</CommandShortcut>
+                </CommandItem>
+                <CommandItem>
+                  <SettingsIcon className="mr-2 h-4 w-4" />
+                  Settings
+                  <CommandShortcut>⌘,</CommandShortcut>
+                </CommandItem>
+              </CommandGroup>
+              <CommandSeparator />
+              <CommandGroup heading="Theme">
+                <CommandItem>
+                  <SunIcon className="mr-2 h-4 w-4" />
+                  Light
+                </CommandItem>
+                <CommandItem>
+                  <MoonIcon className="mr-2 h-4 w-4" />
+                  Dark
+                </CommandItem>
+                <CommandItem>
+                  <LaptopIcon className="mr-2 h-4 w-4" />
+                  System
+                </CommandItem>
+              </CommandGroup>
+            </CommandList>
+          </CommandDialog>
+        </div>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+---
+
+## API Reference
+
+### Command Component API
+
+| Component | Props | Description |
+|-----------|-------|-------------|
+| `Command` | `React.ComponentPropsWithoutRef<typeof CommandPrimitive>` | Root component for the command menu |
+| `CommandDialog` | `DialogProps` | Dialog wrapper for the command menu |
+| `CommandInput` | `React.ComponentPropsWithoutRef<typeof CommandPrimitive.Input>` | Input field for searching commands |
+| `CommandList` | `React.ComponentPropsWithoutRef<typeof CommandPrimitive.List>` | Container for command items |
+| `CommandEmpty` | `React.ComponentPropsWithoutRef<typeof CommandPrimitive.Empty>` | Empty state when no results are found |
+| `CommandGroup` | `React.ComponentPropsWithoutRef<typeof CommandPrimitive.Group>` | Group of related command items |
+| `CommandItem` | `React.ComponentPropsWithoutRef<typeof CommandPrimitive.Item>` | Individual command item |
+| `CommandShortcut` | `React.HTMLAttributes<HTMLSpanElement>` | Display keyboard shortcuts |
+| `CommandSeparator` | `React.ComponentPropsWithoutRef<typeof CommandPrimitive.Separator>` | Visual separator between groups |
+
+### CommandItem Props
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `disabled` | `boolean` | Whether the item is disabled |
+| `onSelect` | `() => void` | Function called when the item is selected |
+| `value` | `string` | Value used for filtering |
+| `className` | `string` | Additional CSS classes |
+
+Command items are automatically selected when navigating with keyboard and can be activated by pressing Enter.
+
+### Accessibility
+
+- Always include a `DialogTitle` when using `CommandDialog` for screen reader accessibility
+- Use the `VisuallyHidden` component if you want to hide the title visually
+- The command menu supports keyboard navigation with arrow keys and Enter to select 
