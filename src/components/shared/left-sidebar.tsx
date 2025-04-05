@@ -51,11 +51,16 @@ const links: {
   {
     category: "Components",
     items: [
+      { href: "/docs/components/badge", label: "Badge", badge: "new" },
       { href: "/docs/components/button", label: "Button" },
+      { href: "/docs/components/card", label: "Card", badge: "new" },
+      { href: "/docs/components/copy-button", label: "Copy Button", badge: "new" },
+      { href: "/docs/components/dialog", label: "Dialog", badge: "new" },
       { href: "/docs/components/fancy-tabs", label: "Fancy tab" },
-      { href: "/docs/components/underline-tabs", label: "Underline tab" },
       { href: "/docs/components/fluid-dropdown", label: "Fluid Dropdown", badge: "new" },
       { href: "/docs/components/date-picker", label: "Date Picker", badge: "new" },
+      { href: "/docs/components/rainbow-button", label: "Rainbow Button", badge: "new" },
+      { href: "/docs/components/underline-tabs", label: "Underline tab" },
     ],
   },
   {

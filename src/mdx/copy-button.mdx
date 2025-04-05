@@ -1,0 +1,93 @@
+import {PreviewCopyButton} from "@/app/docs/components/copy-button/preview";
+import {BreadcrumbNav} from "@/components/breadcrumb-nav";
+import {CopyButtonInstallation} from "@/app/docs/components/copy-button/components/copy-button-installation";
+
+<BreadcrumbNav className="mb-4" items={[
+  {label: "Docs", href: "/docs"},
+  {label: "Components", href: "/docs/components"},
+  {label: "Copy Button"},
+]}/>
+
+<PreviewCopyButton/>
+
+# Copy Button Component
+
+An animated button component that allows users to copy text to their clipboard with visual feedback.
+
+- Provides instant feedback with state change animation
+- Integrates with the clipboard API
+- Built with Framer Motion for smooth transitions
+- Accessible with proper ARIA attributes
+
+---
+
+## Installation
+
+The CopyButton component is part of our UI library. You can import it directly from the components directory.
+
+<CopyButtonInstallation/>
+
+---
+
+## Usage
+
+Here is how to use the copy button in your project.
+
+```tsx
+import { CopyButton } from "@/components/modern-ui/copy-button"
+```
+
+<br/>
+
+```tsx
+<CopyButton value="Text to be copied" />
+```
+
+---
+
+## Examples
+
+### Basic Copy Button
+```tsx
+<CopyButton value="Text to be copied" />
+```
+
+### In a Code Block
+```tsx
+<div className="bg-zinc-900 p-4 rounded-md flex items-center justify-between">
+  <code className="text-sm text-zinc-400">npm install @thangdevalone/modern-ui</code>
+  <CopyButton value="npm install @thangdevalone/modern-ui" />
+</div>
+```
+
+### Custom Styled Copy Button
+```tsx
+<CopyButton 
+  value="Custom styled copy button" 
+  className="p-2 bg-blue-500 rounded-full"
+/>
+```
+
+## API Reference
+
+### CopyButton Component Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `string` | - | The text to be copied to clipboard when the button is clicked |
+| `className` | `string` | - | Additional CSS classes to apply to the button |
+
+### Behavior
+
+The CopyButton component provides the following behavior:
+
+1. When clicked, it copies the provided `value` to the user's clipboard
+2. Displays a check mark for 2 seconds to indicate successful copying
+3. Reverts back to the copy icon after the feedback period
+4. Uses smooth animations for state transitions
+
+### Dependencies
+
+The component uses:
+- Framer Motion for animations
+- Lucide React for icons (Copy and Check) 

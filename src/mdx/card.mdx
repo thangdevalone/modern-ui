@@ -1,0 +1,142 @@
+import {PreviewCard} from "@/app/docs/components/card/preview";
+import {BreadcrumbNav} from "@/components/breadcrumb-nav";
+import {CardInstallation} from "@/app/docs/components/card/components/card-installation";
+
+<BreadcrumbNav className="mb-4" items={[
+  {label: "Docs", href: "/docs"},
+  {label: "Components", href: "/docs/components"},
+  {label: "Card"},
+]}/>
+
+<PreviewCard/>
+
+# Card Component
+
+A customizable card component for containing content with various styles and layouts.
+
+- Multiple variants: default, glass, gradient, outline, and elevated
+- Different size options: default, small, and large
+- Supports spotlight effect for enhanced hover interactions
+- Includes sub-components for structured content organization
+
+---
+
+## Installation
+
+The Card component is part of our UI library. You can import it directly from the components directory.
+
+<CardInstallation/>
+
+---
+
+## Usage
+
+Here is how to use the card in your project.
+
+```tsx
+import { Card, CardHeader, CardContent, CardFooter, CardTitle, CardDescription } from "@/components/modern-ui/card"
+```
+
+<br/>
+
+```tsx
+<Card>
+  <CardHeader>
+    <CardTitle>Card Title</CardTitle>
+    <CardDescription>Card Description</CardDescription>
+  </CardHeader>
+  <CardContent>
+    Card content
+  </CardContent>
+  <CardFooter>
+    Card footer
+  </CardFooter>
+</Card>
+```
+
+---
+
+## Examples
+
+### Default Card
+```tsx
+<Card>
+  <CardHeader>
+    <CardTitle>Default Card</CardTitle>
+    <CardDescription>This is a default card with standard styling</CardDescription>
+  </CardHeader>
+  <CardContent>
+    <p>This is the card content area.</p>
+  </CardContent>
+  <CardFooter>
+    <p>Footer content here</p>
+  </CardFooter>
+</Card>
+```
+
+### Card with Spotlight Effect
+```tsx
+<Card spotlight>
+  <CardHeader>
+    <CardTitle>Spotlight Card</CardTitle>
+    <CardDescription>This card has the spotlight effect on hover</CardDescription>
+  </CardHeader>
+  <CardContent>
+    <p>Hover over the card to see the spotlight effect.</p>
+  </CardContent>
+</Card>
+```
+
+### Gradient Card
+```tsx
+<Card variant="gradient">
+  <CardHeader>
+    <CardTitle>Gradient Card</CardTitle>
+    <CardDescription>This card has a gradient border</CardDescription>
+  </CardHeader>
+  <CardContent>
+    <p>The gradient effect appears on the border of the card.</p>
+  </CardContent>
+</Card>
+```
+
+## API Reference
+
+### Card Component Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `'default' \| 'glass' \| 'gradient' \| 'outline' \| 'elevated'` | `'default'` | Controls the visual style of the card |
+| `size` | `'default' \| 'sm' \| 'lg'` | `'default'` | Controls the size of the card |
+| `spotlight` | `boolean` | `false` | When true, adds a spotlight effect on hover |
+| `childClassname` | `string` | - | Additional CSS classes to apply to the card content wrapper |
+| `className` | `string` | - | Additional CSS classes to apply to the card |
+| `children` | `ReactNode` | - | The content of the card |
+
+### Sub-components
+
+The Card component comes with several sub-components for structuring content:
+
+- `CardHeader`: Container for the top section of the card
+- `CardTitle`: Heading element for the card
+- `CardDescription`: Text element for additional information
+- `CardContent`: Main content area of the card
+- `CardFooter`: Container for the bottom section of the card
+- `CardBadge`: Small badge component that can be placed anywhere within the card
+- `CardDecoration`: Decorative element for adding visual interest
+
+### CSS Classes
+
+The card uses the following CSS class variants:
+
+#### Variant Classes
+- `default`: Standard card with background and subtle hover effect
+- `glass`: Card with backdrop blur and translucent background
+- `gradient`: Card with gradient border effect
+- `outline`: Card with a border and transparent background
+- `elevated`: Card with enhanced shadow effects and hover animations
+
+#### Size Classes
+- `default`: Standard padding (p-6)
+- `sm`: Small padding (p-4)
+- `lg`: Large padding (p-8) 

@@ -1,0 +1,104 @@
+import {PreviewRainbowButton} from "@/app/docs/components/rainbow-button/preview";
+import {BreadcrumbNav} from "@/components/breadcrumb-nav";
+import {RainbowButtonInstallation} from "@/app/docs/components/rainbow-button/components/rainbow-button-installation";
+
+<BreadcrumbNav className="mb-4" items={[
+  {label: "Docs", href: "/docs"},
+  {label: "Components", href: "/docs/components"},
+  {label: "Rainbow Button"},
+]}/>
+
+<PreviewRainbowButton/>
+
+# Rainbow Button Component
+
+A visually striking button component with a colorful animated rainbow effect.
+
+- Animated rainbow gradient background and glow effect
+- Eye-catching design for call-to-action elements
+- Fully accessible with proper focus states
+- Seamless integration with forms and interactions
+
+---
+
+## Installation
+
+The RainbowButton component is part of our UI library. You can import it directly from the components directory.
+
+<RainbowButtonInstallation/>
+
+---
+
+## Usage
+
+Here is how to use the rainbow button in your project.
+
+```tsx
+import { RainbowButton } from "@/components/modern-ui/rainbow-button"
+```
+
+<br/>
+
+```tsx
+<RainbowButton>Click me</RainbowButton>
+```
+
+---
+
+## Examples
+
+### Basic Rainbow Button
+```tsx
+<RainbowButton>Click me</RainbowButton>
+```
+
+### Rainbow Button in a Form
+```tsx
+<form onSubmit={handleSubmit}>
+  <div className="space-y-4">
+    {/* Form fields */}
+    <div className="mt-6">
+      <RainbowButton type="submit">Submit Form</RainbowButton>
+    </div>
+  </div>
+</form>
+```
+
+### Custom Styled Rainbow Button
+```tsx
+<RainbowButton className="font-bold">
+  Custom Rainbow Button
+</RainbowButton>
+```
+
+## API Reference
+
+### RainbowButton Component Props
+
+The RainbowButton component extends the standard HTML button attributes, so it accepts all the props that a regular button would accept:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | - | The content of the button |
+| `className` | `string` | - | Additional CSS classes to apply to the button |
+| `disabled` | `boolean` | `false` | When true, disables the button |
+| `type` | `'button' \| 'submit' \| 'reset'` | `'button'` | HTML button type attribute |
+
+### Animation Effects
+
+The RainbowButton includes the following animated effects:
+
+1. Rainbow gradient background that animates with a subtle flow
+2. Glowing effect underneath the button for added visual emphasis
+3. Smooth transitions on hover and focus states
+4. Animation speed optimized for good performance and visual appeal
+
+### CSS Variables
+
+The component uses the following CSS variables for its rainbow effect:
+
+- `--color-1`: First color in the rainbow gradient
+- `--color-2`: Second color in the rainbow gradient
+- `--color-3`: Third color in the rainbow gradient
+- `--color-4`: Fourth color in the rainbow gradient
+- `--color-5`: Fifth color in the rainbow gradient 

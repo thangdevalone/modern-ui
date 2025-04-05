@@ -49,3 +49,39 @@ import { Button } from "@/components/modern-ui/button"
 ## Examples
 
 Our existing button types, You can have direct access to create as you wish
+
+## API Reference
+
+### Button Component Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `'default' \| 'destructive' \| 'outline' \| 'secondary' \| 'ghost' \| 'link' \| 'icon'` | `'default'` | Controls the visual style of the button |
+| `size` | `'default' \| 'sm' \| 'lg' \| 'icon'` | `'default'` | Controls the size of the button |
+| `asChild` | `boolean` | `false` | When true, the component will render its child as the button |
+| `icon` | `ReactNode` | - | Optional icon to display alongside the button text |
+| `loading` | `boolean` | `false` | When true, displays a loading spinner and disables the button |
+| `className` | `string` | - | Additional CSS classes to apply to the button |
+| `children` | `ReactNode` | - | The content of the button |
+| `disabled` | `boolean` | `false` | When true, disables the button |
+
+Additionally, the Button component accepts all standard HTML button attributes.
+
+### CSS Classes
+
+The button uses the following CSS class variants:
+
+#### Variant Classes
+- `default`: Primary button with background color
+- `destructive`: Red/danger button for destructive actions
+- `outline`: Button with a border and transparent background
+- `secondary`: Alternative button style with different background
+- `ghost`: Button with no background until hovered
+- `link`: Button that appears as a text link
+- `icon`: Special variant optimized for icon-only buttons
+
+#### Size Classes
+- `default`: Standard button size (h-9 px-4 py-2)
+- `sm`: Small button size (h-8 rounded-md px-3 text-xs)
+- `lg`: Large button size (h-10 rounded-md px-8)
+- `icon`: Square button size for icon-only buttons (h-9 w-9)

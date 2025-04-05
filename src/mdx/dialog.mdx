@@ -1,0 +1,165 @@
+import {PreviewDialog} from "@/app/docs/components/dialog/preview";
+import {BreadcrumbNav} from "@/components/breadcrumb-nav";
+import {DialogInstallation} from "@/app/docs/components/dialog/components/dialog-installation";
+
+<BreadcrumbNav className="mb-4" items={[
+  {label: "Docs", href: "/docs"},
+  {label: "Components", href: "/docs/components"},
+  {label: "Dialog"},
+]}/>
+
+<PreviewDialog/>
+
+# Dialog Component
+
+A modal dialog component that renders content in a layer above the page.
+
+- Built on top of Radix UI's Dialog primitive
+- Fully accessible with proper focus management
+- Keyboard navigation and screen reader support
+- Customizable with multiple parts for flexible layouts
+
+---
+
+## Installation
+
+The Dialog component is part of our UI library. You can import it directly from the components directory.
+
+<DialogInstallation/>
+
+---
+
+## Usage
+
+Here is how to use the dialog in your project.
+
+```tsx
+import { 
+  Dialog, 
+  DialogTrigger, 
+  DialogContent, 
+  DialogHeader, 
+  DialogTitle, 
+  DialogDescription,
+  DialogFooter 
+} from "@/components/modern-ui/dialog"
+```
+
+<br/>
+
+```tsx
+<Dialog>
+  <DialogTrigger>Open dialog</DialogTrigger>
+  <DialogContent>
+    <DialogHeader>
+      <DialogTitle>Dialog Title</DialogTitle>
+      <DialogDescription>Dialog description goes here.</DialogDescription>
+    </DialogHeader>
+    <div>Main content of the dialog</div>
+    <DialogFooter>
+      <Button>Action</Button>
+    </DialogFooter>
+  </DialogContent>
+</Dialog>
+```
+
+---
+
+## Examples
+
+### Basic Dialog
+```tsx
+<Dialog>
+  <DialogTrigger asChild>
+    <Button>Open Dialog</Button>
+  </DialogTrigger>
+  <DialogContent className="sm:max-w-[425px]">
+    <DialogHeader>
+      <DialogTitle>Basic Dialog</DialogTitle>
+      <DialogDescription>
+        This is a simple dialog with a title and description.
+      </DialogDescription>
+    </DialogHeader>
+    <div className="py-4">
+      This is the main content of the dialog.
+    </div>
+    <DialogFooter>
+      <Button>Close</Button>
+    </DialogFooter>
+  </DialogContent>
+</Dialog>
+```
+
+### Form Dialog
+```tsx
+<Dialog>
+  <DialogTrigger asChild>
+    <Button>Edit Profile</Button>
+  </DialogTrigger>
+  <DialogContent>
+    <DialogHeader>
+      <DialogTitle>Edit Profile</DialogTitle>
+      <DialogDescription>
+        Make changes to your profile here.
+      </DialogDescription>
+    </DialogHeader>
+    <div className="grid gap-4 py-4">
+      <div className="grid grid-cols-4 items-center gap-4">
+        <Label htmlFor="name" className="text-right">Name</Label>
+        <Input id="name" className="col-span-3" />
+      </div>
+      <div className="grid grid-cols-4 items-center gap-4">
+        <Label htmlFor="email" className="text-right">Email</Label>
+        <Input id="email" className="col-span-3" />
+      </div>
+    </div>
+    <DialogFooter>
+      <Button type="submit">Save changes</Button>
+    </DialogFooter>
+  </DialogContent>
+</Dialog>
+```
+
+## API Reference
+
+### Dialog Component Parts
+
+The Dialog component is composed of several parts:
+
+| Component | Description |
+|-----------|-------------|
+| `Dialog` | The root component that manages the dialog state |
+| `DialogTrigger` | The button that opens the dialog |
+| `DialogContent` | The container for the dialog content |
+| `DialogHeader` | Container for the dialog title and description |
+| `DialogTitle` | The title displayed at the top of the dialog |
+| `DialogDescription` | The description text displayed below the title |
+| `DialogFooter` | Container for the dialog actions, typically at the bottom |
+| `DialogClose` | Button that closes the dialog |
+
+### Dialog Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `open` | `boolean` | - | Controls the open state of the dialog |
+| `onOpenChange` | `(open: boolean) => void` | - | Callback fired when the open state changes |
+| `modal` | `boolean` | `true` | Whether the dialog should block interactions with the rest of the app |
+
+### DialogContent Props
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `forceMount` | `boolean` | - | When used, dialog content will always render regardless of open state |
+| `onEscapeKeyDown` | `(event: KeyboardEvent) => void` | - | Event handler for escape key press |
+| `onPointerDownOutside` | `(event: PointerDownOutsideEvent) => void` | - | Event handler for clicks outside the dialog |
+| `onInteractOutside` | `(event: React.MouseEvent \| React.TouchEvent) => void` | - | Event handler for interactions outside the dialog |
+| `className` | `string` | - | Additional CSS classes to apply to the dialog content |
+
+### Keyboard Interactions
+
+| Key | Description |
+|-----|-------------|
+| `Escape` | Closes the dialog |
+| `Tab` | Focuses the next focusable element within the dialog |
+| `Shift + Tab` | Focuses the previous focusable element within the dialog |
+``` 
+</rewritten_file>

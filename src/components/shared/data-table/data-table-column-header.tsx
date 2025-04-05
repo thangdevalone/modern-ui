@@ -1,4 +1,3 @@
-import {ArrowDownIcon, ArrowUpIcon, CaretSortIcon,} from "@radix-ui/react-icons";
 import {Column} from "@tanstack/react-table";
 
 import {cn} from "@/lib/utils";
@@ -11,6 +10,7 @@ import {
   DropdownMenuTrigger
 } from '@/components/modern-ui/dropdown-menu';
 import {Button} from '@/components/modern-ui/button';
+import { ArrowDownIcon, ArrowUpIcon, ChevronDown, ChevronsUpDown, ChevronUp } from "lucide-react";
 
 interface DataTableColumnHeaderProps<TData, TValue>
   extends React.HTMLAttributes<HTMLDivElement> {
@@ -38,11 +38,11 @@ export function DataTableColumnHeader<TData, TValue>(props: DataTableColumnHeade
           >
             <span>{title}</span>
             {column.getIsSorted() === "desc" ? (
-              <ArrowDownIcon className="ml-2 h-4 w-4"/>
+              <ChevronDown className="ml-2 h-4 w-4"/>
             ) : column.getIsSorted() === "asc" ? (
-              <ArrowUpIcon className="ml-2 h-4 w-4"/>
+              <ChevronUp className="ml-2 h-4 w-4"/>
             ) : (
-              <CaretSortIcon className="ml-2 h-4 w-4"/>
+              <ChevronsUpDown className="ml-2 h-4 w-4"/>
             )}
           </Button>
         </DropdownMenuTrigger>

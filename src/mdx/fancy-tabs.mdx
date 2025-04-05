@@ -64,3 +64,63 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/modern-ui
 ## Examples
 
 Our existing fancy tabs types, You can have direct access to create as you wish
+
+## API Reference
+
+### Tabs Components
+
+The Fancy Tabs component is composed of four main parts:
+
+| Component | Description |
+|-----------|-------------|
+| `Tabs` | The root container component |
+| `TabsList` | Container for the tab triggers with animated indicator |
+| `TabsTrigger` | Individual tab buttons/triggers |
+| `TabsContent` | Content displayed when its associated tab is active |
+
+### Tabs Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `defaultValue` | `string` | - | The value of the tab that should be active when initially rendered |
+| `value` | `string` | - | The controlled value of the tab to activate |
+| `onValueChange` | `(value: string) => void` | - | Callback invoked when the active tab changes |
+| `orientation` | `'horizontal' \| 'vertical'` | `'horizontal'` | The orientation of the tabs |
+| `dir` | `'ltr' \| 'rtl'` | - | The reading direction of the tabs |
+| `activationMode` | `'automatic' \| 'manual'` | `'automatic'` | Whether tabs are activated automatically on focus or manually |
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode` | - | Tab components |
+
+### TabsList Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode` | - | TabsTrigger components |
+
+### TabsTrigger Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `string` | Required | The unique value of the tab |
+| `disabled` | `boolean` | `false` | When true, disables the tab trigger |
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode` | - | The content of the tab trigger |
+
+### TabsContent Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `string` | Required | The value of the associated tab trigger |
+| `forceMount` | `boolean` | `false` | When true, content will be mounted even if its tab isn't active |
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode` | - | The content to display when the tab is active |
+
+### Animation Features
+
+The Fancy Tabs component includes the following animation features:
+
+- Sliding indicator that moves to highlight the active tab
+- Smooth transitions when switching between tabs
+- Spring-based animation physics for natural movement
+- Automatic resizing of the indicator to match the tab size

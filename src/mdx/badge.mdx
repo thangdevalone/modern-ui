@@ -1,0 +1,94 @@
+import {PreviewBadge} from "@/app/docs/components/badge/preview";
+import {BreadcrumbNav} from "@/components/breadcrumb-nav";
+import {BadgeInstallation} from "@/app/docs/components/badge/components/badge-installation";
+
+<BreadcrumbNav className="mb-4" items={[
+  {label: "Docs", href: "/docs"},
+  {label: "Components", href: "/docs/components"},
+  {label: "Badge"},
+]}/>
+
+<PreviewBadge/>
+
+# Badge Component
+
+A small status indicator component for highlighting items, tags, or labels.
+
+- Multiple variants: default, secondary, destructive, and outline
+- Compact and accessible design
+- Perfect for displaying status, categories, or counts
+
+---
+
+## Installation
+
+The Badge component is part of our UI library. You can import it directly from the components directory.
+
+<BadgeInstallation/>
+
+---
+
+## Usage
+
+Here is how to use the badge in your project.
+
+```tsx
+import { Badge } from "@/components/modern-ui/badge"
+```
+
+<br/>
+
+```tsx
+<Badge>Badge</Badge>
+```
+
+---
+
+## Examples
+
+### Default Badge
+```tsx
+<Badge>New</Badge>
+```
+
+### Secondary Badge
+```tsx
+<Badge variant="secondary">Secondary</Badge>
+```
+
+### Destructive Badge
+```tsx
+<Badge variant="destructive">Error</Badge>
+```
+
+### Outline Badge
+```tsx
+<Badge variant="outline">Outline</Badge>
+```
+
+### Custom Styled Badge
+```tsx
+<Badge className="bg-blue-500 hover:bg-blue-600">Custom</Badge>
+```
+
+## API Reference
+
+### Badge Component Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `'default' \| 'secondary' \| 'destructive' \| 'outline'` | `'default'` | Controls the visual style of the badge |
+| `className` | `string` | - | Additional CSS classes to apply to the badge |
+| `children` | `ReactNode` | - | The content of the badge |
+
+Additionally, the Badge component accepts all standard HTML div attributes.
+
+### CSS Classes
+
+The badge uses the following CSS class variants:
+
+#### Variant Classes
+- `default`: Primary color badge with background and white text
+- `secondary`: Secondary color badge with background and white text
+- `destructive`: Red/danger badge for highlighting errors or warnings
+- `outline`: Badge with a border and transparent background 
