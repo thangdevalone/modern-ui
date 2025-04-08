@@ -2,19 +2,14 @@ import { PreviewCard } from "@/app/(docs-group)/docs/components/card/preview";
 import { BreadcrumbNav } from "@/components/breadcrumb-nav";
 import { CardInstallation } from "@/app/(docs-group)/docs/components/card/components/card-installation";
 import {
-  BasicCardDemo,
-  CardWithIconsDemo,
-  CardWithCustomIconsDemo,
-  CardWithCustomColorsDemo,
-  CardWithCustomSizesDemo,
-  CardWithCustomLabelsDemo,
-  CardWithCustomLabelsAndIconsDemo,
-  CardWithCustomLabelsAndColorsDemo,
-  CardWithCustomLabelsAndSizesDemo,
-  CardWithCustomLabelsAndIconsAndColorsDemo,
-  CardWithCustomLabelsAndIconsAndSizesDemo,
-  CardWithCustomLabelsAndColorsAndSizesDemo,
-  CardWithCustomLabelsAndIconsAndColorsAndSizesDemo
+  DefaultCardDemo,
+  OutlineCardDemo,
+  GlassCardDemo,
+  ElevatedCardDemo,
+  InteractiveCardDemo,
+  CardWithBadgeDemo,
+  CardWithDecorationDemo,
+  DashedCardDemo
 } from "@/app/(docs-group)/docs/components/card/components/card-demos";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/modern-ui/tabs";
 
@@ -69,7 +64,7 @@ A standard card with basic styling and layout.
   <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[300px]">
     <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
     <div className="flex justify-center items-center h-full z-10 relative">
-      <BasicCardDemo />
+      <DefaultCardDemo />
     </div>
   </TabsContent>
   <TabsContent value="code">
@@ -84,7 +79,7 @@ A standard card with basic styling and layout.
     } from "@/components/modern-ui/card";
     import { Button } from "@/components/modern-ui/button";
 
-    export function BasicCardDemo() {
+    export function DefaultCardDemo() {
       return (
         <Card className="w-full max-w-sm">
           <CardHeader>
@@ -117,7 +112,7 @@ A card with a border outline that highlights on hover.
   <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[300px]">
     <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
     <div className="flex justify-center items-center h-full z-10 relative">
-      <CardWithIconsDemo />
+      <OutlineCardDemo />
     </div>
   </TabsContent>
   <TabsContent value="code">
@@ -132,7 +127,7 @@ A card with a border outline that highlights on hover.
     } from "@/components/modern-ui/card";
     import { Button } from "@/components/modern-ui/button";
 
-    export function CardWithIconsDemo() {
+    export function OutlineCardDemo() {
       return (
         <Card variant="outline" className="w-full max-w-sm">
           <CardHeader>
