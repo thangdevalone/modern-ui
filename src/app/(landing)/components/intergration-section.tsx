@@ -37,16 +37,9 @@ export function IntegrationSection() {
     <section className="relative overflow-hidden py-24 sm:py-32">
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-purple-100/40 via-background to-background dark:from-purple-900/10"></div>
       <div className="container">
-        <div className="mx-auto grid max-w-5xl items-center gap-10 lg:grid-cols-2">
+        <div className="mx-auto grid max-w-5xl items-center lg:gap-16 gap-10 lg:grid-cols-2">
           <AnimatedContent customDelay={0.2}>
-            <motion.div
-              className="relative mx-auto hidden sm:block aspect-video w-full max-w-md h-full overflow-hidden rounded-2xl border bg-background p-2 shadow-2xl lg:order-last"
-              whileHover={{
-                y: -5,
-                boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
-              }}
-              transition={{ duration: 0.3 }}
-            >
+            <motion.div className="relative mx-auto hidden md:block aspect-video w-full max-w-md h-full min-h-[498px] overflow-hidden rounded-2xl border bg-background p-2 shadow-2xl lg:order-last">
               <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-blue-500/5"></div>
               <div className="h-full rounded-xl border bg-background/80 p-6 backdrop-blur-sm">
                 <div className="grid h-full grid-rows-[auto,1fr] gap-6">

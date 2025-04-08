@@ -1,7 +1,6 @@
 "use client";
 
-import type React from "react";
-
+import React from "react";
 import { useRef } from "react";
 import Link from "next/link";
 import { Button } from "@/components/modern-ui/button";
@@ -49,8 +48,36 @@ export function ComponentsSection() {
     },
   ];
 
+  // Animation variants for staggered animation
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+        delayChildren: 0.3,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        type: "spring",
+        stiffness: 100,
+        damping: 15,
+      },
+    },
+  };
+
   return (
-    <section id="components" className="container space-y-14 px-4 py-24 sm:py-32">
+    <section
+      id="components"
+      className="container space-y-14 px-4 py-12 sm:py-24"
+    >
       <AnimatedContent>
         <div className="mx-auto flex max-w-[58rem] flex-col items-center space-y-4 text-center">
           <div className="rounded-2xl bg-muted px-4 py-1.5 text-sm font-medium">
@@ -66,7 +93,13 @@ export function ComponentsSection() {
         </div>
       </AnimatedContent>
 
-      <div className="mx-auto grid justify-center gap-6 sm:grid-cols-2 md:max-w-[64rem] md:grid-cols-3">
+      <motion.div
+        className="mx-auto grid justify-center gap-6 sm:grid-cols-2 md:max-w-[64rem] md:grid-cols-3"
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.1 }}
+      >
         {components.map((component, index) => (
           <ComponentCard
             key={index}
@@ -76,15 +109,17 @@ export function ComponentsSection() {
             index={index}
           />
         ))}
-      </div>
+      </motion.div>
 
       <div className="flex justify-center">
-        <Button size="lg" className="rounded-full px-8" asChild>
-          <Link href="/docs/components" className="flex items-center gap-2">
-            View All Components
-            <ArrowRight className="ml-2 h-4 w-4" />
-          </Link>
-        </Button>
+        <AnimatedContent>
+          <Button size="lg" className="rounded-full px-8" asChild>
+            <Link href="/docs/components" className="flex items-center gap-2">
+              View All Components
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Link>
+          </Button>
+        </AnimatedContent>
       </div>
     </section>
   );
@@ -101,19 +136,25 @@ function ComponentCard({
   gradient: string;
   index: number;
 }) {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.1 });
-
   return (
     <motion.div
-      ref={ref}
-      className="group relative overflow-hidden rounded-xl border bg-background p-2 shadow-md transition-all hover:-translate-y-1 hover:shadow-lg"
-      initial={{ opacity: 0, y: 30 }}
-      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-      transition={{
-        duration: 0.5,
-        delay: 0.1 * index,
-        type: "spring",
+      variants={{
+        hidden: { opacity: 0, y: 30 },
+        visible: {
+          opacity: 1,
+          y: 0,
+          transition: {
+            type: "spring",
+            stiffness: 100,
+            damping: 15,
+          },
+        },
+      }}
+      className="group relative overflow-hidden rounded-xl border bg-background p-2 shadow-md"
+      whileHover={{
+        translateY: -4,
+        boxShadow:
+          "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
       }}
     >
       <motion.div
@@ -170,8 +211,8 @@ function ComponentCard({
               <div className="h-4 w-4 rounded-full bg-muted"></div>
             </div>
             <div className="rounded-b-md border space-y-2 p-2 bg-white shadow-sm dark:bg-background">
-                <div className="h-8 w-full rounded-md bg-muted"></div>
-                <div className="h-8 w-full rounded-md bg-muted"></div>
+              <div className="h-8 w-full rounded-md bg-muted"></div>
+              <div className="h-8 w-full rounded-md bg-muted"></div>
             </div>
           </div>
         )}

@@ -7,6 +7,7 @@ import Link from "next/link";
 import { Button } from "@/components/modern-ui/button";
 import { motion, useInView } from "framer-motion";
 import dynamic from "next/dynamic";
+import { AnimatedContent } from "./animated-content";
 
 const Github = dynamic(() => import("@/components/assets-theme/github"), {
   ssr: false,
@@ -16,7 +17,7 @@ export function DesignSection() {
     <section className="relative py-20 sm:py-32">
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-purple-100/40 via-background to-background dark:from-purple-900/10"></div>
       <div className="container">
-        <div className="mx-auto grid max-w-5xl items-center gap-10 lg:grid-cols-2">
+        <div className="mx-auto grid max-w-5xl items-center lg:gap-16 gap-10 lg:grid-cols-2">
           <AnimatedContent>
             <div className="space-y-6">
               <div className="inline-flex rounded-full bg-purple-100 px-3 py-1 text-sm font-medium text-purple-800 dark:bg-purple-900/30 dark:text-purple-300">
@@ -53,14 +54,7 @@ export function DesignSection() {
             </div>
           </AnimatedContent>
           <AnimatedContent customDelay={0.2}>
-            <motion.div
-              className="relative hidden sm:block mx-auto aspect-square w-full max-w-md overflow-hidden rounded-2xl border bg-background p-2 shadow-2xl lg:ml-auto"
-              whileHover={{
-                y: -5,
-                boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
-              }}
-              transition={{ duration: 0.3 }}
-            >
+            <motion.div className="relative hidden sm:block mx-auto aspect-square w-full max-w-md overflow-hidden rounded-2xl border bg-background p-2 shadow-2xl lg:ml-auto">
               <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-blue-500/5"></div>
               <div className="flex h-full flex-col rounded-xl border bg-background/80 p-6 backdrop-blur-sm">
                 <div className="mb-8 flex items-center justify-between">
@@ -89,33 +83,5 @@ export function DesignSection() {
         </div>
       </div>
     </section>
-  );
-}
-
-function AnimatedContent({
-  children,
-  customDelay = 0,
-}: {
-  children: React.ReactNode;
-  customDelay?: number;
-}) {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.3 });
-
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 30 }}
-      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-      transition={{
-        duration: 0.5,
-        delay: customDelay,
-        type: "spring",
-        stiffness: 100,
-        damping: 15,
-      }}
-    >
-      {children}
-    </motion.div>
   );
 }

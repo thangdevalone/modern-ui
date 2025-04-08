@@ -86,8 +86,31 @@ export function FeaturesSection() {
     },
   ];
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        duration: 0.5,
+        staggerChildren: 0.15,
+        delayChildren: 0.3,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        type: "spring",
+      },
+    },
+  };
+
   return (
-    <section id="features" className="container space-y-14 px-4 py-24 sm:py-32">
+    <section id="features" className="container space-y-14 px-4 py-12 sm:py-24">
       <AnimatedContent>
         <div className="mx-auto flex max-w-[58rem] flex-col items-center space-y-4 text-center">
           <motion.div
@@ -119,45 +142,46 @@ export function FeaturesSection() {
         </div>
       </AnimatedContent>
 
-      <div className="mx-auto grid justify-center gap-8 sm:grid-cols-2 md:max-w-[64rem] md:grid-cols-3">
-        {features.map((feature, index) => {
-          const ref = useRef(null);
-          const isInView = useInView(ref, { once: true });
-          return (
+      <motion.div
+        className="mx-auto grid justify-center gap-8 sm:grid-cols-2 md:max-w-[64rem] md:grid-cols-3"
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+      >
+        {features.map((feature, index) => (
+          <motion.div
+            key={index}
+            variants={itemVariants}
+            className={`group relative overflow-hidden rounded-xl border bg-background p-6 shadow-md`}
+            whileHover={{
+              translateY: -4,
+              boxShadow:
+                "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
+            }}
+          >
+            <div
+              className={`absolute -right-20 -top-20 h-40 w-40 rounded-full ${
+                colorMap[feature.color]
+              }`}
+            />
             <motion.div
-              ref={ref}
-              key={index}
-              className={`group relative overflow-hidden rounded-xl border bg-background p-6 shadow-md transition-all duration-300 hover:translate-y-[-4px] hover:shadow-lg`}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-              transition={{
-                duration: 0.5,
-                delay: 0.1 * index,
-                type: "spring",
-              }}
+              className={`mb-6 flex h-12 w-12 items-center justify-center rounded-full ${
+                iconColorMap[feature.color].bg
+              }`}
+              whileHover={{ scale: 1.05 }}
             >
-              <div
-                className={`absolute -right-20 -top-20 h-40 w-40 rounded-full ${
-                  colorMap[feature.color]
-                }`}
+              <feature.icon
+                className={`h-6 w-6 ${iconColorMap[feature.color].text}`}
               />
-              <div
-                className={`mb-6 flex h-12 w-12 items-center justify-center rounded-full ${
-                  iconColorMap[feature.color].bg
-                } transition-transform duration-300 group-hover:scale-105`}
-              >
-                <feature.icon
-                  className={`h-6 w-6 ${iconColorMap[feature.color].text}`}
-                />
-              </div>
-              <div className="space-y-2">
-                <h3 className="text-xl font-bold">{feature.title}</h3>
-                <p className="text-muted-foreground">{feature.description}</p>
-              </div>
             </motion.div>
-          );
-        })}
-      </div>
+            <div className="space-y-2">
+              <h3 className="text-xl font-bold">{feature.title}</h3>
+              <p className="text-muted-foreground">{feature.description}</p>
+            </div>
+          </motion.div>
+        ))}
+      </motion.div>
     </section>
   );
 }
