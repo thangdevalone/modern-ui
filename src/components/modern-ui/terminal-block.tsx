@@ -77,7 +77,7 @@ export function TerminalBlock({
             className={cn(
               "relative px-6 py-3 text-sm font-medium cursor-pointer transition-colors",
               currentTab === tab
-                ? "text-primary-foreground"
+                ? "text-primary-foreground dark:text-foreground"
                 : "text-zinc-500 hover:text-zinc-300"
             )}
             whileHover={{ backgroundColor: "rgba(255, 255, 255, 0.05)" }}
@@ -140,7 +140,7 @@ export function TerminalBlock({
           transition={{ duration: 0.2 }}
           className="p-4 text-sm"
         >
-          <div className="flex text-primary-foreground font-mono">
+          <div className="flex text-primary-foreground font-mono dark:text-foreground">
             <motion.span
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
