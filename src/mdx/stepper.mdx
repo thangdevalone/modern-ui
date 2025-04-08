@@ -1,12 +1,21 @@
-import {PreviewStepper} from "@/app/docs/components/stepper/preview";
+import {PreviewStepper} from "@/app/(docs-group)/docs/components/stepper/preview";
 import {BreadcrumbNav} from "@/components/breadcrumb-nav";
-import {StepperInstallation} from "@/app/docs/components/stepper/components/stepper-installation";
+import {StepperInstallation} from "@/app/(docs-group)/docs/components/stepper/components/stepper-installation";
 import {
-  HorizontalStepperDemo,
-  VerticalStepperDemo,
-  InteractiveStepperDemo,
-  StepperWithContentDemo
-} from "@/app/docs/components/stepper/components/stepper-demos";
+  BasicStepperDemo,
+  StepperWithIconsDemo,
+  StepperWithCustomIconsDemo,
+  StepperWithCustomColorsDemo,
+  StepperWithCustomSizesDemo,
+  StepperWithCustomLabelsDemo,
+  StepperWithCustomLabelsAndIconsDemo,
+  StepperWithCustomLabelsAndColorsDemo,
+  StepperWithCustomLabelsAndSizesDemo,
+  StepperWithCustomLabelsAndIconsAndColorsDemo,
+  StepperWithCustomLabelsAndIconsAndSizesDemo,
+  StepperWithCustomLabelsAndColorsAndSizesDemo,
+  StepperWithCustomLabelsAndIconsAndColorsAndSizesDemo
+} from "@/app/(docs-group)/docs/components/stepper/components/stepper-demos";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/modern-ui/tabs";
 
 <BreadcrumbNav className="mb-4" items={[
@@ -61,7 +70,7 @@ A standard horizontal stepper with basic styling.
     <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
     <div className="flex justify-center items-center h-full w-full z-10 min-h-[300px] relative inset-0">
       <div className="w-full max-w-md px-4">
-        <HorizontalStepperDemo />
+        <BasicStepperDemo />
       </div>
     </div>
   </TabsContent>
@@ -69,7 +78,7 @@ A standard horizontal stepper with basic styling.
     ```tsx
     import { Stepper } from "@/components/modern-ui/stepper";
 
-    export function HorizontalStepperDemo() {
+    export function BasicStepperDemo() {
       const steps = [
         { id: 1, title: "Account Details" },
         { id: 2, title: "Personal Information" },
@@ -97,7 +106,7 @@ A stepper with vertical orientation for longer processes.
     <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
     <div className="flex justify-center items-center h-full w-full z-10 relative min-h-[300px] inset-0">
       <div className="w-full max-w-md px-4">
-        <VerticalStepperDemo />
+        <StepperWithIconsDemo />
       </div>
     </div>
   </TabsContent>
@@ -105,7 +114,7 @@ A stepper with vertical orientation for longer processes.
     ```tsx
     import { Stepper } from "@/components/modern-ui/stepper";
 
-    export function VerticalStepperDemo() {
+    export function StepperWithIconsDemo() {
       const steps = [
         { id: 1, title: "Account Details" },
         { id: 2, title: "Personal Information" },
@@ -133,7 +142,7 @@ A stepper with navigation controls for user interaction.
     <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
     <div className="flex justify-center items-center h-full w-full z-10 min-h-[350px] relative inset-0">
       <div className="w-full max-w-md px-4">
-        <InteractiveStepperDemo />
+        <StepperWithCustomIconsDemo />
       </div>
     </div>
   </TabsContent>
@@ -143,7 +152,7 @@ A stepper with navigation controls for user interaction.
     import { Button } from "@/components/modern-ui/button";
     import { useState } from "react";
 
-    export function InteractiveStepperDemo() {
+    export function StepperWithCustomIconsDemo() {
       const [activeStep, setActiveStep] = useState(1);
       
       const steps = [
@@ -192,7 +201,7 @@ A vertical stepper with content for each step.
     <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
     <div className="flex justify-center items-center h-full w-full z-10 relative inset-0">
       <div className="w-full max-w-md px-4">
-        <StepperWithContentDemo />
+        <StepperWithCustomColorsDemo />
       </div>
     </div>
   </TabsContent>
@@ -202,7 +211,7 @@ A vertical stepper with content for each step.
     import { Button } from "@/components/modern-ui/button";
     import { useState } from "react";
 
-    export function StepperWithContentDemo() {
+    export function StepperWithCustomColorsDemo() {
       const [activeStep, setActiveStep] = useState(0);
       
       const steps = [

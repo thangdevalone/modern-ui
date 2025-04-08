@@ -1,55 +1,67 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useRef } from "react"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { ArrowRight } from "lucide-react"
-import { motion, useInView } from "framer-motion"
+import { useRef } from "react";
+import Link from "next/link";
+import { Button } from "@/components/modern-ui/button";
+import { ArrowRight } from "lucide-react";
+import { motion, useInView } from "framer-motion";
+import { AnimatedContent } from "./animated-content";
 
 export function ComponentsSection() {
   const components = [
     {
       name: "Button",
       description: "A button component with different variants and sizes.",
-      gradient: "from-purple-50 to-blue-50 dark:from-purple-950/20 dark:to-blue-950/20",
+      gradient:
+        "from-purple-50 to-blue-50 dark:from-purple-950/20 dark:to-blue-950/20",
     },
     {
       name: "Input",
       description: "An input component for collecting user data.",
-      gradient: "from-blue-50 to-cyan-50 dark:from-blue-950/20 dark:to-cyan-950/20",
+      gradient:
+        "from-blue-50 to-cyan-50 dark:from-blue-950/20 dark:to-cyan-950/20",
     },
     {
       name: "Card",
       description: "A card component for displaying content.",
-      gradient: "from-green-50 to-emerald-50 dark:from-green-950/20 dark:to-emerald-950/20",
+      gradient:
+        "from-green-50 to-emerald-50 dark:from-green-950/20 dark:to-emerald-950/20",
     },
     {
       name: "Avatar",
       description: "An avatar component for displaying user images.",
-      gradient: "from-amber-50 to-yellow-50 dark:from-amber-950/20 dark:to-yellow-950/20",
+      gradient:
+        "from-amber-50 to-yellow-50 dark:from-amber-950/20 dark:to-yellow-950/20",
     },
     {
       name: "Accordion",
       description: "An accordion component for displaying collapsible content.",
-      gradient: "from-rose-50 to-pink-50 dark:from-rose-950/20 dark:to-pink-950/20",
+      gradient:
+        "from-rose-50 to-pink-50 dark:from-rose-950/20 dark:to-pink-950/20",
     },
     {
       name: "Dropdown Menu",
       description: "A dropdown menu component for navigation.",
-      gradient: "from-violet-50 to-indigo-50 dark:from-violet-950/20 dark:to-indigo-950/20",
+      gradient:
+        "from-violet-50 to-indigo-50 dark:from-violet-950/20 dark:to-indigo-950/20",
     },
-  ]
+  ];
 
   return (
-    <section id="components" className="container space-y-14 py-24 sm:py-32">
+    <section id="components" className="container space-y-14 px-4 py-24 sm:py-32">
       <AnimatedContent>
         <div className="mx-auto flex max-w-[58rem] flex-col items-center space-y-4 text-center">
-          <div className="rounded-2xl bg-muted px-4 py-1.5 text-sm font-medium">Extensive Component Library</div>
-          <h2 className="font-heading text-3xl font-bold leading-[1.1] sm:text-4xl md:text-5xl">Everything you need</h2>
+          <div className="rounded-2xl bg-muted px-4 py-1.5 text-sm font-medium">
+            Extensive Component Library
+          </div>
+          <h2 className="font-heading text-3xl font-bold leading-[1.1] sm:text-4xl md:text-5xl">
+            Everything you need
+          </h2>
           <p className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7">
-            Beautifully designed components that you can copy and paste into your apps.
+            Beautifully designed components that you can copy and paste into
+            your apps.
           </p>
         </div>
       </AnimatedContent>
@@ -67,24 +79,15 @@ export function ComponentsSection() {
       </div>
 
       <div className="flex justify-center">
-        <motion.div
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.2 }}
-        >
-          <Button size="lg" className="rounded-full px-8" asChild>
-            <Link href="#docs">
-              View All Components
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
-          </Button>
-        </motion.div>
+        <Button size="lg" className="rounded-full px-8" asChild>
+          <Link href="/docs/components" className="flex items-center gap-2">
+            View All Components
+            <ArrowRight className="ml-2 h-4 w-4" />
+          </Link>
+        </Button>
       </div>
     </section>
-  )
+  );
 }
 
 function ComponentCard({
@@ -92,22 +95,25 @@ function ComponentCard({
   description,
   gradient,
   index,
-}: { name: string; description: string; gradient: string; index: number }) {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, amount: 0.3 })
+}: {
+  name: string;
+  description: string;
+  gradient: string;
+  index: number;
+}) {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, amount: 0.1 });
 
   return (
     <motion.div
       ref={ref}
       className="group relative overflow-hidden rounded-xl border bg-background p-2 shadow-md transition-all hover:-translate-y-1 hover:shadow-lg"
-      initial={{ opacity: 0, y: 50 }}
-      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+      initial={{ opacity: 0, y: 30 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
       transition={{
         duration: 0.5,
         delay: 0.1 * index,
         type: "spring",
-        stiffness: 100,
-        damping: 15,
       }}
     >
       <motion.div
@@ -117,8 +123,12 @@ function ComponentCard({
       >
         {name === "Button" && (
           <div className="flex gap-2">
-            <div className="rounded-md bg-white px-4 py-2 shadow-sm dark:bg-background">Button</div>
-            <div className="rounded-md bg-purple-500 px-4 py-2 text-white shadow-sm">Button</div>
+            <div className="rounded-md bg-white px-4 py-2 shadow-sm dark:bg-background">
+              Button
+            </div>
+            <div className="rounded-md bg-purple-500 px-4 py-2 text-white shadow-sm">
+              Button
+            </div>
           </div>
         )}
         {name === "Input" && (
@@ -159,16 +169,9 @@ function ComponentCard({
               <div className="h-4 w-24 rounded-md bg-muted"></div>
               <div className="h-4 w-4 rounded-full bg-muted"></div>
             </div>
-            <div className="rounded-b-md border bg-white shadow-sm dark:bg-background">
-              <div className="p-2">
+            <div className="rounded-b-md border space-y-2 p-2 bg-white shadow-sm dark:bg-background">
                 <div className="h-8 w-full rounded-md bg-muted"></div>
-              </div>
-              <div className="p-2">
                 <div className="h-8 w-full rounded-md bg-muted"></div>
-              </div>
-              <div className="p-2">
-                <div className="h-8 w-full rounded-md bg-muted"></div>
-              </div>
             </div>
           </div>
         )}
@@ -178,27 +181,5 @@ function ComponentCard({
         <p className="text-sm text-muted-foreground">{description}</p>
       </div>
     </motion.div>
-  )
-}
-
-function AnimatedContent({ children, customDelay = 0 }: { children: React.ReactNode; customDelay?: number }) {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, amount: 0.3 })
-
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 30 }}
-      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-      transition={{
-        duration: 0.5,
-        delay: customDelay,
-        type: "spring",
-        stiffness: 100,
-        damping: 15,
-      }}
-    >
-      {children}
-    </motion.div>
-  )
+  );
 }

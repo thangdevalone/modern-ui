@@ -4,7 +4,7 @@ import {Stepper} from '@/components/modern-ui/stepper';
 import {TerminalBlock} from '@/components/modern-ui/terminal-block';
 import {Code} from '@/components/shared/code';
 import {CodeBlock} from '@/components/code-block';
-import {buttonCode} from '@/app/docs/components/button/preview';
+import {buttonCode} from '@/app/(docs-group)/docs/components/button/preview';
 
 const steps = [
   {

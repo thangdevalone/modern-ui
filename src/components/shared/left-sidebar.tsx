@@ -5,8 +5,9 @@ import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import { Badge } from "@/components/modern-ui/badge";
 import clsx from "clsx";
+import { cn } from "@/lib/utils";
 
-const containerVariants = {
+export const containerVariants = {
   hidden: { opacity: 0 },
   show: {
     opacity: 1,
@@ -14,7 +15,7 @@ const containerVariants = {
   },
 };
 
-const itemVariants = {
+export const itemVariants = {
   hidden: { opacity: 0, x: -10 },
   show: { opacity: 1, x: 0 },
 };
@@ -52,17 +53,37 @@ const links: {
     category: "Components",
     items: [
       { href: "/docs/components/badge", label: "Badge", badge: "new" },
-      { href: "/docs/components/breadcrumb", label: "Breadcrumb", badge: "new" },
+      {
+        href: "/docs/components/breadcrumb",
+        label: "Breadcrumb",
+        badge: "new",
+      },
       { href: "/docs/components/button", label: "Button" },
       { href: "/docs/components/card", label: "Card", badge: "new" },
       { href: "/docs/components/command", label: "Command", badge: "new" },
-      { href: "/docs/components/copy-button", label: "Copy Button", badge: "new" },
-      { href: "/docs/components/date-picker", label: "Date Picker", badge: "new" },
+      {
+        href: "/docs/components/copy-button",
+        label: "Copy Button",
+        badge: "new",
+      },
+      {
+        href: "/docs/components/date-picker",
+        label: "Date Picker",
+        badge: "new",
+      },
       { href: "/docs/components/dialog", label: "Dialog", badge: "new" },
       { href: "/docs/components/fancy-tabs", label: "Fancy tab" },
-      { href: "/docs/components/fluid-dropdown", label: "Fluid Dropdown", badge: "new" },
+      {
+        href: "/docs/components/fluid-dropdown",
+        label: "Fluid Dropdown",
+        badge: "new",
+      },
       { href: "/docs/components/popover", label: "Popover", badge: "new" },
-      { href: "/docs/components/rainbow-button", label: "Rainbow Button", badge: "new" },
+      {
+        href: "/docs/components/rainbow-button",
+        label: "Rainbow Button",
+        badge: "new",
+      },
       { href: "/docs/components/stepper", label: "Stepper", badge: "new" },
       { href: "/docs/components/table", label: "Table", badge: "new" },
       { href: "/docs/components/underline-tabs", label: "Underline tab" },
@@ -70,9 +91,7 @@ const links: {
   },
   {
     category: "React Hooks",
-    items: [
-      { href: "/docs/hooks/use-click-away", label: "useClickAway" },
-    ],
+    items: [{ href: "/docs/hooks/use-click-away", label: "useClickAway" }],
   },
 ];
 
@@ -81,7 +100,7 @@ export default function LeftSidebar() {
 
   return (
     <motion.nav
-      className="space-y-8"
+      className="md:space-y-8 space-y-4"
       variants={containerVariants}
       initial="hidden"
       animate="show"
@@ -107,7 +126,7 @@ export default function LeftSidebar() {
                 >
                   <Link
                     href={disabled ? "#" : href}
-                    className={clsx(
+                    className={cn(
                       "text-muted-foreground hover:text-foreground relative after:content-[''] after:absolute after:bottom-[-2px] after:left-0 after:w-0 after:h-[2px] after:bg-current after:transition-width after:duration-300 hover:after:w-full transition-colors block",
                       {
                         "text-foreground! after:w-full": isActive,

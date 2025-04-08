@@ -1,13 +1,16 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useRef } from "react"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Github } from "lucide-react"
-import { motion, useInView } from "framer-motion"
+import { useRef } from "react";
+import Link from "next/link";
+import { Button } from "@/components/modern-ui/button";
+import { motion, useInView } from "framer-motion";
+import dynamic from "next/dynamic";
 
+const Github = dynamic(() => import("@/components/assets-theme/github"), {
+  ssr: false,
+});
 export function DesignSection() {
   return (
     <section className="relative py-20 sm:py-32">
@@ -23,29 +26,35 @@ export function DesignSection() {
                 Build beautiful interfaces in record time
               </h2>
               <p className="text-lg text-muted-foreground">
-                Focus on your product, not on reinventing UI components. Our components are designed to be accessible,
-                customizable, and work seamlessly with Next.js 15.
+                Focus on your product, not on reinventing UI components. Our
+                components are designed to be accessible, customizable, and work
+                seamlessly with Next.js 15.
               </p>
               <div className="flex flex-col gap-3 sm:flex-row">
-                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                  <Button size="lg" className="rounded-full" asChild>
-                    <Link href="#docs">Get Started</Link>
-                  </Button>
-                </motion.div>
-                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                  <Button variant="outline" size="lg" className="rounded-full" asChild>
-                    <Link href="https://github.com" target="_blank">
-                      <Github className="mr-2 h-4 w-4" />
-                      Star on GitHub
-                    </Link>
-                  </Button>
-                </motion.div>
+                <Button size="lg" className="rounded-full" asChild>
+                  <Link href="/docs">Get Started</Link>
+                </Button>
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="rounded-full"
+                  asChild
+                >
+                  <Link
+                    href="https://github.com/thangdevalone/modern-ui"
+                    className="flex items-center gap-2"
+                    target="_blank"
+                  >
+                    <Github isInvert={true} />
+                    Star on GitHub
+                  </Link>
+                </Button>
               </div>
             </div>
           </AnimatedContent>
           <AnimatedContent customDelay={0.2}>
             <motion.div
-              className="relative mx-auto aspect-square w-full max-w-md overflow-hidden rounded-2xl border bg-background p-2 shadow-2xl lg:ml-auto"
+              className="relative hidden sm:block mx-auto aspect-square w-full max-w-md overflow-hidden rounded-2xl border bg-background p-2 shadow-2xl lg:ml-auto"
               whileHover={{
                 y: -5,
                 boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
@@ -80,12 +89,18 @@ export function DesignSection() {
         </div>
       </div>
     </section>
-  )
+  );
 }
 
-function AnimatedContent({ children, customDelay = 0 }: { children: React.ReactNode; customDelay?: number }) {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, amount: 0.3 })
+function AnimatedContent({
+  children,
+  customDelay = 0,
+}: {
+  children: React.ReactNode;
+  customDelay?: number;
+}) {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, amount: 0.3 });
 
   return (
     <motion.div
@@ -102,5 +117,5 @@ function AnimatedContent({ children, customDelay = 0 }: { children: React.ReactN
     >
       {children}
     </motion.div>
-  )
+  );
 }

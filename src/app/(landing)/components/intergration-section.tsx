@@ -1,11 +1,12 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useRef } from "react"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { motion, useInView } from "framer-motion"
+import { useRef } from "react";
+import Link from "next/link";
+import { Button } from "@/components/modern-ui/button";
+import { motion, useInView } from "framer-motion";
+import { AnimatedContent } from "./animated-content";
 
 // Animation variants
 const container = {
@@ -16,7 +17,7 @@ const container = {
       staggerChildren: 0.1,
     },
   },
-}
+};
 
 const item = {
   hidden: { opacity: 0, y: 20 },
@@ -29,17 +30,17 @@ const item = {
       damping: 20,
     },
   },
-}
+};
 
 export function IntegrationSection() {
   return (
-    <section className="relative overflow-hidden border-t py-24 sm:py-32">
+    <section className="relative overflow-hidden py-24 sm:py-32">
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-purple-100/40 via-background to-background dark:from-purple-900/10"></div>
       <div className="container">
         <div className="mx-auto grid max-w-5xl items-center gap-10 lg:grid-cols-2">
           <AnimatedContent customDelay={0.2}>
             <motion.div
-              className="relative mx-auto aspect-video w-full max-w-md overflow-hidden rounded-2xl border bg-background p-2 shadow-2xl lg:order-last"
+              className="relative mx-auto hidden sm:block aspect-video w-full max-w-md h-full overflow-hidden rounded-2xl border bg-background p-2 shadow-2xl lg:order-last"
               whileHover={{
                 y: -5,
                 boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
@@ -87,8 +88,9 @@ export function IntegrationSection() {
                 Works with your favorite tools
               </h2>
               <p className="text-lg text-muted-foreground">
-                Our components are designed to work seamlessly with popular frameworks and tools. Whether you're using
-                Next.js, React, or any other modern framework, our components will fit right in.
+                Our components are designed to work seamlessly with popular
+                frameworks and tools. Whether you're using Next.js, React, or
+                any other modern framework, our components will fit right in.
               </p>
               <motion.ul
                 className="grid gap-2"
@@ -97,63 +99,42 @@ export function IntegrationSection() {
                 whileInView="show"
                 viewport={{ once: true }}
               >
-                {["Next.js 15 App Router", "React Server Components", "Tailwind CSS", "TypeScript"].map(
-                  (item, index) => (
-                    <motion.li key={index} className="flex items-center gap-2" variants={item}>
-                      <div className="flex h-6 w-6 items-center justify-center rounded-full bg-green-100 dark:bg-green-900/20">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          className="h-3 w-3 text-green-600 dark:text-green-400"
-                        >
-                          <polyline points="20 6 9 17 4 12" />
-                        </svg>
-                      </div>
-                      <span>{item}</span>
-                    </motion.li>
-                  ),
-                )}
+                {[
+                  "Next.js 15 App Router",
+                  "React Server Components",
+                  "Tailwind CSS",
+                  "TypeScript",
+                ].map((item, index) => (
+                  <motion.li key={index} className="flex items-center gap-2">
+                    <div className="flex h-6 w-6 items-center justify-center rounded-full bg-green-100 dark:bg-green-900/20">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="h-3 w-3 text-green-600 dark:text-green-400"
+                      >
+                        <polyline points="20 6 9 17 4 12" />
+                      </svg>
+                    </div>
+                    <span>{item}</span>
+                  </motion.li>
+                ))}
               </motion.ul>
               <div className="flex flex-col gap-3 sm:flex-row">
-                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                  <Button size="lg" className="rounded-full" asChild>
-                    <Link href="#docs">Get Started</Link>
-                  </Button>
-                </motion.div>
+                <Button size="lg" className="rounded-full" asChild>
+                  <Link href="#docs">Get Started</Link>
+                </Button>
               </div>
             </div>
           </AnimatedContent>
         </div>
       </div>
     </section>
-  )
-}
-
-function AnimatedContent({ children, customDelay = 0 }: { children: React.ReactNode; customDelay?: number }) {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, amount: 0.3 })
-
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 30 }}
-      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-      transition={{
-        duration: 0.5,
-        delay: customDelay,
-        type: "spring",
-        stiffness: 100,
-        damping: 15,
-      }}
-    >
-      {children}
-    </motion.div>
-  )
+  );
 }
