@@ -1,0 +1,230 @@
+import {PreviewInput} from "@/app/(docs-group)/docs/components/input/preview";
+import {BreadcrumbNav} from "@/components/breadcrumb-nav";
+import {InputInstallation} from "@/app/(docs-group)/docs/components/input/components/input-installation";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/modern-ui/tabs";
+import {
+  BasicInputDemo,
+  InputWithLabelDemo,
+  InputWithIconDemo,
+  InputWithErrorDemo,
+  InputWithPlaceholderDemo
+} from "@/app/(docs-group)/docs/components/input/components/input-demos";
+
+<BreadcrumbNav className="mb-4" items={[
+  {label: "Docs", href: "/docs"},
+  {label: "Components", href: "/docs/components"},
+  {label: "Input"},
+]}/>
+
+<PreviewInput/>
+
+# Input Component
+
+A form input component that provides a clean and accessible way to collect user input.
+
+- Accessible form input implementation
+- Support for various input types
+- Customizable styling
+- Error state handling
+- Icon support
+- Label integration
+
+---
+
+## Installation
+
+The Input component is part of our UI library. You can import it directly from the components directory.
+
+<InputInstallation/>
+
+---
+
+## Usage
+
+Here is how to use the input in your project.
+
+```tsx
+import { Input } from "@/components/modern-ui/input"
+```
+
+<br/>
+
+```tsx
+<Input type="text" placeholder="Enter text" />
+```
+
+---
+
+## Examples
+
+### Basic Input
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[150px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[150px]">
+      <BasicInputDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { Input } from "@/components/modern-ui/input";
+
+    export function BasicInputDemo() {
+      return (
+        <Input type="text" placeholder="Enter text" />
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+### Input with Label
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[150px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[150px]">
+      <InputWithLabelDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { Input } from "@/components/modern-ui/input";
+    import { Label } from "@/components/modern-ui/label";
+
+    export function InputWithLabelDemo() {
+      return (
+        <div className="grid w-full max-w-sm items-center gap-1.5">
+          <Label htmlFor="email">Email</Label>
+          <Input type="email" id="email" placeholder="Enter your email" />
+        </div>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+### Input with Icon
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[150px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[150px]">
+      <InputWithIconDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { Input } from "@/components/modern-ui/input";
+    import { Search } from "lucide-react";
+
+    export function InputWithIconDemo() {
+      return (
+        <div className="relative">
+          <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
+          <Input placeholder="Search" className="pl-8" />
+        </div>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+### Input with Error
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[150px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[150px]">
+      <InputWithErrorDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { Input } from "@/components/modern-ui/input";
+    import { Label } from "@/components/modern-ui/label";
+
+    export function InputWithErrorDemo() {
+      return (
+        <div className="grid w-full max-w-sm items-center gap-1.5">
+          <Label htmlFor="username" className="text-red-500">Username</Label>
+          <Input 
+            id="username" 
+            className="border-red-500 focus-visible:ring-red-500" 
+            placeholder="Enter username"
+          />
+          <p className="text-sm text-red-500">Username is required</p>
+        </div>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+### Input with Placeholder
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[150px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[150px]">
+      <InputWithPlaceholderDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { Input } from "@/components/modern-ui/input";
+
+    export function InputWithPlaceholderDemo() {
+      return (
+        <div className="grid w-full max-w-sm items-center gap-1.5">
+          <Input 
+            type="text" 
+            placeholder="Enter your full name"
+            className="placeholder:text-muted-foreground/50"
+          />
+        </div>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+## API Reference
+
+### Input
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `type` | `string` | `"text"` | The type of input |
+| `value` | `string` | - | The controlled value of the input |
+| `defaultValue` | `string` | - | The default value of the input |
+| `onChange` | `(event: React.ChangeEvent<HTMLInputElement>) => void` | - | Event handler called when the value changes |
+| `placeholder` | `string` | - | Placeholder text |
+| `disabled` | `boolean` | `false` | Whether the input is disabled |
+| `required` | `boolean` | `false` | Whether the input is required |
+| `name` | `string` | - | The name of the input |
+| `id` | `string` | - | The id of the input |
+| `className` | `string` | - | Additional CSS classes |
+
+Additionally, all standard HTML input attributes are supported. 

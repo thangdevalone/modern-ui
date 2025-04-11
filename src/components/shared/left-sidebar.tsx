@@ -52,6 +52,10 @@ const links: {
   {
     category: "Components",
     items: [
+      { href: "/docs/components/accordion", label: "Accordion", badge: "new" },
+      { href: "/docs/components/alert", label: "Alert", badge: "new" },
+      { href: "/docs/components/animated-gradient-text", label: "Animated Gradient Text", badge: "new" },
+      { href: "/docs/components/avatar", label: "Avatar", badge: "new" },
       { href: "/docs/components/badge", label: "Badge", badge: "new" },
       {
         href: "/docs/components/breadcrumb",
@@ -78,15 +82,22 @@ const links: {
         label: "Fluid Dropdown",
         badge: "new",
       },
+      { href: "/docs/components/input", label: "Input", badge: "new" },
+      { href: "/docs/components/label", label: "Label", badge: "new" },
       { href: "/docs/components/popover", label: "Popover", badge: "new" },
       {
         href: "/docs/components/rainbow-button",
         label: "Rainbow Button",
         badge: "new",
       },
+      { href: "/docs/components/sonner", label: "Sonner", badge: "new" },
       { href: "/docs/components/stepper", label: "Stepper", badge: "new" },
+      { href: "/docs/components/switch", label: "Switch", badge: "new" },
       { href: "/docs/components/table", label: "Table", badge: "new" },
+      { href: "/docs/components/textarea", label: "TextArea", badge: "new" },
+      { href: "/docs/components/tooltip", label: "Tooltip", badge: "new" },
       { href: "/docs/components/underline-tabs", label: "Underline tab" },
+      { href: "/docs/components/visually-hidden", label: "VisuallyHidden", badge: "new" },
     ],
   },
   {

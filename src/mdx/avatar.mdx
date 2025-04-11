@@ -1,0 +1,338 @@
+import {PreviewAvatar} from "@/app/(docs-group)/docs/components/avatar/preview";
+import {BreadcrumbNav} from "@/components/breadcrumb-nav";
+import {AvatarInstallation} from "@/app/(docs-group)/docs/components/avatar/components/avatar-installation";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/modern-ui/tabs";
+import {
+  BasicAvatarDemo,
+  AvatarWithFallbackDemo,
+  AvatarSizesDemo,
+  AvatarGroupDemo,
+  AvatarGroupWithTooltipDemo
+} from "@/app/(docs-group)/docs/components/avatar/components/avatar-demos";
+
+<BreadcrumbNav className="mb-4" items={[
+  {label: "Docs", href: "/docs"},
+  {label: "Components", href: "/docs/components"},
+  {label: "Avatar"},
+]}/>
+
+<PreviewAvatar/>
+
+# Avatar Component
+
+An image element with a fallback for representing the user.
+
+- Displays user images with elegant fallback options
+- Supports different sizes
+- Offers customizable shapes (rounded, square)
+- AvatarGroup for displaying multiple avatars with a stacked appearance
+
+---
+
+## Installation
+
+The Avatar component is part of our UI library. You can import it directly from the components directory.
+
+<AvatarInstallation/>
+
+---
+
+## Usage
+
+Here is how to use the avatar in your project.
+
+```tsx
+import {
+  Avatar,
+  AvatarImage,
+  AvatarFallback,
+  AvatarGroup
+} from "@/components/modern-ui/avatar"
+```
+
+<br/>
+
+```tsx
+<Avatar>
+  <AvatarImage src="https://example.com/user.jpg" alt="User" />
+  <AvatarFallback>JD</AvatarFallback>
+</Avatar>
+```
+
+---
+
+## Examples
+
+### Basic Avatar
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[200px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[200px]">
+      <BasicAvatarDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import {
+      Avatar,
+      AvatarImage,
+      AvatarFallback,
+    } from "@/components/modern-ui/avatar";
+
+    export function BasicAvatarDemo() {
+      return (
+        <Avatar>
+          <AvatarImage src="https://github.com/shadcn.png" alt="User avatar" />
+          <AvatarFallback>CN</AvatarFallback>
+        </Avatar>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+### Avatar with Fallback
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[200px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[200px]">
+      <AvatarWithFallbackDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import {
+      Avatar,
+      AvatarImage,
+      AvatarFallback,
+    } from "@/components/modern-ui/avatar";
+
+    export function AvatarWithFallbackDemo() {
+      return (
+        <div className="flex gap-4">
+          <Avatar>
+            <AvatarImage src="https://broken-link.jpg" alt="John Doe" />
+            <AvatarFallback>JD</AvatarFallback>
+          </Avatar>
+          <Avatar>
+            <AvatarImage src="https://broken-link.jpg" alt="Sarah Smith" />
+            <AvatarFallback>SS</AvatarFallback>
+          </Avatar>
+          <Avatar>
+            <AvatarImage src="https://broken-link.jpg" alt="Michael Brown" />
+            <AvatarFallback>MB</AvatarFallback>
+          </Avatar>
+        </div>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+### Avatar Sizes
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[200px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[200px]">
+      <AvatarSizesDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import {
+      Avatar,
+      AvatarImage,
+      AvatarFallback,
+    } from "@/components/modern-ui/avatar";
+
+    export function AvatarSizesDemo() {
+      return (
+        <div className="flex items-end gap-4">
+          <Avatar className="h-8 w-8">
+            <AvatarImage src="https://github.com/shadcn.png" alt="Small avatar" />
+            <AvatarFallback>SM</AvatarFallback>
+          </Avatar>
+          <Avatar>
+            <AvatarImage src="https://github.com/shadcn.png" alt="Default avatar" />
+            <AvatarFallback>MD</AvatarFallback>
+          </Avatar>
+          <Avatar className="h-16 w-16">
+            <AvatarImage src="https://github.com/shadcn.png" alt="Large avatar" />
+            <AvatarFallback>LG</AvatarFallback>
+          </Avatar>
+        </div>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+### Avatar Group
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[200px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[200px]">
+      <AvatarGroupDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import {
+      Avatar,
+      AvatarImage,
+      AvatarFallback,
+      AvatarGroup
+    } from "@/components/modern-ui/avatar";
+
+    export function AvatarGroupDemo() {
+      return (
+        <AvatarGroup>
+          <Avatar>
+            <AvatarImage src="https://github.com/shadcn.png" alt="User 1" />
+            <AvatarFallback>U1</AvatarFallback>
+          </Avatar>
+          <Avatar>
+            <AvatarImage src="https://i.pravatar.cc/150?img=32" alt="User 2" />
+            <AvatarFallback>U2</AvatarFallback>
+          </Avatar>
+          <Avatar>
+            <AvatarImage src="https://i.pravatar.cc/150?img=33" alt="User 3" />
+            <AvatarFallback>U3</AvatarFallback>
+          </Avatar>
+          <Avatar>
+            <AvatarFallback>+3</AvatarFallback>
+          </Avatar>
+        </AvatarGroup>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+### Avatar Group with Tooltip
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[200px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[200px]">
+      <AvatarGroupWithTooltipDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import {
+      Avatar,
+      AvatarImage,
+      AvatarFallback,
+      AvatarGroup
+    } from "@/components/modern-ui/avatar";
+    import {
+      Tooltip,
+      TooltipContent,
+      TooltipProvider,
+      TooltipTrigger,
+    } from "@/components/modern-ui/tooltip";
+
+    export function AvatarGroupWithTooltipDemo() {
+      return (
+        <TooltipProvider>
+          <AvatarGroup>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Avatar>
+                  <AvatarImage src="https://github.com/shadcn.png" alt="John Doe" />
+                  <AvatarFallback>JD</AvatarFallback>
+                </Avatar>
+              </TooltipTrigger>
+              <TooltipContent>John Doe</TooltipContent>
+            </Tooltip>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Avatar>
+                  <AvatarImage src="https://i.pravatar.cc/150?img=32" alt="Sarah Smith" />
+                  <AvatarFallback>SS</AvatarFallback>
+                </Avatar>
+              </TooltipTrigger>
+              <TooltipContent>Sarah Smith</TooltipContent>
+            </Tooltip>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Avatar>
+                  <AvatarImage src="https://i.pravatar.cc/150?img=33" alt="Robert Johnson" />
+                  <AvatarFallback>RJ</AvatarFallback>
+                </Avatar>
+              </TooltipTrigger>
+              <TooltipContent>Robert Johnson</TooltipContent>
+            </Tooltip>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Avatar>
+                  <AvatarFallback>+3</AvatarFallback>
+                </Avatar>
+              </TooltipTrigger>
+              <TooltipContent>3 more team members</TooltipContent>
+            </Tooltip>
+          </AvatarGroup>
+        </TooltipProvider>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+## API Reference
+
+### Avatar
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode` | - | AvatarImage and AvatarFallback components |
+
+### AvatarImage
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `src` | `string` | - | URL of the avatar image |
+| `alt` | `string` | - | Alt text for the avatar image |
+| `className` | `string` | - | Additional CSS classes |
+
+### AvatarFallback
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `delayMs` | `number` | `600` | Delay before showing fallback when image fails to load |
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode` | - | Content to display as fallback |
+
+### AvatarGroup
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode` | - | Avatar components |
+| `max` | `number` | - | Maximum number of avatars to display before showing a count | 

@@ -1,0 +1,221 @@
+import {PreviewLabel} from "@/app/(docs-group)/docs/components/label/preview";
+import {BreadcrumbNav} from "@/components/breadcrumb-nav";
+import {LabelInstallation} from "@/app/(docs-group)/docs/components/label/components/label-installation";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/modern-ui/tabs";
+import {
+  BasicLabelDemo,
+  RequiredLabelDemo,
+  LabelWithInputDemo,
+  DisabledLabelDemo
+} from "@/app/(docs-group)/docs/components/label/components/label-demos";
+
+<BreadcrumbNav className="mb-4" items={[
+  {label: "Docs", href: "/docs"},
+  {label: "Components", href: "/docs/components"},
+  {label: "Label"},
+]}/>
+
+<PreviewLabel/>
+
+# Label Component
+
+A form label component that is accessible, customizable, and properly associates with form controls.
+
+- Automatically links to form controls with matching id
+- Properly handles disabled states
+- Supports required field indicator
+- Follows accessibility best practices
+
+---
+
+## Installation
+
+The Label component is part of our UI library. You can import it directly from the components directory.
+
+<LabelInstallation/>
+
+---
+
+## Usage
+
+Here is how to use the label in your project.
+
+```tsx
+import { Label } from "@/components/modern-ui/label"
+```
+
+<br/>
+
+```tsx
+<Label htmlFor="email">Email</Label>
+<input id="email" type="email" />
+```
+
+---
+
+## Examples
+
+### Basic Label
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[150px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[150px]">
+      <BasicLabelDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { Label } from "@/components/modern-ui/label";
+
+    export function BasicLabelDemo() {
+      return (
+        <div className="grid w-full max-w-sm items-center gap-1.5">
+          <Label htmlFor="demo-input">Basic Label</Label>
+          <input
+            type="text"
+            id="demo-input"
+            className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+            placeholder="Enter text here"
+          />
+        </div>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+### Required Label
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[150px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[150px]">
+      <RequiredLabelDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { Label } from "@/components/modern-ui/label";
+
+    export function RequiredLabelDemo() {
+      return (
+        <div className="grid w-full max-w-sm items-center gap-1.5">
+          <Label htmlFor="required-input" className="after:content-['*'] after:ml-0.5 after:text-red-500">
+            Required Field
+          </Label>
+          <input
+            type="text"
+            id="required-input"
+            className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+            placeholder="This field is required"
+            required
+          />
+        </div>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+### Label with Input
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[240px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[240px]">
+      <LabelWithInputDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { Label } from "@/components/modern-ui/label";
+    import { Input } from "@/components/modern-ui/input";
+
+    export function LabelWithInputDemo() {
+      return (
+        <div className="w-full max-w-sm space-y-4">
+          <div className="space-y-1.5">
+            <Label htmlFor="name">Name</Label>
+            <Input id="name" placeholder="Enter your name" />
+          </div>
+          <div className="space-y-1.5">
+            <Label htmlFor="email">Email</Label>
+            <Input id="email" type="email" placeholder="Enter your email" />
+          </div>
+          <div className="space-y-1.5">
+            <Label htmlFor="message">Message</Label>
+            <textarea
+              id="message"
+              className="flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+              placeholder="Enter your message"
+            />
+          </div>
+        </div>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+### Disabled Label
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[150px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[150px]">
+      <DisabledLabelDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { Label } from "@/components/modern-ui/label";
+
+    export function DisabledLabelDemo() {
+      return (
+        <div className="grid w-full max-w-sm items-center gap-1.5">
+          <Label htmlFor="disabled-input" className="text-muted-foreground">
+            Disabled Field
+          </Label>
+          <input
+            type="text"
+            id="disabled-input"
+            className="flex h-10 w-full rounded-md border border-input bg-muted px-3 py-2 text-sm opacity-50"
+            placeholder="This field is disabled"
+            disabled
+          />
+        </div>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+## API Reference
+
+### Label
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `htmlFor` | `string` | - | The id of the form control to associate with |
+| `className` | `string` | - | Additional CSS classes |
+| `disabled` | `boolean` | `false` | Whether the label is disabled |
+| `children` | `ReactNode` | - | The content of the label |
+
+Additionally, all standard HTML label attributes are supported. 
