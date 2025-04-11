@@ -8,7 +8,6 @@ import { Button } from "@/components/modern-ui/button";
 import { motion, useInView } from "framer-motion";
 import { AnimatedContent } from "./animated-content";
 
-// Animation variants
 const container = {
   hidden: { opacity: 0 },
   show: {

@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   description:
     "A collection of reusable components built with Radix UI and Tailwind CSS. Free. Open Source. And Next.js 14 Ready.",
   icons: {
-    icon: "/assets/logo_rounded.png",
+    icon: "/assets/logo_rounded.png" ,
   },
 };
 
