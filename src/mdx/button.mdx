@@ -1,6 +1,19 @@
-import {PreviewButton} from "@/app/(docs-group)/docs/components/button/preview";
-import {BreadcrumbNav} from "@/components/breadcrumb-nav";
-import {ButtonInstallation} from "@/app/(docs-group)/docs/components/button/components/button-installation";
+import {
+  ButtonSizesDemo,
+  ButtonWithIconDemo,
+  DefaultButtonDemo,
+  DestructiveButtonDemo,
+  GhostButtonDemo,
+  IconButtonDemo,
+  LinkButtonDemo,
+  LoadingButtonDemo,
+  OutlineButtonDemo,
+  SecondaryButtonDemo
+} from "@/app/(docs-group)/docs/components/button/components/button-demos";
+import { ButtonInstallation } from "@/app/(docs-group)/docs/components/button/components/button-installation";
+import { PreviewButton } from "@/app/(docs-group)/docs/components/button/preview";
+import { BreadcrumbNav } from "@/components/breadcrumb-nav";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/modern-ui/tabs";
 
 
 <BreadcrumbNav className="mb-4" items={[
@@ -48,7 +61,275 @@ import { Button } from "@/components/modern-ui/button"
 
 ## Examples
 
-Our existing button types, You can have direct access to create as you wish
+### Default Button
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[200px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[200px] not-prose">
+      <DefaultButtonDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { Button } from "@/components/modern-ui/button";
+
+    export function DefaultButtonDemo() {
+      return (
+        <Button>Default Button</Button>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+### Secondary Button
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[200px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[200px] not-prose">
+      <SecondaryButtonDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { Button } from "@/components/modern-ui/button";
+
+    export function SecondaryButtonDemo() {
+      return (
+        <Button variant="secondary">Secondary Button</Button>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+### Outline Button
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[200px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[200px] not-prose">
+      <OutlineButtonDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { Button } from "@/components/modern-ui/button";
+
+    export function OutlineButtonDemo() {
+      return (
+        <Button variant="outline">Outline Button</Button>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+### Destructive Button
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[200px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[200px] not-prose">
+      <DestructiveButtonDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { Button } from "@/components/modern-ui/button";
+
+    export function DestructiveButtonDemo() {
+      return (
+        <Button variant="destructive">Destructive Button</Button>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+### Ghost Button
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[200px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[200px] not-prose">
+      <GhostButtonDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { Button } from "@/components/modern-ui/button";
+
+    export function GhostButtonDemo() {
+      return (
+        <Button variant="ghost">Ghost Button</Button>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+### Link Button
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[200px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[200px] not-prose">
+      <LinkButtonDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { Button } from "@/components/modern-ui/button";
+
+    export function LinkButtonDemo() {
+      return (
+        <Button variant="link">Link Button</Button>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+### Button Sizes
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[200px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center gap-4 h-full z-10 relative min-h-[200px]">
+      <ButtonSizesDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { Button } from "@/components/modern-ui/button";
+
+    export function ButtonSizesDemo() {
+      return (
+        <>
+          <Button size="sm">Small</Button>
+          <Button size="default">Default</Button>
+          <Button size="lg">Large</Button>
+        </>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+### Button with Icon
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[200px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[200px] not-prose">
+      <ButtonWithIconDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { Button } from "@/components/modern-ui/button";
+    import { Plus } from "lucide-react";
+
+    export function ButtonWithIconDemo() {
+      return (
+        <Button icon={<Plus />}>
+          With Icon
+        </Button>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+### Icon Button
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[200px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[200px] not-prose">
+      <IconButtonDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { Button } from "@/components/modern-ui/button";
+    import { Plus } from "lucide-react";
+
+    export function IconButtonDemo() {
+      return (
+        <Button size="icon" icon={<Plus />}>
+          <span className="sr-only">Add item</span>
+        </Button>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+### Loading Button
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[200px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[200px] not-prose">
+      <LoadingButtonDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { Button } from "@/components/modern-ui/button";
+
+    export function LoadingButtonDemo() {
+      return (
+        <Button loading>Loading...</Button>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
 
 ## API Reference
 

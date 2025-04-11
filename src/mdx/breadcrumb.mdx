@@ -1,6 +1,12 @@
 import {PreviewBreadcrumb} from "@/app/(docs-group)/docs/components/breadcrumb/preview";
 import {BreadcrumbNav} from "@/components/breadcrumb-nav";
 import {BreadcrumbInstallation} from "@/app/(docs-group)/docs/components/breadcrumb/components/breadcrumb-installation";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/modern-ui/tabs";
+import {
+  BasicBreadcrumbDemo,
+  BreadcrumbWithHomeIconDemo,
+  BreadcrumbWithEllipsisDemo
+} from "@/app/(docs-group)/docs/components/breadcrumb/components/breadcrumb-demos";
 
 <BreadcrumbNav className="mb-4" items={[
   {label: "Docs", href: "/docs"},
@@ -69,74 +75,158 @@ import {
 ## Examples
 
 ### Basic Breadcrumb
-```tsx
-<Breadcrumb>
-  <BreadcrumbList>
-    <BreadcrumbItem>
-      <BreadcrumbLink href="/">Home</BreadcrumbLink>
-    </BreadcrumbItem>
-    <BreadcrumbItem>
-      <BreadcrumbSeparator />
-      <BreadcrumbLink href="/products">Products</BreadcrumbLink>
-    </BreadcrumbItem>
-    <BreadcrumbItem>
-      <BreadcrumbSeparator />
-      <BreadcrumbPage>Product Category</BreadcrumbPage>
-    </BreadcrumbItem>
-  </BreadcrumbList>
-</Breadcrumb>
-```
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[200px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[200px] not-prose">
+      <BasicBreadcrumbDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { 
+      Breadcrumb, 
+      BreadcrumbList, 
+      BreadcrumbItem, 
+      BreadcrumbLink, 
+      BreadcrumbSeparator,
+      BreadcrumbPage
+    } from "@/components/modern-ui/breadcrumb";
+
+    export function BasicBreadcrumbDemo() {
+      return (
+        <Breadcrumb>
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <BreadcrumbLink href="/">Home</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbLink href="/products">Products</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbPage>Product Category</BreadcrumbPage>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
 
 ### Breadcrumb with Home Icon
-```tsx
-import { Home } from "lucide-react";
 
-<Breadcrumb>
-  <BreadcrumbList>
-    <BreadcrumbItem>
-      <BreadcrumbLink href="/" className="flex items-center">
-        <Home className="h-4 w-4" />
-        <span className="sr-only">Home</span>
-      </BreadcrumbLink>
-    </BreadcrumbItem>
-    <BreadcrumbItem>
-      <BreadcrumbSeparator />
-      <BreadcrumbLink href="/dashboard">Dashboard</BreadcrumbLink>
-    </BreadcrumbItem>
-    <BreadcrumbItem>
-      <BreadcrumbSeparator />
-      <BreadcrumbPage>Settings</BreadcrumbPage>
-    </BreadcrumbItem>
-  </BreadcrumbList>
-</Breadcrumb>
-```
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[200px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[200px] not-prose">
+      <BreadcrumbWithHomeIconDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { 
+      Breadcrumb, 
+      BreadcrumbList, 
+      BreadcrumbItem, 
+      BreadcrumbLink, 
+      BreadcrumbSeparator,
+      BreadcrumbPage
+    } from "@/components/modern-ui/breadcrumb";
+    import { Home } from "lucide-react";
+
+    export function BreadcrumbWithHomeIconDemo() {
+      return (
+        <Breadcrumb>
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <BreadcrumbLink href="/" className="flex items-center">
+                <Home className="h-4 w-4" />
+                <span className="sr-only">Home</span>
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbLink href="/dashboard">Dashboard</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbPage>Settings</BreadcrumbPage>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
 
 ### Breadcrumb with Ellipsis for Long Paths
-```tsx
-<Breadcrumb>
-  <BreadcrumbList>
-    <BreadcrumbItem>
-      <BreadcrumbLink href="/">Home</BreadcrumbLink>
-    </BreadcrumbItem>
-    <BreadcrumbItem>
-      <BreadcrumbSeparator />
-      <BreadcrumbLink href="/dashboard">Dashboard</BreadcrumbLink>
-    </BreadcrumbItem>
-    <BreadcrumbItem>
-      <BreadcrumbSeparator />
-      <BreadcrumbEllipsis />
-    </BreadcrumbItem>
-    <BreadcrumbItem>
-      <BreadcrumbSeparator />
-      <BreadcrumbLink href="/dashboard/settings">Settings</BreadcrumbLink>
-    </BreadcrumbItem>
-    <BreadcrumbItem>
-      <BreadcrumbSeparator />
-      <BreadcrumbPage>Profile</BreadcrumbPage>
-    </BreadcrumbItem>
-  </BreadcrumbList>
-</Breadcrumb>
-```
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[200px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[200px] not-prose">
+      <BreadcrumbWithEllipsisDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { 
+      Breadcrumb, 
+      BreadcrumbList, 
+      BreadcrumbItem, 
+      BreadcrumbLink, 
+      BreadcrumbSeparator,
+      BreadcrumbPage,
+      BreadcrumbEllipsis
+    } from "@/components/modern-ui/breadcrumb";
+
+    export function BreadcrumbWithEllipsisDemo() {
+      return (
+        <Breadcrumb>
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <BreadcrumbLink href="/">Home</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbLink href="/dashboard">Dashboard</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbEllipsis />
+            </BreadcrumbItem>
+            <BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbLink href="/dashboard/settings">Settings</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbPage>Profile</BreadcrumbPage>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
 
 ## API Reference
 

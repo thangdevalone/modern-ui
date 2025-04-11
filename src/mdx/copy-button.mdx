@@ -1,6 +1,12 @@
 import {PreviewCopyButton} from "@/app/(docs-group)/docs/components/copy-button/preview";
 import {BreadcrumbNav} from "@/components/breadcrumb-nav";
 import {CopyButtonInstallation} from "@/app/(docs-group)/docs/components/copy-button/components/copy-button-installation";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/modern-ui/tabs";
+import {
+  BasicCopyButtonDemo,
+  CodeBlockCopyButtonDemo,
+  CustomStyledCopyButtonDemo
+} from "@/app/(docs-group)/docs/components/copy-button/components/copy-button-demos";
 
 <BreadcrumbNav className="mb-4" items={[
   {label: "Docs", href: "/docs"},
@@ -48,25 +54,88 @@ import { CopyButton } from "@/components/modern-ui/copy-button"
 ## Examples
 
 ### Basic Copy Button
-```tsx
-<CopyButton value="Text to be copied" />
-```
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[200px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[200px]">
+      <BasicCopyButtonDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { CopyButton } from "@/components/modern-ui/copy-button";
+
+    export function BasicCopyButtonDemo() {
+      return (
+        <CopyButton value="Text to be copied" />
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
 
 ### In a Code Block
-```tsx
-<div className="bg-zinc-900 p-4 rounded-md flex items-center justify-between">
-  <code className="text-sm text-zinc-400">npm install @thangdevalone/modern-ui</code>
-  <CopyButton value="npm install @thangdevalone/modern-ui" />
-</div>
-```
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[200px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[200px]">
+      <CodeBlockCopyButtonDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { CopyButton } from "@/components/modern-ui/copy-button";
+
+    export function CodeBlockCopyButtonDemo() {
+      return (
+        <div className="bg-zinc-900 p-4 rounded-md flex items-center justify-between">
+          <code className="text-sm text-zinc-400">npm install @thangdevalone/modern-ui</code>
+          <CopyButton value="npm install @thangdevalone/modern-ui" />
+        </div>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
 
 ### Custom Styled Copy Button
-```tsx
-<CopyButton 
-  value="Custom styled copy button" 
-  className="p-2 bg-blue-500 rounded-full"
-/>
-```
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[200px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[200px]">
+      <CustomStyledCopyButtonDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { CopyButton } from "@/components/modern-ui/copy-button";
+
+    export function CustomStyledCopyButtonDemo() {
+      return (
+        <CopyButton 
+          value="Custom styled copy button" 
+          className="p-2 bg-blue-500 rounded-full"
+        />
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
 
 ## API Reference
 
