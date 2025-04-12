@@ -45,21 +45,6 @@ export function CustomTooltipDemo() {
   );
 }
 
-export function TooltipWithArrowDemo() {
-  return (
-    <TooltipProvider>
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <Button variant="outline">Hover me</Button>
-        </TooltipTrigger>
-        <TooltipContent side="bottom" sideOffset={5}>
-          <p>Tooltip with arrow</p>
-        </TooltipContent>
-      </Tooltip>
-    </TooltipProvider>
-  );
-}
-
 export function TooltipWithDelayDemo() {
   return (
     <TooltipProvider delayDuration={500}>

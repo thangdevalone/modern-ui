@@ -1,14 +1,12 @@
-import {PreviewAvatar} from "@/app/(docs-group)/docs/components/avatar/preview";
-import {BreadcrumbNav} from "@/components/breadcrumb-nav";
-import {AvatarInstallation} from "@/app/(docs-group)/docs/components/avatar/components/avatar-installation";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/modern-ui/tabs";
 import {
-  BasicAvatarDemo,
-  AvatarWithFallbackDemo,
   AvatarSizesDemo,
-  AvatarGroupDemo,
-  AvatarGroupWithTooltipDemo
+  AvatarWithFallbackDemo,
+  BasicAvatarDemo
 } from "@/app/(docs-group)/docs/components/avatar/components/avatar-demos";
+import { AvatarInstallation } from "@/app/(docs-group)/docs/components/avatar/components/avatar-installation";
+import { PreviewAvatar } from "@/app/(docs-group)/docs/components/avatar/preview";
+import { BreadcrumbNav } from "@/components/breadcrumb-nav";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/modern-ui/tabs";
 
 <BreadcrumbNav className="mb-4" items={[
   {label: "Docs", href: "/docs"},
@@ -25,7 +23,6 @@ An image element with a fallback for representing the user.
 - Displays user images with elegant fallback options
 - Supports different sizes
 - Offers customizable shapes (rounded, square)
-- AvatarGroup for displaying multiple avatars with a stacked appearance
 
 ---
 
@@ -45,8 +42,7 @@ Here is how to use the avatar in your project.
 import {
   Avatar,
   AvatarImage,
-  AvatarFallback,
-  AvatarGroup
+  AvatarFallback
 } from "@/components/modern-ui/avatar"
 ```
 
@@ -72,7 +68,7 @@ import {
   </TabsList>
   <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[200px]">
     <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
-    <div className="flex justify-center items-center h-full z-10 relative min-h-[200px]">
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[200px] not-prose">
       <BasicAvatarDemo />
     </div>
   </TabsContent>
@@ -105,7 +101,7 @@ import {
   </TabsList>
   <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[200px]">
     <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
-    <div className="flex justify-center items-center h-full z-10 relative min-h-[200px]">
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[200px] not-prose">
       <AvatarWithFallbackDemo />
     </div>
   </TabsContent>
@@ -148,7 +144,7 @@ import {
   </TabsList>
   <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[200px]">
     <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
-    <div className="flex justify-center items-center h-full z-10 relative min-h-[200px]">
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[200px] not-prose">
       <AvatarSizesDemo />
     </div>
   </TabsContent>
@@ -164,140 +160,18 @@ import {
       return (
         <div className="flex items-end gap-4">
           <Avatar className="h-8 w-8">
-            <AvatarImage src="https://github.com/shadcn.png" alt="Small avatar" />
+            <AvatarImage src="https://raw.githubusercontent.com/thangdevalone/modern-ui/refs/heads/main/public/assets/logo.png" alt="Small avatar" />
             <AvatarFallback>SM</AvatarFallback>
           </Avatar>
           <Avatar>
-            <AvatarImage src="https://github.com/shadcn.png" alt="Default avatar" />
+            <AvatarImage src="https://raw.githubusercontent.com/thangdevalone/modern-ui/refs/heads/main/public/assets/logo.png" alt="Default avatar" />
             <AvatarFallback>MD</AvatarFallback>
           </Avatar>
           <Avatar className="h-16 w-16">
-            <AvatarImage src="https://github.com/shadcn.png" alt="Large avatar" />
+            <AvatarImage src="https://raw.githubusercontent.com/thangdevalone/modern-ui/refs/heads/main/public/assets/logo.png" alt="Large avatar" />
             <AvatarFallback>LG</AvatarFallback>
           </Avatar>
         </div>
-      );
-    }
-    ```
-  </TabsContent>
-</Tabs>
-
-### Avatar Group
-
-<Tabs defaultValue="preview">
-  <TabsList>
-    <TabsTrigger value="preview">Preview</TabsTrigger>
-    <TabsTrigger value="code">Code</TabsTrigger>
-  </TabsList>
-  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[200px]">
-    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
-    <div className="flex justify-center items-center h-full z-10 relative min-h-[200px]">
-      <AvatarGroupDemo />
-    </div>
-  </TabsContent>
-  <TabsContent value="code">
-    ```tsx
-    import {
-      Avatar,
-      AvatarImage,
-      AvatarFallback,
-      AvatarGroup
-    } from "@/components/modern-ui/avatar";
-
-    export function AvatarGroupDemo() {
-      return (
-        <AvatarGroup>
-          <Avatar>
-            <AvatarImage src="https://github.com/shadcn.png" alt="User 1" />
-            <AvatarFallback>U1</AvatarFallback>
-          </Avatar>
-          <Avatar>
-            <AvatarImage src="https://i.pravatar.cc/150?img=32" alt="User 2" />
-            <AvatarFallback>U2</AvatarFallback>
-          </Avatar>
-          <Avatar>
-            <AvatarImage src="https://i.pravatar.cc/150?img=33" alt="User 3" />
-            <AvatarFallback>U3</AvatarFallback>
-          </Avatar>
-          <Avatar>
-            <AvatarFallback>+3</AvatarFallback>
-          </Avatar>
-        </AvatarGroup>
-      );
-    }
-    ```
-  </TabsContent>
-</Tabs>
-
-### Avatar Group with Tooltip
-
-<Tabs defaultValue="preview">
-  <TabsList>
-    <TabsTrigger value="preview">Preview</TabsTrigger>
-    <TabsTrigger value="code">Code</TabsTrigger>
-  </TabsList>
-  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[200px]">
-    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
-    <div className="flex justify-center items-center h-full z-10 relative min-h-[200px]">
-      <AvatarGroupWithTooltipDemo />
-    </div>
-  </TabsContent>
-  <TabsContent value="code">
-    ```tsx
-    import {
-      Avatar,
-      AvatarImage,
-      AvatarFallback,
-      AvatarGroup
-    } from "@/components/modern-ui/avatar";
-    import {
-      Tooltip,
-      TooltipContent,
-      TooltipProvider,
-      TooltipTrigger,
-    } from "@/components/modern-ui/tooltip";
-
-    export function AvatarGroupWithTooltipDemo() {
-      return (
-        <TooltipProvider>
-          <AvatarGroup>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Avatar>
-                  <AvatarImage src="https://github.com/shadcn.png" alt="John Doe" />
-                  <AvatarFallback>JD</AvatarFallback>
-                </Avatar>
-              </TooltipTrigger>
-              <TooltipContent>John Doe</TooltipContent>
-            </Tooltip>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Avatar>
-                  <AvatarImage src="https://i.pravatar.cc/150?img=32" alt="Sarah Smith" />
-                  <AvatarFallback>SS</AvatarFallback>
-                </Avatar>
-              </TooltipTrigger>
-              <TooltipContent>Sarah Smith</TooltipContent>
-            </Tooltip>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Avatar>
-                  <AvatarImage src="https://i.pravatar.cc/150?img=33" alt="Robert Johnson" />
-                  <AvatarFallback>RJ</AvatarFallback>
-                </Avatar>
-              </TooltipTrigger>
-              <TooltipContent>Robert Johnson</TooltipContent>
-            </Tooltip>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Avatar>
-                  <AvatarFallback>+3</AvatarFallback>
-                </Avatar>
-              </TooltipTrigger>
-              <TooltipContent>3 more team members</TooltipContent>
-            </Tooltip>
-          </AvatarGroup>
-        </TooltipProvider>
       );
     }
     ```

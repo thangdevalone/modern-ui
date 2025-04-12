@@ -93,7 +93,7 @@ export const PreviewBreadcrumb = () => {
               </BreadcrumbList>
             </Breadcrumb>
           </div>
-          <div className="absolute top-4 right-4 flex gap-2">
+          <div className="absolute z-10 top-4 right-4 flex gap-2">
             <Button
               variant="outline"
               size="icon"

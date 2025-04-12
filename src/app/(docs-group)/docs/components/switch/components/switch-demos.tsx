@@ -31,17 +31,3 @@ export function DisabledSwitchDemo() {
     </div>
   );
 }
-
-export function CustomSwitchDemo() {
-  return (
-    <div className="flex items-center space-x-2">
-      <Switch 
-        id="custom-mode" 
-        className="data-[state=checked]:bg-purple-600"
-      />
-      <Label htmlFor="custom-mode" className="text-purple-600">
-        Custom Style
-      </Label>
-    </div>
-  );
-} 

@@ -4,8 +4,6 @@ import {VisuallyHiddenInstallation} from "@/app/(docs-group)/docs/components/vis
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/modern-ui/tabs";
 import {
   BasicVisuallyHiddenDemo,
-  VisuallyHiddenWithIconDemo,
-  VisuallyHiddenWithButtonDemo
 } from "@/app/(docs-group)/docs/components/visually-hidden/components/visually-hidden-demos";
 
 <BreadcrumbNav className="mb-4" items={[
@@ -76,68 +74,6 @@ import { VisuallyHidden } from "@/components/modern-ui/visually-hidden"
           <VisuallyHidden>This text is hidden visually</VisuallyHidden>
           <p>This text is visible</p>
         </div>
-      );
-    }
-    ```
-  </TabsContent>
-</Tabs>
-
-### VisuallyHidden with Icon
-
-<Tabs defaultValue="preview">
-  <TabsList>
-    <TabsTrigger value="preview">Preview</TabsTrigger>
-    <TabsTrigger value="code">Code</TabsTrigger>
-  </TabsList>
-  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[150px]">
-    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
-    <div className="flex justify-center items-center h-full z-10 relative min-h-[150px]">
-      <VisuallyHiddenWithIconDemo />
-    </div>
-  </TabsContent>
-  <TabsContent value="code">
-    ```tsx
-    import { VisuallyHidden } from "@/components/modern-ui/visually-hidden";
-    import { Button } from "@/components/modern-ui/button";
-    import { X } from "lucide-react";
-
-    export function VisuallyHiddenWithIconDemo() {
-      return (
-        <Button variant="outline" size="icon">
-          <X className="h-4 w-4" />
-          <VisuallyHidden>Close</VisuallyHidden>
-        </Button>
-      );
-    }
-    ```
-  </TabsContent>
-</Tabs>
-
-### VisuallyHidden with Button
-
-<Tabs defaultValue="preview">
-  <TabsList>
-    <TabsTrigger value="preview">Preview</TabsTrigger>
-    <TabsTrigger value="code">Code</TabsTrigger>
-  </TabsList>
-  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[150px]">
-    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
-    <div className="flex justify-center items-center h-full z-10 relative min-h-[150px]">
-      <VisuallyHiddenWithButtonDemo />
-    </div>
-  </TabsContent>
-  <TabsContent value="code">
-    ```tsx
-    import { VisuallyHidden } from "@/components/modern-ui/visually-hidden";
-    import { Button } from "@/components/modern-ui/button";
-    import { Menu } from "lucide-react";
-
-    export function VisuallyHiddenWithButtonDemo() {
-      return (
-        <Button variant="ghost" size="icon">
-          <Menu className="h-4 w-4" />
-          <VisuallyHidden>Open menu</VisuallyHidden>
-        </Button>
       );
     }
     ```

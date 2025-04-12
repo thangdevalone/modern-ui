@@ -36,7 +36,18 @@ export default function RootLayout({
             <Header />
             {children}
             <Footer />
-            <SonnerGlobal />
+            <SonnerGlobal
+              richColors
+              closeButton
+              toastOptions={{
+                classNames: {
+                  error: "bg-red-400",
+                  success: "bg-green-400",
+                  warning: "bg-yellow-400",
+                  info: "bg-blue-400",
+                },
+              }}
+            />
           </div>
         </ThemeProvider>
       </body>

@@ -1,13 +1,12 @@
-import {PreviewLabel} from "@/app/(docs-group)/docs/components/label/preview";
-import {BreadcrumbNav} from "@/components/breadcrumb-nav";
-import {LabelInstallation} from "@/app/(docs-group)/docs/components/label/components/label-installation";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/modern-ui/tabs";
 import {
   BasicLabelDemo,
-  RequiredLabelDemo,
-  LabelWithInputDemo,
-  DisabledLabelDemo
+  LabelWithCheckboxDemo,
+  RequiredLabelDemo
 } from "@/app/(docs-group)/docs/components/label/components/label-demos";
+import { LabelInstallation } from "@/app/(docs-group)/docs/components/label/components/label-installation";
+import { PreviewLabel } from "@/app/(docs-group)/docs/components/label/preview";
+import { BreadcrumbNav } from "@/components/breadcrumb-nav";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/modern-ui/tabs";
 
 <BreadcrumbNav className="mb-4" items={[
   {label: "Docs", href: "/docs"},
@@ -89,123 +88,6 @@ import { Label } from "@/components/modern-ui/label"
   </TabsContent>
 </Tabs>
 
-### Required Label
-
-<Tabs defaultValue="preview">
-  <TabsList>
-    <TabsTrigger value="preview">Preview</TabsTrigger>
-    <TabsTrigger value="code">Code</TabsTrigger>
-  </TabsList>
-  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[150px]">
-    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
-    <div className="flex justify-center items-center h-full z-10 relative min-h-[150px]">
-      <RequiredLabelDemo />
-    </div>
-  </TabsContent>
-  <TabsContent value="code">
-    ```tsx
-    import { Label } from "@/components/modern-ui/label";
-
-    export function RequiredLabelDemo() {
-      return (
-        <div className="grid w-full max-w-sm items-center gap-1.5">
-          <Label htmlFor="required-input" className="after:content-['*'] after:ml-0.5 after:text-red-500">
-            Required Field
-          </Label>
-          <input
-            type="text"
-            id="required-input"
-            className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
-            placeholder="This field is required"
-            required
-          />
-        </div>
-      );
-    }
-    ```
-  </TabsContent>
-</Tabs>
-
-### Label with Input
-
-<Tabs defaultValue="preview">
-  <TabsList>
-    <TabsTrigger value="preview">Preview</TabsTrigger>
-    <TabsTrigger value="code">Code</TabsTrigger>
-  </TabsList>
-  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[240px]">
-    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
-    <div className="flex justify-center items-center h-full z-10 relative min-h-[240px]">
-      <LabelWithInputDemo />
-    </div>
-  </TabsContent>
-  <TabsContent value="code">
-    ```tsx
-    import { Label } from "@/components/modern-ui/label";
-    import { Input } from "@/components/modern-ui/input";
-
-    export function LabelWithInputDemo() {
-      return (
-        <div className="w-full max-w-sm space-y-4">
-          <div className="space-y-1.5">
-            <Label htmlFor="name">Name</Label>
-            <Input id="name" placeholder="Enter your name" />
-          </div>
-          <div className="space-y-1.5">
-            <Label htmlFor="email">Email</Label>
-            <Input id="email" type="email" placeholder="Enter your email" />
-          </div>
-          <div className="space-y-1.5">
-            <Label htmlFor="message">Message</Label>
-            <textarea
-              id="message"
-              className="flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
-              placeholder="Enter your message"
-            />
-          </div>
-        </div>
-      );
-    }
-    ```
-  </TabsContent>
-</Tabs>
-
-### Disabled Label
-
-<Tabs defaultValue="preview">
-  <TabsList>
-    <TabsTrigger value="preview">Preview</TabsTrigger>
-    <TabsTrigger value="code">Code</TabsTrigger>
-  </TabsList>
-  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[150px]">
-    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
-    <div className="flex justify-center items-center h-full z-10 relative min-h-[150px]">
-      <DisabledLabelDemo />
-    </div>
-  </TabsContent>
-  <TabsContent value="code">
-    ```tsx
-    import { Label } from "@/components/modern-ui/label";
-
-    export function DisabledLabelDemo() {
-      return (
-        <div className="grid w-full max-w-sm items-center gap-1.5">
-          <Label htmlFor="disabled-input" className="text-muted-foreground">
-            Disabled Field
-          </Label>
-          <input
-            type="text"
-            id="disabled-input"
-            className="flex h-10 w-full rounded-md border border-input bg-muted px-3 py-2 text-sm opacity-50"
-            placeholder="This field is disabled"
-            disabled
-          />
-        </div>
-      );
-    }
-    ```
-  </TabsContent>
-</Tabs>
 
 ## API Reference
 

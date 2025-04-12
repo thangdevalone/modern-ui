@@ -113,67 +113,6 @@ import { AnimatedGradientText } from "@/components/modern-ui/animated-gradient-t
   </TabsContent>
 </Tabs>
 
-### Heading Element
-
-<Tabs defaultValue="preview">
-  <TabsList>
-    <TabsTrigger value="preview">Preview</TabsTrigger>
-    <TabsTrigger value="code">Code</TabsTrigger>
-  </TabsList>
-  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[200px]">
-    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
-    <div className="flex justify-center items-center h-full z-10 relative min-h-[200px]">
-      <HeadingAnimatedGradientTextDemo />
-    </div>
-  </TabsContent>
-  <TabsContent value="code">
-    ```tsx
-    import { AnimatedGradientText } from "@/components/modern-ui/animated-gradient-text";
-
-    export function HeadingAnimatedGradientTextDemo() {
-      return (
-        <AnimatedGradientText 
-          as="h1"
-          className="text-3xl font-bold"
-        >
-          Main Heading
-        </AnimatedGradientText>
-      );
-    }
-    ```
-  </TabsContent>
-</Tabs>
-
-### Slower Animation
-
-<Tabs defaultValue="preview">
-  <TabsList>
-    <TabsTrigger value="preview">Preview</TabsTrigger>
-    <TabsTrigger value="code">Code</TabsTrigger>
-  </TabsList>
-  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[200px]">
-    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
-    <div className="flex justify-center items-center h-full z-10 relative min-h-[200px]">
-      <SlowerAnimationDemo />
-    </div>
-  </TabsContent>
-  <TabsContent value="code">
-    ```tsx
-    import { AnimatedGradientText } from "@/components/modern-ui/animated-gradient-text";
-
-    export function SlowerAnimationDemo() {
-      return (
-        <AnimatedGradientText 
-          className="text-2xl font-bold"
-          animationDuration={10} // 10 seconds
-        >
-          Slower Animation
-        </AnimatedGradientText>
-      );
-    }
-    ```
-  </TabsContent>
-</Tabs>
 
 ## API Reference
 
@@ -181,8 +120,6 @@ import { AnimatedGradientText } from "@/components/modern-ui/animated-gradient-t
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `as` | `ElementType` | `'p'` | The HTML element to render |
-| `colors` | `string[]` | `['#FF4D4D', '#F9CB28', '#9B4DFF', '#0070F3']` | Array of color strings for the gradient |
-| `animationDuration` | `number` | `5` | Duration of the animation in seconds |
+| `speed` | `number` | `1` | speed of the animation |
 | `className` | `string` | - | Additional CSS classes |
 | `children` | `ReactNode` | - | The text content | 

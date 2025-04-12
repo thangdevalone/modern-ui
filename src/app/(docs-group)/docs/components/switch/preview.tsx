@@ -37,13 +37,13 @@ export const PreviewSwitch = () => {
         <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[300px]">
           <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50">
           </div>
-          <div className="flex flex-col items-center justify-center w-full h-full">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 not-prose">
             <div className="flex items-center space-x-2" key={key}>
               <Switch id="airplane-mode" />
               <Label htmlFor="airplane-mode">Airplane Mode</Label>
             </div>
           </div>
-          <div className="absolute top-4 right-4 flex gap-2">
+          <div className="absolute z-10 top-4 right-4 flex gap-2">
             <Button
               variant="outline"
               size="icon"

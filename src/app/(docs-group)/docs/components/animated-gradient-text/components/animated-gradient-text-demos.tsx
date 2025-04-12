@@ -14,41 +14,10 @@ export function CustomColorsAnimatedGradientTextDemo() {
   return (
     <AnimatedGradientText 
       className="text-3xl font-bold"
-      from="from-blue-600" 
-      via="via-green-500" 
-      to="to-indigo-400"
+      colorFrom="#ec4899" 
+      colorTo="#ffaa40"
     >
       Custom Colors
     </AnimatedGradientText>
   );
 }
-
-export function LargeAnimatedGradientTextDemo() {
-  return (
-    <AnimatedGradientText className="text-5xl font-extrabold">
-      Large Text
-    </AnimatedGradientText>
-  );
-}
-
-export function HeadingAnimatedGradientTextDemo() {
-  return (
-    <AnimatedGradientText 
-      as="h1"
-      className="text-3xl font-bold"
-    >
-      Main Heading
-    </AnimatedGradientText>
-  );
-}
-
-export function SlowerAnimationDemo() {
-  return (
-    <AnimatedGradientText 
-      className="text-2xl font-bold"
-      duration="10s" // 10 seconds
-    >
-      Slower Animation
-    </AnimatedGradientText>
-  );
-} 

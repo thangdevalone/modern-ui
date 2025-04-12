@@ -33,7 +33,7 @@ export const PreviewRainbowButton = () => {
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
             <RainbowButton key={key}>Rainbow Button</RainbowButton>
           </div>
-          <div className="absolute top-4 right-4 flex gap-2">
+          <div className="absolute z-10 top-4 right-4 flex gap-2">
             <Button
               variant="outline"
               size="icon"

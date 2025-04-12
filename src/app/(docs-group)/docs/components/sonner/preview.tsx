@@ -38,7 +38,7 @@ export const PreviewSonner = () => {
         <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[300px]">
           <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50">
           </div>
-          <div className="w-full flex justify-center items-center h-full mx-auto">
+          <div className="flex justify-center items-center h-full z-10 relative min-h-[250px] not-prose">
             <Button
               key={key}
               variant="outline"
@@ -47,7 +47,7 @@ export const PreviewSonner = () => {
               Show Toast
             </Button>
           </div>
-          <div className="absolute top-4 right-4 flex gap-2">
+          <div className="absolute z-10 top-4 right-4 flex gap-2">
             <Button
               variant="outline"
               size="icon"

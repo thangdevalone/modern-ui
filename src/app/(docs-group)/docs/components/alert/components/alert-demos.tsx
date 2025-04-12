@@ -34,8 +34,8 @@ export function WarningAlertDemo() {
 
 export function SuccessAlertDemo() {
   return (
-    <Alert className="border-green-500 bg-green-50 text-green-800 w-full max-w-md">
-      <CircleCheck className="h-4 w-4 text-green-600" />
+    <Alert className="border-green-500 bg-green-300 text-green-800 w-full max-w-md">
+      <CircleCheck className="h-4 w-4" />
       <AlertTitle>Success!</AlertTitle>
       <AlertDescription>
         Your changes have been saved successfully.
@@ -63,18 +63,6 @@ export function InfoAlertDemo() {
       <AlertTitle>Note</AlertTitle>
       <AlertDescription>
         This page is still under construction. Some features may not work as expected.
-      </AlertDescription>
-    </Alert>
-  );
-}
-
-export function AlertWithIconDemo() {
-  return (
-    <Alert className="w-full max-w-md">
-      <Terminal className="h-4 w-4" />
-      <AlertTitle>Terminal Command</AlertTitle>
-      <AlertDescription>
-        <code>npm install @/modern-ui</code>
       </AlertDescription>
     </Alert>
   );

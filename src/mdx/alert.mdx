@@ -1,16 +1,15 @@
-import {PreviewAlert} from "@/app/(docs-group)/docs/components/alert/preview";
-import {BreadcrumbNav} from "@/components/breadcrumb-nav";
-import {AlertInstallation} from "@/app/(docs-group)/docs/components/alert/components/alert-installation";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/modern-ui/tabs";
 import {
+  AlertWithActionsDemo,
   BasicAlertDemo,
-  WarningAlertDemo,
-  SuccessAlertDemo,
   DestructiveAlertDemo,
   InfoAlertDemo,
-  AlertWithIconDemo,
-  AlertWithActionsDemo
+  SuccessAlertDemo,
+  WarningAlertDemo
 } from "@/app/(docs-group)/docs/components/alert/components/alert-demos";
+import { AlertInstallation } from "@/app/(docs-group)/docs/components/alert/components/alert-installation";
+import { PreviewAlert } from "@/app/(docs-group)/docs/components/alert/preview";
+import { BreadcrumbNav } from "@/components/breadcrumb-nav";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/modern-ui/tabs";
 
 <BreadcrumbNav className="mb-4" items={[
   {label: "Docs", href: "/docs"},
@@ -101,6 +100,44 @@ import {
   </TabsContent>
 </Tabs>
 
+### Success Alert
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[200px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[200px]">
+      <SuccessAlertDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import {
+      Alert,
+      AlertTitle,
+      AlertDescription,
+    } from "@/components/modern-ui/alert";
+    import { CircleCheck } from "lucide-react";
+
+    export function AlertWithIconDemo() {
+      return (
+        <Alert className="border-green-500 bg-green-300 text-green-800 w-full max-w-md">
+          <CircleCheck className="h-4 w-4" />
+          <AlertTitle>Success!</AlertTitle>
+          <AlertDescription>
+            Your changes have been saved successfully.
+          </AlertDescription>
+        </Alert>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+
 ### Destructive Alert
 
 <Tabs defaultValue="preview">
@@ -171,42 +208,6 @@ import {
   </TabsContent>
 </Tabs>
 
-### Alert with Icon
-
-<Tabs defaultValue="preview">
-  <TabsList>
-    <TabsTrigger value="preview">Preview</TabsTrigger>
-    <TabsTrigger value="code">Code</TabsTrigger>
-  </TabsList>
-  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[200px]">
-    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
-    <div className="flex justify-center items-center h-full z-10 relative min-h-[200px]">
-      <AlertWithIconDemo />
-    </div>
-  </TabsContent>
-  <TabsContent value="code">
-    ```tsx
-    import {
-      Alert,
-      AlertTitle,
-      AlertDescription,
-    } from "@/components/modern-ui/alert";
-    import { Terminal } from "lucide-react";
-
-    export function AlertWithIconDemo() {
-      return (
-        <Alert className="w-full max-w-md">
-          <Terminal className="h-4 w-4" />
-          <AlertTitle>Terminal Command</AlertTitle>
-          <AlertDescription>
-            <code>npm install @/modern-ui</code>
-          </AlertDescription>
-        </Alert>
-      );
-    }
-    ```
-  </TabsContent>
-</Tabs>
 
 ### Alert with Actions
 

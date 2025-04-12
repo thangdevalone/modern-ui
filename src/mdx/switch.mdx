@@ -1,13 +1,12 @@
-import {PreviewSwitch} from "@/app/(docs-group)/docs/components/switch/preview";
-import {BreadcrumbNav} from "@/components/breadcrumb-nav";
-import {SwitchInstallation} from "@/app/(docs-group)/docs/components/switch/components/switch-installation";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/modern-ui/tabs";
 import {
   BasicSwitchDemo,
-  LabeledSwitchDemo,
   DisabledSwitchDemo,
-  CustomSwitchDemo
+  LabeledSwitchDemo
 } from "@/app/(docs-group)/docs/components/switch/components/switch-demos";
+import { SwitchInstallation } from "@/app/(docs-group)/docs/components/switch/components/switch-installation";
+import { PreviewSwitch } from "@/app/(docs-group)/docs/components/switch/preview";
+import { BreadcrumbNav } from "@/components/breadcrumb-nav";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/modern-ui/tabs";
 
 <BreadcrumbNav className="mb-4" items={[
   {label: "Docs", href: "/docs"},
@@ -63,7 +62,7 @@ import { Switch } from "@/components/modern-ui/switch"
   </TabsList>
   <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[150px]">
     <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
-    <div className="flex justify-center items-center h-full z-10 relative min-h-[150px]">
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[150px] not-prose">
       <BasicSwitchDemo />
     </div>
   </TabsContent>
@@ -89,7 +88,7 @@ import { Switch } from "@/components/modern-ui/switch"
   </TabsList>
   <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[150px]">
     <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
-    <div className="flex justify-center items-center h-full z-10 relative min-h-[150px]">
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[150px] not-prose">
       <LabeledSwitchDemo />
     </div>
   </TabsContent>
@@ -119,7 +118,7 @@ import { Switch } from "@/components/modern-ui/switch"
   </TabsList>
   <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[150px]">
     <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
-    <div className="flex justify-center items-center h-full z-10 relative min-h-[150px]">
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[150px] not-prose">
       <DisabledSwitchDemo />
     </div>
   </TabsContent>
@@ -142,40 +141,6 @@ import { Switch } from "@/components/modern-ui/switch"
   </TabsContent>
 </Tabs>
 
-### Custom Switch
-
-<Tabs defaultValue="preview">
-  <TabsList>
-    <TabsTrigger value="preview">Preview</TabsTrigger>
-    <TabsTrigger value="code">Code</TabsTrigger>
-  </TabsList>
-  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[150px]">
-    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
-    <div className="flex justify-center items-center h-full z-10 relative min-h-[150px]">
-      <CustomSwitchDemo />
-    </div>
-  </TabsContent>
-  <TabsContent value="code">
-    ```tsx
-    import { Switch } from "@/components/modern-ui/switch";
-    import { Label } from "@/components/modern-ui/label";
-
-    export function CustomSwitchDemo() {
-      return (
-        <div className="flex items-center space-x-2">
-          <Switch 
-            id="custom-mode" 
-            className="data-[state=checked]:bg-purple-600"
-          />
-          <Label htmlFor="custom-mode" className="text-purple-600">
-            Custom Style
-          </Label>
-        </div>
-      );
-    }
-    ```
-  </TabsContent>
-</Tabs>
 
 ## API Reference
 

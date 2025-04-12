@@ -34,7 +34,7 @@ export const PreviewCopyButton = () => {
             <code className="text-sm text-zinc-400">npm install @thangdevalone/modern-ui</code>
             <CopyButton key={key} value="npm install @thangdevalone/modern-ui" />
           </div>
-          <div className="absolute top-4 right-4 flex gap-2">
+          <div className="absolute z-10 top-4 right-4 flex gap-2">
             <Button
               variant="outline"
               size="icon"

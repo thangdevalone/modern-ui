@@ -1,11 +1,10 @@
 "use client";
 
+import { Badge } from "@/components/modern-ui/badge";
+import { cn } from "@/lib/utils";
+import { motion } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { motion } from "framer-motion";
-import { Badge } from "@/components/modern-ui/badge";
-import clsx from "clsx";
-import { cn } from "@/lib/utils";
 
 export const containerVariants = {
   hidden: { opacity: 0 },
@@ -21,8 +20,8 @@ export const itemVariants = {
 };
 
 const badgeStyles: Record<string, string> = {
-  new: "bg-amber-100 text-amber-800 hover:bg-amber-100",
-  pro: "bg-emerald-100 text-emerald-800 hover:bg-emerald-100",
+  new: "bg-teal-100 text-teal-800 dark:bg-teal-900 dark:text-teal-100 hover:bg-teal-200 dark:hover:bg-teal-800",
+  pro: "bg-fuchsia-100 text-fuchsia-800 dark:bg-fuchsia-900 dark:text-fuchsia-100 hover:bg-fuchsia-200 dark:hover:bg-fuchsia-800",
 };
 
 const links: {
@@ -54,8 +53,17 @@ const links: {
     items: [
       { href: "/docs/components/accordion", label: "Accordion", badge: "new" },
       { href: "/docs/components/alert", label: "Alert", badge: "new" },
-      { href: "/docs/components/animated-gradient-text", label: "Animated Gradient Text", badge: "new" },
+      {
+        href: "/docs/components/animated-gradient-text",
+        label: "Animated Gradient Text",
+        badge: "new",
+      },
       { href: "/docs/components/avatar", label: "Avatar", badge: "new" },
+      {
+        href: "/docs/components/avatar-group",
+        label: "Avatar Group",
+        badge: "new",
+      },
       { href: "/docs/components/badge", label: "Badge", badge: "new" },
       {
         href: "/docs/components/breadcrumb",
@@ -97,7 +105,11 @@ const links: {
       { href: "/docs/components/textarea", label: "TextArea", badge: "new" },
       { href: "/docs/components/tooltip", label: "Tooltip", badge: "new" },
       { href: "/docs/components/underline-tabs", label: "Underline tab" },
-      { href: "/docs/components/visually-hidden", label: "VisuallyHidden", badge: "new" },
+      {
+        href: "/docs/components/visually-hidden",
+        label: "VisuallyHidden",
+        badge: "new",
+      },
     ],
   },
   {
@@ -128,7 +140,8 @@ export default function LeftSidebar() {
             animate="show"
           >
             {items.map(({ href, label, badge, disabled }) => {
-              const isActive = pathname.includes(href);
+              const isActive =
+                pathname === href || pathname.startsWith(href + "/");
               return (
                 <motion.li
                   key={href}

@@ -7,7 +7,8 @@ import {
   TypesSonnerDemo,
   CustomSonnerDemo,
   ActionsSonnerDemo,
-  PromiseSonnerDemo
+  PromiseSonnerDemo,
+  RichColorSonnerDemo
 } from "@/app/(docs-group)/docs/components/sonner/components/sonner-demos";
 
 <BreadcrumbNav className="mb-4" items={[
@@ -20,7 +21,7 @@ import {
 
 # Sonner Component
 
-An opinionated toast component for React with beautiful animations and a clean design.
+An opinionated toast component for React with beautiful animations and a clean design. Sonner is built and maintained by [emilkowalski](https://x.com/emilkowalski_).
 
 - Multiple toast types: success, error, warning, info
 - Custom toast content including actions
@@ -52,14 +53,14 @@ First, add the `<Toaster />` component to your app:
 
 ```tsx
 // In your layout or root component
-import { Toaster } from "@/components/modern-ui/sonner"
+import { SonnerGlobal } from "@/components/modern-ui/sonner"
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
         {children}
-        <Toaster />
+        <SonnerGlobal />
       </body>
     </html>
   )
@@ -273,31 +274,23 @@ function MyComponent() {
     import { toast } from "@/components/modern-ui/sonner";
 
     export function PromiseSonnerDemo() {
-      // Simulate an async operation
-      const mockPromise = () => new Promise((resolve, reject) => {
-        // 80% chance to succeed
-        const willSucceed = Math.random() < 0.8;
-        
-        setTimeout(() => {
-          if (willSucceed) {
-            resolve({ message: "Data saved successfully" });
-          } else {
-            reject(new Error("Failed to save data"));
-          }
-        }, 2000);
-      });
+      const promise = () => {
+        return new Promise<{ name: string }>((resolve) => {
+          setTimeout(() => resolve({ name: "Modern UI" }), 2000);
+        });
+      };
 
       return (
         <Button 
           onClick={() => {
-            toast.promise(mockPromise(), {
-              loading: "Saving data...",
-              success: (data) => data.message,
-              error: (err) => err.message
+            toast.promise(promise, {
+              loading: "Loading data...",
+              success: (data) => `Successfully loaded ${data.name}`,
+              error: "Error loading data"
             });
           }}
         >
-          Save Data
+          Start Loading
         </Button>
       );
     }

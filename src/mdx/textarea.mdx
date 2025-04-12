@@ -76,7 +76,7 @@ import { Textarea } from "@/components/modern-ui/textarea"
 
     export function BasicTextAreaDemo() {
       return (
-        <Textarea placeholder="Enter your message" />
+        <Textarea className="w-full max-w-sm" placeholder="Enter your message" />
       );
     }
     ```
@@ -92,7 +92,7 @@ import { Textarea } from "@/components/modern-ui/textarea"
   </TabsList>
   <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[150px]">
     <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
-    <div className="flex justify-center items-center h-full z-10 relative min-h-[150px]">
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[150px] not-prose">
       <TextAreaWithLabelDemo />
     </div>
   </TabsContent>
@@ -113,35 +113,6 @@ import { Textarea } from "@/components/modern-ui/textarea"
   </TabsContent>
 </Tabs>
 
-### TextArea with Placeholder
-
-<Tabs defaultValue="preview">
-  <TabsList>
-    <TabsTrigger value="preview">Preview</TabsTrigger>
-    <TabsTrigger value="code">Code</TabsTrigger>
-  </TabsList>
-  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[150px]">
-    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
-    <div className="flex justify-center items-center h-full z-10 relative min-h-[150px]">
-      <TextAreaWithPlaceholderDemo />
-    </div>
-  </TabsContent>
-  <TabsContent value="code">
-    ```tsx
-    import { Textarea } from "@/components/modern-ui/textarea";
-
-    export function TextAreaWithPlaceholderDemo() {
-      return (
-        <Textarea 
-          placeholder="Write your story here..."
-          className="min-h-[100px] placeholder:text-muted-foreground/50"
-        />
-      );
-    }
-    ```
-  </TabsContent>
-</Tabs>
-
 ### TextArea with Error
 
 <Tabs defaultValue="preview">
@@ -151,7 +122,7 @@ import { Textarea } from "@/components/modern-ui/textarea"
   </TabsList>
   <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[150px]">
     <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
-    <div className="flex justify-center items-center h-full z-10 relative min-h-[150px]">
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[150px] not-prose">
       <TextAreaWithErrorDemo />
     </div>
   </TabsContent>
@@ -171,35 +142,6 @@ import { Textarea } from "@/components/modern-ui/textarea"
           />
           <p className="text-sm text-red-500">Bio is required</p>
         </div>
-      );
-    }
-    ```
-  </TabsContent>
-</Tabs>
-
-### Resizable TextArea
-
-<Tabs defaultValue="preview">
-  <TabsList>
-    <TabsTrigger value="preview">Preview</TabsTrigger>
-    <TabsTrigger value="code">Code</TabsTrigger>
-  </TabsList>
-  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[150px]">
-    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
-    <div className="flex justify-center items-center h-full z-10 relative min-h-[150px]">
-      <ResizableTextAreaDemo />
-    </div>
-  </TabsContent>
-  <TabsContent value="code">
-    ```tsx
-    import { Textarea } from "@/components/modern-ui/textarea";
-
-    export function ResizableTextAreaDemo() {
-      return (
-        <Textarea 
-          placeholder="This textarea is resizable"
-          className="min-h-[100px] resize-y"
-        />
       );
     }
     ```

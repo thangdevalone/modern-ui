@@ -1,51 +1,50 @@
 "use client";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/modern-ui/avatar";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/components/modern-ui/avatar";
 import { AvatarGroup } from "@/components/modern-ui/avatar-group";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/modern-ui/tooltip";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/modern-ui/tooltip";
 
 export function BasicAvatarDemo() {
   return (
     <Avatar>
-      <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-      <AvatarFallback>CN</AvatarFallback>
+      <AvatarImage src="https://api.dicebear.com/9.x/pixel-art/svg?seed=Maria" alt="@dicebear" />
+      <AvatarFallback>MA</AvatarFallback>
     </Avatar>
   );
 }
 
 export function AvatarWithFallbackDemo() {
   return (
-    <div className="flex gap-4">
-      <Avatar>
-        <AvatarImage src="https://broken-link.jpg" alt="John Doe" />
-        <AvatarFallback>JD</AvatarFallback>
-      </Avatar>
-      <Avatar>
-        <AvatarImage src="https://broken-link.jpg" alt="Sarah Smith" />
-        <AvatarFallback>SS</AvatarFallback>
-      </Avatar>
-      <Avatar>
-        <AvatarImage src="https://broken-link.jpg" alt="Michael Brown" />
-        <AvatarFallback>MB</AvatarFallback>
-      </Avatar>
-    </div>
+    <Avatar>
+      <AvatarImage src="https://broken-link.jpg" alt="John Doe" />
+      <AvatarFallback>JD</AvatarFallback>
+    </Avatar>
   );
 }
 
 export function AvatarSizesDemo() {
   return (
     <div className="flex items-center space-x-4">
-      <Avatar className="h-8 w-8">
-        <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-        <AvatarFallback>CN</AvatarFallback>
+      <Avatar className="h-10 w-10">
+        <AvatarImage src="https://api.dicebear.com/9.x/pixel-art/svg?seed=Maria" alt="@dicebear" />
+        <AvatarFallback>MA</AvatarFallback>
       </Avatar>
-      <Avatar className="h-12 w-12">
-        <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-        <AvatarFallback>CN</AvatarFallback>
+      <Avatar className="h-15 w-15">
+        <AvatarImage src="https://api.dicebear.com/9.x/pixel-art/svg?seed=Maria" alt="@dicebear" />
+        <AvatarFallback>MA</AvatarFallback>
       </Avatar>
-      <Avatar className="h-16 w-16">
-        <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-        <AvatarFallback>CN</AvatarFallback>
+      <Avatar className="h-20 w-20">
+        <AvatarImage src="https://api.dicebear.com/9.x/pixel-art/svg?seed=Maria" alt="@dicebear" />
+        <AvatarFallback>MA</AvatarFallback>
       </Avatar>
     </div>
   );
@@ -108,4 +107,4 @@ export function AvatarGroupWithTooltipDemo() {
       </AvatarGroup>
     </TooltipProvider>
   );
-} 
+}

@@ -1,19 +1,13 @@
 "use client";
 
-import * as React from "react";
 import { cn } from "@/lib/utils";
+import { Plus } from "lucide-react";
+import * as React from "react";
 
 interface AvatarGroupProps extends React.HTMLAttributes<HTMLDivElement> {
-  /**
-   * The number of avatars to show before truncating
-   * @default 3
-   */
   limit?: number;
 }
 
-/**
- * A component for displaying avatar groups with automatic stacking and truncation.
- */
 export function AvatarGroup({
   children,
   className,
@@ -25,10 +19,7 @@ export function AvatarGroup({
   const excess = limit ? childrenArray.length - limit : 0;
 
   return (
-    <div
-      className={cn("flex -space-x-2", className)}
-      {...props}
-    >
+    <div className={cn("flex -space-x-2", className)} {...props}>
       {visibleAvatars.map((child, index) => (
         <div
           key={index}
@@ -38,10 +29,11 @@ export function AvatarGroup({
         </div>
       ))}
       {excess > 0 && (
-        <div className="relative flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-muted text-sm font-medium border-2 border-background">
-          +{excess}
+        <div className="relative flex h-11 w-11 flex-row gap-0.5 shrink-0 items-center justify-center rounded-full bg-muted text-sm font-medium border-2 border-background">
+          <Plus className="h-3 w-3" />
+          <span>{excess}</span>
         </div>
       )}
     </div>
   );
-} 
+}

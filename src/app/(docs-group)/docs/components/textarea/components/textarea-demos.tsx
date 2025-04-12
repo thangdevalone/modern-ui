@@ -5,7 +5,7 @@ import { Label } from "@/components/modern-ui/label";
 
 export function BasicTextAreaDemo() {
   return (
-    <Textarea placeholder="Enter your message" />
+    <Textarea className="w-full max-w-sm bg-background" placeholder="Enter your message" />
   );
 }
 
@@ -13,19 +13,11 @@ export function TextAreaWithLabelDemo() {
   return (
     <div className="grid w-full max-w-sm items-center gap-1.5">
       <Label htmlFor="message">Message</Label>
-      <Textarea id="message" placeholder="Enter your message" />
+      <Textarea id="message" className="bg-background" placeholder="Enter your message" />
     </div>
   );
 }
 
-export function TextAreaWithPlaceholderDemo() {
-  return (
-    <Textarea 
-      placeholder="Write your story here..."
-      className="min-h-[100px] placeholder:text-muted-foreground/50"
-    />
-  );
-}
 
 export function TextAreaWithErrorDemo() {
   return (
@@ -40,12 +32,3 @@ export function TextAreaWithErrorDemo() {
     </div>
   );
 }
-
-export function ResizableTextAreaDemo() {
-  return (
-    <Textarea 
-      placeholder="This textarea is resizable"
-      className="min-h-[100px] resize-y"
-    />
-  );
-} 

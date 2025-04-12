@@ -7,7 +7,6 @@ import {
   InputWithLabelDemo,
   InputWithIconDemo,
   InputWithErrorDemo,
-  InputWithPlaceholderDemo
 } from "@/app/(docs-group)/docs/components/input/components/input-demos";
 
 <BreadcrumbNav className="mb-4" items={[
@@ -66,7 +65,7 @@ import { Input } from "@/components/modern-ui/input"
   </TabsList>
   <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[150px]">
     <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
-    <div className="flex justify-center items-center h-full z-10 relative min-h-[150px]">
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[150px] not-prose">
       <BasicInputDemo />
     </div>
   </TabsContent>
@@ -92,7 +91,7 @@ import { Input } from "@/components/modern-ui/input"
   </TabsList>
   <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[150px]">
     <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
-    <div className="flex justify-center items-center h-full z-10 relative min-h-[150px]">
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[150px] not-prose">
       <InputWithLabelDemo />
     </div>
   </TabsContent>
@@ -122,7 +121,7 @@ import { Input } from "@/components/modern-ui/input"
   </TabsList>
   <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[150px]">
     <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
-    <div className="flex justify-center items-center h-full z-10 relative min-h-[150px]">
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[150px] not-prose">
       <InputWithIconDemo />
     </div>
   </TabsContent>
@@ -152,7 +151,7 @@ import { Input } from "@/components/modern-ui/input"
   </TabsList>
   <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[150px]">
     <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
-    <div className="flex justify-center items-center h-full z-10 relative min-h-[150px]">
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[150px] not-prose">
       <InputWithErrorDemo />
     </div>
   </TabsContent>
@@ -171,38 +170,6 @@ import { Input } from "@/components/modern-ui/input"
             placeholder="Enter username"
           />
           <p className="text-sm text-red-500">Username is required</p>
-        </div>
-      );
-    }
-    ```
-  </TabsContent>
-</Tabs>
-
-### Input with Placeholder
-
-<Tabs defaultValue="preview">
-  <TabsList>
-    <TabsTrigger value="preview">Preview</TabsTrigger>
-    <TabsTrigger value="code">Code</TabsTrigger>
-  </TabsList>
-  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[150px]">
-    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
-    <div className="flex justify-center items-center h-full z-10 relative min-h-[150px]">
-      <InputWithPlaceholderDemo />
-    </div>
-  </TabsContent>
-  <TabsContent value="code">
-    ```tsx
-    import { Input } from "@/components/modern-ui/input";
-
-    export function InputWithPlaceholderDemo() {
-      return (
-        <div className="grid w-full max-w-sm items-center gap-1.5">
-          <Input 
-            type="text" 
-            placeholder="Enter your full name"
-            className="placeholder:text-muted-foreground/50"
-          />
         </div>
       );
     }
