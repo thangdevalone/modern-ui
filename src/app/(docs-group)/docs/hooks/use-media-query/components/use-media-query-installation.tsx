@@ -7,10 +7,10 @@ import { useHookCode } from "@/lib/services/hooks/use-hook-code";
 
 const CLIContent = () => {
   const commands = {
-    npm: "npx @thangdevalone/modern-ui add use-media-query",
-    pnpm: "pnpm dlx @thangdevalone/modern-ui add use-media-query",
-    yarn: "yarn dlx @thangdevalone/modern-ui add use-media-query",
-    bun: "bunx --bun @thangdevalone/modern-ui add use-media-query",
+    npm: "npx @modern-pack/ui add use-media-query",
+    pnpm: "pnpm dlx @modern-pack/ui add use-media-query",
+    yarn: "yarn dlx @modern-pack/ui add use-media-query",
+    bun: "bunx --bun @modern-pack/ui add use-media-query",
   };
   return (
     <div>

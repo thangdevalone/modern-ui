@@ -7,10 +7,10 @@ import { useComponentCode } from "@/lib/services/hooks/use-component-code";
 
 const CLIContent = () => {
   const commands = {
-    npm: "npx @thangdevalone/modern-ui add breadcrumb",
-    pnpm: "pnpm dlx @thangdevalone/modern-ui add breadcrumb",
-    yarn: "yarn dlx @thangdevalone/modern-ui add breadcrumb",
-    bun: "bunx --bun @thangdevalone/modern-ui add breadcrumb",
+    npm: "npx @modern-pack/ui add breadcrumb",
+    pnpm: "pnpm dlx @modern-pack/ui add breadcrumb",
+    yarn: "yarn dlx @modern-pack/ui add breadcrumb",
+    bun: "bunx --bun @modern-pack/ui add breadcrumb",
   };
   return (
     <div>

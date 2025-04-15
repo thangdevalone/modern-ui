@@ -7,10 +7,10 @@ import { useComponentCode } from "@/lib/services/hooks/use-component-code";
 
 const CLIContent = () => {
   const commands = {
-    npm: "npx @thangdevalone/modern-ui add copy-button",
-    pnpm: "pnpm dlx @thangdevalone/modern-ui add copy-button",
-    yarn: "yarn dlx @thangdevalone/modern-ui add copy-button",
-    bun: "bunx --bun @thangdevalone/modern-ui add copy-button",
+    npm: "npx @modern-pack/ui add copy-button",
+    pnpm: "pnpm dlx @modern-pack/ui add copy-button",
+    yarn: "yarn dlx @modern-pack/ui add copy-button",
+    bun: "bunx --bun @modern-pack/ui add copy-button",
   };
   return (
     <div>

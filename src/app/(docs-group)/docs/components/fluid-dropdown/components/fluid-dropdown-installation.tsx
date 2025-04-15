@@ -7,10 +7,10 @@ import { useComponentCode } from "@/lib/services/hooks/use-component-code";
 
 const CLIContent = () => {
   const commands = {
-    npm: "npx @thangdevalone/modern-ui add fluid-dropdown",
-    pnpm: "pnpm dlx @thangdevalone/modern-ui add fluid-dropdown",
-    yarn: "yarn dlx @thangdevalone/modern-ui add fluid-dropdown",
-    bun: "bunx --bun @thangdevalone/modern-ui add fluid-dropdown",
+    npm: "npx @modern-pack/ui add fluid-dropdown",
+    pnpm: "pnpm dlx @modern-pack/ui add fluid-dropdown",
+    yarn: "yarn dlx @modern-pack/ui add fluid-dropdown",
+    bun: "bunx --bun @modern-pack/ui add fluid-dropdown",
   };
   return (
     <div>

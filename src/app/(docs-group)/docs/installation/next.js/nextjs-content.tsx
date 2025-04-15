@@ -34,10 +34,10 @@ const steps = [
     title: "Create project",
     children: () => {
       const commands = {
-        npm: "npx @thangdevalone/modern-ui init",
-        pnpm: "pnpm dlx @thangdevalone/modern-ui init",
-        yarn: "npx @thangdevalone/modern-ui init",
-        bun: "bunx --bun @thangdevalone/modern-ui init",
+        npm: "npx @modern-pack/ui init",
+        pnpm: "pnpm dlx @modern-pack/ui init",
+        yarn: "npx @modern-pack/ui init",
+        bun: "bunx --bun @modern-pack/ui init",
       };
       return (
         <div className="space-y-2">
