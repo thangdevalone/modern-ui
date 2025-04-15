@@ -1,0 +1,90 @@
+import {PreviewVisuallyHidden} from "@/app/(docs-group)/docs/components/visually-hidden/preview";
+import {BreadcrumbNav} from "@/components/breadcrumb-nav";
+import {VisuallyHiddenInstallation} from "@/app/(docs-group)/docs/components/visually-hidden/components/visually-hidden-installation";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/modern-ui/tabs";
+import {
+  BasicVisuallyHiddenDemo,
+} from "@/app/(docs-group)/docs/components/visually-hidden/components/visually-hidden-demos";
+
+<BreadcrumbNav className="mb-4" items={[
+  {label: "Docs", href: "/docs"},
+  {label: "Components", href: "/docs/components"},
+  {label: "VisuallyHidden"},
+]}/>
+
+<PreviewVisuallyHidden/>
+
+# VisuallyHidden Component
+
+A component that hides content visually while keeping it accessible to screen readers.
+
+- Maintains accessibility for screen readers
+- Hides content visually but keeps it in the DOM
+- Useful for providing context to assistive technologies
+- Commonly used with icons and decorative elements
+
+---
+
+## Installation
+
+The VisuallyHidden component is part of our UI library. You can import it directly from the components directory.
+
+<VisuallyHiddenInstallation/>
+
+---
+
+## Usage
+
+Here is how to use the visually hidden component in your project.
+
+```tsx
+import { VisuallyHidden } from "@/components/modern-ui/visually-hidden"
+```
+
+<br/>
+
+```tsx
+<VisuallyHidden>This text is hidden visually but available to screen readers</VisuallyHidden>
+```
+
+---
+
+## Examples
+
+### Basic VisuallyHidden
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[150px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[150px]">
+      <BasicVisuallyHiddenDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { VisuallyHidden } from "@/components/modern-ui/visually-hidden";
+
+    export function BasicVisuallyHiddenDemo() {
+      return (
+        <div>
+          <VisuallyHidden>This text is hidden visually</VisuallyHidden>
+          <p>This text is visible</p>
+        </div>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+## API Reference
+
+### VisuallyHidden
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode` | - | The content to be hidden visually | 

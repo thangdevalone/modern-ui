@@ -1,0 +1,167 @@
+import {PreviewTextArea} from "@/app/(docs-group)/docs/components/textarea/preview";
+import {BreadcrumbNav} from "@/components/breadcrumb-nav";
+import {TextAreaInstallation} from "@/app/(docs-group)/docs/components/textarea/components/textarea-installation";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/modern-ui/tabs";
+import {
+  BasicTextAreaDemo,
+  TextAreaWithLabelDemo,
+  TextAreaWithPlaceholderDemo,
+  TextAreaWithErrorDemo,
+  ResizableTextAreaDemo
+} from "@/app/(docs-group)/docs/components/textarea/components/textarea-demos";
+
+<BreadcrumbNav className="mb-4" items={[
+  {label: "Docs", href: "/docs"},
+  {label: "Components", href: "/docs/components"},
+  {label: "TextArea"},
+]}/>
+
+<PreviewTextArea/>
+
+# TextArea Component
+
+A form textarea component that provides a clean and accessible way to collect multi-line user input.
+
+- Accessible textarea implementation
+- Support for resizing
+- Customizable styling
+- Error state handling
+- Label integration
+- Placeholder support
+
+---
+
+## Installation
+
+The TextArea component is part of our UI library. You can import it directly from the components directory.
+
+<TextAreaInstallation/>
+
+---
+
+## Usage
+
+Here is how to use the textarea in your project.
+
+```tsx
+import { Textarea } from "@/components/modern-ui/textarea"
+```
+
+<br/>
+
+```tsx
+<Textarea placeholder="Enter your message" />
+```
+
+---
+
+## Examples
+
+### Basic TextArea
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[150px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[150px]">
+      <BasicTextAreaDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { Textarea } from "@/components/modern-ui/textarea";
+
+    export function BasicTextAreaDemo() {
+      return (
+        <Textarea className="w-full max-w-sm" placeholder="Enter your message" />
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+### TextArea with Label
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[150px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[150px] not-prose">
+      <TextAreaWithLabelDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { Textarea } from "@/components/modern-ui/textarea";
+    import { Label } from "@/components/modern-ui/label";
+
+    export function TextAreaWithLabelDemo() {
+      return (
+        <div className="grid w-full max-w-sm items-center gap-1.5">
+          <Label htmlFor="message">Message</Label>
+          <Textarea id="message" placeholder="Enter your message" />
+        </div>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+### TextArea with Error
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[150px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[150px] not-prose">
+      <TextAreaWithErrorDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { Textarea } from "@/components/modern-ui/textarea";
+    import { Label } from "@/components/modern-ui/label";
+
+    export function TextAreaWithErrorDemo() {
+      return (
+        <div className="grid w-full max-w-sm items-center gap-1.5">
+          <Label htmlFor="bio" className="text-red-500">Bio</Label>
+          <Textarea 
+            id="bio" 
+            className="border-red-500 focus-visible:ring-red-500" 
+            placeholder="Tell us about yourself"
+          />
+          <p className="text-sm text-red-500">Bio is required</p>
+        </div>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+## API Reference
+
+### Textarea
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `string` | - | The controlled value of the textarea |
+| `defaultValue` | `string` | - | The default value of the textarea |
+| `onChange` | `(event: React.ChangeEvent<HTMLTextAreaElement>) => void` | - | Event handler called when the value changes |
+| `placeholder` | `string` | - | Placeholder text |
+| `disabled` | `boolean` | `false` | Whether the textarea is disabled |
+| `required` | `boolean` | `false` | Whether the textarea is required |
+| `name` | `string` | - | The name of the textarea |
+| `id` | `string` | - | The id of the textarea |
+| `className` | `string` | - | Additional CSS classes |
+
+Additionally, all standard HTML textarea attributes are supported. 

@@ -1,0 +1,234 @@
+import {PreviewTooltip} from "@/app/(docs-group)/docs/components/tooltip/preview";
+import {BreadcrumbNav} from "@/components/breadcrumb-nav";
+import {TooltipInstallation} from "@/app/(docs-group)/docs/components/tooltip/components/tooltip-installation";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/modern-ui/tabs";
+import {
+  BasicTooltipDemo,
+  CustomTooltipDemo,
+  TooltipWithDelayDemo
+} from "@/app/(docs-group)/docs/components/tooltip/components/tooltip-demos";
+
+<BreadcrumbNav className="mb-4" items={[
+  {label: "Docs", href: "/docs"},
+  {label: "Components", href: "/docs/components"},
+  {label: "Tooltip"},
+]}/>
+
+<PreviewTooltip/>
+
+# Tooltip Component
+
+A tooltip component that displays additional information when hovering over an element.
+
+- Accessible tooltip implementation
+- Customizable positioning
+- Support for arrows
+- Configurable delay
+- Rich content support
+
+---
+
+## Installation
+
+The Tooltip component is part of our UI library. You can import it directly from the components directory.
+
+<TooltipInstallation/>
+
+---
+
+## Usage
+
+Here is how to use the tooltip in your project.
+
+```tsx
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/modern-ui/tooltip"
+```
+
+<br/>
+
+```tsx
+<TooltipProvider>
+  <Tooltip>
+    <TooltipTrigger>Hover me</TooltipTrigger>
+    <TooltipContent>
+      <p>Tooltip content</p>
+    </TooltipContent>
+  </Tooltip>
+</TooltipProvider>
+```
+
+---
+
+## Examples
+
+### Basic Tooltip
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[150px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[150px]">
+      <BasicTooltipDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import {
+      Tooltip,
+      TooltipContent,
+      TooltipProvider,
+      TooltipTrigger,
+    } from "@/components/modern-ui/tooltip";
+    import { Button } from "@/components/modern-ui/button";
+
+    export function BasicTooltipDemo() {
+      return (
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button variant="outline">Hover me</Button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>This is a basic tooltip</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+### Custom Tooltip
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[150px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[150px]">
+      <CustomTooltipDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import {
+      Tooltip,
+      TooltipContent,
+      TooltipProvider,
+      TooltipTrigger,
+    } from "@/components/modern-ui/tooltip";
+    import { Button } from "@/components/modern-ui/button";
+    import { Info } from "lucide-react";
+
+    export function CustomTooltipDemo() {
+      return (
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button variant="ghost" size="icon">
+                <Info className="h-4 w-4" />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent className="bg-purple-600 text-white">
+              <div className="flex flex-col gap-1">
+                <p className="font-semibold">Information</p>
+                <p className="text-sm">This is a custom styled tooltip</p>
+              </div>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+
+### Tooltip with Delay
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[150px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[150px]">
+      <TooltipWithDelayDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import {
+      Tooltip,
+      TooltipContent,
+      TooltipProvider,
+      TooltipTrigger,
+    } from "@/components/modern-ui/tooltip";
+    import { Button } from "@/components/modern-ui/button";
+
+    export function TooltipWithDelayDemo() {
+      return (
+        <TooltipProvider delayDuration={500}>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button variant="outline">Hover me (500ms delay)</Button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>This tooltip appears after a 500ms delay</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+## API Reference
+
+### TooltipProvider
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `delayDuration` | `number` | `200` | Delay duration in milliseconds before showing the tooltip |
+| `skipDelayDuration` | `number` | `0` | Delay duration in milliseconds before hiding the tooltip |
+| `disableHoverableContent` | `boolean` | `false` | Whether to disable hoverable content |
+| `children` | `ReactNode` | - | The content to be wrapped |
+
+### Tooltip
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `defaultOpen` | `boolean` | - | The default open state |
+| `open` | `boolean` | - | The controlled open state |
+| `onOpenChange` | `(open: boolean) => void` | - | Event handler called when the open state changes |
+| `children` | `ReactNode` | - | The content to be wrapped |
+
+### TooltipTrigger
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `asChild` | `boolean` | `false` | Whether to render as a child element |
+| `children` | `ReactNode` | - | The trigger element |
+
+### TooltipContent
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `side` | `"top" \| "right" \| "bottom" \| "left"` | `"top"` | The preferred side of the trigger to render the tooltip |
+| `sideOffset` | `number` | `0` | The distance in pixels from the trigger |
+| `align` | `"start" \| "center" \| "end"` | `"center"` | The preferred alignment against the trigger |
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode` | - | The tooltip content | 

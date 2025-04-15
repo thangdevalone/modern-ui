@@ -1,0 +1,158 @@
+import {
+  BasicSwitchDemo,
+  DisabledSwitchDemo,
+  LabeledSwitchDemo
+} from "@/app/(docs-group)/docs/components/switch/components/switch-demos";
+import { SwitchInstallation } from "@/app/(docs-group)/docs/components/switch/components/switch-installation";
+import { PreviewSwitch } from "@/app/(docs-group)/docs/components/switch/preview";
+import { BreadcrumbNav } from "@/components/breadcrumb-nav";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/modern-ui/tabs";
+
+<BreadcrumbNav className="mb-4" items={[
+  {label: "Docs", href: "/docs"},
+  {label: "Components", href: "/docs/components"},
+  {label: "Switch"},
+]}/>
+
+<PreviewSwitch/>
+
+# Switch Component
+
+A toggle switch component that allows users to turn an option on or off.
+
+- Accessible toggle switch implementation
+- Support for labels and descriptions
+- Customizable styling
+- Disabled state support
+
+---
+
+## Installation
+
+The Switch component is part of our UI library. You can import it directly from the components directory.
+
+<SwitchInstallation/>
+
+---
+
+## Usage
+
+Here is how to use the switch in your project.
+
+```tsx
+import { Switch } from "@/components/modern-ui/switch"
+```
+
+<br/>
+
+```tsx
+<Switch />
+```
+
+---
+
+## Examples
+
+### Basic Switch
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[150px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[150px] not-prose">
+      <BasicSwitchDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { Switch } from "@/components/modern-ui/switch";
+
+    export function BasicSwitchDemo() {
+      return (
+        <Switch />
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+### Labeled Switch
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[150px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[150px] not-prose">
+      <LabeledSwitchDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { Switch } from "@/components/modern-ui/switch";
+    import { Label } from "@/components/modern-ui/label";
+
+    export function LabeledSwitchDemo() {
+      return (
+        <div className="flex items-center space-x-2">
+          <Switch id="airplane-mode" />
+          <Label htmlFor="airplane-mode">Airplane Mode</Label>
+        </div>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+### Disabled Switch
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[150px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[150px] not-prose">
+      <DisabledSwitchDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { Switch } from "@/components/modern-ui/switch";
+    import { Label } from "@/components/modern-ui/label";
+
+    export function DisabledSwitchDemo() {
+      return (
+        <div className="flex items-center space-x-2">
+          <Switch id="disabled-mode" disabled />
+          <Label htmlFor="disabled-mode" className="text-muted-foreground">
+            Disabled Option
+          </Label>
+        </div>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+
+## API Reference
+
+### Switch
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `checked` | `boolean` | - | The checked state of the switch |
+| `defaultChecked` | `boolean` | - | The default checked state |
+| `onCheckedChange` | `(checked: boolean) => void` | - | Event handler called when the checked state changes |
+| `disabled` | `boolean` | `false` | Whether the switch is disabled |
+| `required` | `boolean` | `false` | Whether the switch is required |
+| `name` | `string` | - | The name of the switch |
+| `value` | `string` | - | The value of the switch |
+| `className` | `string` | - | Additional CSS classes | 

@@ -33,7 +33,7 @@ export function FluidDropdownDemo() {
     { id: "home", label: "Home", icon: Home, color: "#F9C74F" },
   ];
 
-  return <FluidDropdown categories={categories} defaultCategoryId="all" className="max-w-xs" />;
+  return <FluidDropdown categories={categories} defaultCategoryId="all" className="w-[200px]" />;
 }`;
 
 export const PreviewFluidDropdown = () => {
@@ -60,15 +60,15 @@ export const PreviewFluidDropdown = () => {
           className="p-6 border rounded-md mt-2 relative min-h-[300px]"
         >
           <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 bg-background border rounded-md p-8">
+          <div className="flex justify-center items-center h-full z-10 relative min-h-[250px]">
             <FluidDropdown 
               key={key} 
               categories={sampleCategories} 
               defaultCategoryId="all" 
-              className="w-full"
+              className="w-[200px]"
             />
           </div>
-          <div className="absolute top-4 right-4 flex gap-2">
+          <div className="absolute z-10 top-4 right-4 flex gap-2">
             <Button
               variant="outline"
               size="icon"

@@ -1,0 +1,125 @@
+import {PreviewAnimatedGradientText} from "@/app/(docs-group)/docs/components/animated-gradient-text/preview";
+import {BreadcrumbNav} from "@/components/breadcrumb-nav";
+import {AnimatedGradientTextInstallation} from "@/app/(docs-group)/docs/components/animated-gradient-text/components/animated-gradient-text-installation";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/modern-ui/tabs";
+import {
+  BasicAnimatedGradientTextDemo,
+  CustomColorsAnimatedGradientTextDemo,
+  HeadingAnimatedGradientTextDemo,
+  SlowerAnimationDemo
+} from "@/app/(docs-group)/docs/components/animated-gradient-text/components/animated-gradient-text-demos";
+
+<BreadcrumbNav className="mb-4" items={[
+  {label: "Docs", href: "/docs"},
+  {label: "Components", href: "/docs/components"},
+  {label: "Animated Gradient Text"},
+]}/>
+
+<PreviewAnimatedGradientText/>
+
+# Animated Gradient Text Component
+
+A text component that displays text with beautiful, animated gradient colors.
+
+- Smooth animated gradient effects
+- Customizable color schemes
+- Adjustable animation speed
+- Works with any text element (headings, paragraphs, etc.)
+
+---
+
+## Installation
+
+The AnimatedGradientText component is part of our UI library. You can import it directly from the components directory.
+
+<AnimatedGradientTextInstallation/>
+
+---
+
+## Usage
+
+Here is how to use the animated gradient text in your project.
+
+```tsx
+import { AnimatedGradientText } from "@/components/modern-ui/animated-gradient-text"
+```
+
+<br/>
+
+```tsx
+<AnimatedGradientText>Beautiful gradient text</AnimatedGradientText>
+```
+
+---
+
+## Examples
+
+### Basic Animated Gradient Text
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[200px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[200px]">
+      <BasicAnimatedGradientTextDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { AnimatedGradientText } from "@/components/modern-ui/animated-gradient-text";
+
+    export function BasicAnimatedGradientTextDemo() {
+      return (
+        <AnimatedGradientText className="text-2xl font-bold">
+          Beautiful Animated Text
+        </AnimatedGradientText>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+### Custom Colors
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[200px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[200px]">
+      <CustomColorsAnimatedGradientTextDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { AnimatedGradientText } from "@/components/modern-ui/animated-gradient-text";
+
+    export function CustomColorsAnimatedGradientTextDemo() {
+      return (
+        <AnimatedGradientText 
+          className="text-2xl font-bold"
+          colors={["#f43f5e", "#8b5cf6", "#0ea5e9", "#10b981"]}
+        >
+          Custom Color Gradient
+        </AnimatedGradientText>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+
+## API Reference
+
+### AnimatedGradientText
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `speed` | `number` | `1` | speed of the animation |
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode` | - | The text content | 

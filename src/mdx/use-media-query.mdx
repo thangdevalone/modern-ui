@@ -1,0 +1,130 @@
+import {PreviewUseMediaQuery} from "@/app/(docs-group)/docs/hooks/use-media-query/preview";
+import {BreadcrumbNav} from "@/components/breadcrumb-nav";
+import {UseMediaQueryInstallation} from "@/app/(docs-group)/docs/hooks/use-media-query/components/use-media-query-installation";
+
+<BreadcrumbNav className="mb-4" items={[
+  {label: "Docs", href: "/docs"},
+  {label: "Hooks", href: "/docs/hooks"},
+  {label: "useMediaQuery"},
+]}/>
+
+<PreviewUseMediaQuery/>
+
+# useMediaQuery
+
+A React hook that tracks the state of a CSS media query, allowing for responsive logic in your components.
+
+- Create responsive components that adapt to changing viewport sizes
+- Supports all standard CSS media queries (width, orientation, dark mode, etc.)
+- Efficient updates on window resize or device orientation changes
+
+---
+
+## Installation
+
+The useMediaQuery hook is part of our UI library. You can import it directly from the hooks directory.
+
+<UseMediaQueryInstallation/>
+
+---
+
+## Usage
+
+Here is how to use the useMediaQuery hook in your project:
+
+```tsx
+import { useMediaQuery } from "@/hooks/use-media-query"
+```
+
+<br/>
+
+```tsx
+function Demo() {
+  const isDesktop = useMediaQuery("(min-width: 1024px)")
+  
+  return (
+    <div>
+      <p>Current viewport: {isDesktop ? "Desktop" : "Mobile"}</p>
+      {isDesktop ? (
+        <p>Desktop-specific content</p>
+      ) : (
+        <p>Mobile-specific content</p>
+      )}
+    </div>
+  )
+}
+```
+
+---
+
+## API Reference
+
+```tsx
+function useMediaQuery(
+  query: string
+): boolean
+```
+
+### Inputs
+
+- `query`: A CSS media query string to evaluate
+
+### Output
+
+- `matches`: A boolean representing whether the media query matches or not
+
+### Behavior
+
+- Hook evaluates the provided media query using window.matchMedia
+- Returns a boolean indicating whether the query matches
+- Re-evaluates when the window size changes or orientation changes
+- Cleans up event listeners on component unmount
+
+## Implementation
+
+```tsx
+import { useState, useEffect } from "react"
+
+export function useMediaQuery(query: string): boolean {
+  // Initialize with a default value (consider SSR where window is not available)
+  const [matches, setMatches] = useState(false)
+  
+  useEffect(() => {
+    // Make sure we're in a browser environment
+    if (typeof window !== "undefined") {
+      // Create media query list
+      const media = window.matchMedia(query)
+      
+      // Set the initial value
+      setMatches(media.matches)
+      
+      // Define a callback to handle changes
+      const listener = (event: MediaQueryListEvent) => {
+        setMatches(event.matches)
+      }
+      
+      // Add the listener
+      if (media.addEventListener) {
+        media.addEventListener("change", listener)
+      } else {
+        // For older browsers
+        media.addListener(listener)
+      }
+      
+      // Clean up
+      return () => {
+        if (media.removeEventListener) {
+          media.removeEventListener("change", listener)
+        } else {
+          // For older browsers
+          media.removeListener(listener)
+        }
+      }
+    }
+    
+    // Empty dependency for server-side rendering
+    return undefined
+  }, [query])
+  
+  return matches
+} 

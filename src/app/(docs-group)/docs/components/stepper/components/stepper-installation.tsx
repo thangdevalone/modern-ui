@@ -7,10 +7,10 @@ import { useComponentCode } from "@/lib/services/hooks/use-component-code";
 
 const CLIContent = () => {
   const commands = {
-    npm: "npx @thangdevalone/modern-ui add stepper",
-    pnpm: "pnpm dlx @thangdevalone/modern-ui add stepper",
-    yarn: "yarn dlx @thangdevalone/modern-ui add stepper",
-    bun: "bunx --bun @thangdevalone/modern-ui add stepper",
+    npm: "npx @modern-pack/ui add stepper",
+    pnpm: "pnpm dlx @modern-pack/ui add stepper",
+    yarn: "npx @modern-pack/ui add stepper",
+    bun: "bunx --bun @modern-pack/ui add stepper",
   };
   return (
     <div>

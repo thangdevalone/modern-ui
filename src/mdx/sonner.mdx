@@ -1,0 +1,346 @@
+import {PreviewSonner} from "@/app/(docs-group)/docs/components/sonner/preview";
+import {BreadcrumbNav} from "@/components/breadcrumb-nav";
+import {SonnerInstallation} from "@/app/(docs-group)/docs/components/sonner/components/sonner-installation";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/modern-ui/tabs";
+import {
+  BasicSonnerDemo,
+  TypesSonnerDemo,
+  CustomSonnerDemo,
+  ActionsSonnerDemo,
+  PromiseSonnerDemo,
+  RichColorSonnerDemo
+} from "@/app/(docs-group)/docs/components/sonner/components/sonner-demos";
+
+<BreadcrumbNav className="mb-4" items={[
+  {label: "Docs", href: "/docs"},
+  {label: "Components", href: "/docs/components"},
+  {label: "Sonner"},
+]}/>
+
+<PreviewSonner/>
+
+# Sonner Component
+
+An opinionated toast component for React with beautiful animations and a clean design. Sonner is built and maintained by [emilkowalski](https://x.com/emilkowalski_).
+
+- Multiple toast types: success, error, warning, info
+- Custom toast content including actions
+- Smooth animations
+- Promise-based toasts
+- Accessible design
+
+---
+
+## Installation
+
+The Sonner component is part of our UI library. You can import it directly from the components directory.
+
+<SonnerInstallation/>
+
+---
+
+## Usage
+
+Here is how to use Sonner in your project.
+
+```tsx
+import { Toaster, toast } from "@/components/modern-ui/sonner"
+```
+
+<br/>
+
+First, add the `<Toaster />` component to your app:
+
+```tsx
+// In your layout or root component
+import { SonnerGlobal } from "@/components/modern-ui/sonner"
+
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en">
+      <body>
+        {children}
+        <SonnerGlobal />
+      </body>
+    </html>
+  )
+}
+```
+
+Then, use the `toast()` function anywhere in your components:
+
+```tsx
+import { toast } from "@/components/modern-ui/sonner"
+
+function MyComponent() {
+  return (
+    <button onClick={() => toast("My first toast")}>
+      Show Toast
+    </button>
+  )
+}
+```
+
+---
+
+## Examples
+
+### Basic Toast
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[200px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[200px]">
+      <BasicSonnerDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { Button } from "@/components/modern-ui/button";
+    import { toast } from "@/components/modern-ui/sonner";
+
+    export function BasicSonnerDemo() {
+      return (
+        <Button 
+          onClick={() => toast("This is a toast notification")}
+        >
+          Show Toast
+        </Button>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+### Toast Types
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[200px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[200px]">
+      <TypesSonnerDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { Button } from "@/components/modern-ui/button";
+    import { toast } from "@/components/modern-ui/sonner";
+
+    export function TypesSonnerDemo() {
+      return (
+        <div className="flex flex-wrap gap-2">
+          <Button 
+            variant="default" 
+            onClick={() => toast.success("Operation completed successfully")}
+          >
+            Success
+          </Button>
+          <Button 
+            variant="destructive" 
+            onClick={() => toast.error("An error occurred")}
+          >
+            Error
+          </Button>
+          <Button 
+            variant="outline" 
+            onClick={() => toast.info("Here's some information")}
+          >
+            Info
+          </Button>
+          <Button 
+            variant="secondary" 
+            onClick={() => toast.warning("Warning: This action is irreversible")}
+          >
+            Warning
+          </Button>
+        </div>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+### Custom Toast
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[200px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[200px]">
+      <CustomSonnerDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { Button } from "@/components/modern-ui/button";
+    import { toast } from "@/components/modern-ui/sonner";
+    import { CheckCircle } from "lucide-react";
+
+    export function CustomSonnerDemo() {
+      return (
+        <Button 
+          onClick={() => {
+            toast(
+              <div className="flex gap-2 items-center">
+                <CheckCircle className="h-5 w-5 text-green-500" />
+                <div className="flex flex-col">
+                  <span className="font-medium">Payment successful</span>
+                  <span className="text-xs text-gray-500">
+                    Transaction ID: 78912364
+                  </span>
+                </div>
+              </div>
+            );
+          }}
+        >
+          Custom Toast
+        </Button>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+### Toast with Actions
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[200px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[200px]">
+      <ActionsSonnerDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { Button } from "@/components/modern-ui/button";
+    import { toast } from "@/components/modern-ui/sonner";
+
+    export function ActionsSonnerDemo() {
+      return (
+        <Button 
+          onClick={() => {
+            toast("File deleted", {
+              description: "The file has been permanently deleted",
+              action: {
+                label: "Undo",
+                onClick: () => toast.success("Deletion undone")
+              },
+              cancel: {
+                label: "Dismiss",
+                onClick: () => console.log("Toast dismissed")
+              }
+            });
+          }}
+        >
+          Delete File
+        </Button>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+### Promise Toast
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[200px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[200px]">
+      <PromiseSonnerDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { Button } from "@/components/modern-ui/button";
+    import { toast } from "@/components/modern-ui/sonner";
+
+    export function PromiseSonnerDemo() {
+      const promise = () => {
+        return new Promise<{ name: string }>((resolve) => {
+          setTimeout(() => resolve({ name: "Modern UI" }), 2000);
+        });
+      };
+
+      return (
+        <Button 
+          onClick={() => {
+            toast.promise(promise, {
+              loading: "Loading data...",
+              success: (data) => `Successfully loaded ${data.name}`,
+              error: "Error loading data"
+            });
+          }}
+        >
+          Start Loading
+        </Button>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+## API Reference
+
+### Toaster
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `position` | `"top-left" \| "top-right" \| "bottom-left" \| "bottom-right" \| "top-center" \| "bottom-center"` | `"bottom-right"` | Position of the toasts |
+| `expand` | `boolean` | `false` | Whether to expand toasts on hover |
+| `duration` | `number` | `4000` | Default duration for toasts in milliseconds |
+| `visibleToasts` | `number` | `3` | Maximum number of visible toasts |
+| `closeButton` | `boolean` | `false` | Whether to show close buttons on toasts |
+| `offset` | `string \| number` | - | Offset from the edges of the screen |
+| `theme` | `"light" \| "dark" \| "system"` | `"system"` | Color theme |
+| `richColors` | `boolean` | `false` | Whether to use rich colors for different toast types |
+| `className` | `string` | - | Additional CSS classes for the toast container |
+| `toastOptions` | `ToastOptions` | - | Default options for all toasts |
+
+### toast() Function
+
+The `toast()` function accepts the following parameters:
+
+```tsx
+toast(message, options?)
+```
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `message` | `string \| React.ReactNode` | Content of the toast |
+| `options` | `ToastOptions` | Configuration options for the toast |
+
+### ToastOptions
+
+| Option | Type | Description |
+|--------|------|-------------|
+| `id` | `string \| number` | Custom ID for the toast |
+| `duration` | `number` | Duration in milliseconds |
+| `icon` | `React.ReactNode` | Custom icon to display |
+| `description` | `string \| React.ReactNode` | Additional description text |
+| `action` | `{ label: string, onClick: () => void }` | Action button configuration |
+| `cancel` | `{ label: string, onClick: () => void }` | Cancel button configuration |
+| `onDismiss` | `() => void` | Function called when toast is dismissed |
+| `onAutoClose` | `(toast: ToastT) => void` | Function called when toast automatically closes |
+| `position` | Same as Toaster position | Position override for individual toasts |
+| `className` | `string` | Additional CSS classes for this toast |
+| `dismissible` | `boolean` | Whether the toast can be dismissed by clicking |
+| `important` | `boolean` | Prevents toast from being automatically removed | 

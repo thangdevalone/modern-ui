@@ -1,5 +1,6 @@
 "use client";
 
+import { cn } from "@/lib/utils";
 import type React from "react";
 
 import { useRef, useState, useEffect, memo } from "react";
@@ -14,6 +15,7 @@ interface Tab {
 interface UnderlineTabsProps {
   tabs: Tab[];
   defaultTabId?: string;
+  className?: string;
 }
 
 const TabContent = ({
@@ -28,7 +30,7 @@ const TabContent = ({
 };
 TabContent.displayName = "TabContent";
 
-export const UnderlineTabs = ({ tabs, defaultTabId }: UnderlineTabsProps) => {
+export const UnderlineTabs = ({ tabs, defaultTabId, className }: UnderlineTabsProps) => {
   const [activeTab, setActiveTab] = useState<string>(
     defaultTabId || tabs[0].id
   );
@@ -69,7 +71,7 @@ export const UnderlineTabs = ({ tabs, defaultTabId }: UnderlineTabsProps) => {
   }, [activeTab]);
 
   return (
-    <div className="w-full">
+    <div className={cn("w-full", className)}>
       <div className="relative border-b">
         <div className="flex" ref={tabsContainerRef}>
           {tabs.map((tab) => (

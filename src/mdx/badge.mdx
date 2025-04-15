@@ -1,6 +1,14 @@
 import {PreviewBadge} from "@/app/(docs-group)/docs/components/badge/preview";
 import {BreadcrumbNav} from "@/components/breadcrumb-nav";
 import {BadgeInstallation} from "@/app/(docs-group)/docs/components/badge/components/badge-installation";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/modern-ui/tabs";
+import {
+  DefaultBadgeDemo,
+  SecondaryBadgeDemo,
+  DestructiveBadgeDemo,
+  OutlineBadgeDemo,
+  CustomStyledBadgeDemo
+} from "@/app/(docs-group)/docs/components/badge/components/badge-demos";
 
 <BreadcrumbNav className="mb-4" items={[
   {label: "Docs", href: "/docs"},
@@ -47,29 +55,134 @@ import { Badge } from "@/components/modern-ui/badge"
 ## Examples
 
 ### Default Badge
-```tsx
-<Badge>New</Badge>
-```
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[200px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[200px]">
+      <DefaultBadgeDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { Badge } from "@/components/modern-ui/badge";
+
+    export function DefaultBadgeDemo() {
+      return (
+        <Badge>New</Badge>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
 
 ### Secondary Badge
-```tsx
-<Badge variant="secondary">Secondary</Badge>
-```
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[200px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[200px]">
+      <SecondaryBadgeDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { Badge } from "@/components/modern-ui/badge";
+
+    export function SecondaryBadgeDemo() {
+      return (
+        <Badge variant="secondary">Secondary</Badge>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
 
 ### Destructive Badge
-```tsx
-<Badge variant="destructive">Error</Badge>
-```
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[200px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[200px]">
+      <DestructiveBadgeDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { Badge } from "@/components/modern-ui/badge";
+
+    export function DestructiveBadgeDemo() {
+      return (
+        <Badge variant="destructive">Error</Badge>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
 
 ### Outline Badge
-```tsx
-<Badge variant="outline">Outline</Badge>
-```
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[200px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[200px]">
+      <OutlineBadgeDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { Badge } from "@/components/modern-ui/badge";
+
+    export function OutlineBadgeDemo() {
+      return (
+        <Badge variant="outline">Outline</Badge>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
 
 ### Custom Styled Badge
-```tsx
-<Badge className="bg-blue-500 hover:bg-blue-600">Custom</Badge>
-```
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[200px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[200px]">
+      <CustomStyledBadgeDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { Badge } from "@/components/modern-ui/badge";
+
+    export function CustomStyledBadgeDemo() {
+      return (
+        <Badge className="bg-blue-500 hover:bg-blue-600">Custom</Badge>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
 
 ## API Reference
 

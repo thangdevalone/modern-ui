@@ -1,0 +1,92 @@
+import {PreviewUseDebounce} from "@/app/(docs-group)/docs/hooks/use-debounce/preview";
+import {BreadcrumbNav} from "@/components/breadcrumb-nav";
+import {UseDebounceInstallation} from "@/app/(docs-group)/docs/hooks/use-debounce/components/use-debounce-installation";
+
+<BreadcrumbNav className="mb-4" items={[
+  {label: "Docs", href: "/docs"},
+  {label: "Hooks", href: "/docs/hooks"},
+  {label: "useDebounce"},
+]}/>
+
+<PreviewUseDebounce/>
+
+# useDebounce
+
+A hook that delays updating a value until a specified time has passed since the last change. Useful for reducing the number of API calls or expensive calculations while a user is typing or interacting.
+
+- Improves performance by reducing the frequency of expensive operations
+- Perfect for search inputs, form validation, and API requests
+- Configurable delay time to suit different use cases
+
+---
+
+## Installation
+
+The useDebounce hook is part of our UI library. You can import it directly from the hooks directory.
+
+<UseDebounceInstallation/>
+
+---
+
+## Usage
+
+Here is how to use the useDebounce hook in your project:
+
+```tsx
+import { useDebounce } from "@/hooks/use-debounce"
+```
+
+<br/>
+
+```tsx
+function SearchInput() {
+  const [inputValue, setInputValue] = useState("")
+  // Value only updates 500ms after the user stops typing
+  const debouncedValue = useDebounce(inputValue, 500)
+  
+  // Effect only runs when debouncedValue changes
+  useEffect(() => {
+    // Perform search or API call with debouncedValue
+    searchApi(debouncedValue)
+  }, [debouncedValue])
+  
+  return (
+    <div>
+      <input
+        type="text"
+        value={inputValue}
+        onChange={(e) => setInputValue(e.target.value)}
+        placeholder="Type to search..."
+      />
+      <p>Current search term: {debouncedValue}</p>
+    </div>
+  )
+}
+```
+
+---
+
+## API Reference
+
+```tsx
+function useDebounce<T>(
+  value: T,
+  delay: number
+): T
+```
+
+### Inputs
+
+- `value`: The value to be debounced
+- `delay`: The delay in milliseconds
+
+### Output
+
+- `debouncedValue`: The debounced value that updates after the specified delay
+
+### Behavior
+
+- Hook tracks the provided value but only updates the returned value after the delay
+- Each change to the input value resets the delay timer
+- The debounced value remains stable during rapid changes to the input value
+- Cleans up any pending updates on component unmount

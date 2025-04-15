@@ -1,11 +1,10 @@
 "use client";
 
+import { Badge } from "@/components/modern-ui/badge";
+import { cn } from "@/lib/utils";
+import { motion } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { motion } from "framer-motion";
-import { Badge } from "@/components/modern-ui/badge";
-import clsx from "clsx";
-import { cn } from "@/lib/utils";
 
 export const containerVariants = {
   hidden: { opacity: 0 },
@@ -21,8 +20,8 @@ export const itemVariants = {
 };
 
 const badgeStyles: Record<string, string> = {
-  new: "bg-amber-100 text-amber-800 hover:bg-amber-100",
-  pro: "bg-emerald-100 text-emerald-800 hover:bg-emerald-100",
+  new: "bg-teal-100 text-teal-800 dark:bg-teal-900 dark:text-teal-100 hover:bg-teal-200 dark:hover:bg-teal-800",
+  pro: "bg-fuchsia-100 text-fuchsia-800 dark:bg-fuchsia-900 dark:text-fuchsia-100 hover:bg-fuchsia-200 dark:hover:bg-fuchsia-800",
 };
 
 const links: {
@@ -52,46 +51,67 @@ const links: {
   {
     category: "Components",
     items: [
-      { href: "/docs/components/badge", label: "Badge", badge: "new" },
+      { href: "/docs/components/accordion", label: "Accordion" },
+      { href: "/docs/components/alert", label: "Alert" },
+      {
+        href: "/docs/components/animated-gradient-text",
+        label: "Animated Gradient Text",
+      },
+      { href: "/docs/components/avatar", label: "Avatar" },
+      {
+        href: "/docs/components/avatar-group",
+        label: "Avatar Group",
+      },
+      { href: "/docs/components/badge", label: "Badge" },
       {
         href: "/docs/components/breadcrumb",
         label: "Breadcrumb",
-        badge: "new",
       },
       { href: "/docs/components/button", label: "Button" },
-      { href: "/docs/components/card", label: "Card", badge: "new" },
-      { href: "/docs/components/command", label: "Command", badge: "new" },
+      { href: "/docs/components/card", label: "Card" },
+      { href: "/docs/components/command", label: "Command" },
       {
         href: "/docs/components/copy-button",
         label: "Copy Button",
-        badge: "new",
       },
       {
         href: "/docs/components/date-picker",
         label: "Date Picker",
-        badge: "new",
       },
-      { href: "/docs/components/dialog", label: "Dialog", badge: "new" },
+      { href: "/docs/components/dialog", label: "Dialog" },
       { href: "/docs/components/fancy-tabs", label: "Fancy tab" },
       {
         href: "/docs/components/fluid-dropdown",
         label: "Fluid Dropdown",
-        badge: "new",
       },
-      { href: "/docs/components/popover", label: "Popover", badge: "new" },
+      { href: "/docs/components/input", label: "Input" },
+      { href: "/docs/components/label", label: "Label" },
+      { href: "/docs/components/popover", label: "Popover" },
       {
         href: "/docs/components/rainbow-button",
         label: "Rainbow Button",
-        badge: "new",
       },
-      { href: "/docs/components/stepper", label: "Stepper", badge: "new" },
-      { href: "/docs/components/table", label: "Table", badge: "new" },
+      { href: "/docs/components/sonner", label: "Sonner" },
+      { href: "/docs/components/stepper", label: "Stepper" },
+      { href: "/docs/components/switch", label: "Switch" },
+      { href: "/docs/components/table", label: "Table" },
+      { href: "/docs/components/textarea", label: "TextArea" },
+      { href: "/docs/components/tooltip", label: "Tooltip" },
       { href: "/docs/components/underline-tabs", label: "Underline tab" },
+      {
+        href: "/docs/components/visually-hidden",
+        label: "VisuallyHidden",
+      },
     ],
   },
   {
     category: "React Hooks",
-    items: [{ href: "/docs/hooks/use-click-away", label: "useClickAway" }],
+    items: [
+      { href: "/docs/hooks/use-click-away", label: "useClickAway" },
+      { href: "/docs/hooks/use-debounce", label: "useDebounce" },
+      { href: "/docs/hooks/use-local-storage", label: "useLocalStorage" },
+      { href: "/docs/hooks/use-media-query", label: "useMediaQuery" },
+    ],
   },
 ];
 
@@ -117,7 +137,8 @@ export default function LeftSidebar() {
             animate="show"
           >
             {items.map(({ href, label, badge, disabled }) => {
-              const isActive = pathname.includes(href);
+              const isActive =
+                pathname === href || pathname.startsWith(href + "/");
               return (
                 <motion.li
                   key={href}

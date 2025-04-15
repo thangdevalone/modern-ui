@@ -94,7 +94,7 @@ export const PreviewUnderlineTabs = () => {
           <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/3 w-lg bg-background border p-8 rounded-md">
             <UnderlineTabs key={key} tabs={tabs} defaultTabId="profile" />
           </div>
-          <div className="absolute top-4 right-4 flex gap-2">
+          <div className="absolute z-10 top-4 right-4 flex gap-2">
             <Button
               variant="outline"
               size="icon"

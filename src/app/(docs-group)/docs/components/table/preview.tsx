@@ -78,7 +78,7 @@ export const PreviewTable = () => {
         <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[400px]">
           <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50">
           </div>
-          <div className="absolute bg-background left-10 top-20 right-10 bottom-20 border rounded-md flex items-center justify-center p-6">
+          <div className="not-prose absolute bg-background left-10 top-20 right-10 bottom-20 border rounded-md flex items-center justify-center p-6">
             <Table key={key}>
               <TableCaption>A list of your recent invoices.</TableCaption>
               <TableHeader>
@@ -111,7 +111,7 @@ export const PreviewTable = () => {
               </TableBody>
             </Table>
           </div>
-          <div className="absolute top-4 right-4 flex gap-2">
+          <div className="absolute z-10 top-4 right-4 flex gap-2">
             <Button
               variant="outline"
               size="icon"

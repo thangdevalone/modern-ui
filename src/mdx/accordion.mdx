@@ -1,0 +1,264 @@
+import {PreviewAccordion} from "@/app/(docs-group)/docs/components/accordion/preview";
+import {BreadcrumbNav} from "@/components/breadcrumb-nav";
+import {AccordionInstallation} from "@/app/(docs-group)/docs/components/accordion/components/accordion-installation";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/modern-ui/tabs";
+import {
+  BasicAccordionDemo,
+  CustomAccordionDemo,
+  MultipleAccordionDemo
+} from "@/app/(docs-group)/docs/components/accordion/components/accordion-demos";
+
+<BreadcrumbNav className="mb-4" items={[
+  {label: "Docs", href: "/docs"},
+  {label: "Components", href: "/docs/components"},
+  {label: "Accordion"},
+]}/>
+
+<PreviewAccordion/>
+
+# Accordion Component
+
+A vertically stacked set of interactive headings that each reveal a section of content.
+
+- Accessible, follows WAI-ARIA Accordion pattern
+- Support for multiple accordion items open simultaneously
+- Smooth animations for expanding and collapsing content
+- Fully customizable styling
+
+---
+
+## Installation
+
+The Accordion component is part of our UI library. You can import it directly from the components directory.
+
+<AccordionInstallation/>
+
+---
+
+## Usage
+
+Here is how to use the accordion in your project.
+
+```tsx
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/modern-ui/accordion"
+```
+
+<br/>
+
+```tsx
+<Accordion type="single" collapsible>
+  <AccordionItem value="item-1">
+    <AccordionTrigger>Section 1</AccordionTrigger>
+    <AccordionContent>
+      Content for section 1
+    </AccordionContent>
+  </AccordionItem>
+</Accordion>
+```
+
+---
+
+## Examples
+
+### Basic Accordion
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[250px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[250px] not-prose">
+      <BasicAccordionDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import {
+      Accordion,
+      AccordionContent,
+      AccordionItem,
+      AccordionTrigger,
+    } from "@/components/modern-ui/accordion";
+
+    export function BasicAccordionDemo() {
+      return (
+        <Accordion type="single" collapsible className="w-full max-w-md">
+          <AccordionItem value="item-1">
+            <AccordionTrigger>Is it accessible?</AccordionTrigger>
+            <AccordionContent>
+              Yes. It adheres to the WAI-ARIA design pattern.
+            </AccordionContent>
+          </AccordionItem>
+          <AccordionItem value="item-2">
+            <AccordionTrigger>Is it styled?</AccordionTrigger>
+            <AccordionContent>
+              Yes. It comes with default styles that match the other components.
+            </AccordionContent>
+          </AccordionItem>
+          <AccordionItem value="item-3">
+            <AccordionTrigger>Is it animated?</AccordionTrigger>
+            <AccordionContent>
+              Yes. It's animated by default, but you can disable it if you prefer.
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+### Multiple Accordion Items
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[250px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[250px] not-prose">
+      <MultipleAccordionDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import {
+      Accordion,
+      AccordionContent,
+      AccordionItem,
+      AccordionTrigger,
+    } from "@/components/modern-ui/accordion";
+
+    export function MultipleAccordionDemo() {
+      return (
+        <Accordion type="multiple" className="w-full max-w-md">
+          <AccordionItem value="item-1">
+            <AccordionTrigger>First section</AccordionTrigger>
+            <AccordionContent>
+              This is the first section's content. Multiple sections can be open at the same time.
+            </AccordionContent>
+          </AccordionItem>
+          <AccordionItem value="item-2">
+            <AccordionTrigger>Second section</AccordionTrigger>
+            <AccordionContent>
+              This is the second section's content. You can have complex content here including lists, images, and more.
+            </AccordionContent>
+          </AccordionItem>
+          <AccordionItem value="item-3">
+            <AccordionTrigger>Third section</AccordionTrigger>
+            <AccordionContent>
+              This is the third section's content. Try opening multiple sections at once!
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+### Custom Styled Accordion
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[250px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[250px] not-prose">
+      <CustomAccordionDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import {
+      Accordion,
+      AccordionContent,
+      AccordionItem,
+      AccordionTrigger,
+    } from "@/components/modern-ui/accordion";
+
+    export function CustomAccordionDemo() {
+      return (
+        <Accordion 
+          type="single" 
+          collapsible 
+          className="w-full max-w-md border rounded-lg overflow-hidden"
+        >
+          <AccordionItem value="item-1" className="border-b">
+            <AccordionTrigger className="px-4 py-3 bg-blue-50 hover:bg-blue-100 text-blue-800">
+              About us
+            </AccordionTrigger>
+            <AccordionContent className="px-4 py-3 bg-blue-50/50">
+              We are a team dedicated to creating beautiful and accessible UI components.
+            </AccordionContent>
+          </AccordionItem>
+          <AccordionItem value="item-2" className="border-b">
+            <AccordionTrigger className="px-4 py-3 bg-green-50 hover:bg-green-100 text-green-800">
+              Our mission
+            </AccordionTrigger>
+            <AccordionContent className="px-4 py-3 bg-green-50/50">
+              To provide developers with tools that make building interfaces easier and more enjoyable.
+            </AccordionContent>
+          </AccordionItem>
+          <AccordionItem value="item-3">
+            <AccordionTrigger className="px-4 py-3 bg-purple-50 hover:bg-purple-100 text-purple-800">
+              Contact us
+            </AccordionTrigger>
+            <AccordionContent className="px-4 py-3 bg-purple-50/50">
+              Reach out to us through our website or social media channels.
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+## API Reference
+
+### Accordion
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `type` | `'single' \| 'multiple'` | `'single'` | Determines whether one or multiple items can be opened at the same time |
+| `collapsible` | `boolean` | `false` | When `type` is `'single'`, allows closing content when clicking the trigger for an open item |
+| `defaultValue` | `string \| string[]` | - | The default open item value(s) |
+| `value` | `string \| string[]` | - | The controlled open item value(s) |
+| `onValueChange` | `(value: string \| string[]) => void` | - | Event handler called when the value changes |
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode` | - | AccordionItem components |
+
+### AccordionItem
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `string` | Required | A unique value for the item |
+| `disabled` | `boolean` | `false` | Whether the item is disabled |
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode` | - | AccordionTrigger and AccordionContent components |
+
+### AccordionTrigger
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode` | - | The content of the trigger |
+
+### AccordionContent
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `forceMount` | `boolean` | `false` | Force mounting when closed |
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode` | - | The content to reveal | 

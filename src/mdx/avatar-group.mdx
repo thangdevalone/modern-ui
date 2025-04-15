@@ -1,0 +1,202 @@
+import {PreviewAvatarGroup} from "@/app/(docs-group)/docs/components/avatar-group/preview";
+import {BreadcrumbNav} from "@/components/breadcrumb-nav";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/modern-ui/tabs";
+import {
+  AvatarGroupDemo,
+  AvatarGroupWithTooltipDemo
+} from "@/app/(docs-group)/docs/components/avatar-group/components/avatar-group-demos";
+
+<BreadcrumbNav className="mb-4" items={[
+  {label: "Docs", href: "/docs"},
+  {label: "Components", href: "/docs/components"},
+  {label: "Avatar Group"},
+]}/>
+
+<PreviewAvatarGroup/>
+
+# Avatar Group Component
+
+A component for displaying multiple avatars together with an elegant stacked appearance.
+
+- Automatically stacks avatars with a slight overlap
+- Provides a count indicator for additional avatars
+- Configurable limit for visible avatars
+- Works seamlessly with the Avatar component
+
+---
+
+## Installation
+
+The AvatarGroup component is part of our UI library. You can import it directly from the components directory.
+
+```tsx
+import { AvatarGroup } from "@/components/modern-ui/avatar-group";
+```
+
+---
+
+## Usage
+
+Here is how to use the avatar group in your project.
+
+```tsx
+import {
+  Avatar,
+  AvatarImage,
+  AvatarFallback
+} from "@/components/modern-ui/avatar"
+import { AvatarGroup } from "@/components/modern-ui/avatar-group"
+```
+
+<br/>
+
+```tsx
+<AvatarGroup>
+  <Avatar>
+    <AvatarImage src="https://example.com/user1.jpg" alt="User 1" />
+    <AvatarFallback>U1</AvatarFallback>
+  </Avatar>
+  <Avatar>
+    <AvatarImage src="https://example.com/user2.jpg" alt="User 2" />
+    <AvatarFallback>U2</AvatarFallback>
+  </Avatar>
+  <Avatar>
+    <AvatarImage src="https://example.com/user3.jpg" alt="User 3" />
+    <AvatarFallback>U3</AvatarFallback>
+  </Avatar>
+</AvatarGroup>
+```
+
+---
+
+## Examples
+
+### Basic Avatar Group
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[200px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[200px] not-prose">
+      <AvatarGroupDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import {
+      Avatar,
+      AvatarImage,
+      AvatarFallback,
+    } from "@/components/modern-ui/avatar";
+    import { AvatarGroup } from "@/components/modern-ui/avatar-group";
+
+    export function AvatarGroupDemo() {
+      return (
+        <AvatarGroup limit={3}>
+          <Avatar>
+            <AvatarImage src="https://api.dicebear.com/9.x/pixel-art/svg?seed=Maria" alt="@dicebear" />
+            <AvatarFallback>MA</AvatarFallback>
+          </Avatar>
+          <Avatar>
+            <AvatarImage src="https://api.dicebear.com/9.x/pixel-art/svg?seed=Nolan" alt="@dicebear" />
+            <AvatarFallback>NO</AvatarFallback>
+          </Avatar>
+          <Avatar>
+            <AvatarImage src="https://api.dicebear.com/9.x/pixel-art/svg?seed=Destiny" alt="@dicebear" />
+            <AvatarFallback>DE</AvatarFallback>
+          </Avatar>
+          <Avatar>
+            <AvatarImage src="https://api.dicebear.com/9.x/pixel-art/svg?seed=Ryan" alt="@dicebear" />
+            <AvatarFallback>RY</AvatarFallback>
+          </Avatar>
+        </AvatarGroup>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+### Avatar Group with Tooltip
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[200px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[200px] not-prose">
+      <AvatarGroupWithTooltipDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import {
+      Avatar,
+      AvatarImage,
+      AvatarFallback,
+    } from "@/components/modern-ui/avatar";
+    import { AvatarGroup } from "@/components/modern-ui/avatar-group";
+    import {
+      Tooltip,
+      TooltipContent,
+      TooltipProvider,
+      TooltipTrigger,
+    } from "@/components/modern-ui/tooltip";
+
+    export function AvatarGroupWithTooltipDemo() {
+      return (
+        <TooltipProvider>
+          <AvatarGroup limit={3}>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Avatar>
+                  <AvatarImage src="https://api.dicebear.com/9.x/pixel-art/svg?seed=Maria" alt="Maria" />
+                  <AvatarFallback>MA</AvatarFallback>
+                </Avatar>
+              </TooltipTrigger>
+              <TooltipContent>Maria</TooltipContent>
+            </Tooltip>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Avatar>
+                  <AvatarImage src="https://api.dicebear.com/9.x/pixel-art/svg?seed=Nolan" alt="Nolan" />
+                  <AvatarFallback>NO</AvatarFallback>
+                </Avatar>
+              </TooltipTrigger>
+              <TooltipContent>Nolan</TooltipContent>
+            </Tooltip>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Avatar>
+                  <AvatarImage src="https://api.dicebear.com/9.x/pixel-art/svg?seed=Destiny" alt="Destiny" />
+                  <AvatarFallback>DE</AvatarFallback>
+                </Avatar>
+              </TooltipTrigger>
+              <TooltipContent>Destiny</TooltipContent>
+            </Tooltip>
+            <Avatar>
+              <AvatarFallback>+2</AvatarFallback>
+            </Avatar>
+          </AvatarGroup>
+        </TooltipProvider>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+## API Reference
+
+### AvatarGroup
+
+The AvatarGroup component is used to display multiple avatars in a group.
+
+| Prop     | Type     | Default | Description                                  |
+| -------- | -------- | ------- | -------------------------------------------- |
+| limit    | number   | 3       | The number of avatars to show before truncating |
+| children | ReactNode | -       | Avatar components to display                |
+| className | string   | -       | Additional CSS class names                  | 

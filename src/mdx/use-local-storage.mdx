@@ -1,0 +1,147 @@
+import {PreviewUseLocalStorage} from "@/app/(docs-group)/docs/hooks/use-local-storage/preview";
+import {BreadcrumbNav} from "@/components/breadcrumb-nav";
+import {UseLocalStorageInstallation} from "@/app/(docs-group)/docs/hooks/use-local-storage/components/use-local-storage-installation";
+
+<BreadcrumbNav className="mb-4" items={[
+  {label: "Docs", href: "/docs"},
+  {label: "Hooks", href: "/docs/hooks"},
+  {label: "useLocalStorage"},
+]}/>
+
+<PreviewUseLocalStorage/>
+
+# useLocalStorage
+
+A custom React hook that persists state in `localStorage` and syncs across browser tabs.
+
+- Allows data persistence between page refreshes and browser sessions
+- Automatically syncs state across browser tabs with the same site open
+- Uses the same API as React's useState hook for a familiar developer experience
+
+---
+
+## Installation
+
+The useLocalStorage hook is part of our UI library. You can import it directly from the hooks directory.
+
+<UseLocalStorageInstallation/>
+
+---
+
+## Usage
+
+Here is how to use the useLocalStorage hook in your project:
+
+```tsx
+import { useLocalStorage } from "@/hooks/use-local-storage"
+```
+
+<br/>
+
+```tsx
+function Demo() {
+  // Similar API to useState
+  const [value, setValue] = useLocalStorage("storage-key", "default value")
+  
+  return (
+    <div>
+      <p>Current value: {value}</p>
+      <button onClick={() => setValue("new value")}>Update value</button>
+      <button onClick={() => setValue(prev => `${prev}-updated`)}>Update functionally</button>
+    </div>
+  )
+}
+```
+
+---
+
+## API Reference
+
+```tsx
+function useLocalStorage<T>(
+  key: string,
+  initialValue: T
+): [T, (value: T | ((val: T) => T)) => void]
+```
+
+### Inputs
+
+- `key`: The key to store the value under in localStorage
+- `initialValue`: The initial value to use if no value is found in localStorage
+
+### Output
+
+- `value`: The current state value
+- `setValue`: Function to update the state (works like useState setter)
+
+### Behavior
+
+- First render retrieves the value from localStorage (or uses initialValue if not found)
+- Any updates through the setter will persist to localStorage
+- Changes to localStorage from other tabs or windows will update the state automatically
+- The hook handles serialization to JSON for storage and parsing on retrieval
+
+## Implementation
+
+```tsx
+import { useState, useEffect } from "react"
+
+export function useLocalStorage<T>(key: string, initialValue: T) {
+  // Get from local storage then
+  // parse stored json or return initialValue
+  const readValue = () => {
+    // Prevent build error "window is undefined" but keep working
+    if (typeof window === "undefined") {
+      return initialValue
+    }
+
+    try {
+      const item = window.localStorage.getItem(key)
+      return item ? JSON.parse(item) : initialValue
+    } catch (error) {
+      console.warn(`Error reading localStorage key "${key}":`, error)
+      return initialValue
+    }
+  }
+
+  // State to store our value
+  // Pass initial state function to useState so logic is only executed once
+  const [storedValue, setStoredValue] = useState<T>(readValue)
+
+  // Return a wrapped version of useState's setter function that ...
+  // ... persists the new value to localStorage.
+  const setValue = (value: T | ((val: T) => T)) => {
+    try {
+      // Allow value to be a function so we have the same API as useState
+      const valueToStore =
+        value instanceof Function ? value(storedValue) : value
+      
+      // Save state
+      setStoredValue(valueToStore)
+      
+      // Save to local storage
+      if (typeof window !== "undefined") {
+        window.localStorage.setItem(key, JSON.stringify(valueToStore))
+      }
+    } catch (error) {
+      console.warn(`Error setting localStorage key "${key}":`, error)
+    }
+  }
+
+  useEffect(() => {
+    const handleStorageChange = (event: StorageEvent) => {
+      if (event.key === key && event.newValue) {
+        setStoredValue(JSON.parse(event.newValue))
+      }
+    }
+
+    // Listen for changes to this local storage value made from other windows
+    window.addEventListener("storage", handleStorageChange)
+    
+    return () => {
+      window.removeEventListener("storage", handleStorageChange)
+    }
+  }, [key])
+
+  return [storedValue, setValue] as const
+} 

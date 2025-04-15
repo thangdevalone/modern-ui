@@ -1,6 +1,11 @@
-import {PreviewTable} from "@/app/(docs-group)/docs/components/table/preview";
-import {BreadcrumbNav} from "@/components/breadcrumb-nav";
-import {TableInstallation} from "@/app/(docs-group)/docs/components/table/components/table-installation";
+import {
+  BasicTableDemo,
+  TableWithCaptionAndFooterDemo
+} from "@/app/(docs-group)/docs/components/table/components/table-demos";
+import { TableInstallation } from "@/app/(docs-group)/docs/components/table/components/table-installation";
+import { PreviewTable } from "@/app/(docs-group)/docs/components/table/preview";
+import { BreadcrumbNav } from "@/components/breadcrumb-nav";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/modern-ui/tabs";
 
 <BreadcrumbNav className="mb-4" items={[
   {label: "Docs", href: "/docs"},
@@ -71,64 +76,122 @@ import {
 ## Examples
 
 ### Basic Table
-```tsx
-<Table>
-  <TableHeader>
-    <TableRow>
-      <TableHead>Name</TableHead>
-      <TableHead>Email</TableHead>
-      <TableHead>Role</TableHead>
-    </TableRow>
-  </TableHeader>
-  <TableBody>
-    <TableRow>
-      <TableCell className="font-medium">John Doe</TableCell>
-      <TableCell>john@example.com</TableCell>
-      <TableCell>Admin</TableCell>
-    </TableRow>
-    <TableRow>
-      <TableCell className="font-medium">Jane Smith</TableCell>
-      <TableCell>jane@example.com</TableCell>
-      <TableCell>User</TableCell>
-    </TableRow>
-  </TableBody>
-</Table>
-```
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center bg-background border p-6 rounded-md items-center h-full z-10 relative not-prose">
+      <BasicTableDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { 
+      Table, 
+      TableHeader, 
+      TableBody, 
+      TableHead, 
+      TableRow, 
+      TableCell 
+    } from "@/components/modern-ui/table";
+
+    export function BasicTableDemo() {
+      return (
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Name</TableHead>
+              <TableHead>Email</TableHead>
+              <TableHead>Role</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell className="font-medium">John Doe</TableCell>
+              <TableCell>john@example.com</TableCell>
+              <TableCell>Admin</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell className="font-medium">Jane Smith</TableCell>
+              <TableCell>jane@example.com</TableCell>
+              <TableCell>User</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
 
 ### Table with Caption and Footer
-```tsx
-<Table>
-  <TableCaption>List of recent orders with their status.</TableCaption>
-  <TableHeader>
-    <TableRow>
-      <TableHead>Order ID</TableHead>
-      <TableHead>Customer</TableHead>
-      <TableHead>Status</TableHead>
-      <TableHead className="text-right">Total</TableHead>
-    </TableRow>
-  </TableHeader>
-  <TableBody>
-    <TableRow>
-      <TableCell className="font-medium">#12345</TableCell>
-      <TableCell>John Doe</TableCell>
-      <TableCell>Shipped</TableCell>
-      <TableCell className="text-right">$249.99</TableCell>
-    </TableRow>
-    <TableRow>
-      <TableCell className="font-medium">#12346</TableCell>
-      <TableCell>Jane Smith</TableCell>
-      <TableCell>Processing</TableCell>
-      <TableCell className="text-right">$149.99</TableCell>
-    </TableRow>
-  </TableBody>
-  <TableFooter>
-    <TableRow>
-      <TableCell colSpan={3}>Total Orders: 2</TableCell>
-      <TableCell className="text-right">$399.98</TableCell>
-    </TableRow>
-  </TableFooter>
-</Table>
-```
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[250px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center bg-background border rounded-md p-6 items-center h-full z-10 relative not-prose">
+      <TableWithCaptionAndFooterDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { 
+      Table, 
+      TableHeader, 
+      TableBody, 
+      TableFooter,
+      TableHead, 
+      TableRow, 
+      TableCell,
+      TableCaption
+    } from "@/components/modern-ui/table";
+
+    export function TableWithCaptionAndFooterDemo() {
+      return (
+        <Table>
+          <TableCaption>List of recent orders with their status.</TableCaption>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Order ID</TableHead>
+              <TableHead>Customer</TableHead>
+              <TableHead>Status</TableHead>
+              <TableHead className="text-right">Total</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell className="font-medium">#12345</TableCell>
+              <TableCell>John Doe</TableCell>
+              <TableCell>Shipped</TableCell>
+              <TableCell className="text-right">$249.99</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell className="font-medium">#12346</TableCell>
+              <TableCell>Jane Smith</TableCell>
+              <TableCell>Processing</TableCell>
+              <TableCell className="text-right">$149.99</TableCell>
+            </TableRow>
+          </TableBody>
+          <TableFooter>
+            <TableRow>
+              <TableCell colSpan={3}>Total Orders: 2</TableCell>
+              <TableCell className="text-right">$399.98</TableCell>
+            </TableRow>
+          </TableFooter>
+        </Table>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
 
 ## API Reference
 
