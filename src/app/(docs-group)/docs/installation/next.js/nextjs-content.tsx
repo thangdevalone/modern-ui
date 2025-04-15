@@ -12,10 +12,10 @@ const steps = [
     title: "Getting Started with Next.js",
     children: () => {
       const commands = {
-        npm: "npx create-next-app@latest",
-        pnpm: "npx create-next-app@latest",
-        yarn: "npx create-next-app@latest",
-        bun: "npx create-next-app@latest",
+        npm: "npx create-next-app@latest demo-app --tailwind --app --use-npm --skip-install",
+        pnpm: "npx create-next-app@latest demo-app --tailwind --app --use-pnpm --skip-install",
+        yarn: "npx create-next-app@latest demo-app --tailwind --app --use-yarn --skip-install",
+        bun: "npx create-next-app@latest demo-app --tailwind --app --use-bun --skip-install",
       };
       return (
         <div className="space-y-2">
@@ -31,7 +31,29 @@ const steps = [
   },
   {
     id: 1,
-    title: "Create project",
+    title: "Cd project",
+    children: () => {
+      const commands = {
+        npm: 'cd demo-app && npm i',
+        pnpm: 'cd demo-app && pnpm i',
+        yarn: 'cd demo-app && yarn',
+        bun: 'cd demo-app && bun i',
+      };
+      return (
+        <div className="space-y-2">
+          <div>Install dependencies using your preferred package manager.</div>
+          <TerminalBlock
+            commands={commands}
+            activeTab={"npm"}
+            showTypingAnimation={true}
+          />
+        </div>
+      );
+    },
+  },  
+  {
+    id: 2,
+    title: "Init Modern UI",
     children: () => {
       const commands = {
         npm: "npx @modern-pack/ui init",
@@ -56,7 +78,7 @@ const steps = [
     },
   },
   {
-    id: 2,
+    id: 3,
     title: "Add Components",
     children: () => {
       const commands = {

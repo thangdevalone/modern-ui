@@ -121,7 +121,7 @@ type CommandProps = Children &
   }
 
 type Context = {
-  value: (id: string, value: string, keywords?: string[]) => void
+  value: (id: string, value: string | undefined, keywords?: string[]) => void
   item: (id: string, groupId: string) => () => void
   group: (id: string) => () => void
   filter: () => boolean
@@ -158,13 +158,44 @@ const ITEM_SELECTOR = `[cmdk-item=""]`
 const VALID_ITEM_SELECTOR = `${ITEM_SELECTOR}:not([aria-disabled="true"])`
 const SELECT_EVENT = `cmdk-item-select`
 const VALUE_ATTR = `data-value`
-const defaultFilter: CommandFilter = (value, search, keywords) => commandScore(value, search, keywords)
+const defaultFilter: CommandFilter = (value, search, keywords) => commandScore(value, search, keywords!)
 
-const CommandContext = React.createContext<Context>(undefined)
+// Create default context values to avoid undefined assignment
+const defaultContextValue: Context = {
+  value: () => {},
+  item: () => () => {},
+  group: () => () => {},
+  filter: () => true,
+  label: '',
+  getDisablePointerSelection: () => false,
+  listId: '',
+  labelId: '',
+  inputId: '',
+  listInnerRef: { current: null },
+}
+
+const defaultStoreValue: Store = {
+  subscribe: () => () => {},
+  snapshot: () => ({ 
+    search: '', 
+    value: '', 
+    selectedItemId: undefined,
+    filtered: { count: 0, items: new Map(), groups: new Set() }
+  }),
+  setState: () => {},
+  emit: () => {},
+}
+
+const defaultGroupValue: Group = {
+  id: '',
+  forceMount: false,
+}
+
+const CommandContext = React.createContext<Context>(defaultContextValue)
 const useCommand = () => React.useContext(CommandContext)
-const StoreContext = React.createContext<Store>(undefined)
+const StoreContext = React.createContext<Store>(defaultStoreValue)
 const useStore = () => React.useContext(StoreContext)
-const GroupContext = React.createContext<Group>(undefined)
+const GroupContext = React.createContext<Group>(defaultGroupValue)
 
 const Command = React.forwardRef<HTMLDivElement, CommandProps>((props, forwardedRef) => {
   const state = useLazyRef<State>(() => ({
@@ -246,7 +277,7 @@ const Command = React.forwardRef<HTMLDivElement, CommandProps>((props, forwarded
           }
 
           schedule(7, () => {
-            state.current.selectedItemId = getSelectedItem()?.id
+            state.current.selectedItemId = getSelectedItem()?.id ?? undefined
             store.emit()
           })
 
@@ -276,9 +307,10 @@ const Command = React.forwardRef<HTMLDivElement, CommandProps>((props, forwarded
     () => ({
       // Keep id → {value, keywords} mapping up-to-date
       value: (id, value, keywords) => {
-        if (value !== ids.current.get(id)?.value) {
-          ids.current.set(id, { value, keywords })
-          state.current.filtered.items.set(id, score(value, keywords))
+        const safeValue = value || ''
+        if (safeValue !== ids.current.get(id)?.value) {
+          ids.current.set(id, { value: safeValue, keywords })
+          state.current.filtered.items.set(id, score(safeValue, keywords))
           schedule(2, () => {
             sort()
             store.emit()
@@ -294,7 +326,10 @@ const Command = React.forwardRef<HTMLDivElement, CommandProps>((props, forwarded
           if (!allGroups.current.has(groupId)) {
             allGroups.current.set(groupId, new Set([id]))
           } else {
-            allGroups.current.get(groupId).add(id)
+            const group = allGroups.current.get(groupId)
+            if (group) {
+              group.add(id)
+            }
           }
         }
 
@@ -342,11 +377,11 @@ const Command = React.forwardRef<HTMLDivElement, CommandProps>((props, forwarded
         }
       },
       filter: () => {
-        return propsRef.current.shouldFilter
+        return propsRef.current.shouldFilter ?? true
       },
-      label: label || props['aria-label'],
+      label: label || props['aria-label'] || '',
       getDisablePointerSelection: () => {
-        return propsRef.current.disablePointerSelection
+        return propsRef.current.disablePointerSelection ?? false
       },
       listId,
       inputId,
@@ -380,10 +415,12 @@ const Command = React.forwardRef<HTMLDivElement, CommandProps>((props, forwarded
 
       // Get the maximum score of the group's items
       let max = 0
-      items.forEach((item) => {
-        const score = scores.get(item)
-        max = Math.max(score, max)
-      })
+      if (items) {
+        items.forEach((item) => {
+          const score = scores.get(item) ?? 0
+          max = Math.max(score, max)
+        })
+      }
 
       groups.push([value, max])
     })
@@ -396,19 +433,25 @@ const Command = React.forwardRef<HTMLDivElement, CommandProps>((props, forwarded
     // Sort the items
     getValidItems()
       .sort((a, b) => {
-        const valueA = a.getAttribute('id')
-        const valueB = b.getAttribute('id')
+        const valueA = a.getAttribute('id') ?? ''
+        const valueB = b.getAttribute('id') ?? ''
         return (scores.get(valueB) ?? 0) - (scores.get(valueA) ?? 0)
       })
       .forEach((item) => {
         const group = item.closest(GROUP_ITEMS_SELECTOR)
 
         if (group) {
-          group.appendChild(item.parentElement === group ? item : item.closest(`${GROUP_ITEMS_SELECTOR} > *`))
-        } else {
-          listInsertionElement.appendChild(
-            item.parentElement === listInsertionElement ? item : item.closest(`${GROUP_ITEMS_SELECTOR} > *`),
-          )
+          const closestItem = item.closest(`${GROUP_ITEMS_SELECTOR} > *`)
+          if (closestItem) {
+            group.appendChild(item.parentElement === group ? item : closestItem)
+          }
+        } else if (listInsertionElement) {
+          const closestItem = item.closest(`${GROUP_ITEMS_SELECTOR} > *`)
+          if (closestItem) {
+            listInsertionElement.appendChild(
+              item.parentElement === listInsertionElement ? item : closestItem
+            )
+          }
         }
       })
 
@@ -418,14 +461,14 @@ const Command = React.forwardRef<HTMLDivElement, CommandProps>((props, forwarded
         const element = listInnerRef.current?.querySelector(
           `${GROUP_SELECTOR}[${VALUE_ATTR}="${encodeURIComponent(group[0])}"]`,
         )
-        element?.parentElement.appendChild(element)
+        element?.parentElement?.appendChild(element)
       })
   }
 
   function selectFirstItem() {
     const item = getValidItems().find((item) => item.getAttribute('aria-disabled') !== 'true')
-    const value = item?.getAttribute(VALUE_ATTR)
-    store.setState('value', value || undefined)
+    const value = item?.getAttribute(VALUE_ATTR) ?? undefined
+    store.setState('value', value || '')
   }
 
   /** Filters the current items. */
@@ -456,7 +499,7 @@ const Command = React.forwardRef<HTMLDivElement, CommandProps>((props, forwarded
     // Check which groups have at least 1 item shown
     for (const [groupId, group] of allGroups.current) {
       for (const itemId of group) {
-        if (state.current.filtered.items.get(itemId) > 0) {
+        if ((state.current.filtered.items.get(itemId) ?? 0) > 0) {
           state.current.filtered.groups.add(groupId)
           break
         }
@@ -495,7 +538,7 @@ const Command = React.forwardRef<HTMLDivElement, CommandProps>((props, forwarded
   function updateSelectedToIndex(index: number) {
     const items = getValidItems()
     const item = items[index]
-    if (item) store.setState('value', item.getAttribute(VALUE_ATTR))
+    if (item) store.setState('value', item.getAttribute(VALUE_ATTR) ?? '')
   }
 
   function updateSelectedByItem(change: 1 | -1) {
@@ -515,21 +558,21 @@ const Command = React.forwardRef<HTMLDivElement, CommandProps>((props, forwarded
           : items[index + change]
     }
 
-    if (newSelected) store.setState('value', newSelected.getAttribute(VALUE_ATTR))
+    if (newSelected) store.setState('value', newSelected.getAttribute(VALUE_ATTR) ?? '')
   }
 
   function updateSelectedByGroup(change: 1 | -1) {
     const selected = getSelectedItem()
     let group = selected?.closest(GROUP_SELECTOR)
-    let item: HTMLElement
+    let item: HTMLElement | null = null
 
     while (group && !item) {
       group = change > 0 ? findNextSibling(group, GROUP_SELECTOR) : findPreviousSibling(group, GROUP_SELECTOR)
-      item = group?.querySelector(VALID_ITEM_SELECTOR)
+      item = group?.querySelector(VALID_ITEM_SELECTOR) as HTMLElement | null
     }
 
     if (item) {
-      store.setState('value', item.getAttribute(VALUE_ATTR))
+      store.setState('value', item.getAttribute(VALUE_ATTR) ?? '')
     } else {
       updateSelectedByItem(change)
     }
@@ -668,16 +711,16 @@ const Item = React.forwardRef<HTMLDivElement, ItemProps>((props, forwardedRef) =
 
   useLayoutEffect(() => {
     if (!forceMount) {
-      return context.item(id, groupContext?.id)
+      return context.item(id, groupContext?.id ?? '')
     }
   }, [forceMount])
 
-  const value = useValue(id, ref, [props.value, props.children, ref], props.keywords)
+  const value = useValue(id, ref as unknown as React.RefObject<HTMLDivElement>, [props.value, props.children, ref], props.keywords)
 
   const store = useStore()
   const selected = useCmdk((state) => state.value && state.value === value.current)
   const render = useCmdk((state) =>
-    forceMount ? true : context.filter() === false ? true : !state.search ? true : state.filtered.items.get(id) > 0,
+    forceMount ? true : context.filter() === false ? true : !state.search ? true : (state.filtered.items.get(id) ?? 0) > 0,
   )
 
   React.useEffect(() => {
@@ -738,7 +781,7 @@ const Group = React.forwardRef<HTMLDivElement, GroupProps>((props, forwardedRef)
     return context.group(id)
   }, [])
 
-  useValue(id, ref, [props.value, props.heading, headingRef])
+  useValue(id, ref as unknown as React.RefObject<HTMLDivElement>, [props.value, props.heading, headingRef])
 
   const contextValue = React.useMemo(() => ({ id, forceMount }), [forceMount])
 
@@ -838,7 +881,7 @@ const List = React.forwardRef<HTMLDivElement, ListProps>((props, forwardedRef) =
     if (height.current && ref.current) {
       const el = height.current
       const wrapper = ref.current
-      let animationFrame
+      let animationFrame: number | undefined
       const observer = new ResizeObserver(() => {
         animationFrame = requestAnimationFrame(() => {
           const height = el.offsetHeight
@@ -847,7 +890,9 @@ const List = React.forwardRef<HTMLDivElement, ListProps>((props, forwardedRef) =
       })
       observer.observe(el)
       return () => {
-        cancelAnimationFrame(animationFrame)
+        if (animationFrame) {
+          cancelAnimationFrame(animationFrame)
+        }
         observer.unobserve(el)
       }
     }
@@ -988,7 +1033,7 @@ function useAsRef<T>(data: T) {
 const useLayoutEffect = typeof window === 'undefined' ? React.useEffect : React.useLayoutEffect
 
 function useLazyRef<T>(fn: () => T) {
-  const ref = React.useRef<T>()
+  const ref = React.useRef<T | undefined>(undefined)
 
   if (ref.current === undefined) {
     ref.current = fn()
@@ -1006,11 +1051,11 @@ function useCmdk<T = any>(selector: (state: State) => T): T {
 
 function useValue(
   id: string,
-  ref: React.RefObject<HTMLElement>,
-  deps: (string | React.ReactNode | React.RefObject<HTMLElement>)[],
+  ref: React.RefObject<HTMLDivElement>,
+  deps: (string | React.ReactNode | React.RefObject<any>)[],
   aliases: string[] = [],
 ) {
-  const valueRef = React.useRef<string>()
+  const valueRef = React.useRef<string>('')
   const context = useCommand()
 
   useLayoutEffect(() => {
@@ -1020,19 +1065,22 @@ function useValue(
           return part.trim()
         }
 
-        if (typeof part === 'object' && 'current' in part) {
+        if (part && typeof part === 'object' && 'current' in part) {
           if (part.current) {
-            return part.current.textContent?.trim()
+            return part.current.textContent?.trim() || ''
           }
           return valueRef.current
         }
       }
+      return ''
     })()
 
     const keywords = aliases.map((alias) => alias.trim())
 
     context.value(id, value, keywords)
-    ref.current?.setAttribute(VALUE_ATTR, value)
+    if (value) {
+      ref.current?.setAttribute(VALUE_ATTR, value)
+    }
     valueRef.current = value
   })
 
@@ -1067,10 +1115,10 @@ function renderChildren(children: React.ReactElement) {
 
 function SlottableWithNestedChildren(
   { asChild, children }: { asChild?: boolean; children?: React.ReactNode },
-  render: (child: React.ReactNode) => JSX.Element,
+  render: (child: React.ReactNode) => React.ReactElement,
 ) {
   if (asChild && React.isValidElement(children)) {
-    return React.cloneElement(renderChildren(children), { ref: (children as any).ref }, render(children.props.children))
+    return React.cloneElement(renderChildren(children), { ref: (children as any).ref }, render((children as any).props.children))
   }
   return render(children)
 }
