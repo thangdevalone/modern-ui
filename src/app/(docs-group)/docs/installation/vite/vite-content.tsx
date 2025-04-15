@@ -12,7 +12,7 @@ const steps = [
     title: "Getting Started with Vite",
     children: () => {
       const commands = {
-        npm: 'npm create vite@latest demo-app --template react-ts',
+        npm: 'npm create vite@latest demo-app -- --template react-ts',
         pnpm: 'pnpm create vite demo-app --template react-ts',
         yarn: 'yarn create vite demo-app --template react-ts',
         bun: 'bun create vite demo-app --template react-ts',
@@ -41,7 +41,7 @@ const steps = [
       return (
         <div className='space-y-2'>
           <div>
-            Install Vite using your preferred package manager.
+            Install the dependencies for your project.
           </div>
           <TerminalBlock commands={commands} activeTab={'npm'}
                          showTypingAnimation={true}/>
