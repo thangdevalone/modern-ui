@@ -9,7 +9,7 @@ const CLIContent = () => {
   const commands = {
     npm: "npx @modern-pack/ui add animated-gradient-text",
     pnpm: "pnpm dlx @modern-pack/ui add animated-gradient-text",
-    yarn: "yarn dlx @modern-pack/ui add animated-gradient-text",
+    yarn: "npx @modern-pack/ui add animated-gradient-text",
     bun: "bunx --bun @modern-pack/ui add animated-gradient-text",
   };
   return (

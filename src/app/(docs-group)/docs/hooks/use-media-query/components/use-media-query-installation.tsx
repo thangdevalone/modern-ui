@@ -9,7 +9,7 @@ const CLIContent = () => {
   const commands = {
     npm: "npx @modern-pack/ui add use-media-query",
     pnpm: "pnpm dlx @modern-pack/ui add use-media-query",
-    yarn: "yarn dlx @modern-pack/ui add use-media-query",
+    yarn: "npx @modern-pack/ui add use-media-query",
     bun: "bunx --bun @modern-pack/ui add use-media-query",
   };
   return (

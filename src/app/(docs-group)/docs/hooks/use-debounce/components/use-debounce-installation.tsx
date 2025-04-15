@@ -9,7 +9,7 @@ const CLIContent = () => {
   const commands = {
     npm: "npx @modern-pack/ui add use-debounce",
     pnpm: "pnpm dlx @modern-pack/ui add use-debounce",
-    yarn: "yarn dlx @modern-pack/ui add use-debounce",
+    yarn: "npx @modern-pack/ui add use-debounce",
     bun: "bunx --bun @modern-pack/ui add use-debounce",
   };
   return (

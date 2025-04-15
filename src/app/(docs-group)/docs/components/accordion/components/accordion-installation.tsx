@@ -9,7 +9,7 @@ const CLIContent = () => {
   const commands = {
     npm: "npx @modern-pack/ui add accordion",
     pnpm: "pnpm dlx @modern-pack/ui add accordion",
-    yarn: "yarn dlx @modern-pack/ui add accordion",
+    yarn: "npx @modern-pack/ui add accordion",
     bun: "bunx --bun @modern-pack/ui add accordion",
   };
   return (

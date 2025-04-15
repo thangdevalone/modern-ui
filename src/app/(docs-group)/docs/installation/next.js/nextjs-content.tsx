@@ -60,10 +60,10 @@ const steps = [
     title: "Add Components",
     children: () => {
       const commands = {
-        npm: "npx @thangdevalone/button add button",
-        pnpm: "pnpm dlx @thangdevalone/button add button",
-        yarn: "yarn dlx @thangdevalone/button add button",
-        bun: "bunx --bun @thangdevalone/button add button",
+        npm: "npx @modern-pack/ui add button",
+        pnpm: "pnpm dlx @modern-pack/ui add button",
+        yarn: "npx @modern-pack/ui add button",
+        bun: "bunx --bun @modern-pack/ui add button",
       };
       return (
         <div className="space-y-2">

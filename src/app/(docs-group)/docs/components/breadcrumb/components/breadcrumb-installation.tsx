@@ -9,7 +9,7 @@ const CLIContent = () => {
   const commands = {
     npm: "npx @modern-pack/ui add breadcrumb",
     pnpm: "pnpm dlx @modern-pack/ui add breadcrumb",
-    yarn: "yarn dlx @modern-pack/ui add breadcrumb",
+    yarn: "npx @modern-pack/ui add breadcrumb",
     bun: "bunx --bun @modern-pack/ui add breadcrumb",
   };
   return (

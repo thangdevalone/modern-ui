@@ -9,7 +9,7 @@ const CLIContent = () => {
   const commands = {
     npm: "npx @modern-pack/ui add stepper",
     pnpm: "pnpm dlx @modern-pack/ui add stepper",
-    yarn: "yarn dlx @modern-pack/ui add stepper",
+    yarn: "npx @modern-pack/ui add stepper",
     bun: "bunx --bun @modern-pack/ui add stepper",
   };
   return (

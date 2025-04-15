@@ -9,7 +9,7 @@ const CLIContent = () => {
   const commands = {
     npm: "npx @modern-pack/ui add textarea",
     pnpm: "pnpm dlx @modern-pack/ui add textarea",
-    yarn: "yarn dlx @modern-pack/ui add textarea",
+    yarn: "npx @modern-pack/ui add textarea",
     bun: "bunx --bun @modern-pack/ui add textarea",
   };
   return (

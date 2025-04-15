@@ -12,10 +12,10 @@ const steps = [
     title: "Getting Started with Vite",
     children: () => {
       const commands = {
-        npm: 'npm create vite@latest',
-        pnpm: 'pnpm create vite',
-        yarn: 'yarn create vite',
-        bun: 'bun create vite',
+        npm: 'npm create vite@latest demo-app --template react-ts',
+        pnpm: 'pnpm create vite demo-app --template react-ts',
+        yarn: 'yarn create vite demo-app --template react-ts',
+        bun: 'bun create vite demo-app --template react-ts',
       };
       return (
         <div className='space-y-2'>
@@ -30,6 +30,27 @@ const steps = [
   },
   {
     id: 1,
+    title: "Install Dependencies",
+    children: () => {
+      const commands = {
+        npm: 'cd demo-app && npm i',
+        pnpm: 'cd demo-app && pnpm i',
+        yarn: 'cd demo-app && yarn',
+        bun: 'cd demo-app && bun i',
+      };
+      return (
+        <div className='space-y-2'>
+          <div>
+            Install Vite using your preferred package manager.
+          </div>
+          <TerminalBlock commands={commands} activeTab={'npm'}
+                         showTypingAnimation={true}/>
+        </div>
+      );
+    }
+  },
+  {
+    id: 2,
     title: "Init Modern UI",
     children: () => {
       const commands = {
@@ -53,14 +74,14 @@ const steps = [
     }
   },
   {
-    id: 2,
+    id: 3,
     title: "Add Components",
     children: () => {
       const commands = {
-        npm: 'npx @thangdevalone/button add button',
-        pnpm: 'pnpm dlx @thangdevalone/button add button',
-        yarn: 'yarn dlx @thangdevalone/button add button',
-        bun: 'bunx --bun @thangdevalone/button add button',
+        npm: 'npx @modern-pack/ui add button',
+        pnpm: 'pnpm dlx @modern-pack/ui add button',
+        yarn: 'npx @modern-pack/ui add button',
+        bun: 'bunx --bun @modern-pack/ui add button',
       };
       return (
         <div className='space-y-2'>

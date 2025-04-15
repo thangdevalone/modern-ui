@@ -9,7 +9,7 @@ const CLIContent = () => {
   const commands = {
     npm: "npx @modern-pack/ui add tooltip",
     pnpm: "pnpm dlx @modern-pack/ui add tooltip",
-    yarn: "yarn dlx @modern-pack/ui add tooltip",
+    yarn: "npx @modern-pack/ui add tooltip",
     bun: "bunx --bun @modern-pack/ui add tooltip",
   };
   return (

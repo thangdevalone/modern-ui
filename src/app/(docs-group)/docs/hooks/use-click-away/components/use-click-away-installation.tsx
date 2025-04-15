@@ -9,7 +9,7 @@ const CLIContent = () => {
   const commands = {
     npm: "npx @modern-pack/ui add use-click-away",
     pnpm: "pnpm dlx @modern-pack/ui add use-click-away",
-    yarn: "yarn dlx @modern-pack/ui add use-click-away",
+    yarn: "npx @modern-pack/ui add use-click-away",
     bun: "bunx --bun @modern-pack/ui add use-click-away",
   };
   return (
