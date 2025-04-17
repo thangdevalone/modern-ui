@@ -54,7 +54,7 @@ export const PreviewAccordion = () => {
           value="preview"
           className="p-6 border rounded-md mt-2 relative min-h-[300px]"
         >
-          <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50 "></div>
           <div className="flex justify-center items-center h-full z-10 relative min-h-[250px] not-prose">
             <div className="w-full bg-background p-6 border rounded-md max-w-md">
               <Accordion key={key} type="single" collapsible className="w-full">

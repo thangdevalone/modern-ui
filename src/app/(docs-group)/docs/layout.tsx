@@ -4,7 +4,7 @@ import LeftSidebar from '@/components/shared/left-sidebar';
 
 export const metadata: Metadata = {
   title: "Docs | Modern UI",
-  description: "A collection of reusable components built with Radix UI and Tailwind CSS. Free. Open Source. And Next.js 14 Ready.",
+  description: "A collection of reusable components built with Radix UI and Tailwind CSS. Free. Open Source. And Next.js 15 Ready. Inspired by Shadcn UI.",
   icons: {
     icon: "/assets/logo_rounded.png",
   },

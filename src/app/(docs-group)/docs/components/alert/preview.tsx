@@ -42,7 +42,7 @@ export const PreviewAlert = () => {
           <TabsTrigger value="code">Code</TabsTrigger>
         </TabsList>
         <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[300px]">
-          <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50">
+          <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50 ">
           </div>
           <div className="flex justify-center items-center h-full z-10 min-h-[250px] not-prose">
             <Alert key={key} className='max-w-md'>

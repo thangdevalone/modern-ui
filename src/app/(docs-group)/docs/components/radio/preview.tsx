@@ -57,7 +57,7 @@ export function PreviewRadio() {
           value="preview"
           className="p-6 border rounded-md mt-2 relative min-h-[250px]"
         >
-          <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50 "></div>
           <div className="flex justify-center items-center relative h-full z-10 min-h-[250px] not-prose">
             <RadioGroup key={key} defaultValue="comfortable">
               <div className="flex items-center space-x-2">

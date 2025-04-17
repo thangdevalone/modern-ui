@@ -45,7 +45,7 @@ export function HeroSection() {
           transition={{ duration: 0.5, delay: 0.2 }}
         >
           A collection of reusable components built with Radix UI and Tailwind
-          CSS. Free. Open Source. And Next.js 14 Ready.
+          CSS. Free. Open Source. And Next.js 15 Ready. Inspired by Shadcn UI.
         </motion.p>
 
         <motion.div

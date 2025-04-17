@@ -115,7 +115,7 @@ export const PreviewDatePicker = () => {
           value="preview"
           className="p-6 border rounded-md mt-2 relative min-h-[350px]"
         >
-          <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50 "></div>
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
             <div className="flex flex-col space-y-4 items-center">
               <div className="flex space-x-2 mb-4 flex-wrap gap-2 justify-center">

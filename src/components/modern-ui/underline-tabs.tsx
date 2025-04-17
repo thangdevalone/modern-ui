@@ -73,7 +73,7 @@ export const UnderlineTabs = ({ tabs, defaultTabId, className }: UnderlineTabsPr
   return (
     <div className={cn("w-full", className)}>
       <div className="relative border-b">
-        <div className="flex" ref={tabsContainerRef}>
+        <div className="flex overflow-x-auto no-scrollbar" ref={tabsContainerRef}>
           {tabs.map((tab) => (
             <button
               key={tab.id}

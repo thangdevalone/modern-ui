@@ -59,7 +59,7 @@ export const PreviewFluidDropdown = () => {
           value="preview"
           className="p-6 border rounded-md mt-2 relative min-h-[300px]"
         >
-          <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50 "></div>
           <div className="flex justify-center items-center h-full z-10 relative min-h-[250px]">
             <FluidDropdown 
               key={key} 
