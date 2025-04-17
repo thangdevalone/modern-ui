@@ -59,7 +59,7 @@ export function HeroSection() {
             className="h-12 rounded-full px-8 shadow-lg"
             asChild
           >
-            <Link href="/docs/components" className="flex items-center gap-2">
+            <Link href="/docs/installation" className="flex items-center gap-2">
               Get Started
               <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
