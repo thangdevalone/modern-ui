@@ -69,7 +69,7 @@ export function TerminalBlock({
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
     >
-      <div className="flex border-b border-zinc-800 bg-[#161b22]">
+      <div className="flex border-b border-zinc-800 bg-[#161b22] overflow-x-auto no-scrollbar">
         {tabs.map((tab) => (
           <motion.button
             key={tab}
