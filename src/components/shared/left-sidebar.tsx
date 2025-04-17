@@ -38,7 +38,8 @@ const links: {
     items: [
       { href: "/docs/introduction", label: "Introduction" },
       { href: "/docs/installation", label: "Installation" },
-      { href: "/docs/cli", label: "CLI", disabled: true },
+      { href: "/docs/modern-ui-json", label: "modern-ui.json" },
+      { href: "/docs/cli", label: "CLI" },
     ],
   },
   {

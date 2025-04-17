@@ -1,6 +1,7 @@
 import React, {ComponentPropsWithoutRef} from 'react';
 import {cn, generateId} from '@/lib/utils';
 import {CodeBlock} from '@/components/code-block';
+import { Code } from './components/shared/code';
 
 type HeadingProps = ComponentPropsWithoutRef<'h1'>;
 type ParagraphProps = ComponentPropsWithoutRef<'p'>;
@@ -68,7 +69,7 @@ const components = {
   },
   p: ({className, children, ...props}: ParagraphProps) => (
     <p
-      className={cn("mb-4 mt-0 text-muted-foreground", className)}
+      className={cn("mb-4 mt-0", className)}
       {...props}
     >
       {children}
@@ -124,9 +125,9 @@ const components = {
     const language = match ? match[1] : "";
     if (!language) {
       return (
-        <code className={cn("bg-muted px-1 py-0.5 rounded text-sm font-mono", className)} {...props}>
+        <Code className={cn(className)} {...props}>
           {children}
-        </code>
+        </Code>
       );
     }
 

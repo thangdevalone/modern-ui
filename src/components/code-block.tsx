@@ -1,11 +1,11 @@
 "use client";
 
+import { cn } from "@/lib/utils";
+import { ChevronDown, ChevronUp, Terminal } from "lucide-react";
+import { motion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
-import { Check, ChevronDown, ChevronUp, Copy, Terminal } from "lucide-react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { coldarkDark } from "react-syntax-highlighter/dist/esm/styles/prism";
-import { AnimatePresence, motion } from "motion/react";
-import { cn } from "@/lib/utils";
 import { CopyButton } from "./modern-ui/copy-button";
 
 interface CodeBlockProps {
@@ -26,7 +26,6 @@ export function CodeBlock({
   const [isExpanded, setIsExpanded] = useState(false);
   const [shouldShowButton, setShouldShowButton] = useState(false);
   const highlighterRef = useRef<HTMLPreElement>(null);
-  const [hasCopied, setHasCopied] = useState(false);
 
   useEffect(() => {
     const checkCodeHeight = () => {
@@ -88,28 +87,34 @@ export function CodeBlock({
 
   return (
     <motion.div className="overflow-hidden relative rounded-xl border border-zinc-800 bg-[#0d1117] shadow-lg not-prose">
-      <div className="flex items-center justify-between border-b border-zinc-800 bg-[#161b22] px-4 py-2">
-        <div className="flex items-center gap-2">
-          <Terminal className="h-4 w-4 text-zinc-400" />
-          {filename ? (
-            <span className="text-xs font-medium text-zinc-300">
-              {filename}
-            </span>
-          ) : (
-            <span className="text-xs font-medium text-zinc-400">
-              {getLanguageDisplayName()}
-            </span>
-          )}
+      {language !== "bash" ? (
+        <div className="flex items-center justify-between border-b border-zinc-800 bg-[#161b22] px-4 py-2">
+          <div className="flex items-center gap-2">
+            <Terminal className="h-4 w-4 text-zinc-400" />
+            {filename ? (
+              <span className="text-xs font-medium text-zinc-300">
+                {filename}
+              </span>
+            ) : (
+              <span className="text-xs font-medium text-zinc-400">
+                {getLanguageDisplayName()}
+              </span>
+            )}
+          </div>
+          <div className="flex items-center gap-2">
+            {filename && (
+              <span className="text-xs text-zinc-500">
+                {getLanguageDisplayName()}
+              </span>
+            )}
+            <CopyButton value={code} />
+          </div>
         </div>
-        <div className="flex items-center gap-2">
-          {filename && (
-            <span className="text-xs text-zinc-500">
-              {getLanguageDisplayName()}
-            </span>
-          )}
+      ) : (
+        <div className="absolute right-2 top-2 z-10">
           <CopyButton value={code} />
         </div>
-      </div>
+      )}
 
       <div
         className="relative h-full"
@@ -144,7 +149,7 @@ export function CodeBlock({
           <SyntaxHighlighter
             language={language}
             style={coldarkDark}
-            showLineNumbers={showLineNumbers}
+            showLineNumbers={showLineNumbers && language !== "bash"}
             wrapLines={true}
             lineProps={{}}
             customStyle={{

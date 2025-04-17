@@ -1,0 +1,54 @@
+import { BreadcrumbNav } from "@/components/breadcrumb-nav";
+import { InitInstallation, AddInstallation, VersionInstallation } from "@/app/(docs-group)/docs/cli/components/cli-installation";
+
+<BreadcrumbNav className="mb-4" items={[
+  {label: "Docs", href: "/docs"},
+  {label: "CLI"},
+]}/>
+
+# Modern UI CLI
+
+Use the Modern UI CLI to add components to your project.
+
+---
+
+## init
+
+Use the `init` command to initialize configuration and dependencies for a new project.
+The `init` command installs dependencies, adds the `cn` util and configures CSS variables for the project.
+
+<InitInstallation />
+
+---
+
+## add
+
+Use the `add` command to add a component to your project.
+
+<AddInstallation />
+
+---
+
+## version
+
+Use the `version` command to check the version of the modern-ui CLI.
+
+<VersionInstallation />
+
+### Options
+
+```bash
+# List installed components
+npx @modern-pack/ui version
+
+# Install specific versions
+npx @modern-pack/ui add [component] --version 0.9.0
+
+# Check available versions
+npx @modern-pack/ui version --available [component]
+
+# Update components
+npx @modern-pack/ui version --update [component]
+```
+
+

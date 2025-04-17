@@ -1,0 +1,37 @@
+import { BreadcrumbNav } from "@/components/breadcrumb-nav";
+import { InitInstallation } from "@/app/(docs-group)/docs/cli/components/cli-installation";
+
+<BreadcrumbNav className="mb-4" items={[
+  {label: "Docs", href: "/docs"},
+  {label: "modern-ui.json"},
+]}/>
+
+# modern-ui.json
+
+The `modern-ui.json` file holds configuration for your project.
+
+We use it to understand how your project is set up and how to generate components customized for your project.
+
+<div className="bg-muted/10 border rounded-lg px-4 py-3 [&>p]:!mb-0 [&>p]:!text-[13px] [&>p]:!leading-5 mb-4">
+    Note: The `modern-ui.json` file is optional and only required if <b>you're using the CLI</b> to add components to your project. If you're using the copy and paste method, you don't need this file.
+</div>
+
+You can create a `modern-ui.json` file in your project by running the following command:
+
+<InitInstallation className="mb-4" />
+
+See the [CLI](/docs/cli) section for more information.
+
+---
+
+## style
+
+The style for your components. <b>This cannot be changed after initialization</b>.
+
+```bash
+{
+  "style": "default"
+}
+```
+
+

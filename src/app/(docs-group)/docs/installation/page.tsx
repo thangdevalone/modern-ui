@@ -5,8 +5,9 @@ import {Metadata} from 'next';
 
 export const metadata: Metadata = {
   title: "Installation | Modern UI",
-  description: "A collection of reusable components built with Radix UI and Tailwind CSS. Free. Open Source. And Next.js 14 Ready.",
+  description: "Install Modern UI in your project.",
 };
+
 export default function page() {
   return <>
     <MdxLayout>
