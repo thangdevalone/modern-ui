@@ -1,16 +1,15 @@
 "use client";
-import { RefreshCw } from "lucide-react";
-import { useState } from "react";
+import { CodeBlock } from "@/components/code-block";
+import { Button } from "@/components/modern-ui/button";
 import {
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
 } from "@/components/modern-ui/tabs";
-import { Button } from "@/components/modern-ui/button";
-import { CodeBlock } from "@/components/code-block";
 import { UnderlineTabs } from "@/components/modern-ui/underline-tabs";
-import { Home, Settings, User } from "lucide-react";
+import { Home, RefreshCw, Settings, User } from "lucide-react";
+import { useState } from "react";
 
 export const underlineTabsCode = `import UnderlineTabs from "@/components/modern-ui/underline-tabs";
 import { Home, Settings, User } from "lucide-react";
@@ -53,25 +52,19 @@ export const PreviewUnderlineTabs = () => {
       id: "profile",
       label: "Profile",
       icon: <User className="h-4 w-4" />,
-      content: (
-        <div className="p-4 border rounded-md">Profile content goes here</div>
-      ),
+      content: <div>Profile content goes here</div>,
     },
     {
       id: "dashboard",
       label: "Dashboard",
-      icon: <Home className="h-4 w-4"/>,
-      content: (
-        <div className="p-4 border rounded-md">Dashboard content goes here</div>
-      ),
+      icon: <Home className="h-4 w-4" />,
+      content: <div>Dashboard content goes here</div>,
     },
     {
       id: "settings",
       label: "Settings",
-      icon: <Settings className="h-4 w-4"/>,
-      content: (
-        <div className="p-4 border rounded-md">Settings content goes here</div>
-      ),
+      icon: <Settings className="h-4 w-4" />,
+      content: <div>Settings content goes here</div>,
     },
   ];
 
@@ -91,7 +84,7 @@ export const PreviewUnderlineTabs = () => {
           className="p-6 border rounded-md mt-2 relative min-h-[300px]"
         >
           <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50 overflow-hidden"></div>
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg bg-background border p-4 md:p-8 rounded-md overflow-hidden">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg bg-background border p-4 rounded-md overflow-hidden">
             <UnderlineTabs key={key} tabs={tabs} defaultTabId="profile" />
           </div>
           <div className="absolute z-10 top-4 right-4 flex gap-2">

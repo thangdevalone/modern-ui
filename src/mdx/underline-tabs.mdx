@@ -1,12 +1,12 @@
-import {PreviewUnderlineTabs} from "@/app/(docs-group)/docs/components/underline-tabs/preview";
-import {BreadcrumbNav} from "@/components/breadcrumb-nav";
-import {UnderlineTabsInstallation} from "@/app/(docs-group)/docs/components/underline-tabs/components/underline-tabs-installation";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/modern-ui/tabs";
 import {
   BasicUnderlineTabsDemo,
-  IconsUnderlineTabsDemo,
-  CustomStyledUnderlineTabsDemo
+  CustomStyledUnderlineTabsDemo,
+  IconsUnderlineTabsDemo
 } from "@/app/(docs-group)/docs/components/underline-tabs/components/underline-tabs-demos";
+import { UnderlineTabsInstallation } from "@/app/(docs-group)/docs/components/underline-tabs/components/underline-tabs-installation";
+import { PreviewUnderlineTabs } from "@/app/(docs-group)/docs/components/underline-tabs/preview";
+import { BreadcrumbNav } from "@/components/breadcrumb-nav";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/modern-ui/tabs";
 
 
 <BreadcrumbNav className="mb-4" items={[
@@ -83,9 +83,9 @@ const tabs = [
     <TabsTrigger value="preview">Preview</TabsTrigger>
     <TabsTrigger value="code">Code</TabsTrigger>
   </TabsList>
-  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[250px]">
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[200px]">
     <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50 "></div>
-    <div className="flex justify-center items-center h-full z-10 relative min-h-[250px]">
+    <div className="flex justify-center items-center h-full z-10 relative mx-auto bg-background border rounded-md p-4 max-w-lg not-prose">
       <BasicUnderlineTabsDemo />
     </div>
   </TabsContent>
@@ -99,7 +99,7 @@ const tabs = [
           id: "tab1",
           label: "Tab 1",
           content: (
-            <div className="p-4">
+            <div>
               <h3 className="text-lg font-medium">Tab 1 Content</h3>
               <p className="text-gray-500 mt-2">
                 This is the content for the first tab.
@@ -111,7 +111,7 @@ const tabs = [
           id: "tab2",
           label: "Tab 2",
           content: (
-            <div className="p-4">
+            <div>
               <h3 className="text-lg font-medium">Tab 2 Content</h3>
               <p className="text-gray-500 mt-2">
                 This is the content for the second tab.
@@ -123,7 +123,7 @@ const tabs = [
           id: "tab3",
           label: "Tab 3",
           content: (
-            <div className="p-4">
+            <div>
               <h3 className="text-lg font-medium">Tab 3 Content</h3>
               <p className="text-gray-500 mt-2">
                 This is the content for the third tab.
@@ -146,9 +146,9 @@ const tabs = [
     <TabsTrigger value="preview">Preview</TabsTrigger>
     <TabsTrigger value="code">Code</TabsTrigger>
   </TabsList>
-  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[250px]">
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[200px]">
     <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50 "></div>
-    <div className="flex justify-center items-center h-full z-10 relative min-h-[250px]">
+    <div className="flex justify-center items-center h-full z-10 relative mx-auto bg-background border rounded-md p-4 max-w-lg not-prose">
       <IconsUnderlineTabsDemo />
     </div>
   </TabsContent>
@@ -164,7 +164,7 @@ const tabs = [
           label: "Profile",
           icon: User,
           content: (
-            <div className="p-4">
+            <div>
               <h3 className="text-lg font-medium">Profile</h3>
               <p className="text-gray-500 mt-2">
                 View and edit your profile information.
@@ -177,7 +177,7 @@ const tabs = [
           label: "Dashboard",
           icon: Home,
           content: (
-            <div className="p-4">
+            <div>
               <h3 className="text-lg font-medium">Dashboard</h3>
               <p className="text-gray-500 mt-2">
                 Overview of your account and statistics.
@@ -190,7 +190,7 @@ const tabs = [
           label: "Settings",
           icon: Settings,
           content: (
-            <div className="p-4">
+            <div>
               <h3 className="text-lg font-medium">Settings</h3>
               <p className="text-gray-500 mt-2">
                 Configure your account settings and preferences.
@@ -214,8 +214,8 @@ const tabs = [
     <TabsTrigger value="code">Code</TabsTrigger>
   </TabsList>
   <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[250px]">
-    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50 "></div>
-    <div className="flex justify-center items-center h-full z-10 relative min-h-[250px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[250px] max-w-lg mx-auto">
       <CustomStyledUnderlineTabsDemo />
     </div>
   </TabsContent>
