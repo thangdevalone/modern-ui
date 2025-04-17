@@ -9,7 +9,7 @@ import {
   Code2,
   Layers,
 } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import dynamic from "next/dynamic";
 
 const Github = dynamic(() => import("@/components/assets-theme/github"), {

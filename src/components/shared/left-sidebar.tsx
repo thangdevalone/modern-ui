@@ -2,7 +2,7 @@
 
 import { Badge } from "@/components/modern-ui/badge";
 import { cn } from "@/lib/utils";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -49,7 +49,7 @@ const links: {
     ],
   },
   {
-    category: "Components",
+    category: "Base Components",
     items: [
       { href: "/docs/components/accordion", label: "Accordion" },
       { href: "/docs/components/alert", label: "Alert" },

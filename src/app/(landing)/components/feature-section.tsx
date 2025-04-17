@@ -1,7 +1,7 @@
 "use client";
 
 import type React from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView } from "motion/react";
 import { Zap, Palette, Code2, Layers, Star, Sparkles } from "lucide-react";
 import { AnimatedContent } from "./animated-content";
 import { useRef } from "react";

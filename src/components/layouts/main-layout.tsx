@@ -8,7 +8,7 @@ import Image from "next/image";
 import dynamic from "next/dynamic";
 import { Button } from "@/components/modern-ui/button";
 import { Menu } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import {
   Drawer,
   DrawerContent,
@@ -40,7 +40,7 @@ export const Header = () => {
   const pathname = usePathname();
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur-sm supports-backdrop-filter:bg-background/60">
-      <div className="container flex sm:h-[70px] h-[60px] items-center justify-between pl-6 pr-4">
+      <div className="container flex sm:h-[70px] h-[60px] items-center justify-between pl-6 pr-4 md:pl-4 md:pr-0">
         <Link href="/" className="flex items-center min-w-[35px] space-x-3">
           <Logo />
           <span className="font-bold hidden md:block">Modern UI</span>

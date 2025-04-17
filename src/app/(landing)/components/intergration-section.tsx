@@ -5,7 +5,7 @@ import type React from "react";
 import { useRef } from "react";
 import Link from "next/link";
 import { Button } from "@/components/modern-ui/button";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView } from "motion/react";
 import { AnimatedContent } from "./animated-content";
 
 const container = {

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { Bug, Lightbulb } from "lucide-react";
 import type { TOCItem } from "@/lib/toc";
 import { extractTOC } from "@/lib/toc";
