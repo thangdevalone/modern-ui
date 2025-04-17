@@ -1,0 +1,222 @@
+import { CalendarDemo, CalendarMultipleDemo, CalendarRangeDemo } from "@/app/(docs-group)/docs/components/calendar/components/calendar-demos";
+import { CalendarInstallation } from "@/app/(docs-group)/docs/components/calendar/components/calendar-installation";
+import { PreviewCalendar } from "@/app/(docs-group)/docs/components/calendar/preview";
+import { BreadcrumbNav } from "@/components/breadcrumb-nav";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/modern-ui/tabs";
+
+<BreadcrumbNav className="mb-4" items={[
+  {label: "Docs", href: "/docs"},
+  {label: "Components", href: "/docs/components"},
+  {label: "Calendar"},
+]}/>
+
+<PreviewCalendar/>
+
+# Calendar Component
+
+A highly customizable calendar component based on react-day-picker with advanced date selection capabilities.
+
+- Multiple selection modes: single, multiple, range
+- Supports day, month, quarter, and year views
+- Fully accessible with ARIA attributes
+- Customizable styling through classNames
+
+---
+
+## Installation
+
+The Calendar component is part of our UI library. You can import it directly from the components directory.
+
+<CalendarInstallation/>
+
+---
+
+## Usage
+
+Here is how to use the calendar in your project.
+
+```tsx
+import { Calendar } from "@/components/modern-ui/calendar"
+```
+
+<br/>
+
+```tsx
+<Calendar mode="single" />
+```
+
+---
+
+## Examples
+
+### Default Calendar
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[350px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[350px] not-prose">
+      <CalendarDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { Calendar } from "@/components/modern-ui/calendar";
+    import { useState } from "react";
+
+    export function CalendarDemo() {
+      const [date, setDate] = useState<Date | undefined>(new Date());
+      
+      return (
+        <Calendar
+          mode="single"
+          selected={date}
+          onSelect={setDate}
+          className="rounded-md border"
+        />
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+### Date Range Selection
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[350px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[350px] not-prose">
+      <CalendarRangeDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { Calendar } from "@/components/modern-ui/calendar";
+    import { DateRange } from "react-day-picker";
+    import { useState } from "react";
+
+    export function CalendarRangeDemo() {
+      const [dateRange, setDateRange] = useState<DateRange | undefined>({
+        from: new Date(),
+        to: new Date(new Date().setDate(new Date().getDate() + 7))
+      });
+      
+      return (
+        <Calendar
+          mode="range"
+          selected={dateRange}
+          onSelect={setDateRange}
+          className="rounded-md border"
+          numberOfMonths={2}
+        />
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+### Multiple Date Selection
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[350px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[350px] not-prose">
+      <CalendarMultipleDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { Calendar } from "@/components/modern-ui/calendar";
+    import { DateRange } from "react-day-picker";
+    import { useState } from "react";
+
+   export function CalendarMultipleDemo() {
+      const [dates, setDates] = useState<Date[]>([]);
+
+      return (
+        <Calendar
+          mode="multiple"
+          required
+          selected={dates}
+          onSelect={setDates}
+          className="rounded-md border"
+        />
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+---
+
+## API Reference
+
+### Main Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `mode` | `"single" \| "multiple" \| "range" \| "custom"` | `"single"` | Selection mode of the calendar |
+| `selected` | `Date \| Date[] \| DateRange \| undefined` | `undefined` | Currently selected date(s) |
+| `onSelect` | `(date: Date \| Date[] \| DateRange \| undefined) => void` | `undefined` | Handler called when date(s) are selected |
+| `defaultMonth` | `Date` | Current month | The default month to display |
+| `initialView` | `"days" \| "months" \| "years"` | `"days"` | The initial view to display when calendar opens |
+| `showOutsideDays` | `boolean` | `true` | Whether to show days from previous/next months |
+| `showYearSwitcher` | `boolean` | `true` | Whether to show the year switcher in the caption |
+| `yearRange` | `number` | `12` | Number of years to display in the year view |
+| `numberOfMonths` | `number` | `1` | Number of months to display at once |
+| `disabled` | `Date[] \| ((date: Date) => boolean)` | `undefined` | Dates to disable or a function to determine if a date should be disabled |
+| `fromDate` | `Date` | `undefined` | Minimum date that can be selected |
+| `toDate` | `Date` | `undefined` | Maximum date that can be selected |
+
+### Event Handlers
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `onMonthSelect` | `(date: Date) => void` | Handler called when a month is selected |
+| `onQuarterSelect` | `(date: Date) => void` | Handler called when a quarter is selected |
+| `onYearSelect` | `(date: Date) => void` | Handler called when a year is selected |
+| `onDayClick` | `(date: Date, modifiers: DayModifiers, e: MouseEvent) => void` | Handler called when a day is clicked |
+| `onMonthChange` | `(month: Date) => void` | Handler called when the month changes |
+
+### Styling Props
+
+The Calendar component provides extensive styling options through className props:
+
+| Prop | Description |
+|------|-------------|
+| `className` | The main Calendar container class |
+| `monthsClassName` | The months container class |
+| `monthCaptionClassName` | The month caption class |
+| `weekdaysClassName` | The weekdays container class |
+| `weekdayClassName` | The weekday class |
+| `monthClassName` | The month class |
+| `captionClassName` | The caption class |
+| `captionLabelClassName` | The caption label class |
+| `buttonNextClassName` | The next button class |
+| `buttonPreviousClassName` | The previous button class |
+| `navClassName` | The navigation class |
+| `monthGridClassName` | The month grid class |
+| `weekClassName` | The week class |
+| `dayClassName` | The day class |
+| `dayButtonClassName` | The day button class |
+| `rangeStartClassName` | The range start day class |
+| `rangeEndClassName` | The range end day class |
+| `selectedClassName` | The selected day class |
+| `todayClassName` | The today day class |
+| `outsideClassName` | The outside day class |
+| `disabledClassName` | The disabled day class |
+| `rangeMiddleClassName` | The middle day in a range class |
+| `hiddenClassName` | The hidden day class |
+
+

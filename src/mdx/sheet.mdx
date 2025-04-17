@@ -1,0 +1,400 @@
+import { SheetDemo, SheetSideDemo, SheetFormDemo } from "@/app/(docs-group)/docs/components/sheet/components/sheet-demos";
+import { SheetInstallation } from "@/app/(docs-group)/docs/components/sheet/components/sheet-installation";
+import { PreviewSheet } from "@/app/(docs-group)/docs/components/sheet/preview";
+import { BreadcrumbNav } from "@/components/breadcrumb-nav";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/modern-ui/tabs";
+
+<BreadcrumbNav className="mb-4" items={[
+  {label: "Docs", href: "/docs"},
+  {label: "Components", href: "/docs/components"},
+  {label: "Sheet"},
+]}/>
+
+<PreviewSheet/>
+
+# Sheet Component
+
+A responsive, accessible dialog component that slides in from the edge of the screen.
+
+- Multiple positions: top, right, bottom, left
+- Smooth animations with configurable durations
+- Built with accessibility in mind using Radix UI
+- Includes nested components for header, footer, and content structuring
+
+---
+
+## Installation
+
+The Sheet component is part of our UI library. You can import it directly from the components directory.
+
+<SheetInstallation/>
+
+---
+
+## Usage
+
+Here is how to use the sheet in your project.
+
+```tsx
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/modern-ui/sheet"
+```
+
+<br/>
+
+```tsx
+<Sheet>
+  <SheetTrigger>Open Sheet</SheetTrigger>
+  <SheetContent>
+    <SheetHeader>
+      <SheetTitle>Sheet Title</SheetTitle>
+      <SheetDescription>
+        Sheet description goes here. Make it useful for the user.
+      </SheetDescription>
+    </SheetHeader>
+    <div className="py-4">Sheet content goes here.</div>
+  </SheetContent>
+</Sheet>
+```
+
+---
+
+## Examples
+
+### Basic Sheet
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[200px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[200px] not-prose">
+      <SheetDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { Button } from "@/components/modern-ui/button";
+    import {
+      Sheet,
+      SheetContent,
+      SheetDescription,
+      SheetHeader,
+      SheetTitle,
+      SheetTrigger,
+    } from "@/components/modern-ui/sheet";
+
+    export function SheetDemo() {
+      return (
+        <Sheet>
+          <SheetTrigger asChild>
+            <Button variant="outline">Open Sheet</Button>
+          </SheetTrigger>
+          <SheetContent>
+            <SheetHeader>
+              <SheetTitle>Edit Profile</SheetTitle>
+              <SheetDescription>
+                Make changes to your profile here. Click save when you're done.
+              </SheetDescription>
+            </SheetHeader>
+            <div className="grid gap-4 py-4">
+              <div className="grid grid-cols-4 items-center gap-4">
+                <span className="col-span-1 text-sm">Name</span>
+                <input
+                  className="col-span-3 h-10 rounded-md border px-3"
+                  placeholder="Your name"
+                />
+              </div>
+              <div className="grid grid-cols-4 items-center gap-4">
+                <span className="col-span-1 text-sm">Email</span>
+                <input
+                  className="col-span-3 h-10 rounded-md border px-3"
+                  placeholder="example@email.com"
+                />
+              </div>
+            </div>
+            <div className="flex justify-end">
+              <Button>Save changes</Button>
+            </div>
+          </SheetContent>
+        </Sheet>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+### Side Variations
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[200px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center gap-4 h-full z-10 relative min-h-[200px] not-prose">
+      <SheetSideDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { Button } from "@/components/modern-ui/button";
+    import {
+      Sheet,
+      SheetContent,
+      SheetDescription,
+      SheetHeader,
+      SheetTitle,
+      SheetTrigger,
+    } from "@/components/modern-ui/sheet";
+
+    export function SheetSideDemo() {
+      return (
+        <div className="flex gap-2">
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button variant="outline">Top</Button>
+            </SheetTrigger>
+            <SheetContent side="top">
+              <SheetHeader>
+                <SheetTitle>Top Sheet</SheetTitle>
+                <SheetDescription>
+                  This sheet slides in from the top of the screen.
+                </SheetDescription>
+              </SheetHeader>
+            </SheetContent>
+          </Sheet>
+          
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button variant="outline">Right</Button>
+            </SheetTrigger>
+            <SheetContent side="right">
+              <SheetHeader>
+                <SheetTitle>Right Sheet</SheetTitle>
+                <SheetDescription>
+                  This sheet slides in from the right of the screen.
+                </SheetDescription>
+              </SheetHeader>
+            </SheetContent>
+          </Sheet>
+          
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button variant="outline">Bottom</Button>
+            </SheetTrigger>
+            <SheetContent side="bottom">
+              <SheetHeader>
+                <SheetTitle>Bottom Sheet</SheetTitle>
+                <SheetDescription>
+                  This sheet slides in from the bottom of the screen.
+                </SheetDescription>
+              </SheetHeader>
+            </SheetContent>
+          </Sheet>
+          
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button variant="outline">Left</Button>
+            </SheetTrigger>
+            <SheetContent side="left">
+              <SheetHeader>
+                <SheetTitle>Left Sheet</SheetTitle>
+                <SheetDescription>
+                  This sheet slides in from the left of the screen.
+                </SheetDescription>
+              </SheetHeader>
+            </SheetContent>
+          </Sheet>
+        </div>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+### Form Integration
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[200px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[200px] not-prose">
+      <SheetFormDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { useState } from "react";
+    import { Button } from "@/components/modern-ui/button";
+    import {
+      Sheet,
+      SheetContent,
+      SheetDescription,
+      SheetFooter,
+      SheetHeader,
+      SheetTitle,
+      SheetTrigger,
+    } from "@/components/modern-ui/sheet";
+    import { Label } from "@/components/modern-ui/label";
+    import { Input } from "@/components/modern-ui/input";
+
+    export function SheetFormDemo() {
+      const [open, setOpen] = useState(false);
+      const [formValues, setFormValues] = useState({
+        name: "",
+        email: "",
+      });
+
+      const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        console.log("Form submitted:", formValues);
+        setOpen(false);
+      };
+
+      return (
+        <Sheet open={open} onOpenChange={setOpen}>
+          <SheetTrigger asChild>
+            <Button variant="outline">Edit Profile</Button>
+          </SheetTrigger>
+          <SheetContent>
+            <form onSubmit={handleSubmit}>
+              <SheetHeader>
+                <SheetTitle>Edit Profile</SheetTitle>
+                <SheetDescription>
+                  Make changes to your profile here. Click save when you're done.
+                </SheetDescription>
+              </SheetHeader>
+              <div className="grid gap-4 py-4">
+                <div className="grid gap-2">
+                  <Label htmlFor="name">Name</Label>
+                  <Input
+                    id="name"
+                    value={formValues.name}
+                    onChange={(e) => setFormValues({...formValues, name: e.target.value})}
+                    placeholder="Your name"
+                  />
+                </div>
+                <div className="grid gap-2">
+                  <Label htmlFor="email">Email</Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    value={formValues.email}
+                    onChange={(e) => setFormValues({...formValues, email: e.target.value})}
+                    placeholder="example@email.com"
+                  />
+                </div>
+              </div>
+              <SheetFooter>
+                <Button type="submit">Save changes</Button>
+              </SheetFooter>
+            </form>
+          </SheetContent>
+        </Sheet>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+---
+
+## API Reference
+
+### Sheet
+
+The main container component for the sheet.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `open` | `boolean` | - | Controlled open state of the sheet |
+| `onOpenChange` | `(open: boolean) => void` | - | Callback fired when the open state changes |
+| `defaultOpen` | `boolean` | `false` | Whether the sheet is open by default (uncontrolled) |
+| `modal` | `boolean` | `true` | Whether the sheet should block interactions with the rest of the page when open |
+| `children` | `React.ReactNode` | - | The sheet trigger and content |
+
+### SheetTrigger
+
+The button that triggers the sheet.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `asChild` | `boolean` | `false` | Change the component to the HTML tag or custom component of the only child |
+| `children` | `React.ReactNode` | - | The element that will trigger the sheet |
+
+### SheetContent
+
+The content of the sheet that appears from the edge of the screen.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `side` | `"top" \| "right" \| "bottom" \| "left"` | `"right"` | The side from which the sheet enters the screen |
+| `className` | `string` | - | Additional CSS classes to apply |
+| `children` | `React.ReactNode` | - | The content of the sheet |
+
+### SheetHeader
+
+A container for the sheet header content.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes to apply |
+| `children` | `React.ReactNode` | - | The header content |
+
+### SheetFooter
+
+A container for the sheet footer content.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes to apply |
+| `children` | `React.ReactNode` | - | The footer content |
+
+### SheetTitle
+
+The title of the sheet.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes to apply |
+| `children` | `React.ReactNode` | - | The title content |
+
+### SheetDescription
+
+The description of the sheet.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes to apply |
+| `children` | `React.ReactNode` | - | The description content |
+
+### SheetClose
+
+The button that closes the sheet.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `asChild` | `boolean` | `false` | Change the component to the HTML tag or custom component of the only child |
+| `children` | `React.ReactNode` | - | The element that will close the sheet |
+
+## Accessibility
+
+The Sheet component follows the [WAI-ARIA Dialog pattern](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/) and includes the following accessibility features:
+
+- Focus is automatically trapped within the sheet when it is open
+- When closed, focus returns to the element that triggered the sheet
+- `Escape` key closes the sheet
+- `aria-labelledby` and `aria-describedby` attributes are automatically set based on the SheetTitle and SheetDescription components 

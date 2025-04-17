@@ -1,75 +1,69 @@
-"use client"
+"use client";
 
-import { Button, buttonVariants } from "@/components/modern-ui/button"
-import { cn } from "@/lib/utils"
-import { differenceInCalendarDays } from "date-fns"
-import { ChevronLeft, ChevronRight } from "lucide-react"
-import * as React from "react"
+import { Button, buttonVariants } from "@/components/modern-ui/button";
+import { cn } from "@/lib/utils";
+import { differenceInCalendarDays } from "date-fns";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import * as React from "react";
 import {
   DayPicker,
   labelNext,
   labelPrevious,
   useDayPicker,
   type DayPickerProps,
-} from "react-day-picker"
+} from "react-day-picker";
 
-export type CalendarProps = Omit<DayPickerProps, 'mode'> & {
+export type CalendarProps = DayPickerProps & {
   /**
    * In the year view, the number of years to display at once.
    * @default 12
    */
-  yearRange?: number
+  yearRange?: number;
 
   /**
    * Wether to show the year switcher in the caption.
    * @default true
    */
-  showYearSwitcher?: boolean
+  showYearSwitcher?: boolean;
 
   /**
    * The initial view of the calendar.
    * @default "days"
    */
-  initialView?: NavView
-
-  /**
-   * The selection mode of the calendar.
-   * @default "single"
-   */
-  mode?: "single" | "multiple" | "range" | "default"
+  initialView?: NavView;
 
   /**
    * Custom handlers for direct selection
    */
-  onMonthSelect?: (date: Date) => void
-  onQuarterSelect?: (date: Date) => void
-  onYearSelect?: (date: Date) => void
+  onMonthSelect?: (date: Date) => void;
+  onQuarterSelect?: (date: Date) => void;
+  onYearSelect?: (date: Date) => void;
 
-  monthsClassName?: string
-  monthCaptionClassName?: string
-  weekdaysClassName?: string
-  weekdayClassName?: string
-  monthClassName?: string
-  captionClassName?: string
-  captionLabelClassName?: string
-  buttonNextClassName?: string
-  buttonPreviousClassName?: string
-  navClassName?: string
-  monthGridClassName?: string
-  weekClassName?: string
-  dayClassName?: string
-  dayButtonClassName?: string
-  rangeStartClassName?: string
-  rangeEndClassName?: string
-  selectedClassName?: string
-  todayClassName?: string
-  outsideClassName?: string
-  disabledClassName?: string
-  rangeMiddleClassName?: string
-  hiddenClassName?: string
-}
+  monthsClassName?: string;
+  monthCaptionClassName?: string;
+  weekdaysClassName?: string;
+  weekdayClassName?: string;
+  monthClassName?: string;
+  captionClassName?: string;
+  captionLabelClassName?: string;
+  buttonNextClassName?: string;
+  buttonPreviousClassName?: string;
+  navClassName?: string;
+  monthGridClassName?: string;
+  weekClassName?: string;
+  dayClassName?: string;
+  dayButtonClassName?: string;
+  rangeStartClassName?: string;
+  rangeEndClassName?: string;
+  selectedClassName?: string;
+  todayClassName?: string;
+  outsideClassName?: string;
+  disabledClassName?: string;
+  rangeMiddleClassName?: string;
+  hiddenClassName?: string;
+};
 
-type NavView = "days" | "months" | "quarters" | "years"
+type NavView = "days" | "months" | "years";
 
 /**
  * A custom calendar component built on top of react-day-picker.
@@ -86,125 +80,111 @@ function Calendar({
   numberOfMonths,
   initialView = "days",
   onMonthSelect,
-  onQuarterSelect,
   onYearSelect,
   ...props
 }: CalendarProps) {
-  const [navView, setNavView] = React.useState<NavView>(initialView)
+  const [navView, setNavView] = React.useState<NavView>(initialView);
   const [displayYears, setDisplayYears] = React.useState<{
-    from: number
-    to: number
+    from: number;
+    to: number;
   }>(
     React.useMemo(() => {
-      const currentYear = new Date().getFullYear()
+      const currentYear = new Date().getFullYear();
       return {
         from: currentYear - Math.floor(yearRange / 2 - 1),
         to: currentYear + Math.ceil(yearRange / 2),
-      }
+      };
     }, [yearRange])
-  )
-  // Month view state
-  const [selectedMonth, setSelectedMonth] = React.useState<number | undefined>(
-    undefined
-  )
-  // Quarter view state
-  const [selectedQuarter, setSelectedQuarter] = React.useState<number | undefined>(
-    undefined
-  )
-  // Time view state
-  const [selectedTime, setSelectedTime] = React.useState<{
-    hour: number
-    minute: number
-  } | undefined>(undefined)
+  );
 
-  const { onNextClick, onPrevClick, startMonth, endMonth } = props
+  const { onNextClick, onPrevClick, startMonth, endMonth } = props;
 
-  const columnsDisplayed = navView === "years" ? 1 : numberOfMonths
+  const columnsDisplayed = navView === "years" ? 1 : numberOfMonths;
 
-  const _monthsClassName = cn("relative flex", props.monthsClassName)
+  const _monthsClassName = cn("relative flex", props.monthsClassName);
   const _monthCaptionClassName = cn(
     "relative mx-10 flex h-7 items-center justify-center",
     props.monthCaptionClassName
-  )
-  const _weekdaysClassName = cn("flex flex-row", props.weekdaysClassName)
+  );
+  const _weekdaysClassName = cn("flex flex-row", props.weekdaysClassName);
   const _weekdayClassName = cn(
     "w-8 text-sm font-normal text-muted-foreground",
     props.weekdayClassName
-  )
-  const _monthClassName = cn("w-full", props.monthClassName)
+  );
+  const _monthClassName = cn("w-full", props.monthClassName);
   const _captionClassName = cn(
     "relative flex items-center justify-center pt-1",
     props.captionClassName
-  )
+  );
   const _captionLabelClassName = cn(
     "truncate text-sm font-medium",
     props.captionLabelClassName
-  )
+  );
   const buttonNavClassName = buttonVariants({
     variant: "outline",
     className:
       "absolute h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100",
-  })
+  });
   const _buttonNextClassName = cn(
     buttonNavClassName,
     "right-0",
     props.buttonNextClassName
-  )
+  );
   const _buttonPreviousClassName = cn(
     buttonNavClassName,
     "left-0",
     props.buttonPreviousClassName
-  )
-  const _navClassName = cn("flex items-start", props.navClassName)
-  const _monthGridClassName = cn("mx-auto mt-4", props.monthGridClassName)
-  const _weekClassName = cn("mt-2 flex w-max items-start", props.weekClassName)
+  );
+  const _navClassName = cn("flex items-start", props.navClassName);
+  const _monthGridClassName = cn("mx-auto mt-4", props.monthGridClassName);
+  const _weekClassName = cn("mt-2 flex w-max items-start", props.weekClassName);
   const _dayClassName = cn(
     "flex size-8 flex-1 items-center justify-center p-0 text-sm",
     props.dayClassName
-  )
+  );
   const _dayButtonClassName = cn(
     buttonVariants({ variant: "ghost" }),
     "size-8 rounded-md p-0 font-normal transition-none aria-selected:opacity-100",
     props.dayButtonClassName
-  )
+  );
   const buttonRangeClassName =
-    "bg-accent [&>button]:bg-primary [&>button]:text-primary-foreground [&>button]:hover:bg-primary [&>button]:hover:text-primary-foreground"
+    "bg-accent [&>button]:bg-primary [&>button]:text-primary-foreground [&>button]:hover:bg-primary [&>button]:hover:text-primary-foreground";
   const _rangeStartClassName = cn(
     buttonRangeClassName,
     "day-range-start rounded-s-md",
     props.rangeStartClassName
-  )
+  );
   const _rangeEndClassName = cn(
     buttonRangeClassName,
     "day-range-end rounded-e-md",
     props.rangeEndClassName
-  )
+  );
   const _rangeMiddleClassName = cn(
     "bg-accent !text-foreground [&>button]:bg-transparent [&>button]:!text-foreground [&>button]:hover:bg-transparent [&>button]:hover:!text-foreground",
     props.rangeMiddleClassName
-  )
+  );
   const _selectedClassName = cn(
     "[&>button]:bg-primary [&>button]:text-primary-foreground [&>button]:hover:bg-primary [&>button]:hover:text-primary-foreground",
     props.selectedClassName
-  )
+  );
   const _todayClassName = cn(
     "[&>button]:bg-accent [&>button]:text-accent-foreground",
     props.todayClassName
-  )
+  );
   const _outsideClassName = cn(
     "day-outside text-muted-foreground opacity-50 aria-selected:bg-accent/50 aria-selected:text-muted-foreground aria-selected:opacity-30",
     props.outsideClassName
-  )
+  );
   const _disabledClassName = cn(
     "text-muted-foreground opacity-50",
     props.disabledClassName
-  )
-  const _hiddenClassName = cn("invisible flex-1", props.hiddenClassName)
+  );
+  const _hiddenClassName = cn("invisible flex-1", props.hiddenClassName);
 
   return (
     <DayPicker
       {...(props as any)}
-      mode={mode === "default" ? "single" : mode}
+      mode={mode}
       showOutsideDays={showOutsideDays}
       className={cn("p-3", className)}
       style={{
@@ -236,8 +216,8 @@ function Calendar({
       }}
       components={{
         Chevron: ({ orientation }) => {
-          const Icon = orientation === "left" ? ChevronLeft : ChevronRight
-          return <Icon className="h-4 w-4" />
+          const Icon = orientation === "left" ? ChevronLeft : ChevronRight;
+          return <Icon className="h-4 w-4" />;
         },
         Nav: ({ className }) => (
           <Nav
@@ -270,7 +250,6 @@ function Calendar({
             navView={navView}
             setNavView={setNavView}
             onMonthSelect={onMonthSelect}
-            onQuarterSelect={onQuarterSelect}
             onYearSelect={onYearSelect}
             {...gridProps}
           />
@@ -278,9 +257,9 @@ function Calendar({
       }}
       numberOfMonths={columnsDisplayed}
     />
-  )
+  );
 }
-Calendar.displayName = "Calendar"
+Calendar.displayName = "Calendar";
 
 function Nav({
   className,
@@ -292,21 +271,21 @@ function Nav({
   onPrevClick,
   onNextClick,
 }: {
-  className?: string
-  navView: NavView
-  startMonth?: Date
-  endMonth?: Date
-  displayYears: { from: number; to: number }
+  className?: string;
+  navView: NavView;
+  startMonth?: Date;
+  endMonth?: Date;
+  displayYears: { from: number; to: number };
   setDisplayYears: React.Dispatch<
     React.SetStateAction<{ from: number; to: number }>
-  >
-  onPrevClick?: (date: Date) => void
-  onNextClick?: (date: Date) => void
+  >;
+  onPrevClick?: (date: Date) => void;
+  onNextClick?: (date: Date) => void;
 }) {
-  const { nextMonth, previousMonth, goToMonth } = useDayPicker()
+  const { nextMonth, previousMonth, goToMonth } = useDayPicker();
 
   const isPreviousDisabled = (() => {
-    if (navView === "years" || navView === "months" || navView === "quarters") {
+    if (navView === "years" || navView === "months") {
       return (
         (startMonth &&
           differenceInCalendarDays(
@@ -318,13 +297,13 @@ function Nav({
             new Date(displayYears.from - 1, 0, 1),
             endMonth
           ) > 0)
-      )
+      );
     }
-    return !previousMonth
-  })()
+    return !previousMonth;
+  })();
 
   const isNextDisabled = (() => {
-    if (navView === "years" || navView === "months" || navView === "quarters") {
+    if (navView === "years" || navView === "months") {
       return (
         (startMonth &&
           differenceInCalendarDays(
@@ -336,88 +315,103 @@ function Nav({
             new Date(displayYears.to + 1, 0, 1),
             endMonth
           ) > 0)
-      )
+      );
     }
-    return !nextMonth
-  })()
+    return !nextMonth;
+  })();
 
   const handlePreviousClick = React.useCallback(() => {
-    if (!previousMonth) return
-    
+    if (!previousMonth) return;
+
     if (navView === "years") {
       setDisplayYears((prev) => ({
         from: prev.from - (prev.to - prev.from + 1),
         to: prev.to - (prev.to - prev.from + 1),
-      }))
+      }));
       onPrevClick?.(
         new Date(
           displayYears.from - (displayYears.to - displayYears.from),
           0,
           1
         )
-      )
-      return
+      );
+      return;
     }
-    
-    if (navView === "months" || navView === "quarters") {
+
+    if (navView === "months") {
       setDisplayYears((prev) => ({
         from: prev.from - 1,
         to: prev.to - 1,
-      }))
-      onPrevClick?.(new Date(displayYears.from - 1, 0, 1))
-      return
+      }));
+      onPrevClick?.(new Date(displayYears.from - 1, 0, 1));
+      return;
     }
-    
-    goToMonth(previousMonth)
-    onPrevClick?.(previousMonth)
-  }, [previousMonth, goToMonth, navView, displayYears, setDisplayYears, onPrevClick])
+
+    goToMonth(previousMonth);
+    onPrevClick?.(previousMonth);
+  }, [
+    previousMonth,
+    goToMonth,
+    navView,
+    displayYears,
+    setDisplayYears,
+    onPrevClick,
+  ]);
 
   const handleNextClick = React.useCallback(() => {
-    if (!nextMonth) return
-    
+    if (!nextMonth) return;
+
     if (navView === "years") {
       setDisplayYears((prev) => ({
         from: prev.from + (prev.to - prev.from + 1),
         to: prev.to + (prev.to - prev.from + 1),
-      }))
+      }));
       onNextClick?.(
         new Date(
           displayYears.from + (displayYears.to - displayYears.from),
           0,
           1
         )
-      )
-      return
+      );
+      return;
     }
-    
-    if (navView === "months" || navView === "quarters") {
+
+    if (navView === "months") {
       setDisplayYears((prev) => ({
         from: prev.from + 1,
         to: prev.to + 1,
-      }))
-      onNextClick?.(new Date(displayYears.from + 1, 0, 1))
-      return
+      }));
+      onNextClick?.(new Date(displayYears.from + 1, 0, 1));
+      return;
     }
-    
-    goToMonth(nextMonth)
-    onNextClick?.(nextMonth)
-  }, [goToMonth, nextMonth, navView, displayYears, setDisplayYears, onNextClick])
-  
-  const getAriaLabel = (direction: 'previous' | 'next') => {
+
+    goToMonth(nextMonth);
+    onNextClick?.(nextMonth);
+  }, [
+    goToMonth,
+    nextMonth,
+    navView,
+    displayYears,
+    setDisplayYears,
+    onNextClick,
+  ]);
+
+  const getAriaLabel = (direction: "previous" | "next") => {
     if (navView === "years") {
-      return `Go to the ${direction} ${displayYears.to - displayYears.from + 1} years`
+      return `Go to the ${direction} ${
+        displayYears.to - displayYears.from + 1
+      } years`;
     }
     if (navView === "months") {
-      return `Go to ${direction === 'previous' ? 'previous' : 'next'} year's months`
+      return `Go to ${
+        direction === "previous" ? "previous" : "next"
+      } year's months`;
     }
-    if (navView === "quarters") {
-      return `Go to ${direction === 'previous' ? 'previous' : 'next'} year's quarters`
-    }
-    return direction === 'previous' 
-      ? labelPrevious(previousMonth) 
-      : labelNext(nextMonth)
-  }
-  
+    return direction === "previous"
+      ? labelPrevious(previousMonth)
+      : labelNext(nextMonth);
+  };
+
   return (
     <nav className={cn("flex items-center", className)}>
       <Button
@@ -426,7 +420,7 @@ function Nav({
         type="button"
         tabIndex={isPreviousDisabled ? undefined : -1}
         disabled={isPreviousDisabled}
-        aria-label={getAriaLabel('previous')}
+        aria-label={getAriaLabel("previous")}
         onClick={handlePreviousClick}
       >
         <ChevronLeft className="h-4 w-4" />
@@ -438,13 +432,13 @@ function Nav({
         type="button"
         tabIndex={isNextDisabled ? undefined : -1}
         disabled={isNextDisabled}
-        aria-label={getAriaLabel('next')}
+        aria-label={getAriaLabel("next")}
         onClick={handleNextClick}
       >
         <ChevronRight className="h-4 w-4" />
       </Button>
     </nav>
-  )
+  );
 }
 
 function CaptionLabel({
@@ -455,45 +449,41 @@ function CaptionLabel({
   displayYears,
   ...props
 }: {
-  showYearSwitcher?: boolean
-  navView: NavView
-  setNavView: React.Dispatch<React.SetStateAction<NavView>>
-  displayYears: { from: number; to: number }
+  showYearSwitcher?: boolean;
+  navView: NavView;
+  setNavView: React.Dispatch<React.SetStateAction<NavView>>;
+  displayYears: { from: number; to: number };
 } & React.HTMLAttributes<HTMLSpanElement>) {
-  if (!showYearSwitcher) return <span {...props}>{children}</span>
-  
+  if (!showYearSwitcher) return <span {...props}>{children}</span>;
+
   const handleViewChange = () => {
     setNavView((prev) => {
       switch (prev) {
         case "days":
-          return "months"
+          return "months";
         case "months":
-          return "years"
-        case "quarters":
-          return "years"
+          return "years";
         case "years":
-          return "days"
+          return "days";
         default:
-          return "days"
+          return "days";
       }
-    })
-  }
-  
+    });
+  };
+
   const getViewLabel = () => {
     switch (navView) {
       case "days":
-        return children
+        return children;
       case "months":
-        return `${displayYears.from} - Months`
-      case "quarters":
-        return `${displayYears.from} - Quarters`
+        return `${displayYears.from} - Months`;
       case "years":
-        return `${displayYears.from} - ${displayYears.to}`
+        return `${displayYears.from} - ${displayYears.to}`;
       default:
-        return children
+        return children;
     }
-  }
-  
+  };
+
   return (
     <Button
       className="h-7 w-full truncate text-sm font-medium"
@@ -503,7 +493,7 @@ function CaptionLabel({
     >
       {getViewLabel()}
     </Button>
-  )
+  );
 }
 
 function MonthGrid({
@@ -519,16 +509,16 @@ function MonthGrid({
   onYearSelect,
   ...props
 }: {
-  className?: string
-  children: React.ReactNode
-  displayYears: { from: number; to: number }
-  startMonth?: Date
-  endMonth?: Date
-  navView: NavView
-  setNavView: React.Dispatch<React.SetStateAction<NavView>>
-  onMonthSelect?: (date: Date) => void
-  onQuarterSelect?: (date: Date) => void
-  onYearSelect?: (date: Date) => void
+  className?: string;
+  children: React.ReactNode;
+  displayYears: { from: number; to: number };
+  startMonth?: Date;
+  endMonth?: Date;
+  navView: NavView;
+  setNavView: React.Dispatch<React.SetStateAction<NavView>>;
+  onMonthSelect?: (date: Date) => void;
+  onQuarterSelect?: (date: Date) => void;
+  onYearSelect?: (date: Date) => void;
 } & React.TableHTMLAttributes<HTMLTableElement>) {
   if (navView === "years") {
     return (
@@ -542,9 +532,9 @@ function MonthGrid({
         className={className}
         {...props}
       />
-    )
+    );
   }
-  
+
   if (navView === "months") {
     return (
       <MonthViewGrid
@@ -557,29 +547,14 @@ function MonthGrid({
         className={className}
         {...props}
       />
-    )
+    );
   }
-  
-  if (navView === "quarters") {
-    return (
-      <QuarterGrid
-        displayYears={displayYears}
-        startMonth={startMonth}
-        endMonth={endMonth}
-        setNavView={setNavView}
-        navView={navView}
-        onQuarterSelect={onQuarterSelect}
-        className={className}
-        {...props}
-      />
-    )
-  }
-  
+
   return (
     <table className={className} {...props}>
       {children}
     </table>
-  )
+  );
 }
 
 function YearGrid({
@@ -592,23 +567,23 @@ function YearGrid({
   onYearSelect,
   ...props
 }: {
-  className?: string
-  displayYears: { from: number; to: number }
-  startMonth?: Date
-  endMonth?: Date
-  setNavView: React.Dispatch<React.SetStateAction<NavView>>
-  navView: NavView
-  onYearSelect?: (date: Date) => void
+  className?: string;
+  displayYears: { from: number; to: number };
+  startMonth?: Date;
+  endMonth?: Date;
+  setNavView: React.Dispatch<React.SetStateAction<NavView>>;
+  navView: NavView;
+  onYearSelect?: (date: Date) => void;
 } & React.HTMLAttributes<HTMLDivElement>) {
-  const { goToMonth, selected } = useDayPicker()
-  
+  const { goToMonth, selected } = useDayPicker();
+
   // Generate years in a proper grid layout
   const currentYear = new Date().getFullYear();
-  
+
   // Calculate the start year to create a nice 3x4 grid with current year in the middle
   let startYear = displayYears.from;
   const yearsToShow = 12; // 3x4 grid
-  
+
   return (
     <div className="w-full" {...props}>
       <div className="mt-2 px-1">
@@ -616,37 +591,38 @@ function YearGrid({
           {Array.from({ length: yearsToShow }, (_, i) => {
             const year = startYear + i;
             const isCurrentYear = year === currentYear;
-            
-            const isBefore = startMonth && 
-              new Date(year, 11, 31) < startMonth;
-              
-            const isAfter = endMonth && 
-              new Date(year, 0, 1) > endMonth;
-              
+
+            const isBefore = startMonth && new Date(year, 11, 31) < startMonth;
+
+            const isAfter = endMonth && new Date(year, 0, 1) > endMonth;
+
             const isDisabled = isBefore || isAfter;
-            
+
             const newDate = new Date(year, 0, 1);
-            
-            const isSelected = selected && 
-              typeof selected === 'object' && 
-              'getFullYear' in selected && 
+
+            const isSelected =
+              selected &&
+              typeof selected === "object" &&
+              "getFullYear" in selected &&
               (selected as Date).getFullYear() === year;
-            
+
             return (
               <Button
                 key={i}
                 className={cn(
                   "h-10 w-full rounded-md transition-all",
-                  isCurrentYear && !isSelected && "bg-accent text-accent-foreground font-medium",
-                  isSelected && "bg-primary text-primary-foreground font-medium",
+                  isCurrentYear &&
+                    !isSelected &&
+                    "bg-accent text-accent-foreground font-medium",
+                  isSelected && "bg-primary text-primary-foreground font-medium"
                 )}
                 variant={isSelected ? "default" : "ghost"}
                 onClick={() => {
-                  if (typeof onYearSelect === 'function') {
+                  if (typeof onYearSelect === "function") {
                     onYearSelect(newDate);
                     return;
                   }
-                  
+
                   setNavView("days");
                   goToMonth(
                     new Date(
@@ -664,7 +640,7 @@ function YearGrid({
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 function MonthViewGrid({
@@ -677,44 +653,56 @@ function MonthViewGrid({
   onMonthSelect,
   ...props
 }: {
-  className?: string
-  displayYears: { from: number; to: number }
-  startMonth?: Date
-  endMonth?: Date
-  setNavView: React.Dispatch<React.SetStateAction<NavView>>
-  navView: NavView
-  onMonthSelect?: (date: Date) => void
+  className?: string;
+  displayYears: { from: number; to: number };
+  startMonth?: Date;
+  endMonth?: Date;
+  setNavView: React.Dispatch<React.SetStateAction<NavView>>;
+  navView: NavView;
+  onMonthSelect?: (date: Date) => void;
 } & React.HTMLAttributes<HTMLDivElement>) {
-  const { goToMonth } = useDayPicker()
-  const currentDate = new Date()
-  const currentYear = currentDate.getFullYear()
-  const currentMonth = currentDate.getMonth()
-  
+  const { goToMonth } = useDayPicker();
+  const currentDate = new Date();
+  const currentYear = currentDate.getFullYear();
+  const currentMonth = currentDate.getMonth();
+
   const monthNames = [
-    "Jan", "Feb", "Mar", "Apr", 
-    "May", "Jun", "Jul", "Aug",
-    "Sep", "Oct", "Nov", "Dec"
-  ]
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
 
   return (
     <div className={cn("grid grid-cols-3 gap-2", className)} {...props}>
       {monthNames.map((month, index) => {
-        const isCurrentMonth = currentYear === displayYears.from && currentMonth === index
-        
-        const isBefore = startMonth && 
+        const isCurrentMonth =
+          currentYear === displayYears.from && currentMonth === index;
+
+        const isBefore =
+          startMonth &&
           differenceInCalendarDays(
             new Date(displayYears.from, index, 1),
             startMonth
-          ) < 0
-          
-        const isAfter = endMonth && 
+          ) < 0;
+
+        const isAfter =
+          endMonth &&
           differenceInCalendarDays(
             new Date(displayYears.from, index, 1),
             endMonth
-          ) > 0
-          
-        const isDisabled = isBefore || isAfter
-        
+          ) > 0;
+
+        const isDisabled = isBefore || isAfter;
+
         return (
           <Button
             key={index}
@@ -725,11 +713,11 @@ function MonthViewGrid({
             variant="ghost"
             onClick={() => {
               const newDate = new Date(displayYears.from, index, 1);
-              if (typeof onMonthSelect === 'function') {
+              if (typeof onMonthSelect === "function") {
                 onMonthSelect(newDate);
                 return;
               }
-              
+
               setNavView("days");
               goToMonth(newDate);
             }}
@@ -737,147 +725,10 @@ function MonthViewGrid({
           >
             {month}
           </Button>
-        )
+        );
       })}
-    </div>
-  )
-}
-
-function QuarterGrid({
-  className,
-  displayYears,
-  startMonth,
-  endMonth,
-  setNavView,
-  navView,
-  onQuarterSelect,
-  ...props
-}: {
-  className?: string
-  displayYears: { from: number; to: number }
-  startMonth?: Date
-  endMonth?: Date
-  setNavView: React.Dispatch<React.SetStateAction<NavView>>
-  navView: NavView
-  onQuarterSelect?: (date: Date) => void
-} & React.HTMLAttributes<HTMLDivElement>) {
-  const { goToMonth, selected } = useDayPicker()
-  
-  const currentDate = new Date()
-  const currentYear = currentDate.getFullYear()
-  const currentQuarter = Math.floor(currentDate.getMonth() / 3) + 1
-  
-  const year = displayYears.from;
-  
-  const quarters = [
-    { 
-      quarter: "Q1", 
-      name: "First Quarter",
-      months: [0, 1, 2],
-      monthNames: ["Jan", "Feb", "Mar"]
-    },
-    { 
-      quarter: "Q2", 
-      name: "Second Quarter",
-      months: [3, 4, 5],
-      monthNames: ["Apr", "May", "Jun"]
-    },
-    { 
-      quarter: "Q3", 
-      name: "Third Quarter",
-      months: [6, 7, 8],
-      monthNames: ["Jul", "Aug", "Sep"]
-    },
-    { 
-      quarter: "Q4", 
-      name: "Fourth Quarter",
-      months: [9, 10, 11],
-      monthNames: ["Oct", "Nov", "Dec"]
-    }
-  ]
-  
-  const getIsSelected = (quarterIndex: number) => {
-    if (!selected || typeof selected !== 'object' || !('getMonth' in selected)) {
-      return false;
-    }
-    const selectedQuarter = Math.floor((selected as Date).getMonth() / 3);
-    return (selected as Date).getFullYear() === year && selectedQuarter === quarterIndex;
-  };
-
-  return (
-    <div className="ư-full" {...props}>
-      <div className="grid gap-3">
-        {quarters.map((q, index) => {
-          const isCurrentQuarter = currentYear === year && currentQuarter === index + 1;
-          
-          const isBefore = startMonth && 
-            new Date(year, q.months[0], 1) < startMonth;
-            
-          const isAfter = endMonth && 
-            new Date(year, q.months[q.months.length - 1] + 1, 0) > endMonth;
-            
-          const isDisabled = isBefore || isAfter;
-          
-          const isSelected = getIsSelected(index);
-          
-          return (
-            <div
-              key={index}
-              className={cn(
-                "rounded-lg border p-3 transition-all",
-                isSelected && "border-primary bg-primary/5",
-                isCurrentQuarter && !isSelected && "border-accent bg-accent/5",
-                !isCurrentQuarter && !isSelected && "border-border"
-              )}
-            >
-              <div className="flex justify-between items-center">
-                <div>
-                  <div className={cn(
-                    "text-base font-medium",
-                    isSelected && "text-primary",
-                    isCurrentQuarter && !isSelected && "text-accent-foreground"
-                  )}>
-                    ({q.monthNames[0]} - {q.monthNames[2]}) {year}
-                  </div>
-                  <div className="text-xs text-muted-foreground mt-1">
-                    {q.name}
-                  </div>
-                </div>
-                <Button
-                  variant={isSelected ? "default" : "outline"}
-                  size="sm"
-                  className="h-8"
-                  onClick={() => {
-                    const newDate = new Date(year, q.months[0], 1);
-                    if (typeof onQuarterSelect === 'function') {
-                      onQuarterSelect(newDate);
-                      return;
-                    }
-                    
-                    setNavView("days");
-                    goToMonth(newDate);
-                  }}
-                  disabled={isDisabled}
-                >
-                  {isSelected ? "Selected" : "Select"}
-                </Button>
-              </div>
-              <div className="grid grid-cols-3 gap-1 mt-2">
-                {q.monthNames.map((month, monthIndex) => (
-                  <div 
-                    key={monthIndex}
-                    className="text-xs px-2 py-1 rounded-sm bg-background text-muted-foreground text-center"
-                  >
-                    {month}
-                  </div>
-                ))}
-              </div>
-            </div>
-          );
-        })}
-      </div>
     </div>
   );
 }
 
-export { Calendar }
+export { Calendar };

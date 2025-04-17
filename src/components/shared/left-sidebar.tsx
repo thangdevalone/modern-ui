@@ -68,6 +68,7 @@ const links: {
         label: "Breadcrumb",
       },
       { href: "/docs/components/button", label: "Button" },
+      { href: "/docs/components/calendar", label: "Calendar", badge: "new" },
       { href: "/docs/components/card", label: "Card" },
       { href: "/docs/components/command", label: "Command" },
       {
@@ -79,6 +80,7 @@ const links: {
         label: "Date Picker",
       },
       { href: "/docs/components/dialog", label: "Dialog" },
+      { href: "/docs/components/drawer", label: "Drawer", badge: "new" },
       { href: "/docs/components/fancy-tabs", label: "Fancy tab" },
       {
         href: "/docs/components/fluid-dropdown",
@@ -87,10 +89,12 @@ const links: {
       { href: "/docs/components/input", label: "Input" },
       { href: "/docs/components/label", label: "Label" },
       { href: "/docs/components/popover", label: "Popover" },
+      { href: "/docs/components/radio", label: "Radio", badge: "new" },
       {
         href: "/docs/components/rainbow-button",
         label: "Rainbow Button",
       },
+      { href: "/docs/components/sheet", label: "Sheet", badge: "new" },
       { href: "/docs/components/sonner", label: "Sonner" },
       { href: "/docs/components/stepper", label: "Stepper" },
       { href: "/docs/components/switch", label: "Switch" },

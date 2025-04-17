@@ -1,0 +1,365 @@
+import { DrawerDemo, DrawerSizeDemo, DrawerNestedDemo } from "@/app/(docs-group)/docs/components/drawer/components/drawer-demos";
+import { DrawerInstallation } from "@/app/(docs-group)/docs/components/drawer/components/drawer-installation";
+import { PreviewDrawer } from "@/app/(docs-group)/docs/components/drawer/preview";
+import { BreadcrumbNav } from "@/components/breadcrumb-nav";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/modern-ui/tabs";
+
+<BreadcrumbNav className="mb-4" items={[
+  {label: "Docs", href: "/docs"},
+  {label: "Components", href: "/docs/components"},
+  {label: "Drawer"},
+]}/>
+
+<PreviewDrawer/>
+
+# Drawer Component
+
+A bottom sheet component for mobile and tablet interfaces, built on top of the Vaul library.
+
+- Mobile-friendly bottom sheet that can be swiped to dismiss
+- Customizable with different sizes and heights
+- Includes nested components for header, footer, and content structuring
+- Smooth animation effects with background scaling
+
+---
+
+## Installation
+
+The Drawer component is part of our UI library. You can import it directly from the components directory.
+
+<DrawerInstallation/>
+
+---
+
+## Usage
+
+Here is how to use the drawer in your project.
+
+```tsx
+import {
+  Drawer,
+  DrawerContent,
+  DrawerDescription,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/modern-ui/drawer"
+```
+
+<br/>
+
+```tsx
+<Drawer>
+  <DrawerTrigger>Open Drawer</DrawerTrigger>
+  <DrawerContent>
+    <DrawerHeader>
+      <DrawerTitle>Drawer Title</DrawerTitle>
+      <DrawerDescription>
+        This is a description for the drawer.
+      </DrawerDescription>
+    </DrawerHeader>
+    <div className="p-4">Drawer content goes here</div>
+  </DrawerContent>
+</Drawer>
+```
+
+---
+
+## Examples
+
+### Basic Drawer
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[200px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[200px] not-prose">
+      <DrawerDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { Button } from "@/components/modern-ui/button";
+    import {
+      Drawer,
+      DrawerContent,
+      DrawerDescription,
+      DrawerHeader,
+      DrawerTitle,
+      DrawerTrigger,
+      DrawerFooter,
+    } from "@/components/modern-ui/drawer";
+
+    export function DrawerDemo() {
+      return (
+        <Drawer>
+          <DrawerTrigger asChild>
+            <Button variant="outline">Open Drawer</Button>
+          </DrawerTrigger>
+          <DrawerContent>
+            <DrawerHeader>
+              <DrawerTitle>Mobile Menu</DrawerTitle>
+              <DrawerDescription>
+                This is a drawer component for mobile interfaces.
+              </DrawerDescription>
+            </DrawerHeader>
+            <div className="p-4 grid gap-2">
+              <div className="h-8 rounded-md bg-muted/50 flex items-center justify-center">
+                Menu Item 1
+              </div>
+              <div className="h-8 rounded-md bg-muted/50 flex items-center justify-center">
+                Menu Item 2
+              </div>
+              <div className="h-8 rounded-md bg-muted/50 flex items-center justify-center">
+                Menu Item 3
+              </div>
+            </div>
+            <DrawerFooter>
+              <Button>Close</Button>
+            </DrawerFooter>
+          </DrawerContent>
+        </Drawer>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+### Different Sizes
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[200px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center gap-4 h-full z-10 relative min-h-[200px] not-prose">
+      <DrawerSizeDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { Button } from "@/components/modern-ui/button";
+    import {
+      Drawer,
+      DrawerContent,
+      DrawerDescription,
+      DrawerHeader,
+      DrawerTitle,
+      DrawerTrigger,
+    } from "@/components/modern-ui/drawer";
+
+    export function DrawerSizeDemo() {
+      return (
+        <div className="flex gap-2">
+          <Drawer>
+            <DrawerTrigger asChild>
+              <Button variant="outline">Small</Button>
+            </DrawerTrigger>
+            <DrawerContent className="h-full max-h-[30vh]">
+              <DrawerHeader>
+                <DrawerTitle>Small Drawer</DrawerTitle>
+                <DrawerDescription>
+                  This is a small drawer with 30% viewport height.
+                </DrawerDescription>
+              </DrawerHeader>
+              <div className="p-4">
+                Drawer content goes here
+              </div>
+            </DrawerContent>
+          </Drawer>
+          
+          <Drawer>
+            <DrawerTrigger asChild>
+              <Button variant="outline">Medium</Button>
+            </DrawerTrigger>
+            <DrawerContent className="h-full max-h-[50vh]">
+              <DrawerHeader>
+                <DrawerTitle>Medium Drawer</DrawerTitle>
+                <DrawerDescription>
+                  This is a medium drawer with 50% viewport height.
+                </DrawerDescription>
+              </DrawerHeader>
+              <div className="p-4">
+                Drawer content goes here
+              </div>
+            </DrawerContent>
+          </Drawer>
+          
+          <Drawer>
+            <DrawerTrigger asChild>
+              <Button variant="outline">Large</Button>
+            </DrawerTrigger>
+            <DrawerContent className="h-full max-h-[80vh]">
+              <DrawerHeader>
+                <DrawerTitle>Large Drawer</DrawerTitle>
+                <DrawerDescription>
+                  This is a large drawer with 80% viewport height.
+                </DrawerDescription>
+              </DrawerHeader>
+              <div className="p-4">
+                Drawer content goes here
+              </div>
+            </DrawerContent>
+          </Drawer>
+        </div>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+### Nested Drawers
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[200px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[200px] not-prose">
+      <DrawerNestedDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { Button } from "@/components/modern-ui/button";
+    import {
+      Drawer,
+      DrawerContent,
+      DrawerDescription,
+      DrawerHeader,
+      DrawerTitle,
+      DrawerTrigger,
+      DrawerFooter,
+    } from "@/components/modern-ui/drawer";
+
+    export function DrawerNestedDemo() {
+      return (
+        <Drawer>
+          <DrawerTrigger asChild>
+            <Button variant="outline">Open Main Drawer</Button>
+          </DrawerTrigger>
+          <DrawerContent>
+            <DrawerHeader>
+              <DrawerTitle>Main Drawer</DrawerTitle>
+              <DrawerDescription>
+                This is the main drawer. Try opening the nested drawer.
+              </DrawerDescription>
+            </DrawerHeader>
+            <div className="p-4 flex justify-center">
+              <Drawer>
+                <DrawerTrigger asChild>
+                  <Button>Open Nested Drawer</Button>
+                </DrawerTrigger>
+                <DrawerContent>
+                  <DrawerHeader>
+                    <DrawerTitle>Nested Drawer</DrawerTitle>
+                    <DrawerDescription>
+                      This is a nested drawer inside the main drawer.
+                    </DrawerDescription>
+                  </DrawerHeader>
+                  <div className="p-4">
+                    <p>Nested drawer content goes here</p>
+                  </div>
+                  <DrawerFooter>
+                    <Button>Close</Button>
+                  </DrawerFooter>
+                </DrawerContent>
+              </Drawer>
+            </div>
+          </DrawerContent>
+        </Drawer>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+---
+
+## API Reference
+
+### Drawer
+
+The main container component for the drawer.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `shouldScaleBackground` | `boolean` | `true` | Whether the background should scale when the drawer opens |
+| `open` | `boolean` | - | Controlled open state of the drawer |
+| `onOpenChange` | `(open: boolean) => void` | - | Callback fired when the open state changes |
+| `modal` | `boolean` | `true` | Whether the drawer should block interactions with the rest of the page when open |
+| `direction` | `"bottom"` | `"bottom"` | The direction the drawer opens from (only bottom is supported in this implementation) |
+| `snapPoints` | `number[]` | - | Points where the drawer can snap to when dragging |
+| `activeSnapPoint` | `number` | - | The active snap point |
+| `setActiveSnapPoint` | `(snapPoint: number) => void` | - | Callback fired when the active snap point changes |
+| `children` | `React.ReactNode` | - | The drawer trigger and content |
+
+### DrawerTrigger
+
+The button that triggers the drawer.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `asChild` | `boolean` | `false` | Change the component to the HTML tag or custom component of the only child |
+| `children` | `React.ReactNode` | - | The element that will trigger the drawer |
+
+### DrawerContent
+
+The content of the drawer.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes to apply |
+| `children` | `React.ReactNode` | - | The content of the drawer |
+
+### DrawerHeader
+
+A container for the drawer header content.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes to apply |
+| `children` | `React.ReactNode` | - | The header content |
+
+### DrawerFooter
+
+A container for the drawer footer content.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes to apply |
+| `children` | `React.ReactNode` | - | The footer content |
+
+### DrawerTitle
+
+The title of the drawer.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes to apply |
+| `children` | `React.ReactNode` | - | The title content |
+
+### DrawerDescription
+
+The description of the drawer.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes to apply |
+| `children` | `React.ReactNode` | - | The description content |
+
+### DrawerClose
+
+The button that closes the drawer.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `asChild` | `boolean` | `false` | Change the component to the HTML tag or custom component of the only child |
+| `children` | `React.ReactNode` | - | The element that will close the drawer | 

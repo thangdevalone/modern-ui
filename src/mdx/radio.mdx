@@ -1,0 +1,242 @@
+import { RadioGroupDemo, RadioGroupDisabledDemo, RadioGroupFormDemo } from "@/app/(docs-group)/docs/components/radio/components/radio-demos";
+import { RadioInstallation } from "@/app/(docs-group)/docs/components/radio/components/radio-installation";
+import { PreviewRadio } from "@/app/(docs-group)/docs/components/radio/preview";
+import { BreadcrumbNav } from "@/components/breadcrumb-nav";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/modern-ui/tabs";
+
+<BreadcrumbNav className="mb-4" items={[
+  {label: "Docs", href: "/docs"},
+  {label: "Components", href: "/docs/components"},
+  {label: "Radio"},
+]}/>
+
+<PreviewRadio/>
+
+# Radio Component
+
+A radio group component built on top of Radix UI's Radio Group, providing a set of checkable buttons where only one can be checked at a time.
+
+- Follows WAI-ARIA patterns for accessibility
+- Keyboard navigation support
+- Customizable styles through className prop
+- Integrates seamlessly with form libraries
+
+---
+
+## Installation
+
+The Radio component is part of our UI library. You can import it directly from the components directory.
+
+<RadioInstallation/>
+
+---
+
+## Usage
+
+Here is how to use the radio group in your project.
+
+```tsx
+import { RadioGroup, RadioGroupItem } from "@/components/modern-ui/radio"
+```
+
+<br/>
+
+```tsx
+<RadioGroup defaultValue="option-one">
+  <div className="flex items-center space-x-2">
+    <RadioGroupItem value="option-one" id="option-one" />
+    <label htmlFor="option-one">Option One</label>
+  </div>
+</RadioGroup>
+```
+
+---
+
+## Examples
+
+### Basic Radio Group
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[200px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[200px] not-prose">
+      <RadioGroupDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { RadioGroup, RadioGroupItem } from "@/components/modern-ui/radio";
+    import { Label } from "@/components/modern-ui/label";
+
+    export function RadioGroupDemo() {
+      return (
+        <RadioGroup defaultValue="comfortable">
+          <div className="flex items-center space-x-2">
+            <RadioGroupItem value="default" id="r1" />
+            <Label htmlFor="r1">Default</Label>
+          </div>
+          <div className="flex items-center space-x-2">
+            <RadioGroupItem value="comfortable" id="r2" />
+            <Label htmlFor="r2">Comfortable</Label>
+          </div>
+          <div className="flex items-center space-x-2">
+            <RadioGroupItem value="compact" id="r3" />
+            <Label htmlFor="r3">Compact</Label>
+          </div>
+        </RadioGroup>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+### Disabled Radio Group
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[200px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[200px] not-prose">
+      <RadioGroupDisabledDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { RadioGroup, RadioGroupItem } from "@/components/modern-ui/radio";
+    import { Label } from "@/components/modern-ui/label";
+
+    export function RadioGroupDisabledDemo() {
+      return (
+        <RadioGroup defaultValue="default" disabled>
+          <div className="flex items-center space-x-2">
+            <RadioGroupItem value="default" id="rd1" />
+            <Label htmlFor="rd1">Default (Disabled)</Label>
+          </div>
+          <div className="flex items-center space-x-2">
+            <RadioGroupItem value="comfortable" id="rd2" />
+            <Label htmlFor="rd2">Comfortable (Disabled)</Label>
+          </div>
+          <div className="flex items-center space-x-2">
+            <RadioGroupItem value="compact" id="rd3" />
+            <Label htmlFor="rd3">Compact (Disabled)</Label>
+          </div>
+        </RadioGroup>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+### Form Integration
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[250px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[250px] not-prose">
+      <RadioGroupFormDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { useState } from "react";
+    import { RadioGroup, RadioGroupItem } from "@/components/modern-ui/radio";
+    import { Label } from "@/components/modern-ui/label";
+    import { Button } from "@/components/modern-ui/button";
+
+    export function RadioGroupFormDemo() {
+      const [value, setValue] = useState("default");
+      const [submitted, setSubmitted] = useState(false);
+      
+      const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        setSubmitted(true);
+        setTimeout(() => setSubmitted(false), 2000);
+      };
+      
+      return (
+        <form onSubmit={handleSubmit} className="w-full max-w-sm space-y-4">
+          <div className="space-y-2">
+            <Label htmlFor="layout">Select a display density</Label>
+            <RadioGroup value={value} onValueChange={setValue}>
+              <div className="flex items-center space-x-2">
+                <RadioGroupItem value="default" id="layout1" />
+                <Label htmlFor="layout1">Default</Label>
+              </div>
+              <div className="flex items-center space-x-2">
+                <RadioGroupItem value="comfortable" id="layout2" />
+                <Label htmlFor="layout2">Comfortable</Label>
+              </div>
+              <div className="flex items-center space-x-2">
+                <RadioGroupItem value="compact" id="layout3" />
+                <Label htmlFor="layout3">Compact</Label>
+              </div>
+            </RadioGroup>
+          </div>
+          <Button type="submit">
+            {submitted ? "Submitted!" : "Submit"}
+          </Button>
+        </form>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+---
+
+
+## API Reference
+
+### RadioGroup
+
+The root component that contains all radio items.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `defaultValue` | `string` | - | The value of the radio item that should be checked by default |
+| `value` | `string` | - | The controlled value of the radio item to check |
+| `onValueChange` | `(value: string) => void` | - | Event handler called when the value changes |
+| `disabled` | `boolean` | `false` | When `true`, prevents the user from interacting with the radio items |
+| `name` | `string` | - | The name of the group. Submitted with its owning form as part of a name/value pair |
+| `required` | `boolean` | `false` | When `true`, indicates that the user must check a radio item before the owning form can be submitted |
+| `orientation` | `"horizontal" \| "vertical"` | `"vertical"` | The orientation of the component |
+| `dir` | `"ltr" \| "rtl"` | - | The reading direction of the radio group |
+| `loop` | `boolean` | `true` | When `true`, keyboard navigation will loop from last item to first and vice versa |
+| `className` | `string` | - | Additional CSS classes for styling |
+
+### RadioGroupItem
+
+An individual radio item.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `string` | **Required** | The unique value of the radio item |
+| `disabled` | `boolean` | `false` | When `true`, prevents the user from interacting with the radio item |
+| `required` | `boolean` | `false` | When `true`, indicates that the user must check the radio item before the owning form can be submitted |
+| `id` | `string` | - | The ID of the radio item. Should be used with a label |
+| `className` | `string` | - | Additional CSS classes for styling |
+
+## Accessibility
+
+The RadioGroup component follows the [WAI-ARIA design pattern for Radio Groups](https://www.w3.org/WAI/ARIA/apg/patterns/radiobutton/).
+
+### Keyboard Interactions
+
+| Key | Description |
+|-----|-------------|
+| `Space` | When focus is on a radio item, selects it |
+| `ArrowDown` | Moves focus to the next radio item in the group |
+| `ArrowRight` | Moves focus to the next radio item in the group |
+| `ArrowUp` | Moves focus to the previous radio item in the group |
+| `ArrowLeft` | Moves focus to the previous radio item in the group | 
