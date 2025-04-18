@@ -1,0 +1,162 @@
+import {
+  ColoredSparklesTextDemo,
+  CustomSparklesTextDemo,
+  DefaultSparklesTextDemo
+} from "@/app/(docs-group)/docs/components/sparkles-text/components/sparkles-text-demos";
+import {
+  SparklesTextInstallation
+} from "@/app/(docs-group)/docs/components/sparkles-text/components/sparkles-text-installation";
+import { PreviewSparklesText } from "@/app/(docs-group)/docs/components/sparkles-text/preview";
+import { BreadcrumbNav } from "@/components/breadcrumb-nav";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/modern-ui/tabs";
+
+<BreadcrumbNav className="mb-4" items={[
+  {label: "Docs", href: "/docs"},
+  {label: "Components", href: "/docs/components"},
+  {label: "Sparkles Text"},
+]}/>
+
+<PreviewSparklesText/>
+
+# Sparkles Text Component
+
+A text component with animated sparkle effects to draw attention to important text elements.
+
+- Customizable sparkle colors and size
+- Configurable animation speed
+- Works with any text content
+- Adds visual interest to headings or important text
+
+---
+
+## Installation
+
+The Sparkles Text component is part of our UI library. You can import it directly from the components directory.
+
+<SparklesTextInstallation/>
+
+---
+
+## Usage
+
+Here is how to use the Sparkles Text component in your project.
+
+```tsx
+import { SparklesText } from "@/components/modern-ui/sparkles-text"
+```
+
+<br/>
+
+```tsx
+<SparklesText>Magic Text</SparklesText>
+```
+
+---
+
+## Examples
+
+### Default Sparkles Text
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[200px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50 "></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[200px] not-prose">
+      <DefaultSparklesTextDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { SparklesText } from "@/components/modern-ui/sparkles-text";
+
+    export function DefaultSparklesTextDemo() {
+      return (
+        <SparklesText>Magic Text</SparklesText>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+### Colored Sparkles Text
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[200px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50 "></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[200px] not-prose">
+      <ColoredSparklesTextDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { SparklesText } from "@/components/modern-ui/sparkles-text";
+
+    export function ColoredSparklesTextDemo() {
+      return (
+          <SparklesText 
+            sparkleColors={["#FFD700", "#FF69B4", "#00BFFF"]}
+          >
+            Colorful Magic
+          </SparklesText>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+### Custom Sparkles Text
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[200px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50 "></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[200px] not-prose">
+      <CustomSparklesTextDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { SparklesText } from "@/components/modern-ui/sparkles-text";
+
+    export function CustomSparklesTextDemo() {
+      return (
+        <SparklesText 
+          sparkleSize={20}
+          sparkleCount={20}
+          speed={0.4}
+        >
+          ✨ Special Offer ✨
+        </SparklesText>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+---
+
+## API Reference
+
+#### Properties
+
+| Property | Type | Default | Description |
+| -------- | ---- | ------- | ----------- |
+| `children` | `React.ReactNode` | - | The text content to display with sparkles |
+| `text` | `string` | - | Alternative to children prop for text content |
+| `sparkleCount` | `number` | `10` | Number of sparkles to display |
+| `sparklesCount` | `number` | `10` | Alias for sparkleCount |
+| `sparkleSize` | `number` | `15` | Size of sparkles in pixels |
+| `sparkleColors` | `string[]` | - | Array of custom sparkle colors |
+| `colors` | `{ first: string, second: string }` | `{ first: "#9E7AFF", second: "#FE8BBB" }` | Default pair of colors if sparkleColors not provided |
+| `speed` | `number` | `0.3` | Animation speed for sparkles (0.1 to 1.0) |
+| `className` | `string` | - | Additional CSS classes | 

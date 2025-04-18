@@ -1,0 +1,400 @@
+import {
+  DefaultFormDemo,
+  FormValidationDemo,
+  FormWithFieldsDemo
+} from "@/app/(docs-group)/docs/components/form/components/form-demos";
+import {
+  FormInstallation
+} from "@/app/(docs-group)/docs/components/form/components/form-installation";
+import { BreadcrumbNav } from "@/components/breadcrumb-nav";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/modern-ui/tabs";
+import { ExternalLinkIcon } from "lucide-react";
+import Link from "next/link";
+
+<BreadcrumbNav className="mb-4" items={[
+  {label: "Docs", href: "/docs"},
+  {label: "Components", href: "/docs/components"},
+  {label: "Form"},
+]}/>
+
+
+# React Hook Form
+
+Building forms with React Hook Form and Zod. Please refer to the [Docs](https://react-hook-form.com/) for more information.
+
+Forms are tricky. They are one of the most common things you'll build in a web application, but also one of the most complex.
+
+Well-designed HTML forms are:
+
+- Well-structured and semantically correct.
+- Easy to use and navigate (keyboard).
+- Accessible with ARIA attributes and proper labels.
+- Has support for client and server side validation.
+- Well-styled and consistent with the rest of the application.
+
+In this guide, we will take a look at building forms with [`react-hook-form`](https://react-hook-form.com/) and [`zod`](https://zod.dev/). We're going to use a `<FormField>` component to compose accessible forms using Radix UI components.
+
+---
+
+## Features
+
+The `<Form />` component is a wrapper around the [`react-hook-form`](https://react-hook-form.com/) library. It provides a few things:
+
+- Composable components for building forms.
+- A `<FormField />` component for building controlled form fields.
+- Form validation using [`zod`](https://zod.dev/).
+- Handles accessibility and error messages.
+- Uses React.useId() for generating unique IDs.
+- Applies the correct aria attributes to form fields based on states.
+- Built to work with all Radix UI components.
+- Bring your own schema library. We use zod but you can use anything you want.
+- You have full control over the markup and styling.
+
+---
+
+## Installation
+
+The Form component is part of our UI library. You can import it directly from the components directory.
+
+<FormInstallation/>
+
+---
+
+## Usage
+
+Here is how to use the Form component in your project.
+
+```tsx
+import { Form, FormField, FormItem, FormLabel, FormControl, FormDescription, FormMessage } from "@/components/modern-ui/form"
+import { useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
+import * as z from "zod"
+```
+
+<br/>
+
+```tsx
+const formSchema = z.object({
+  username: z.string().min(2).max(50),
+})
+
+export function MyForm() {
+  const form = useForm({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      username: "",
+    },
+  })
+
+  function onSubmit(values) {
+    console.log(values)
+  }
+
+  return (
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        <FormField
+          control={form.control}
+          name="username"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Username</FormLabel>
+              <FormControl>
+                <Input placeholder="johndoe" {...field} />
+              </FormControl>
+              <FormDescription>
+                Your public display name.
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <Button type="submit">Submit</Button>
+      </form>
+    </Form>
+  )
+}
+```
+
+---
+
+## Examples
+
+### Default Form
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[200px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50 "></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[200px] not-prose">
+      <DefaultFormDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/modern-ui/form";
+    import { Input } from "@/components/modern-ui/input";
+    import { Button } from "@/components/modern-ui/button";
+    import { useForm } from "react-hook-form";
+    import * as z from "zod";
+    import { zodResolver } from "@hookform/resolvers/zod";
+
+    const formSchema = z.object({
+      email: z.string().email(),
+    });
+
+    export function DefaultFormDemo() {
+      const form = useForm({
+        resolver: zodResolver(formSchema),
+        defaultValues: {
+          email: "",
+        },
+      });
+
+      function onSubmit(values) {
+        console.log(values);
+      }
+
+      return (
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="w-full max-w-sm space-y-4">
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Email</FormLabel>
+                  <FormControl>
+                    <Input placeholder="example@email.com" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <Button type="submit">Submit</Button>
+          </form>
+        </Form>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+### Form Validation
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[200px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50 "></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[200px] not-prose">
+      <FormValidationDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/modern-ui/form";
+    import { Input } from "@/components/modern-ui/input";
+    import { Button } from "@/components/modern-ui/button";
+    import { useForm } from "react-hook-form";
+    import * as z from "zod";
+    import { zodResolver } from "@hookform/resolvers/zod";
+    import { useState } from "react";
+
+    const formSchema = z.object({
+      username: z.string().min(3, {
+        message: "Username must be at least 3 characters.",
+      }),
+      password: z.string().min(8, {
+        message: "Password must be at least 8 characters.",
+      }),
+    });
+
+    export function FormValidationDemo() {
+      const [submitted, setSubmitted] = useState(false);
+      
+      const form = useForm({
+        resolver: zodResolver(formSchema),
+        defaultValues: {
+          username: "",
+          password: "",
+        },
+      });
+
+      function onSubmit(values) {
+        setSubmitted(true);
+        console.log(values);
+      }
+
+      return (
+        <Form {...form}>
+          {submitted ? (
+            <div className="text-center p-4">
+              <p className="text-sm font-medium text-green-600 mb-2">Form submitted successfully!</p>
+              <Button variant="outline" onClick={() => {
+                form.reset();
+                setSubmitted(false);
+              }}>
+                Reset Form
+              </Button>
+            </div>
+          ) : (
+            <form onSubmit={form.handleSubmit(onSubmit)} className="w-full max-w-sm space-y-4">
+              <FormField
+                control={form.control}
+                name="username"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Username</FormLabel>
+                    <FormControl>
+                      <Input placeholder="username" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Password</FormLabel>
+                    <FormControl>
+                      <Input type="password" placeholder="********" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <Button type="submit">Submit</Button>
+            </form>
+          )}
+        </Form>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+### Form With Multiple Fields
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[200px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50 "></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[200px] not-prose">
+      <FormWithFieldsDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { Form, FormField, FormItem, FormLabel, FormControl, FormDescription, FormMessage } from "@/components/modern-ui/form";
+    import { Input } from "@/components/modern-ui/input";
+    import { Button } from "@/components/modern-ui/button";
+    import { Textarea } from "@/components/modern-ui/textarea";
+    import { Switch } from "@/components/modern-ui/switch";
+    import { useForm } from "react-hook-form";
+    import * as z from "zod";
+    import { zodResolver } from "@hookform/resolvers/zod";
+
+    const profileFormSchema = z.object({
+      name: z.string().min(2, {
+        message: "Name must be at least 2 characters.",
+      }),
+      bio: z.string().max(160).optional(),
+      notifications: z.boolean().default(false),
+    });
+
+    export function FormWithFieldsDemo() {
+      const form = useForm({
+        resolver: zodResolver(profileFormSchema),
+        defaultValues: {
+          name: "",
+          bio: "",
+          notifications: false,
+        },
+      });
+
+      function onSubmit(values) {
+        console.log(values);
+      }
+
+      return (
+        <div className="w-full max-w-sm space-y-4 bg-background md:p-6 p-4 rounded-lg border">
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="w-full max-w-md space-y-6">
+              <FormField
+                control={form.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Name</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Your name" {...field} />
+                    </FormControl>
+                    <FormDescription>
+                      This is your public display name.
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="bio"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Bio</FormLabel>
+                    <FormControl>
+                      <Textarea
+                        placeholder="Tell us a little bit about yourself"
+                        className="resize-none"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormDescription>
+                      You can <span className="font-medium">@mention</span> other users.
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="notifications"
+                render={({ field }) => (
+                  <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
+                    <div className="space-y-0.5">
+                      <FormLabel className="text-base">
+                        Email Notifications
+                      </FormLabel>
+                      <FormDescription>
+                        Receive emails about your account activity.
+                      </FormDescription>
+                    </div>
+                    <FormControl>
+                      <Switch
+                        checked={field.value}
+                        onCheckedChange={field.onChange}
+                      />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+              <Button type="submit">Update profile</Button>
+            </form>
+          </Form>
+        </div>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>

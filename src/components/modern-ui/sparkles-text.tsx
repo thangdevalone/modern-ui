@@ -40,13 +40,14 @@ const Sparkle: React.FC<Sparkle> = ({ id, x, y, color, delay, scale }) => {
 
 interface SparklesTextProps {
   as?: ReactElement;
-
   className?: string;
-
-  text: string;
-
+  text?: string;
+  children?: React.ReactNode;
   sparklesCount?: number;
-
+  sparkleSize?: number;
+  sparkleCount?: number;
+  speed?: number;
+  sparkleColors?: string[];
   colors?: {
     first: string;
     second: string;
@@ -55,19 +56,35 @@ interface SparklesTextProps {
 
 export const SparklesText: React.FC<SparklesTextProps> = ({
   text,
+  children,
   colors = { first: "#9E7AFF", second: "#FE8BBB" },
+  sparkleColors,
   className,
   sparklesCount = 10,
+  sparkleCount,
+  sparkleSize,
+  speed,
   ...props
 }) => {
+  const content = text || children;
+  const actualSparkleCount = sparkleCount || sparklesCount;
   const [sparkles, setSparkles] = useState<Sparkle[]>([]);
 
   useEffect(() => {
     const generateStar = (): Sparkle => {
       const starX = `${Math.random() * 100}%`;
       const starY = `${Math.random() * 100}%`;
-      const color = Math.random() > 0.5 ? colors.first : colors.second;
-      const delay = Math.random() * 2;
+      
+      // Use sparkleColors array if provided, otherwise use first/second colors
+      let color;
+      if (sparkleColors && sparkleColors.length > 0) {
+        const randomIndex = Math.floor(Math.random() * sparkleColors.length);
+        color = sparkleColors[randomIndex];
+      } else {
+        color = Math.random() > 0.5 ? colors.first : colors.second;
+      }
+      
+      const delay = Math.random() * (speed || 2);
       const scale = Math.random() * 1 + 0.3;
       const lifespan = Math.random() * 10 + 5;
       const id = `${starX}-${starY}-${Date.now()}`;
@@ -75,7 +92,7 @@ export const SparklesText: React.FC<SparklesTextProps> = ({
     };
 
     const initializeStars = () => {
-      const newSparkles = Array.from({ length: sparklesCount }, generateStar);
+      const newSparkles = Array.from({ length: actualSparkleCount }, generateStar);
       setSparkles(newSparkles);
     };
 
@@ -95,11 +112,11 @@ export const SparklesText: React.FC<SparklesTextProps> = ({
     const interval = setInterval(updateStars, 100);
 
     return () => clearInterval(interval);
-  }, [colors.first, colors.second, sparklesCount]);
+  }, [colors.first, colors.second, actualSparkleCount, sparkleColors, speed]);
 
   return (
     <div
-      className={cn("text-6xl font-bold", className)}
+      className={cn("text-4xl font-bold", className)}
       {...props}
       style={
         {
@@ -112,7 +129,7 @@ export const SparklesText: React.FC<SparklesTextProps> = ({
         {sparkles.map((sparkle) => (
           <Sparkle key={sparkle.id} {...sparkle} />
         ))}
-        <strong>{text}</strong>
+        <strong>{content}</strong>
       </span>
     </div>
   );

@@ -1,0 +1,190 @@
+import {
+  SliderInstallation 
+} from "@/app/(docs-group)/docs/components/slider/components/slider-installation";
+import { 
+  DefaultSliderDemo,
+  SliderWithValuesDemo,
+  RangeSliderDemo
+} from "@/app/(docs-group)/docs/components/slider/components/slider-demos";
+import { PreviewSlider } from "@/app/(docs-group)/docs/components/slider/preview";
+import { BreadcrumbNav } from "@/components/breadcrumb-nav";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/modern-ui/tabs";
+
+<BreadcrumbNav className="mb-4" items={[
+  {label: "Docs", href: "/docs"},
+  {label: "Components", href: "/docs/components"},
+  {label: "Slider"},
+]}/>
+
+<PreviewSlider/>
+
+# Slider Component
+
+A slider input component that allows users to select values within a range.
+
+- Built on top of Radix UI's Slider primitive
+- Customizable range and steps
+- Support for single value and range values
+- Accessible design with keyboard navigation
+
+---
+
+## Installation
+
+The Slider component is part of our UI library. You can import it directly from the components directory.
+
+<SliderInstallation/>
+
+---
+
+## Usage
+
+Here is how to use the Slider component in your project.
+
+```tsx
+import { Slider } from "@/components/modern-ui/slider"
+```
+
+<br/>
+
+```tsx
+<Slider defaultValue={[50]} max={100} step={1} />
+```
+
+---
+
+## Examples
+
+### Default Slider
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[200px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50 "></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[200px] not-prose">
+      <DefaultSliderDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { Slider } from "@/components/modern-ui/slider";
+
+    export function DefaultSliderDemo() {
+      return (
+        <div className="w-full max-w-md">
+          <Slider defaultValue={[50]} max={100} step={1} />
+        </div>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+### Slider With Value Display
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[200px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50 "></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[200px] not-prose">
+      <SliderWithValuesDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { Slider } from "@/components/modern-ui/slider";
+    import { useState } from "react";
+
+    export function SliderWithValuesDemo() {
+      const [value, setValue] = useState([25]);
+
+      return (
+        <div className="w-full max-w-md space-y-4">
+          <div className="flex justify-between">
+            <label className="text-sm font-medium">Volume: {value}%</label>
+          </div>
+          <Slider 
+            value={value} 
+            onValueChange={setValue} 
+            max={100} 
+            step={1}
+          />
+        </div>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+### Range Slider
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[200px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50 "></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[200px] not-prose">
+      <RangeSliderDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { Slider } from "@/components/modern-ui/slider";
+    import { useState } from "react";
+
+    export function RangeSliderDemo() {
+      const [range, setRange] = useState([20, 80]);
+
+      return (
+        <div className="w-full max-w-md space-y-4">
+          <div className="flex justify-between">
+            <label className="text-sm font-medium">
+              Price Range: ${range[0]} - ${range[1]}
+            </label>
+          </div>
+          <Slider 
+            value={range} 
+            onValueChange={setRange} 
+            max={100} 
+            step={1}
+          />
+        </div>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+---
+
+## API Reference
+
+#### Properties
+
+| Property | Type | Default | Description |
+| -------- | ---- | ------- | ----------- |
+| `value` | `number[]` | - | The controlled value of the slider. Must be used with `onValueChange` |
+| `defaultValue` | `number[]` | `[0]` | The default value of the slider |
+| `min` | `number` | `0` | The minimum value for the range |
+| `max` | `number` | `100` | The maximum value for the range |
+| `step` | `number` | `1` | The step value for the slider |
+| `orientation` | `'horizontal' \| 'vertical'` | `'horizontal'` | The orientation of the slider |
+| `disabled` | `boolean` | `false` | Whether the slider is disabled |
+| `onValueChange` | `(value: number[]) => void` | - | Event handler called when the value changes |
+| `onValueCommit` | `(value: number[]) => void` | - | Event handler called when the value changes and interaction ends |
+
+## Accessibility
+
+The slider component follows the [WAI-ARIA Slider Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/slider/), ensuring keyboard navigation and screen reader compatibility.
+
+- Supports keyboard navigation with arrow keys
+- Provides appropriate ARIA labels 
+- Implements proper focus management 

@@ -13,7 +13,7 @@ export function useComponentCode(componentName: string) {
         const response = await axiosService.get(`/api/component-code`, {
           params: { name: componentName }
         });
-        
+
         if (response.data.code) {
           setCode(response.data.code);
           setError(null);

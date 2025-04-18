@@ -14,7 +14,6 @@ export async function GET(request: Request) {
   }
 
   const filePath = path.join(process.cwd(), 'src', 'components', 'modern-ui', `${componentName}.tsx`);
-  
   try {
     const fileContent = fs.readFileSync(filePath, 'utf8');
     return NextResponse.json({ code: fileContent });

@@ -1,0 +1,221 @@
+import {
+  NumberCounterInstallation 
+} from "@/app/(docs-group)/docs/components/number-counter/components/number-counter-installation";
+import { 
+  DefaultNumberCounterDemo,
+  CustomFormattedCounterDemo,
+  AnimatedNumberCounterDemo
+} from "@/app/(docs-group)/docs/components/number-counter/components/number-counter-demos";
+import { PreviewNumberCounter } from "@/app/(docs-group)/docs/components/number-counter/preview";
+import { BreadcrumbNav } from "@/components/breadcrumb-nav";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/modern-ui/tabs";
+
+<BreadcrumbNav className="mb-4" items={[
+  {label: "Docs", href: "/docs"},
+  {label: "Components", href: "/docs/components"},
+  {label: "Number Counter"},
+]}/>
+
+<PreviewNumberCounter/>
+
+# Number Counter Component
+
+An animated counter component that smoothly transitions between number values.
+
+- Smooth animation between value changes
+- Configurable duration and easing functions
+- Custom formatting options
+- Supports various numerical displays like currency and percentages
+
+---
+
+## Installation
+
+The Number Counter component is part of our UI library. You can import it directly from the components directory.
+
+<NumberCounterInstallation/>
+
+---
+
+## Usage
+
+Here is how to use the Number Counter component in your project.
+
+```tsx
+import { NumberCounter } from "@/components/modern-ui/number-counter"
+```
+
+<br/>
+
+```tsx
+<NumberCounter from={0} to={1000} duration={2000} />
+```
+
+---
+
+## Examples
+
+### Default Number Counter
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[200px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50 "></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[200px] not-prose">
+      <DefaultNumberCounterDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { NumberCounter } from "@/components/modern-ui/number-counter";
+    import { Button } from "@/components/modern-ui/button";
+    import { useState } from "react";
+
+    export function DefaultNumberCounterDemo() {
+      const [value, setValue] = useState(0);
+      
+      return (
+        <div className="flex flex-col items-center gap-4">
+          <div className="text-4xl font-bold">
+            <NumberCounter from={value} to={value + 1000} duration={2000} />
+          </div>
+          <Button 
+            onClick={() => setValue(prev => prev + 1000)}
+          >
+            Add 1000
+          </Button>
+        </div>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+### Custom Formatted Counter
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[200px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50 "></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[200px] not-prose">
+      <CustomFormattedCounterDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { NumberCounter } from "@/components/modern-ui/number-counter";
+
+    export function CustomFormattedCounterDemo() {
+      const formatAsCurrency = (value) => {
+        return new Intl.NumberFormat('en-US', {
+          style: 'currency',
+          currency: 'USD',
+          minimumFractionDigits: 0,
+        }).format(value);
+      };
+      
+      return (
+        <div className="space-y-4">
+          <div className="flex flex-col items-center">
+            <p className="text-sm text-muted-foreground mb-2">Revenue</p>
+            <span className="text-3xl font-bold">
+              <NumberCounter 
+                from={0} 
+                to={5280} 
+                duration={3000} 
+                formatter={formatAsCurrency} 
+              />
+            </span>
+          </div>
+        </div>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+### Animated Number Counter Group
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[200px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50 "></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[200px] not-prose">
+      <AnimatedNumberCounterDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { NumberCounter } from "@/components/modern-ui/number-counter";
+    import { Button } from "@/components/modern-ui/button";
+    import { useState } from "react";
+
+    export function AnimatedNumberCounterDemo() {
+      const [isVisible, setIsVisible] = useState(true);
+      
+      const stats = [
+        { label: "Users", value: 25600, prefix: "", suffix: "+" },
+        { label: "Revenue", value: 5280, prefix: "$", suffix: "" },
+        { label: "Conversion", value: 14.8, prefix: "", suffix: "%" },
+      ];
+      
+      return (
+        <div className="w-full max-w-md space-y-4">
+          <div className="grid grid-cols-3 gap-4">
+            {isVisible && stats.map((stat, index) => (
+              <div key={index} className="flex flex-col items-center text-center">
+                <p className="text-sm text-muted-foreground mb-1">{stat.label}</p>
+                <span className="text-lg font-bold">
+                  {stat.prefix}
+                  <NumberCounter 
+                    from={0} 
+                    to={stat.value} 
+                    duration={2000 + index * 500} 
+                    decimals={stat.label === "Conversion" ? 1 : 0}
+                  />
+                  {stat.suffix}
+                </span>
+              </div>
+            ))}
+          </div>
+          <div className="flex justify-center">
+            <Button 
+              variant="outline" 
+              onClick={() => {
+                setIsVisible(false);
+                setTimeout(() => setIsVisible(true), 300);
+              }}
+            >
+              Restart Animation
+            </Button>
+          </div>
+        </div>
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+---
+
+## API Reference
+
+#### Properties
+
+| Property | Type | Default | Description |
+| -------- | ---- | ------- | ----------- |
+| `value` | `number` | Required | The target value to count to |
+| `startValue` | `number` | `0` | The initial value to start counting from |
+| `direction` | `"up" \| "down"` | `"up"` | The direction of the animation |
+| `delay` | `number` | `0` | Delay before starting the animation in seconds |
+| `decimalPlaces` | `number` | `0` | Number of decimal places to show |
+| `className` | `string` | - | Additional CSS classes for the component |

@@ -1,0 +1,110 @@
+import {
+  CustomTypewriterDemo,
+  DefaultTypewriterDemo,
+  MultipleTextTypewriterDemo
+} from "@/app/(docs-group)/docs/components/typewriter-effect/components/typewriter-effect-demos";
+import {
+  TypewriterEffectInstallation
+} from "@/app/(docs-group)/docs/components/typewriter-effect/components/typewriter-effect-installation";
+import { PreviewTypewriterEffect } from "@/app/(docs-group)/docs/components/typewriter-effect/preview";
+import { BreadcrumbNav } from "@/components/breadcrumb-nav";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/modern-ui/tabs";
+
+<BreadcrumbNav className="mb-4" items={[
+  {label: "Docs", href: "/docs"},
+  {label: "Components", href: "/docs/components"},
+  {label: "Typewriter Effect"},
+]}/>
+
+<PreviewTypewriterEffect/>
+
+# Typewriter Effect Component
+
+An animated typewriter effect component that simulates typing text, with configurable speed and behavior.
+
+- Smooth typing animation effect
+- Customizable typing speed and delay
+- Support for multiple text strings with cycling
+- Optional cursor with blinking effect
+
+---
+
+## Installation
+
+The Typewriter Effect component is part of our UI library. You can import it directly from the components directory.
+
+<TypewriterEffectInstallation/>
+
+---
+
+## Usage
+
+Here is how to use the Typewriter Effect component in your project.
+
+```tsx
+import { TypewriterEffect } from "@/components/modern-ui/typewriter-effect"
+```
+
+<br/>
+
+```tsx
+<TypewriterEffect 
+  words={[
+    { text: "Hello, World!" }
+  ]}
+/>
+```
+
+---
+
+## Examples
+
+### Default Typewriter Effect
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[200px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50 "></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[200px] not-prose">
+      <DefaultTypewriterDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { TypewriterEffect } from "@/components/modern-ui/typewriter-effect";
+
+    export function DefaultTypewriterDemo() {
+      return (
+        <TypewriterEffect words={[{ text: "Modern" }, { text: "UI" }]} />
+      );
+    }
+    ```
+  </TabsContent>
+</Tabs>
+
+---
+
+## API Reference
+
+### TypewriterEffect
+
+#### Properties
+
+| Property | Type | Default | Description |
+| -------- | ---- | ------- | ----------- |
+| `words` | `{ text: string, className?: string }[]` | `[]` | Array of word objects, each with text content and optional className |
+| `className` | `string` | - | Additional CSS classes for the component |
+| `cursorClassName` | `string` | - | Additional CSS classes for the cursor |
+
+### TypewriterEffectSmooth
+
+#### Properties
+
+| Property | Type | Default | Description |
+| -------- | ---- | ------- | ----------- |
+| `words` | `{ text: string, className?: string }[]` | `[]` | Array of word objects, each with text content and optional className |
+| `className` | `string` | - | Additional CSS classes for the component |
+| `cursorClassName` | `string` | - | Additional CSS classes for the cursor | 
