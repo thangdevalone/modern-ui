@@ -43,70 +43,44 @@ const links: {
     ],
   },
   {
-    category: "Templates",
-    items: [
-      { href: "#dev-tool", label: "Dev Tool", badge: "pro", disabled: true },
-      { href: "#saas", label: "SaaS", badge: "pro", disabled: true },
-    ],
-  },
-  {
     category: "Base Components",
     items: [
       { href: "/docs/components/accordion", label: "Accordion" },
       { href: "/docs/components/alert", label: "Alert" },
-      {
-        href: "/docs/components/animated-gradient-text",
-        label: "Animated Gradient Text",
-      },
       { href: "/docs/components/avatar", label: "Avatar" },
-      {
-        href: "/docs/components/avatar-group",
-        label: "Avatar Group",
-      },
       { href: "/docs/components/badge", label: "Badge" },
-      {
-        href: "/docs/components/breadcrumb",
-        label: "Breadcrumb",
-      },
+      { href: "/docs/components/breadcrumb", label: "Breadcrumb" },
       { href: "/docs/components/button", label: "Button" },
       { href: "/docs/components/calendar", label: "Calendar", badge: "new" },
       { href: "/docs/components/card", label: "Card" },
-      { href: "/docs/components/command", label: "Command" },
-      {
-        href: "/docs/components/copy-button",
-        label: "Copy Button",
-      },
-      {
-        href: "/docs/components/date-picker",
-        label: "Date Picker",
-      },
       { href: "/docs/components/dialog", label: "Dialog" },
       { href: "/docs/components/drawer", label: "Drawer", badge: "new" },
-      { href: "/docs/components/fancy-tabs", label: "Fancy tab" },
-      {
-        href: "/docs/components/fluid-dropdown",
-        label: "Fluid Dropdown",
-      },
       { href: "/docs/components/input", label: "Input" },
       { href: "/docs/components/label", label: "Label" },
       { href: "/docs/components/popover", label: "Popover" },
       { href: "/docs/components/radio", label: "Radio", badge: "new" },
-      {
-        href: "/docs/components/rainbow-button",
-        label: "Rainbow Button",
-      },
       { href: "/docs/components/sheet", label: "Sheet", badge: "new" },
-      { href: "/docs/components/sonner", label: "Sonner" },
-      { href: "/docs/components/stepper", label: "Stepper" },
       { href: "/docs/components/switch", label: "Switch" },
       { href: "/docs/components/table", label: "Table" },
       { href: "/docs/components/textarea", label: "TextArea" },
       { href: "/docs/components/tooltip", label: "Tooltip" },
+    ],
+  },
+  {
+    category: "Modern Components",
+    items: [
+      { href: "/docs/components/animated-gradient-text", label: "Animated Gradient Text" },
+      { href: "/docs/components/avatar-group", label: "Avatar Group" },
+      { href: "/docs/components/command", label: "Command" },
+      { href: "/docs/components/copy-button", label: "Copy Button" },
+      { href: "/docs/components/date-picker", label: "Date Picker" },
+      { href: "/docs/components/fancy-tabs", label: "Fancy tab" },
+      { href: "/docs/components/fluid-dropdown", label: "Fluid Dropdown" },
+      { href: "/docs/components/rainbow-button", label: "Rainbow Button" },
+      { href: "/docs/components/sonner", label: "Sonner" },
+      { href: "/docs/components/stepper", label: "Stepper" },
       { href: "/docs/components/underline-tabs", label: "Underline tab" },
-      {
-        href: "/docs/components/visually-hidden",
-        label: "VisuallyHidden",
-      },
+      { href: "/docs/components/visually-hidden", label: "VisuallyHidden" },
     ],
   },
   {
@@ -125,7 +99,7 @@ export default function LeftSidebar() {
 
   return (
     <motion.nav
-      className="md:space-y-8 space-y-4"
+      className="md:space-y-6 space-y-4"
       variants={containerVariants}
       initial="hidden"
       animate="show"
@@ -136,7 +110,7 @@ export default function LeftSidebar() {
             {category}
           </motion.h2>
           <motion.ul
-            className="space-y-2"
+            className="space-y-1"
             variants={containerVariants}
             initial="hidden"
             animate="show"

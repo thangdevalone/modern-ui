@@ -1,5 +1,5 @@
-import { BreadcrumbNav } from "@/components/breadcrumb-nav";
 import { InitInstallation } from "@/app/(docs-group)/docs/cli/components/cli-installation";
+import { BreadcrumbNav } from "@/components/breadcrumb-nav";
 
 <BreadcrumbNav className="mb-4" items={[
   {label: "Docs", href: "/docs"},
@@ -33,5 +33,98 @@ The style for your components. <b>This cannot be changed after initialization</b
   "style": "default"
 }
 ```
+---
 
+## outDir
 
+The directory where the components will be installed.
+
+```bash
+{
+  "outDir": "src/components/modern-ui"
+}
+```
+---
+
+## typescript
+
+TypeScript support toggle.
+
+```bash
+{
+  "typescript": true
+}
+```
+
+---
+
+## tailwind
+
+Tailwind support toggle.
+
+```bash
+{
+  "tailwind": true
+}
+```
+
+---
+
+## tailwindVersion
+
+The version of Tailwind to use.
+
+```bash
+{
+  "tailwindVersion": "v4"
+}
+```
+
+---
+
+## framework
+
+Detected framework
+
+```bash
+{
+  "framework": "nextjs"
+}
+```
+---
+
+## theme
+
+The theme to use.
+
+```bash
+{
+  "theme": "default"
+}
+```
+
+---
+
+## aliases
+
+Aliases for components.
+
+```bash
+{
+  "aliases": {
+    "cn": "@/lib/utils",
+    "hooks": "@/hooks",
+  }
+}
+```
+
+---
+
+## components
+
+Tracks installed components.
+
+```bash
+{
+  "components": []
+}

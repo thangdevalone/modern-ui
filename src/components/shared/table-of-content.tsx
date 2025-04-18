@@ -31,7 +31,7 @@ export default function TableOfContents({ content }: TableOfContentsProps) {
   const renderTOCItems = (items: TOCItem[]) => {
     return (
       <motion.ul
-        className="space-y-2"
+        className="space-y-1"
         variants={container}
         initial="hidden"
         animate="show"
@@ -60,7 +60,7 @@ export default function TableOfContents({ content }: TableOfContentsProps) {
 
             {tocItem.children && tocItem.children.length > 0 && (
               <motion.ul
-                className="ml-4 mt-2 space-y-2"
+                className="ml-4 space-y-1"
                 variants={container}
                 initial="hidden"
                 animate="show"

@@ -14,6 +14,6 @@ export default function page() {
     <MdxLayout>
       <Contents/>
     </MdxLayout>
-    <TocWrapper file="docs"/>
+    <TocWrapper file="modern-ui-json"/>
   </>;
 }
