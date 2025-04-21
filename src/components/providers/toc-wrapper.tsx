@@ -5,7 +5,7 @@ import matter from 'gray-matter';
 import TableOfContents from '@/components/shared/table-of-content';
 
 export default function TocWrapper({file}: { file: string }) {
-  const fullPath = path.join(process.cwd(), 'src', 'mdx', `${file}.mdx`);
+  const fullPath = path.join(process.cwd(), 'src', 'mdx', 'docs', `${file}.mdx`);
   console.log(fullPath);
   if (!fs.existsSync(fullPath)) {
     return <div>Document not found.</div>;
