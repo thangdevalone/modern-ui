@@ -7,10 +7,10 @@ import { useComponentCode } from "@/lib/services/hooks/use-component-code";
 
 const CLIContent = () => {
   const commands = {
-    npm: "npx @modern-kit/ui add animated-gradient-text",
-    pnpm: "pnpm dlx @modern-kit/ui add animated-gradient-text",
-    yarn: "npx @modern-kit/ui add animated-gradient-text",
-    bun: "bunx --bun @modern-kit/ui add animated-gradient-text",
+    npm: "npx @modern-core/ui add animated-gradient-text",
+    pnpm: "pnpm dlx @modern-core/ui add animated-gradient-text",
+    yarn: "npx @modern-core/ui add animated-gradient-text",
+    bun: "bunx --bun @modern-core/ui add animated-gradient-text",
   };
   return (
     <div>

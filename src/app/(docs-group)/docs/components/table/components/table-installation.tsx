@@ -7,10 +7,10 @@ import { useComponentCode } from "@/lib/services/hooks/use-component-code";
 
 const CLIContent = () => {
   const commands = {
-    npm: "npx @modern-kit/ui add table",
-    pnpm: "pnpm dlx @modern-kit/ui add table",
-    yarn: "npx @modern-kit/ui add table",
-    bun: "bunx --bun @modern-kit/ui add table",
+    npm: "npx @modern-core/ui add table",
+    pnpm: "pnpm dlx @modern-core/ui add table",
+    yarn: "npx @modern-core/ui add table",
+    bun: "bunx --bun @modern-core/ui add table",
   };
   return (
     <div>

@@ -7,10 +7,10 @@ import { useComponentCode } from "@/lib/services/hooks/use-component-code";
 
 const CLIContent = () => {
   const commands = {
-    npm: "npx @modern-kit/ui add textarea",
-    pnpm: "pnpm dlx @modern-kit/ui add textarea",
-    yarn: "npx @modern-kit/ui add textarea",
-    bun: "bunx --bun @modern-kit/ui add textarea",
+    npm: "npx @modern-core/ui add textarea",
+    pnpm: "pnpm dlx @modern-core/ui add textarea",
+    yarn: "npx @modern-core/ui add textarea",
+    bun: "bunx --bun @modern-core/ui add textarea",
   };
   return (
     <div>

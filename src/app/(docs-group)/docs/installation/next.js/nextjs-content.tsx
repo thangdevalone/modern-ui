@@ -56,10 +56,10 @@ const steps = [
     title: "Init Modern UI",
     children: () => {
       const commands = {
-        npm: "npx @modern-kit/ui init",
-        pnpm: "pnpm dlx @modern-kit/ui init",
-        yarn: "npx @modern-kit/ui init",
-        bun: "bunx --bun @modern-kit/ui init",
+        npm: "npx @modern-core/ui init",
+        pnpm: "pnpm dlx @modern-core/ui init",
+        yarn: "npx @modern-core/ui init",
+        bun: "bunx --bun @modern-core/ui init",
       };
       return (
         <div className="space-y-2">
@@ -82,10 +82,10 @@ const steps = [
     title: "Add Components",
     children: () => {
       const commands = {
-        npm: "npx @modern-kit/ui add button",
-        pnpm: "pnpm dlx @modern-kit/ui add button",
-        yarn: "npx @modern-kit/ui add button",
-        bun: "bunx --bun @modern-kit/ui add button",
+        npm: "npx @modern-core/ui add button",
+        pnpm: "pnpm dlx @modern-core/ui add button",
+        yarn: "npx @modern-core/ui add button",
+        bun: "bunx --bun @modern-core/ui add button",
       };
       return (
         <div className="space-y-2">

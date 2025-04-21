@@ -7,10 +7,10 @@ import { useComponentCode } from "@/lib/services/hooks/use-component-code";
 
 const CLIContent = () => {
   const commands = {
-    npm: "npx @modern-kit/ui add calendar",
-    pnpm: "pnpm dlx @modern-kit/ui add calendar",
-    yarn: "npx @modern-kit/ui add calendar",
-    bun: "bunx --bun @modern-kit/ui add calendar",
+    npm: "npx @modern-core/ui add calendar",
+    pnpm: "pnpm dlx @modern-core/ui add calendar",
+    yarn: "npx @modern-core/ui add calendar",
+    bun: "bunx --bun @modern-core/ui add calendar",
   };
   return (
     <div>

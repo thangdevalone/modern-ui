@@ -7,10 +7,10 @@ import { useComponentCode } from "@/lib/services/hooks/use-component-code";
 
 const CLIContent = () => {
   const commands = {
-    npm: "npx @modern-kit/ui add visually-hidden",
-    pnpm: "pnpm dlx @modern-kit/ui add visually-hidden",
-    yarn: "npx @modern-kit/ui add visually-hidden",
-    bun: "bunx --bun @modern-kit/ui add visually-hidden",
+    npm: "npx @modern-core/ui add visually-hidden",
+    pnpm: "pnpm dlx @modern-core/ui add visually-hidden",
+    yarn: "npx @modern-core/ui add visually-hidden",
+    bun: "bunx --bun @modern-core/ui add visually-hidden",
   };
   return (
     <div>

@@ -7,10 +7,10 @@ import { useComponentCode } from "@/lib/services/hooks/use-component-code";
 
 const CLIContent = () => {
   const commands = {
-    npm: "npx @modern-kit/ui add badge",
-    pnpm: "pnpm dlx @modern-kit/ui add badge",
-    yarn: "npx @modern-kit/ui add badge",
-    bun: "bunx --bun @modern-kit/ui add badge",
+    npm: "npx @modern-core/ui add badge",
+    pnpm: "pnpm dlx @modern-core/ui add badge",
+    yarn: "npx @modern-core/ui add badge",
+    bun: "bunx --bun @modern-core/ui add badge",
   };
   return (
     <div>

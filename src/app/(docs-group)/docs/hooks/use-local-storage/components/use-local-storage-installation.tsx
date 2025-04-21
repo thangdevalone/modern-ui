@@ -7,10 +7,10 @@ import { useHookCode } from "@/lib/services/hooks/use-hook-code";
 
 const CLIContent = () => {
   const commands = {
-    npm: "npx @modern-kit/ui add use-local-storage",
-    pnpm: "pnpm dlx @modern-kit/ui add use-local-storage",
-    yarn: "npx @modern-kit/ui add use-local-storage",
-    bun: "bunx --bun @modern-kit/ui add use-local-storage",
+    npm: "npx @modern-core/ui add use-local-storage",
+    pnpm: "pnpm dlx @modern-core/ui add use-local-storage",
+    yarn: "npx @modern-core/ui add use-local-storage",
+    bun: "bunx --bun @modern-core/ui add use-local-storage",
   };
   return (
     <div>

@@ -8,10 +8,10 @@ import { useEffect } from "react";
 
 const CLIContent = () => {
   const commands = {
-    npm: "npx @modern-kit/ui add underline-tabs",
-    pnpm: "pnpm dlx @modern-kit/ui add underline-tabs",
-    yarn: "npx @modern-kit/ui add underline-tabs",
-    bun: "bunx --bun @modern-kit/ui add underline-tabs",
+    npm: "npx @modern-core/ui add underline-tabs",
+    pnpm: "pnpm dlx @modern-core/ui add underline-tabs",
+    yarn: "npx @modern-core/ui add underline-tabs",
+    bun: "bunx --bun @modern-core/ui add underline-tabs",
   };
   return (
     <div>

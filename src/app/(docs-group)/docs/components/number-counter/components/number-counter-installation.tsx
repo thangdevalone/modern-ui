@@ -7,10 +7,10 @@ import { useComponentCode } from "@/lib/services/hooks/use-component-code";
 
 const CLIContent = () => {
   const commands = {
-    npm: "npx @modern-kit/ui add number-counter",
-    pnpm: "pnpm dlx @modern-kit/ui add number-counter",
-    yarn: "npx @modern-kit/ui add number-counter",
-    bun: "bunx --bun @modern-kit/ui add number-counter",
+    npm: "npx @modern-core/ui add number-counter",
+    pnpm: "pnpm dlx @modern-core/ui add number-counter",
+    yarn: "npx @modern-core/ui add number-counter",
+    bun: "bunx --bun @modern-core/ui add number-counter",
   };
   return (
     <div>

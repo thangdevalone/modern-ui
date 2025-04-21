@@ -7,10 +7,10 @@ import { useHookCode } from "@/lib/services/hooks/use-hook-code";
 
 const CLIContent = () => {
   const commands = {
-    npm: "npx @modern-kit/ui add use-debounce",
-    pnpm: "pnpm dlx @modern-kit/ui add use-debounce",
-    yarn: "npx @modern-kit/ui add use-debounce",
-    bun: "bunx --bun @modern-kit/ui add use-debounce",
+    npm: "npx @modern-core/ui add use-debounce",
+    pnpm: "pnpm dlx @modern-core/ui add use-debounce",
+    yarn: "npx @modern-core/ui add use-debounce",
+    bun: "bunx --bun @modern-core/ui add use-debounce",
   };
   return (
     <div>
