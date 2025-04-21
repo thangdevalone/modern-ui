@@ -1,4 +1,4 @@
-import Contents from '@/mdx/installation.vite.mdx';
+import Contents from '@/mdx/docs/installation.vite.mdx';
 import MdxLayout from '@/components/layouts/mdx-layout';
 import TocWrapper from '@/components/providers/toc-wrapper';
 import {Metadata} from 'next';

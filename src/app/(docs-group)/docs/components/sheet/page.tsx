@@ -1,6 +1,6 @@
 import MdxLayout from "@/components/layouts/mdx-layout";
 import TocWrapper from "@/components/providers/toc-wrapper";
-import Contents from "@/mdx/sheet.mdx";
+import Contents from "@/mdx/docs/sheet.mdx";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

@@ -1,5 +1,5 @@
 import {redirect} from 'next/navigation';
 
 export default function page() {
-  redirect("/docs/components/button");
+  redirect("/docs/components/accordion");
 }

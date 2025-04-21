@@ -1,4 +1,4 @@
-import Contents from '@/mdx/cli.mdx';
+import Contents from '@/mdx/docs/cli.mdx';
 import MdxLayout from '@/components/layouts/mdx-layout';
 import TocWrapper from '@/components/providers/toc-wrapper';
 import {Metadata} from 'next';

@@ -1,4 +1,4 @@
-import Contents from "@/mdx/stepper.mdx";
+import Contents from "@/mdx/docs/stepper.mdx";
 import MdxLayout from "@/components/layouts/mdx-layout";
 import TocWrapper from "@/components/providers/toc-wrapper";
 import { Metadata } from "next";

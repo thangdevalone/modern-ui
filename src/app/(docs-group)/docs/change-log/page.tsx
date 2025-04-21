@@ -1,6 +1,6 @@
 import MdxLayout from "@/components/layouts/mdx-layout";
 import TocWrapper from "@/components/providers/toc-wrapper";
-import ChangelogMDX from "@/mdx/change-log.mdx";
+import Contents from "@/mdx/docs/change-log.mdx";
 
 export const metadata = {
   title: "Change log | Modern UI",
@@ -12,7 +12,7 @@ export default function page() {
   return (
     <>
       <MdxLayout>
-        <ChangelogMDX />
+        <Contents />
       </MdxLayout>
       <TocWrapper file="change-log" />
     </>

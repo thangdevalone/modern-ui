@@ -1,0 +1,66 @@
+---
+title: Getting Started with Modern UI
+description: Learn how to quickly set up and start using Modern UI components in your Next.js project
+date: 2023-08-15
+image: /blog/getting-started.jpg
+tags: [Tutorial, Next.js, Tailwind CSS]
+---
+
+# Getting Started with Modern UI
+
+Modern UI is a powerful component library that makes it easy to build beautiful, responsive user interfaces for your web applications. In this guide, we'll walk through the process of setting up Modern UI in your Next.js project.
+
+## Installation
+
+Follow these steps to set up Modern UI in your Next.js project:
+
+### 1. Create a Next.js Project
+
+If you don't have a Next.js project yet, create one with the following command:
+
+```bash
+npx create-next-app@latest my-app --tailwind --app --use-npm --skip-install
+cd my-app
+npm i
+```
+
+### 2. Initialize Modern UI
+
+Run the initialization command to set up Modern UI in your project:
+
+```bash
+npx @modern-kit/ui init
+```
+
+Follow the prompts in the terminal to complete the setup.
+
+### 3. Add Components
+
+You can add specific components to your project using the add command:
+
+```bash
+npx @modern-kit/ui add button
+```
+
+## Using Components
+
+Now you can start using Modern UI components in your project. Here's an example of how to use the Button component:
+
+```jsx
+import { Button } from '@/components/ui/button';
+
+export default function HomePage() {
+  return (
+    <div className="p-4">
+      <h1 className="text-2xl font-bold mb-4">Welcome to My App</h1>
+      <Button variant="primary">Get Started</Button>
+    </div>
+  );
+}
+```
+
+## Next Steps
+
+Now that you have Modern UI set up in your project, check out our component documentation to learn more about what's available and how to use each component effectively.
+
+Happy coding! 

@@ -1,4 +1,4 @@
-import Contents from '@/mdx/modern-ui-json.mdx';
+import Contents from '@/mdx/docs/modern-ui-json.mdx';
 import MdxLayout from '@/components/layouts/mdx-layout';
 import TocWrapper from '@/components/providers/toc-wrapper';
 import {BreadcrumbNav} from '@/components/breadcrumb-nav';

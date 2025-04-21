@@ -1,4 +1,4 @@
-import Contents from '@/mdx/docs.mdx';
+import Contents from '@/mdx/docs/docs.mdx';
 import MdxLayout from '@/components/layouts/mdx-layout';
 import TocWrapper from '@/components/providers/toc-wrapper';
 import {BreadcrumbNav} from '@/components/breadcrumb-nav';

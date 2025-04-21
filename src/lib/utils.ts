@@ -18,3 +18,20 @@ export const generateId = (text: string) => {
     .replace(/[^\w\s-]/g, "")
     .replace(/\s+/g, "-");
 };
+
+export function slugify(text: string) {
+  return text
+    .toLowerCase()
+    .replace(/[^\w\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
+export function formatDate(date: string) {
+  const options: Intl.DateTimeFormatOptions = {
+    year: 'numeric', 
+    month: 'long', 
+    day: 'numeric'
+  };
+  return new Date(date).toLocaleDateString('en-US', options);
+}
