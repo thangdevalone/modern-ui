@@ -7,10 +7,10 @@ import { useHookCode } from "@/lib/services/hooks/use-hook-code";
 
 const CLIContent = () => {
   const commands = {
-    npm: "npx @modern-pack/ui add use-click-away",
-    pnpm: "pnpm dlx @modern-pack/ui add use-click-away",
-    yarn: "npx @modern-pack/ui add use-click-away",
-    bun: "bunx --bun @modern-pack/ui add use-click-away",
+    npm: "npx @modern-kit/ui add use-click-away",
+    pnpm: "pnpm dlx @modern-kit/ui add use-click-away",
+    yarn: "npx @modern-kit/ui add use-click-away",
+    bun: "bunx --bun @modern-kit/ui add use-click-away",
   };
   return (
     <div>

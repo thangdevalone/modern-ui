@@ -8,10 +8,10 @@ import { useComponentCode } from "@/lib/services/hooks/use-component-code";
 
 const CLIContent = () => {
   const commands = {
-    npm: "npx @modern-pack/ui add form",
-    pnpm: "pnpm dlx @modern-pack/ui add form",
-    yarn: "npx @modern-pack/ui add form",
-    bun: "bunx --bun @modern-pack/ui add form",
+    npm: "npx @modern-kit/ui add form",
+    pnpm: "pnpm dlx @modern-kit/ui add form",
+    yarn: "npx @modern-kit/ui add form",
+    bun: "bunx --bun @modern-kit/ui add form",
   };
   return (
     <div>

@@ -7,10 +7,10 @@ import { useComponentCode } from "@/lib/services/hooks/use-component-code";
 
 const CLIContent = () => {
   const commands = {
-    npm: "npx @modern-pack/ui add accordion",
-    pnpm: "pnpm dlx @modern-pack/ui add accordion",
-    yarn: "npx @modern-pack/ui add accordion",
-    bun: "bunx --bun @modern-pack/ui add accordion",
+    npm: "npx @modern-kit/ui add accordion",
+    pnpm: "pnpm dlx @modern-kit/ui add accordion",
+    yarn: "npx @modern-kit/ui add accordion",
+    bun: "bunx --bun @modern-kit/ui add accordion",
   };
   return (
     <div>

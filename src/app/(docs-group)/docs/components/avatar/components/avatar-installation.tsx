@@ -7,10 +7,10 @@ import { useComponentCode } from "@/lib/services/hooks/use-component-code";
 
 const CLIContent = () => {
   const commands = {
-    npm: "npx @modern-pack/ui add avatar",
-    pnpm: "pnpm dlx @modern-pack/ui add avatar",
-    yarn: "npx @modern-pack/ui add avatar",
-    bun: "bunx --bun @modern-pack/ui add avatar",
+    npm: "npx @modern-kit/ui add avatar",
+    pnpm: "pnpm dlx @modern-kit/ui add avatar",
+    yarn: "npx @modern-kit/ui add avatar",
+    bun: "bunx --bun @modern-kit/ui add avatar",
   };
   return (
     <div>

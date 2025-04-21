@@ -2,10 +2,10 @@ import { TerminalBlock } from "@/components/modern-ui/terminal-block";
 
 export const InitInstallation = ({className}: {className?: string}) => {
   const commands = {
-    npm: "npx @modern-pack/ui init",
-    pnpm: "pnpm dlx @modern-pack/ui init",
-    yarn: "npx @modern-pack/ui init",
-    bun: "bunx --bun @modern-pack/ui init",
+    npm: "npx @modern-kit/ui init",
+    pnpm: "pnpm dlx @modern-kit/ui init",
+    yarn: "npx @modern-kit/ui init",
+    bun: "bunx --bun @modern-kit/ui init",
   };
   return (
     <div className={className}>
@@ -20,10 +20,10 @@ export const InitInstallation = ({className}: {className?: string}) => {
 
 export const AddInstallation = () => {
   const commands = {
-    npm: "npx @modern-pack/ui add [component]",
-    pnpm: "pnpm dlx @modern-pack/ui add [component]",
-    yarn: "npx @modern-pack/ui add [component]",
-    bun: "bunx --bun @modern-pack/ui add [component]",
+    npm: "npx @modern-kit/ui add [component]",
+    pnpm: "pnpm dlx @modern-kit/ui add [component]",
+    yarn: "npx @modern-kit/ui add [component]",
+    bun: "bunx --bun @modern-kit/ui add [component]",
   };
   return (
     <div>
@@ -38,10 +38,10 @@ export const AddInstallation = () => {
 
 export const VersionInstallation = () => {
   const commands = {
-    npm: "npx @modern-pack/ui version",
-    pnpm: "pnpm dlx @modern-pack/ui version",
-    yarn: "npx @modern-pack/ui version",
-    bun: "bunx --bun @modern-pack/ui version",
+    npm: "npx @modern-kit/ui version",
+    pnpm: "pnpm dlx @modern-kit/ui version",
+    yarn: "npx @modern-kit/ui version",
+    bun: "bunx --bun @modern-kit/ui version",
   };
   return (
     <div>

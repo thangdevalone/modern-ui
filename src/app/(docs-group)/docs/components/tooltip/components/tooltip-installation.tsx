@@ -7,10 +7,10 @@ import { useComponentCode } from "@/lib/services/hooks/use-component-code";
 
 const CLIContent = () => {
   const commands = {
-    npm: "npx @modern-pack/ui add tooltip",
-    pnpm: "pnpm dlx @modern-pack/ui add tooltip",
-    yarn: "npx @modern-pack/ui add tooltip",
-    bun: "bunx --bun @modern-pack/ui add tooltip",
+    npm: "npx @modern-kit/ui add tooltip",
+    pnpm: "pnpm dlx @modern-kit/ui add tooltip",
+    yarn: "npx @modern-kit/ui add tooltip",
+    bun: "bunx --bun @modern-kit/ui add tooltip",
   };
   return (
     <div>

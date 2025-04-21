@@ -7,10 +7,10 @@ import { useComponentCode } from "@/lib/services/hooks/use-component-code";
 
 const CLIContent = () => {
   const commands = {
-    npm: "npx @modern-pack/ui add typewriter-effect",
-    pnpm: "pnpm dlx @modern-pack/ui add typewriter-effect",
-    yarn: "npx @modern-pack/ui add typewriter-effect",
-    bun: "bunx --bun @modern-pack/ui add typewriter-effect",
+    npm: "npx @modern-kit/ui add typewriter-effect",
+    pnpm: "pnpm dlx @modern-kit/ui add typewriter-effect",
+    yarn: "npx @modern-kit/ui add typewriter-effect",
+    bun: "bunx --bun @modern-kit/ui add typewriter-effect",
   };
   return (
     <div>
