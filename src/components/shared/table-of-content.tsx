@@ -1,10 +1,10 @@
 "use client";
 
-import Link from "next/link";
-import { motion } from "motion/react";
-import { Bug, Lightbulb } from "lucide-react";
 import type { TOCItem } from "@/lib/toc";
 import { extractTOC } from "@/lib/toc";
+import { Bug, Lightbulb } from "lucide-react";
+import { motion } from "motion/react";
+import Link from "next/link";
 
 interface TableOfContentsProps {
   content: string;
@@ -103,7 +103,8 @@ export default function TableOfContents({ content }: TableOfContentsProps) {
         >
           <motion.div variants={item}>
             <Link
-              href="#report-issue"
+              href="https://github.com/thangdevalone/modern-ui/issues/new?template=bug-report.md&title=%5Bbug%5D%3A+"
+              target="_blank"
               className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
             >
               <Bug className="h-4 w-4" />
@@ -112,11 +113,12 @@ export default function TableOfContents({ content }: TableOfContentsProps) {
           </motion.div>
           <motion.div variants={item}>
             <Link
-              href="#request-feature"
+              href="https://github.com/thangdevalone/modern-ui/issues/new?template=components-request.md&title=%5Bnew%5D%3A+"
+              target="_blank"
               className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
             >
               <Lightbulb className="h-4 w-4" />
-              <span>Request a feature</span>
+              <span>Request a component</span>
             </Link>
           </motion.div>
           <motion.div variants={item}></motion.div>
