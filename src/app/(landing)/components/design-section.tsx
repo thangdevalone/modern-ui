@@ -74,7 +74,7 @@ export function DesignSection() {
                   <div className="h-32 w-full rounded-md bg-muted"></div>
                   <div className="flex justify-end gap-2">
                     <div className="h-8 w-20 rounded-md bg-muted"></div>
-                    <div className="h-8 w-20 rounded-md bg-purple-500"></div>
+                    <div className="h-8 w-20 rounded-md bg-primary"></div>
                   </div>
                 </div>
               </div>

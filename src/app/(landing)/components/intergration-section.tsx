@@ -62,7 +62,7 @@ export function IntegrationSection() {
                         <div className="h-4 w-1/2 rounded-md bg-muted"></div>
                         <div className="h-20 w-full rounded-md bg-muted"></div>
                         <div className="flex justify-end">
-                          <div className="h-8 w-20 rounded-md bg-purple-500"></div>
+                          <div className="h-8 w-20 rounded-md bg-primary"></div>
                         </div>
                       </div>
                     </div>

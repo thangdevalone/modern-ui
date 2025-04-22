@@ -1,78 +1,75 @@
 "use client";
 
-import React from "react";
-import { useRef } from "react";
-import Link from "next/link";
 import { Button } from "@/components/modern-ui/button";
 import { ArrowRight } from "lucide-react";
-import { motion, useInView } from "motion/react";
+import { motion } from "motion/react";
+import Link from "next/link";
 import { AnimatedContent } from "./animated-content";
+const components = [
+  {
+    name: "Button",
+    description: "A button component with different variants and sizes.",
+    gradient:
+      "from-purple-50 to-blue-50 dark:from-purple-950/20 dark:to-blue-950/20",
+  },
+  {
+    name: "Input",
+    description: "An input component for collecting user data.",
+    gradient:
+      "from-blue-50 to-cyan-50 dark:from-blue-950/20 dark:to-cyan-950/20",
+  },
+  {
+    name: "Card",
+    description: "A card component for displaying content.",
+    gradient:
+      "from-green-50 to-emerald-50 dark:from-green-950/20 dark:to-emerald-950/20",
+  },
+  {
+    name: "Avatar",
+    description: "An avatar component for displaying user images.",
+    gradient:
+      "from-amber-50 to-yellow-50 dark:from-amber-950/20 dark:to-yellow-950/20",
+  },
+  {
+    name: "Accordion",
+    description: "An accordion component for displaying collapsible content.",
+    gradient:
+      "from-rose-50 to-pink-50 dark:from-rose-950/20 dark:to-pink-950/20",
+  },
+  {
+    name: "Dropdown Menu",
+    description: "A dropdown menu component for navigation.",
+    gradient:
+      "from-violet-50 to-indigo-50 dark:from-violet-950/20 dark:to-indigo-950/20",
+  },
+];
+
+// Animation variants for staggered animation
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 0.3,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: "spring",
+      stiffness: 100,
+      damping: 15,
+    },
+  },
+};
 
 export function ComponentsSection() {
-  const components = [
-    {
-      name: "Button",
-      description: "A button component with different variants and sizes.",
-      gradient:
-        "from-purple-50 to-blue-50 dark:from-purple-950/20 dark:to-blue-950/20",
-    },
-    {
-      name: "Input",
-      description: "An input component for collecting user data.",
-      gradient:
-        "from-blue-50 to-cyan-50 dark:from-blue-950/20 dark:to-cyan-950/20",
-    },
-    {
-      name: "Card",
-      description: "A card component for displaying content.",
-      gradient:
-        "from-green-50 to-emerald-50 dark:from-green-950/20 dark:to-emerald-950/20",
-    },
-    {
-      name: "Avatar",
-      description: "An avatar component for displaying user images.",
-      gradient:
-        "from-amber-50 to-yellow-50 dark:from-amber-950/20 dark:to-yellow-950/20",
-    },
-    {
-      name: "Accordion",
-      description: "An accordion component for displaying collapsible content.",
-      gradient:
-        "from-rose-50 to-pink-50 dark:from-rose-950/20 dark:to-pink-950/20",
-    },
-    {
-      name: "Dropdown Menu",
-      description: "A dropdown menu component for navigation.",
-      gradient:
-        "from-violet-50 to-indigo-50 dark:from-violet-950/20 dark:to-indigo-950/20",
-    },
-  ];
-
-  // Animation variants for staggered animation
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.3,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        type: "spring",
-        stiffness: 100,
-        damping: 15,
-      },
-    },
-  };
-
   return (
     <section
       id="components"
@@ -138,21 +135,10 @@ function ComponentCard({
 }) {
   return (
     <motion.div
-      variants={{
-        hidden: { opacity: 0, y: 30 },
-        visible: {
-          opacity: 1,
-          y: 0,
-          transition: {
-            type: "spring",
-            stiffness: 100,
-            damping: 15,
-          },
-        },
-      }}
+      variants={itemVariants}
       className="group relative overflow-hidden rounded-xl border bg-background p-2 shadow-md"
       whileHover={{
-        translateY: -4,
+        y: -4,
         boxShadow:
           "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
       }}
