@@ -11,15 +11,15 @@ A modern component and hooks library for React projects, inspired by shadcn/ui, 
 
 ```bash
 # Initialize Modern UI
-npx @modern-pack/ui init
+npx @modern-core/ui init
 
 # Add components
-npx @modern-pack/ui add button
-npx @modern-pack/ui add card
+npx @modern-core/ui add button
+npx @modern-core/ui add card
 
 # Add hooks
-npx @modern-pack/ui add use-media-query
-npx @modern-pack/ui add use-debounce
+npx @modern-core/ui add use-media-query
+npx @modern-core/ui add use-debounce
 ```
 
 ## Features
@@ -76,12 +76,12 @@ Modern UI allows you to install both UI components and custom hooks:
 
 ```bash
 # Install components
-npx @modern-pack/ui add button
-npx @modern-pack/ui add card
+npx @modern-core/ui add button
+npx @modern-core/ui add card
 
 # Install hooks
-npx @modern-pack/ui add use-media-query
-npx @modern-pack/ui add use-click-outside
+npx @modern-core/ui add use-media-query
+npx @modern-core/ui add use-click-outside
 ```
 
 Hooks are automatically installed to your configured hook directory (`aliases.hook` path).
@@ -125,16 +125,16 @@ When adding components with external dependencies:
 
 ```bash
 # List installed components and hooks
-npx @modern-pack/ui version
+npx @modern-core/ui version
 
 # Install specific versions
-npx @modern-pack/ui add button --version 0.9.0
+npx @modern-core/ui add button --version 0.9.0
 
 # Check available versions
-npx @modern-pack/ui version --available button
+npx @modern-core/ui version --available button
 
 # Update components
-npx @modern-pack/ui version --update button
+npx @modern-core/ui version --update button
 ```
 
 ### 8. Path Aliases Support
