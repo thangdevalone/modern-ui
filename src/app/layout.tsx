@@ -12,7 +12,7 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Modern UI",
   description:
-    "A collection of reusable components built with Radix UI and Tailwind CSS. Free. Open Source. And Next.js 14 Ready.",
+    "A collection of reusable components built with Radix UI and Tailwind CSS. Free. Open Source. And Next.js 14 Ready. Inspired by Shadcn UI.",
   keywords: [
     "Modern UI", 
     "React", 
@@ -57,7 +57,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://modern-ui.org",
     title: "Modern UI - Next.js Components",
-    description: "A collection of reusable components built with Radix UI and Tailwind CSS. Free. Open Source. And Next.js 14 Ready.",
+    description: "A collection of reusable components built with Radix UI and Tailwind CSS. Free. Open Source. And Next.js 14 Ready. Inspired by Shadcn UI.",
     siteName: "Modern UI",
     images: [{
       url: "/assets/logo.png",
@@ -69,7 +69,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Modern UI - Next.js Components",
-    description: "A collection of reusable components built with Radix UI and Tailwind CSS. Free. Open Source. And Next.js 14 Ready.",
+    description: "A collection of reusable components built with Radix UI and Tailwind CSS. Free. Open Source. And Next.js 14 Ready. Inspired by Shadcn UI.",
     images: ["/assets/logo.png"],
     creator: "@ThangDevAlone",
   },
