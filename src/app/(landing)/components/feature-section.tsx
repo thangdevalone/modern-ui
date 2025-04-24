@@ -1,10 +1,9 @@
 "use client";
 
-import type React from "react";
+import { Code2, Layers, Palette, Sparkles, Star, Zap } from "lucide-react";
 import { motion, useInView } from "motion/react";
-import { Zap, Palette, Code2, Layers, Star, Sparkles } from "lucide-react";
-import { AnimatedContent } from "./animated-content";
 import { useRef } from "react";
+import { AnimatedContent } from "./animated-content";
 
 const colorMap = {
   purple: "bg-purple-500/10",
@@ -43,6 +42,9 @@ const iconColorMap = {
 } as const;
 
 export function FeaturesSection() {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, amount: 0.3 });
+
   const features = [
     {
       icon: Zap,
@@ -91,20 +93,24 @@ export function FeaturesSection() {
     visible: {
       opacity: 1,
       transition: {
-        duration: 0.5,
-        staggerChildren: 0.15,
-        delayChildren: 0.3,
+        duration: 0.3,
+        staggerChildren: 0.08,
+        delayChildren: 0.1,
       },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: 0, y: 15 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
         type: "spring",
+        stiffness: 400,
+        damping: 15,
+        mass: 0.8,
+        duration: 0.4,
       },
     },
   };
@@ -143,11 +149,11 @@ export function FeaturesSection() {
       </AnimatedContent>
 
       <motion.div
+        ref={ref}
         className="mx-auto grid justify-center gap-8 sm:grid-cols-2 md:max-w-[64rem] md:grid-cols-3"
         variants={containerVariants}
         initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.3 }}
+        animate={isInView ? "visible" : "hidden"}
       >
         {features.map((feature, index) => (
           <motion.div
@@ -155,7 +161,7 @@ export function FeaturesSection() {
             variants={itemVariants}
             className={`group relative overflow-hidden rounded-xl border bg-background p-6 shadow-md`}
             whileHover={{
-              translateY: -4,
+              y: -4,
               boxShadow:
                 "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
             }}
