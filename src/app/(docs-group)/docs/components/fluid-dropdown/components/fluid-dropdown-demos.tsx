@@ -32,6 +32,7 @@ export function BasicFluidDropdownDemo() {
     <FluidDropdown 
       categories={categories}
       defaultCategoryId="all"
+      className="max-w-[200px]"
     />
   );
 }
@@ -52,21 +53,3 @@ export function CustomColorsFluidDropdownDemo() {
     />
   );
 }
-
-export function CompactFluidDropdownDemo() {
-  const categories = [
-    { id: "sunny", label: "Sunny", icon: Sun, color: "#F9CF00" },
-    { id: "night", label: "Night", icon: Moon, color: "#5E60CE" },
-    { id: "rainy", label: "Rainy", icon: CloudRain, color: "#5390D9" },
-    { id: "windy", label: "Windy", icon: Wind, color: "#79C5E8" },
-    { id: "snowy", label: "Snowy", icon: CloudSnow, color: "#D6E5FA" },
-  ];
-
-  return (
-    <FluidDropdown 
-      categories={categories}
-      defaultCategoryId="sunny"
-      className="max-w-[200px]"
-    />
-  );
-} 

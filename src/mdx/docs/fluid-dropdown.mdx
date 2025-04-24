@@ -5,7 +5,6 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/modern-ui
 import {
   BasicFluidDropdownDemo,
   CustomColorsFluidDropdownDemo,
-  CompactFluidDropdownDemo
 } from "@/app/(docs-group)/docs/components/fluid-dropdown/components/fluid-dropdown-demos";
 
 
@@ -145,44 +144,6 @@ const categories = [
   </TabsContent>
 </Tabs>
 
-### Compact Dropdown
-
-<Tabs defaultValue="preview">
-  <TabsList>
-    <TabsTrigger value="preview">Preview</TabsTrigger>
-    <TabsTrigger value="code">Code</TabsTrigger>
-  </TabsList>
-  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[250px]">
-    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50 "></div>
-    <div className="flex justify-center items-center h-full z-10 relative min-h-[250px]">
-      <CompactFluidDropdownDemo />
-    </div>
-  </TabsContent>
-  <TabsContent value="code">
-    ```tsx
-    import { FluidDropdown } from "@/components/modern-ui/fluid-dropdown";
-    import { Sun, Moon, CloudRain, Wind, CloudSnow } from "lucide-react";
-
-    export function CompactFluidDropdownDemo() {
-      const categories = [
-        { id: "sunny", label: "Sunny", icon: Sun, color: "#F9CF00" },
-        { id: "night", label: "Night", icon: Moon, color: "#5E60CE" },
-        { id: "rainy", label: "Rainy", icon: CloudRain, color: "#5390D9" },
-        { id: "windy", label: "Windy", icon: Wind, color: "#79C5E8" },
-        { id: "snowy", label: "Snowy", icon: CloudSnow, color: "#D6E5FA" },
-      ];
-
-      return (
-        <FluidDropdown 
-          categories={categories}
-          defaultCategoryId="sunny"
-          className="max-w-[200px]"
-        />
-      );
-    }
-    ```
-  </TabsContent>
-</Tabs>
 
 ---
 
