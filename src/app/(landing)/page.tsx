@@ -8,7 +8,7 @@ import { HeroSection } from "./components/hero-section";
 import { IntegrationSection } from "./components/intergration-section";
 
 export const metadata: Metadata = {
-  title: "Modern UI - Beautiful Next.js Components",
+  title: "Modern UI - Beautiful Library Components",
   description:
     "A collection of beautiful and reusable components built with Radix UI and Tailwind CSS. Free, Open Source, and ready for your Next.js projects. Inspired by Shadcn UI.",
   alternates: {
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 
 export default function Page() {
   const jsonLd = generateWebPageSchema({
-    title: "Modern UI - Beautiful Next.js Components",
+    title: "Modern UI - Beautiful Library Components",
     description:
       "A collection of beautiful and reusable components built with Radix UI and Tailwind CSS. Free, Open Source, and ready for your Next.js projects. Inspired by Shadcn UI.",
     url: "https://modern-ui.org",
