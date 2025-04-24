@@ -64,6 +64,10 @@ export type CalendarProps = DayPickerProps & {
 };
 
 type NavView = "days" | "months" | "years";
+type DateRange = {
+  from?: Date;
+  to?: Date;
+};
 
 /**
  * A custom calendar component built on top of react-day-picker.
@@ -575,7 +579,11 @@ function YearGrid({
   navView: NavView;
   onYearSelect?: (date: Date) => void;
 } & React.HTMLAttributes<HTMLDivElement>) {
-  const { goToMonth, selected } = useDayPicker();
+  
+  const { goToMonth, selected } = useDayPicker() as {
+    goToMonth: (date: Date) => void;
+    selected: DateRange | undefined;
+  };
 
   // Generate years in a proper grid layout
   const currentYear = new Date().getFullYear();
@@ -622,14 +630,19 @@ function YearGrid({
                     onYearSelect(newDate);
                     return;
                   }
-
-                  setNavView("days");
-                  goToMonth(
-                    new Date(
-                      year,
-                      (selected as Date | undefined)?.getMonth() ?? 0
-                    )
-                  );
+                setNavView("days");
+                
+                  let selectedMonth = 0;
+                
+                  if (selected && typeof selected === "object") {
+                    if ("getMonth" in selected && typeof (selected as Date).getMonth === "function") {
+                      selectedMonth = (selected as Date).getMonth();
+                    } else if ("from" in selected && selected.from instanceof Date) {
+                      selectedMonth = selected.from.getMonth();
+                    }
+                  }
+                
+                  goToMonth(new Date(year, selectedMonth));
                 }}
                 disabled={isDisabled}
               >
