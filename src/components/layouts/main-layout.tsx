@@ -34,6 +34,7 @@ const mainNavigationItems = [
   { href: "/docs/components", label: "Components" },
   { href: "/docs", label: "Documentation" },
   { href: "/blogs", label: "Blogs" },
+  { href: "/components", label: "Showcase" },
 ];
 
 export const Header = () => {

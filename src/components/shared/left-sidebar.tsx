@@ -20,8 +20,8 @@ export const itemVariants = {
 };
 
 const badgeStyles: Record<string, string> = {
-  new: "bg-teal-100 text-teal-800 dark:bg-teal-900 dark:text-teal-100 hover:bg-teal-200 dark:hover:bg-teal-800",
-  pro: "bg-fuchsia-100 text-fuchsia-800 dark:bg-fuchsia-900 dark:text-fuchsia-100 hover:bg-fuchsia-200 dark:hover:bg-fuchsia-800",
+  new: "bg-teal-100 text-teal-800 dark:bg-teal-800 dark:text-teal-200 hover:bg-teal-200 dark:hover:bg-teal-800",
+  pro: "bg-fuchsia-100 text-fuchsia-800 dark:bg-fuchsia-800 dark:text-fuchsia-200 hover:bg-fuchsia-200 dark:hover:bg-fuchsia-800",
 };
 
 const links: {
@@ -40,7 +40,7 @@ const links: {
       { href: "/docs/installation", label: "Installation" },
       { href: "/docs/modern-ui-json", label: "modern-ui.json" },
       { href: "/docs/cli", label: "CLI" },
-      { href: "/docs/change-log", label: "Change log", badge: "new" },
+      { href: "/docs/change-log", label: "Change log" },
     ],
   },
   {
@@ -52,16 +52,16 @@ const links: {
       { href: "/docs/components/badge", label: "Badge" },
       { href: "/docs/components/breadcrumb", label: "Breadcrumb" },
       { href: "/docs/components/button", label: "Button" },
-      { href: "/docs/components/calendar", label: "Calendar", badge: "new" },
+      { href: "/docs/components/calendar", label: "Calendar" },
       { href: "/docs/components/card", label: "Card" },
       { href: "/docs/components/dialog", label: "Dialog" },
-      { href: "/docs/components/drawer", label: "Drawer", badge: "new" },
-      { href: "/docs/components/form", label: "Form", badge: "new" },
+      { href: "/docs/components/drawer", label: "Drawer" },
+      { href: "/docs/components/form", label: "Form" },
       { href: "/docs/components/input", label: "Input" },
       { href: "/docs/components/label", label: "Label" },
       { href: "/docs/components/popover", label: "Popover" },
-      { href: "/docs/components/radio", label: "Radio", badge: "new" },
-      { href: "/docs/components/sheet", label: "Sheet", badge: "new" },
+      { href: "/docs/components/radio", label: "Radio" },
+      { href: "/docs/components/sheet", label: "Sheet" },
       { href: "/docs/components/switch", label: "Switch" },
       { href: "/docs/components/table", label: "Table" },
       { href: "/docs/components/textarea", label: "TextArea" },
@@ -84,22 +84,19 @@ const links: {
       {
         href: "/docs/components/number-counter",
         label: "Number Counter",
-        badge: "new",
       },
       { href: "/docs/components/rainbow-button", label: "Rainbow Button" },
       { href: "/docs/components/rich-text-editor", label: "Rich Text Editor", badge: "new" },
-      { href: "/docs/components/slider", label: "Slider", badge: "new" },
+      { href: "/docs/components/slider", label: "Slider" },
       { href: "/docs/components/sonner", label: "Sonner" },
       {
         href: "/docs/components/sparkles-text",
         label: "Sparkles Text",
-        badge: "new",
       },
       { href: "/docs/components/stepper", label: "Stepper" },
       {
         href: "/docs/components/typewriter-effect",
         label: "Typewriter Effect",
-        badge: "new",
       },
       { href: "/docs/components/underline-tabs", label: "Underline tab" },
       { href: "/docs/components/visually-hidden", label: "VisuallyHidden" },
@@ -121,7 +118,7 @@ export default function LeftSidebar() {
 
   return (
     <motion.nav
-      className="md:space-y-6 space-y-4"
+      className="md:space-y-6 space-y-4 text-sm"
       variants={containerVariants}
       initial="hidden"
       animate="show"
@@ -132,7 +129,7 @@ export default function LeftSidebar() {
             {category}
           </motion.h2>
           <motion.ul
-            className="space-y-1"
+            className="space-y-1.5"
             variants={containerVariants}
             initial="hidden"
             animate="show"

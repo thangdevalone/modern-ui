@@ -117,7 +117,7 @@ export const FluidDropdown = ({
               isHovered={false}
               color={selectedCategory.color}
             />
-            {selectedCategory.label}
+            <span className="truncate">{selectedCategory.label}</span>
           </span>
           <motion.div
             animate={{ rotate: isOpen ? 180 : 0 }}
@@ -167,7 +167,8 @@ export const FluidDropdown = ({
               <motion.div
                 className={cn(
                   "absolute w-full rounded-lg border border-border",
-                  "bg-popover p-1 shadow-lg"
+                  "bg-popover p-1 shadow-lg",
+                  "min-w-[150px]"
                 )}
                 initial={{ borderRadius: 8 }}
                 animate={{
@@ -238,7 +239,7 @@ export const FluidDropdown = ({
                           isHovered={hoveredCategory === category.id}
                           color={category.color}
                         />
-                        {category.label}
+                        <span className="truncate">{category.label}</span>
                       </motion.button>
                     </React.Fragment>
                   ))}

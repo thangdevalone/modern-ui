@@ -31,7 +31,7 @@ const steps = [
   },
   {
     id: 1,
-    title: "Cd project",
+    title: "Install Dependencies",
     children: () => {
       const commands = {
         npm: 'cd demo-app && npm i',

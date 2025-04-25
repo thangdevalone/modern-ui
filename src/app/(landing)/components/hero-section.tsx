@@ -8,6 +8,7 @@ import {
   Palette,
   Code2,
   Layers,
+  Grid,
 } from "lucide-react";
 import { motion } from "motion/react";
 import dynamic from "next/dynamic";

@@ -31,7 +31,6 @@ export default function TableOfContents({ content }: TableOfContentsProps) {
   const renderTOCItems = (items: TOCItem[]) => {
     return (
       <motion.ul
-        className="space-y-1"
         variants={container}
         initial="hidden"
         animate="show"
@@ -53,7 +52,7 @@ export default function TableOfContents({ content }: TableOfContentsProps) {
                   });
                 }
               }}
-              className="text-muted-foreground w-fit hover:text-foreground relative after:content-[''] after:absolute after:bottom-[-2px] after:left-0 after:w-0 after:h-[2px] after:bg-current after:transition-width after:duration-300 hover:after:w-full transition-colors block"
+              className="mb-1.5 text-muted-foreground w-fit hover:text-foreground relative after:content-[''] after:absolute after:bottom-[-2px] after:left-0 after:w-0 after:h-[2px] after:bg-current after:transition-width after:duration-300 hover:after:w-full transition-colors block"
             >
               <span className="line-clamp-1 break-all">{tocItem.text}</span>
             </Link>
@@ -77,7 +76,7 @@ export default function TableOfContents({ content }: TableOfContentsProps) {
   return (
     <aside className="hidden no-scrollbar h-[calc(100vh_-_70px)] top-[70px] left-0 right-0 lg:block w-64 shrink-0 border-l border-border sticky overflow-y-auto py-4 pl-4">
       <motion.div
-        className="space-y-6"
+        className="space-y-6 text-sm"
         variants={container}
         initial="hidden"
         animate="show"
@@ -87,7 +86,9 @@ export default function TableOfContents({ content }: TableOfContentsProps) {
             On This Page
           </motion.h2>
           {tocItems.length > 0 ? (
-            renderTOCItems(tocItems)
+            <div className="-mb-1.5">
+              {renderTOCItems(tocItems)}
+            </div>
           ) : (
             <p className="text-muted-foreground">
               No headings found in this document.
@@ -96,7 +97,7 @@ export default function TableOfContents({ content }: TableOfContentsProps) {
         </div>
 
         <motion.div
-          className="space-y-3 pt-4 border-t border-border"
+          className="space-y-2 pt-4 border-t border-border"
           variants={container}
           initial="hidden"
           animate="show"

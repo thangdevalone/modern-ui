@@ -111,7 +111,7 @@ export function ComponentsSection() {
       <div className="flex justify-center">
         <AnimatedContent>
           <Button size="lg" className="rounded-full px-8" asChild>
-            <Link href="/docs/components" className="flex items-center gap-2">
+            <Link href="/components" className="flex items-center gap-2">
               View All Components
               <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
