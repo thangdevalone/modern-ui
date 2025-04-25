@@ -1,4 +1,4 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
 @config '../../tailwind.config.ts';
 
@@ -22,7 +22,6 @@
 
 @layer base {
   :root {
-
     --sh-class: #7aa2f7;
     --sh-sign: #89ddff;
     --sh-string: #9ece6a;
@@ -106,3 +105,165 @@
   }
 }
 
+/* Rich Text Editor Styles */
+.ProseMirror:focus-visible {
+  outline: none;
+}
+
+.ProseMirror {
+  min-height: 300px;
+}
+
+.ProseMirror p.is-editor-empty:first-child::before {
+  @apply text-muted-foreground;
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+
+.ProseMirror img {
+  @apply max-w-full h-auto rounded shadow-sm;
+  transition: all 0.2s ease;
+}
+
+.ProseMirror img:hover {
+  @apply shadow-md;
+}
+
+.ProseMirror blockquote {
+  @apply border-l-4 border-gray-300 pl-4 italic my-4 text-gray-600;
+  background-color: rgba(0, 0, 0, 0.03);
+  border-radius: 0 0.25rem 0.25rem 0;
+  padding: 0.5rem 0.75rem;
+}
+
+.ProseMirror pre {
+  @apply bg-gray-50 p-4 rounded font-mono text-sm my-4 overflow-x-auto;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Table styling fixes */
+.rich-text-table {
+  @apply border-collapse w-full my-4 rounded overflow-hidden;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.rich-text-table-header {
+  @apply bg-gray-50 font-bold p-2 border border-gray-200 text-gray-700;
+}
+
+.rich-text-table-cell {
+  @apply p-2 border border-gray-200;
+}
+
+.ProseMirror table {
+  @apply border-collapse w-full my-4;
+  border: 1px solid #e2e8f0;
+}
+
+.ProseMirror table th {
+  @apply bg-gray-50 font-bold p-2 border border-gray-200 text-gray-700;
+}
+
+.ProseMirror table td {
+  @apply p-2 border border-gray-200;
+}
+
+.ProseMirror ul {
+  @apply list-disc pl-6 my-4;
+}
+
+.ProseMirror ol {
+  @apply list-decimal pl-6 my-4;
+}
+
+.ProseMirror h1 {
+  @apply text-3xl font-bold my-4 text-gray-800;
+}
+
+.ProseMirror h2 {
+  @apply text-2xl font-bold my-3 text-gray-800;
+}
+
+.ProseMirror h3 {
+  @apply text-xl font-bold my-2 text-gray-800;
+}
+
+.ProseMirror a {
+  @apply text-blue-600 underline underline-offset-2 transition-colors;
+}
+
+.ProseMirror a:hover {
+  @apply text-blue-700;
+}
+
+.ProseMirror mark {
+  @apply px-1 rounded;
+  color: inherit;
+}
+
+/* Resizable images */
+.resizable-image {
+  display: inline-block;
+  position: relative;
+  resize: both;
+  overflow: hidden;
+  max-width: 100%;
+}
+
+.resizable-image::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 10px;
+  height: 10px;
+  cursor: nwse-resize;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+}
+
+/* Bubble menu animation */
+.tippy-box[data-animation="fade"][data-state="hidden"] {
+  opacity: 0;
+}
+
+.tippy-box[data-animation="fade"][data-state="visible"] {
+  opacity: 1;
+  transition: opacity 0.2s ease-out;
+}
+
+/* Custom scrollbar for the editor */
+.ProseMirror::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.ProseMirror::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.ProseMirror::-webkit-scrollbar-thumb {
+  @apply bg-zinc-300 dark:bg-zinc-700 rounded-full;
+}
+
+.ProseMirror::-webkit-scrollbar-thumb:hover {
+  @apply bg-zinc-400 dark:bg-zinc-600;
+}
+
+/* Focus styles */
+.ProseMirror *:focus {
+  @apply outline-none;
+}
+
+/* Selection styles */
+.ProseMirror ::selection {
+  @apply bg-blue-100;
+}
+
+/* Iframe styling */
+.ProseMirror iframe {
+  @apply my-4 rounded border border-gray-200 max-w-full;
+  aspect-ratio: 16 / 9;
+}
