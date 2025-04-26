@@ -86,6 +86,7 @@ const links: {
         label: "Number Counter",
       },
       { href: "/docs/components/rainbow-button", label: "Rainbow Button" },
+      { href: "/docs/components/rich-text-editor", label: "Rich Text Editor", badge: "new" },
       { href: "/docs/components/slider", label: "Slider" },
       { href: "/docs/components/sonner", label: "Sonner" },
       {

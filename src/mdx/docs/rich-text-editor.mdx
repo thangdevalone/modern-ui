@@ -1,0 +1,184 @@
+import { PreviewRichTextEditor } from "@/app/(docs-group)/docs/components/rich-text-editor/preview";
+import { BreadcrumbNav } from "@/components/breadcrumb-nav";
+import { RichTextEditorInstallation } from "@/app/(docs-group)/docs/components/rich-text-editor/components/rich-text-editor-installation";
+import {
+  Tabs,
+  TabsList,
+  TabsTrigger,
+  TabsContent,
+} from "@/components/modern-ui/tabs";
+import {
+  BasicRichTextEditorDemo,
+  RichTextEditorWithCustomExtensionsDemo,
+} from "@/app/(docs-group)/docs/components/rich-text-editor/components/rich-text-editor-demos";
+
+<BreadcrumbNav
+  className="mb-4"
+  items={[
+    { label: "Docs", href: "/docs" },
+    { label: "Components", href: "/docs/components" },
+    { label: "RichTextEditor" },
+  ]}
+/>
+
+<PreviewRichTextEditor />
+
+# Rich Text Editor Component
+
+A powerful WYSIWYG editor component built on top of Tiptap that provides a comprehensive solution for text editing with formatting, image embedding, tables, and more.
+
+- Extensive text formatting options
+- Image, link, and table insertion
+- Color control and highlighting
+- Text alignment
+- Lists and code blocks
+- Dropdown menus for organized options
+- Export to HTML, Markdown, or JSON
+- Accessibility support
+
+---
+
+## Installation
+
+The RichTextEditor component is part of our UI library. You can import it directly from the components directory.
+
+<RichTextEditorInstallation />
+
+---
+
+## Usage
+
+Here is how to use the Rich Text Editor in your project.
+
+```tsx
+import { RichTextEditor } from "@/components/modern-ui/rich-text-editor";
+```
+
+<br />
+
+```tsx
+<RichTextEditor placeholder="Type something..." />
+```
+
+---
+
+## Examples
+
+### Basic Editor
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[400px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[350px] not-prose">
+      <BasicRichTextEditorDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { RichTextEditor } from "@/components/modern-ui/rich-text-editor";
+
+    export function BasicRichTextEditorDemo() {
+      return (
+        <RichTextEditor className="w-full" />
+      );
+    }
+    ```
+
+  </TabsContent>
+</Tabs>
+
+### Editor with Custom Extensions
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview" className="p-6 border rounded-md mt-2 relative min-h-[400px]">
+    <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50"></div>
+    <div className="flex justify-center items-center h-full z-10 relative min-h-[400px] not-prose">
+      <RichTextEditorWithCustomExtensionsDemo />
+    </div>
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx
+    import { RichTextEditor } from "@/components/modern-ui/rich-text-editor";
+    import Mention from '@tiptap/extension-mention'
+    import suggestion from '@tiptap/suggestion'
+
+    export function RichTextEditorWithCustomExtensionsDemo() {
+      // This is just a simplified example of custom extensions
+      const customExtensions = [
+        Mention.configure({
+          HTMLAttributes: {
+            class: 'mention',
+          },
+          suggestion: {
+            items: ({ query }) => {
+              return [
+                'John',
+                'Jane',
+                'Joe',
+                'Jack',
+                'Jill',
+              ].filter(item => item.toLowerCase().startsWith(query.toLowerCase())).slice(0, 5)
+            },
+          },
+        }),
+      ];
+
+      return (
+        <RichTextEditor
+          className="w-full"
+          customExtensions={customExtensions}
+          placeholder="Try typing @ to mention someone..."
+        />
+      );
+    }
+    ```
+
+  </TabsContent>
+</Tabs>
+
+---
+
+## API Reference
+
+### RichTextEditor
+
+| Prop               | Type                      | Default               | Description                                     |
+| ------------------ | ------------------------- | --------------------- | ----------------------------------------------- |
+| `initialContent`   | `string`                  | `""`                  | Initial HTML content for the editor             |
+| `placeholder`      | `string`                  | `"Type something..."` | Placeholder text when the editor is empty       |
+| `onChange`         | `(html: string) => void`  | -                     | Callback when content changes                   |
+| `className`        | `string`                  | -                     | Additional CSS classes for the editor container |
+| `customExtensions` | `Extension[]`             | `[]`                  | Custom Tiptap extensions to add to the editor   |
+| `value`            | `string`                  | -                     | Controlled value of the editor content (HTML)   |
+| `onValueChange`    | `(value: string) => void` | -                     | Callback for controlled value changes           |
+
+## Features
+
+The Rich Text Editor includes the following features:
+
+- **Text Formatting**: Bold, italic, underline, strikethrough, superscript, subscript organized in a dropdown
+- **Paragraph Styles**: Headings (H1-H3), paragraphs, ordered and unordered lists, code blocks, blockquotes
+- **Text Styling**: Font family, font size, text and background colors in dropdown menus
+- **Alignment**: Left, center, right, justify options in a dropdown
+- **Media**: Image upload and URL insertion, embeddable content
+- **Tables**: Insert and edit tables
+- **Links**: Add, edit, and remove links
+- **Drawings**: Integration with Excalidraw for creating diagrams
+- **Export Options**: Export to HTML, Markdown, or JSON
+
+## Accessibility
+
+The Rich Text Editor is built with accessibility in mind:
+
+- Supports keyboard navigation
+- Provides ARIA attributes for screen readers
+- Includes visible focus states
+- Follows WAI-ARIA authoring practices
