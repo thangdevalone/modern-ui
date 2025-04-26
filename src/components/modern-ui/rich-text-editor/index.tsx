@@ -4,17 +4,13 @@ import type React from "react";
 
 import { Button } from "@/components/modern-ui/button";
 import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/modern-ui/dialog";
-import { Label } from "@/components/modern-ui/label";
-import { Slider } from "@/components/modern-ui/slider";
-import { VisuallyHidden } from "@/components/modern-ui/visually-hidden";
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/modern-ui/tooltip";
 import { cn } from "@/lib/utils";
-import { Extension } from "@tiptap/core";
+import { Extension, Mark } from "@tiptap/core";
 import Color from "@tiptap/extension-color";
 import FontFamily from "@tiptap/extension-font-family";
 import Highlight from "@tiptap/extension-highlight";
@@ -22,10 +18,6 @@ import Link from "@tiptap/extension-link";
 import Placeholder from "@tiptap/extension-placeholder";
 import Subscript from "@tiptap/extension-subscript";
 import Superscript from "@tiptap/extension-superscript";
-import Table from "@tiptap/extension-table";
-import TableCell from "@tiptap/extension-table-cell";
-import TableHeader from "@tiptap/extension-table-header";
-import TableRow from "@tiptap/extension-table-row";
 import TextAlign from "@tiptap/extension-text-align";
 import TextStyle from "@tiptap/extension-text-style";
 import Typography from "@tiptap/extension-typography";
@@ -36,16 +28,37 @@ import { MoreVertical } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 import TurndownService from "turndown";
-import { EditorToolbar } from "./components/toolbar";
 import { EditorBubbleMenu } from "./components/bubble-menu";
 import { CustomImage } from "./components/custom-image";
 import { EditorExportDialog } from "./components/export-dialog";
-import {
-  Tooltip,
-  TooltipProvider,
-  TooltipTrigger,
-  TooltipContent,
-} from "@/components/modern-ui/tooltip";
+import { EditorToolbar } from "./components/toolbar";
+
+// Constants for font sizes
+const MIN_FONT_SIZE = 8;
+const MAX_FONT_SIZE = 72;
+const DEFAULT_FONT_SIZE = 16;
+
+// Create a custom extension for font size support
+const CustomTextStyle = TextStyle.extend({
+  addAttributes() {
+    return {
+      ...this.parent?.(),
+      fontSize: {
+        default: null,
+        parseHTML: (element: HTMLElement) => element.style.fontSize || null,
+        renderHTML: (attributes: { fontSize: string | null }) => {
+          if (!attributes.fontSize) {
+            return {};
+          }
+          
+          return {
+            style: `font-size: ${attributes.fontSize}`,
+          };
+        },
+      },
+    };
+  },
+});
 
 interface RichTextEditorProps {
   initialContent?: string;
@@ -75,14 +88,16 @@ export function RichTextEditor({
   const [paragraphType, setParagraphType] = useState("paragraph");
   const [fontSize, setFontSize] = useState(16);
   const [fontFamily, setFontFamily] = useState("Arial");
-  const [excalidrawImage, setExcalidrawImage] = useState<string | null>(null);
-  const [excalidrawWidth, setExcalidrawWidth] = useState(100);
   const [textColor, setTextColor] = useState("#000000");
   const [bgColor, setBgColor] = useState("");
-  const [isExcalidrawDialogOpen, setIsExcalidrawDialogOpen] = useState(false);
-  const excalidrawIframeRef = useRef<HTMLIFrameElement>(null);
   const editorContainerRef = useRef<HTMLDivElement>(null);
-  const turndownService = useRef(new TurndownService());
+  const turndownService = useRef(
+    new TurndownService({
+      headingStyle: "atx",
+      codeBlockStyle: "fenced",
+      emDelimiter: "*",
+    })
+  );
   const isControlled = value !== undefined;
 
   const textColorPresets = [
@@ -185,26 +200,10 @@ export function RichTextEditor({
       Underline,
       Superscript,
       Subscript,
-      Table.configure({
-        resizable: true,
-        HTMLAttributes: {
-          class: "rich-text-table",
-        },
-      }),
-      TableRow,
-      TableHeader.configure({
-        HTMLAttributes: {
-          class: "rich-text-table-header",
-        },
-      }),
-      TableCell.configure({
-        HTMLAttributes: {
-          class: "rich-text-table-cell",
-        },
-      }),
       TextStyle,
       Color,
       FontFamily,
+      CustomTextStyle,
       ...customExtensions,
     ],
     content: isControlled ? value : initialContent,
@@ -224,6 +223,40 @@ export function RichTextEditor({
     immediatelyRender: false,
   });
 
+  // Setup Turndown for Markdown conversion
+  useEffect(() => {
+    // Configure turndown for better markdown compatibility
+    turndownService.current.addRule("image", {
+      filter: "img",
+      replacement: function (content, node) {
+        const element = node as HTMLElement;
+        const alt = element.getAttribute("alt") || "";
+        const src = element.getAttribute("src") || "";
+        return "![" + alt + "](" + src + ")";
+      },
+    });
+
+    // Handle <br> tags properly
+    turndownService.current.addRule("lineBreak", {
+      filter: "br",
+      replacement: function () {
+        return "\n";
+      },
+    });
+
+    // Better handling of code blocks
+    turndownService.current.addRule("codeBlock", {
+      filter: ["pre"],
+      replacement: function (content, node) {
+        const element = node as HTMLElement;
+        const codeElement = element.querySelector("code");
+        const code = codeElement?.textContent || "";
+        const lang = element.getAttribute("data-language") || "";
+        return "\n```" + lang + "\n" + code + "\n```\n";
+      },
+    });
+  }, []);
+
   // Handle controlled component updates
   useEffect(() => {
     if (editor && isControlled && value !== editor.getHTML()) {
@@ -236,27 +269,6 @@ export function RichTextEditor({
       editor.commands.setContent(initialContent);
     }
   }, [editor, initialContent, isControlled]);
-
-  // Setup communication with Excalidraw iframe
-  useEffect(() => {
-    const handleExcalidrawMessage = (event: MessageEvent) => {
-      if (event.data && event.data.type === "excalidraw-image") {
-        setExcalidrawImage(event.data.imageData);
-      }
-    };
-
-    window.addEventListener("message", handleExcalidrawMessage);
-    return () => {
-      window.removeEventListener("message", handleExcalidrawMessage);
-    };
-  }, []);
-
-  // Handle Excalidraw dialog state
-  useEffect(() => {
-    if (!isExcalidrawDialogOpen) {
-      setExcalidrawImage(null);
-    }
-  }, [isExcalidrawDialogOpen]);
 
   const setLink = useCallback(() => {
     if (!editor) return;
@@ -323,22 +335,13 @@ export function RichTextEditor({
     [editor]
   );
 
-  const addTable = useCallback(() => {
-    if (!editor) return;
-
-    editor
-      .chain()
-      .focus()
-      .insertTable({ rows: 3, cols: 3, withHeaderRow: true })
-      .run();
-  }, [editor]);
-
   const exportToFormat = useCallback(() => {
-    if (!editor) return {
-      content: "",
-      fileExtension: "html",
-      mimeType: "text/html"
-    };
+    if (!editor)
+      return {
+        content: "",
+        fileExtension: "html",
+        mimeType: "text/html",
+      };
 
     let content = "";
     let fileExtension = "";
@@ -467,10 +470,23 @@ export function RichTextEditor({
     [editor]
   );
 
-  const handleFontSizeChange = useCallback((size: number) => {
-    setFontSize(size);
-    // This would require a font size extension
-  }, []);
+  const handleFontSizeChange = useCallback(
+    (size: number) => {
+      if (!editor) return;
+      
+      // Ensure size is within bounds
+      const validSize = Math.min(Math.max(size, MIN_FONT_SIZE), MAX_FONT_SIZE);
+      
+      setFontSize(validSize);
+      
+      // Apply font size using the TextStyle extension
+      editor.chain()
+        .focus()
+        .setMark('textStyle', { fontSize: `${validSize}px` })
+        .run();
+    },
+    [editor]
+  );
 
   const handleFontFamilyChange = useCallback(
     (font: string) => {
@@ -503,55 +519,6 @@ export function RichTextEditor({
     [editor]
   );
 
-  const saveExcalidrawImage = useCallback(() => {
-    if (!editor || !excalidrawImage) return;
-
-    // Insert the Excalidraw image into the editor
-    editor
-      .chain()
-      .focus()
-      .setImage({
-        src: excalidrawImage,
-        alt: "Excalidraw drawing",
-      })
-      .run();
-
-    // Close the dialog
-    setIsExcalidrawDialogOpen(false);
-    setExcalidrawImage(null);
-  }, [editor, excalidrawImage]);
-
-  const captureExcalidrawImage = useCallback(() => {
-    if (excalidrawIframeRef.current) {
-      // Send a message to the Excalidraw iframe to request the image
-      excalidrawIframeRef.current.contentWindow?.postMessage(
-        { type: "get-image" },
-        "*"
-      );
-
-      // For demonstration purposes, we'll simulate receiving an image
-      const canvas = document.createElement("canvas");
-      canvas.width = 800;
-      canvas.height = 600;
-      const ctx = canvas.getContext("2d");
-      if (ctx) {
-        // Draw a simple placeholder image
-        ctx.fillStyle = "#f0f0f0";
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.strokeStyle = "#000";
-        ctx.lineWidth = 2;
-        ctx.strokeRect(10, 10, canvas.width - 20, canvas.height - 20);
-        ctx.font = "20px Arial";
-        ctx.fillStyle = "#333";
-        ctx.fillText("Excalidraw Drawing", 50, 50);
-
-        // Convert to data URL
-        const imageData = canvas.toDataURL("image/png");
-        setExcalidrawImage(imageData);
-      }
-    }
-  }, []);
-
   if (!editor) {
     return null;
   }
@@ -583,100 +550,16 @@ export function RichTextEditor({
           setTextColor={handleTextColorChange}
           bgColor={bgColor}
           setBgColor={handleBgColorChange}
-          setIsExcalidrawDialogOpen={setIsExcalidrawDialogOpen}
           handleImageUpload={handleImageUpload}
           addImageByUrl={addImageByUrl}
           setLink={setLink}
-          addTable={addTable}
           textColorPresets={textColorPresets}
           bgColorPresets={bgColorPresets}
           handleParagraphChange={handleParagraphChange}
         />
 
-        {/* Excalidraw Dialog */}
-        <Dialog
-          open={isExcalidrawDialogOpen}
-          onOpenChange={setIsExcalidrawDialogOpen}
-        >
-          <DialogContent className="sm:max-w-[90vw] h-[90vh] p-0">
-            <VisuallyHidden>
-              <DialogTitle>Draw with Excalidraw</DialogTitle>
-            </VisuallyHidden>
-            <div className="flex flex-col h-full">
-              <div className="flex-1 relative">
-                <iframe
-                  ref={excalidrawIframeRef}
-                  src="https://excalidraw.com/"
-                  className="w-full h-full border-0"
-                  title="Excalidraw"
-                />
-                <div className="absolute bottom-0 left-0 right-0 p-2 flex justify-between items-center bg-white border-t">
-                  <div className="flex items-center gap-2">
-                    <Button variant="outline" size="sm" className="h-8 px-2">
-                      <span>100%</span>
-                    </Button>
-                  </div>
-
-                  <div className="flex gap-2">
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => setIsExcalidrawDialogOpen(false)}
-                    >
-                      Discard
-                    </Button>
-                    <Button
-                      variant="default"
-                      size="sm"
-                      className="bg-black text-white hover:bg-gray-800"
-                      onClick={captureExcalidrawImage}
-                    >
-                      Save
-                    </Button>
-                  </div>
-                </div>
-              </div>
-
-              {excalidrawImage && (
-                <div className="p-4 border-t">
-                  <div className="flex justify-between items-center mb-2">
-                    <Label>Preview</Label>
-                    <div className="flex items-center gap-2">
-                      <Label htmlFor="drawing-width" className="text-xs">
-                        Width: {excalidrawWidth}%
-                      </Label>
-                      <Slider
-                        id="drawing-width"
-                        min={10}
-                        max={100}
-                        step={5}
-                        value={[excalidrawWidth]}
-                        onValueChange={(value) => setExcalidrawWidth(value[0])}
-                        className="w-32"
-                      />
-                    </div>
-                  </div>
-                  <div className="border rounded p-2 bg-background flex justify-center">
-                    <img
-                      src={excalidrawImage || "/placeholder.svg"}
-                      alt="Excalidraw drawing preview"
-                      style={{ width: `${excalidrawWidth}%` }}
-                      className="max-h-40 object-contain"
-                    />
-                  </div>
-                  <div className="flex justify-end mt-4">
-                    <Button onClick={saveExcalidrawImage}>
-                      Insert Drawing
-                    </Button>
-                  </div>
-                </div>
-              )}
-            </div>
-          </DialogContent>
-        </Dialog>
-
-        <EditorBubbleMenu 
-          editor={editor} 
+        <EditorBubbleMenu
+          editor={editor}
           setLink={(url) => {
             setLinkUrl(url);
             setLink();
@@ -728,4 +611,4 @@ export function RichTextEditor({
       </div>
     </TooltipProvider>
   );
-} 
+}

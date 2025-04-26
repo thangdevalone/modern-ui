@@ -1,147 +1,109 @@
-import { BubbleMenu } from "@tiptap/react";
 import { Button } from "@/components/modern-ui/button";
 import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/modern-ui/dialog";
-import { Input } from "@/components/modern-ui/input";
-import { Label } from "@/components/modern-ui/label";
+  BubbleMenu,
+  isNodeSelection,
+} from "@tiptap/react";
 import {
   Bold,
   Italic,
+  Link,
   Strikethrough,
-  UnderlineIcon,
-  Type,
-  LinkIcon,
+  Underline,
 } from "lucide-react";
-import { cn } from "@/lib/utils";
 import { useState } from "react";
-
+import { Editor } from "@tiptap/core";
+import { LinkInput } from "./link-input";
 interface EditorBubbleMenuProps {
-  editor: any;
+  editor: Editor;
   setLink: (url: string) => void;
 }
 
 export const EditorBubbleMenu = ({ editor, setLink }: EditorBubbleMenuProps) => {
-  const [linkUrl, setLinkUrl] = useState("");
-  
-  const handleSetLink = () => {
-    setLink(linkUrl);
-    setLinkUrl("");
-  };
+  const [showLinkInput, setShowLinkInput] = useState(false);
 
   return (
-    <BubbleMenu
-      editor={editor}
-      tippyOptions={{ duration: 100 }}
-      shouldShow={({ editor }) => {
-        const { selection } = editor.state;
-        return !selection.empty && !editor.isActive("image");
-      }}
-      className="bg-white rounded shadow-lg border border-gray-200 p-1 flex gap-1"
-    >
-      <Button
-        variant="ghost"
-        size="sm"
-        onClick={() => editor.chain().focus().toggleBold().run()}
-        className={cn(
-          "h-7 w-7 p-0 rounded",
-          editor.isActive("bold") ? "bg-gray-200" : "hover:bg-gray-100"
-        )}
+    <>
+      <BubbleMenu
+        editor={editor}
+        tippyOptions={{ duration: 100 }}
+        shouldShow={({ editor, from, to }) => {
+          // Only show for text selections, not for tables or other node selections
+          return from !== to && 
+                 !isNodeSelection(editor.state.selection) &&
+                 !editor.isActive("codeBlock");
+        }}
+        updateDelay={0}
       >
-        <Bold className="h-3.5 w-3.5" />
-      </Button>
-      <Button
-        variant="ghost"
-        size="sm"
-        onClick={() => editor.chain().focus().toggleItalic().run()}
-        className={cn(
-          "h-7 w-7 p-0 rounded",
-          editor.isActive("italic") ? "bg-gray-200" : "hover:bg-gray-100"
-        )}
-      >
-        <Italic className="h-3.5 w-3.5" />
-      </Button>
-      <Button
-        variant="ghost"
-        size="sm"
-        onClick={() => editor.chain().focus().toggleUnderline().run()}
-        className={cn(
-          "h-7 w-7 p-0 rounded",
-          editor.isActive("underline") ? "bg-gray-200" : "hover:bg-gray-100"
-        )}
-      >
-        <UnderlineIcon className="h-3.5 w-3.5" />
-      </Button>
-      <Button
-        variant="ghost"
-        size="sm"
-        onClick={() => editor.chain().focus().toggleStrike().run()}
-        className={cn(
-          "h-7 w-7 p-0 rounded",
-          editor.isActive("strike") ? "bg-gray-200" : "hover:bg-gray-100"
-        )}
-      >
-        <Strikethrough className="h-3.5 w-3.5" />
-      </Button>
-      <Button
-        variant="ghost"
-        size="sm"
-        onClick={() => editor.chain().focus().toggleHighlight().run()}
-        className={cn(
-          "h-7 w-7 p-0 rounded",
-          editor.isActive("highlight") ? "bg-gray-200" : "hover:bg-gray-100"
-        )}
-      >
-        <Type className="h-3.5 w-3.5" />
-      </Button>
-      <Dialog>
-        <DialogTrigger asChild>
+        <div className="flex rounded-md overflow-hidden border shadow-sm divide-x bg-white">
           <Button
-            variant="ghost"
             size="sm"
-            className={cn(
-              "h-7 w-7 p-0 rounded",
-              editor.isActive("link") ? "bg-gray-200" : "hover:bg-gray-100"
-            )}
+            variant="ghost"
+            className="h-8 px-2.5"
+            onClick={() => editor.chain().focus().toggleBold().run()}
+            data-active={editor.isActive("bold")}
           >
-            <LinkIcon className="h-3.5 w-3.5" />
+            <Bold className="h-4 w-4" />
           </Button>
-        </DialogTrigger>
-        <DialogContent className="sm:max-w-md">
-          <DialogHeader>
-            <DialogTitle>Insert Link</DialogTitle>
-          </DialogHeader>
-          <div className="grid gap-4 py-4">
-            <div className="grid gap-2">
-              <Label htmlFor="bubbleUrl">URL</Label>
-              <Input
-                id="bubbleUrl"
-                placeholder="https://example.com"
-                value={linkUrl}
-                onChange={(e) => setLinkUrl(e.target.value)}
+
+          <Button
+            size="sm"
+            variant="ghost"
+            className="h-8 px-2.5"
+            onClick={() => editor.chain().focus().toggleItalic().run()}
+            data-active={editor.isActive("italic")}
+          >
+            <Italic className="h-4 w-4" />
+          </Button>
+
+          <Button
+            size="sm"
+            variant="ghost"
+            className="h-8 px-2.5"
+            onClick={() => editor.chain().focus().toggleUnderline().run()}
+            data-active={editor.isActive("underline")}
+          >
+            <Underline className="h-4 w-4" />
+          </Button>
+
+          <Button
+            size="sm"
+            variant="ghost"
+            className="h-8 px-2.5"
+            onClick={() => editor.chain().focus().toggleStrike().run()}
+            data-active={editor.isActive("strike")}
+          >
+            <Strikethrough className="h-4 w-4" />
+          </Button>
+
+          <Button
+            size="sm"
+            variant="ghost"
+            className="h-8 px-2.5"
+            onClick={() => {
+              if (editor.isActive("link")) {
+                editor.chain().focus().unsetLink().run();
+              } else {
+                setShowLinkInput(!showLinkInput);
+              }
+            }}
+            data-active={editor.isActive("link") || showLinkInput}
+          >
+            <Link className="h-4 w-4" />
+          </Button>
+
+          {showLinkInput && (
+            <div className="flex items-center">
+              <LinkInput
+                onSubmit={(url: string) => {
+                  setLink(url);
+                  setShowLinkInput(false);
+                }}
+                onClose={() => setShowLinkInput(false)}
               />
             </div>
-          </div>
-          <DialogFooter>
-            <DialogClose asChild>
-              <Button type="button" variant="secondary">
-                Cancel
-              </Button>
-            </DialogClose>
-            <DialogClose asChild>
-              <Button type="button" onClick={handleSetLink}>
-                Save
-              </Button>
-            </DialogClose>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
-    </BubbleMenu>
+          )}
+        </div>
+      </BubbleMenu>
+    </>
   );
 }; 

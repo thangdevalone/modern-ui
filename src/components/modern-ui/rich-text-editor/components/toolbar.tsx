@@ -1,4 +1,4 @@
-import { Button } from "@/components/modern-ui/button";
+import { Button, buttonVariants } from "@/components/modern-ui/button";
 import {
   Dialog,
   DialogClose,
@@ -16,18 +16,19 @@ import {
 } from "@/components/modern-ui/dropdown-menu";
 import { Input } from "@/components/modern-ui/input";
 import { Label } from "@/components/modern-ui/label";
-import { Toggle } from "@/components/modern-ui/toggle";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from "@/components/modern-ui/tooltip";
+import { cn } from "@/lib/utils";
 import {
   AlignCenter,
   AlignJustify,
   AlignLeft,
   AlignRight,
   Bold,
+  CheckSquare,
   ChevronDown,
   Code,
   Heading1Icon,
@@ -36,27 +37,18 @@ import {
   ImageIcon,
   ImageUp,
   Italic,
-  LinkIcon,
   List,
   ListOrdered,
   Minus,
-  PenTool,
   Plus,
   Quote,
   Redo,
+  Strikethrough,
   SubscriptIcon,
   SuperscriptIcon,
-  TableIcon,
-  Type,
   UnderlineIcon,
   Undo,
-  Unlink,
-  CheckSquare,
-  Square,
-  Strikethrough,
 } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { buttonVariants } from "@/components/modern-ui/button";
 import { ColorPickerInput } from "./color-picker";
 
 interface EditorToolbarProps {
@@ -77,11 +69,9 @@ interface EditorToolbarProps {
   setTextColor: (color: string) => void;
   bgColor: string;
   setBgColor: (color: string) => void;
-  setIsExcalidrawDialogOpen: (isOpen: boolean) => void;
   handleImageUpload: (e: React.ChangeEvent<HTMLInputElement>) => void;
   addImageByUrl: () => void;
   setLink: () => void;
-  addTable: () => void;
   textColorPresets: string[];
   bgColorPresets: string[];
   handleParagraphChange: (type: string) => void;
@@ -93,10 +83,7 @@ export const EditorToolbar = ({
   setImageUrl,
   imageAlt,
   setImageAlt,
-  linkUrl,
-  setLinkUrl,
   paragraphType,
-  setParagraphType,
   fontSize,
   setFontSize,
   fontFamily,
@@ -105,11 +92,8 @@ export const EditorToolbar = ({
   setTextColor,
   bgColor,
   setBgColor,
-  setIsExcalidrawDialogOpen,
   handleImageUpload,
   addImageByUrl,
-  setLink,
-  addTable,
   textColorPresets,
   bgColorPresets,
   handleParagraphChange,
@@ -183,6 +167,16 @@ export const EditorToolbar = ({
                 {paragraphType === "orderedList" && (
                   <div className="flex items-center gap-2">
                     <ListOrdered className="h-3.5 w-3.5" /> Numbered List
+                  </div>
+                )}
+                {paragraphType === "codeBlock" && (
+                  <div className="flex items-center gap-2">
+                    <Code className="h-3.5 w-3.5" /> Code Block
+                  </div>
+                )}
+                {paragraphType === "quote" && (
+                  <div className="flex items-center gap-2">
+                    <Quote className="h-3.5 w-3.5" /> Quote
                   </div>
                 )}
                 {paragraphType === "checkList" && (
@@ -275,9 +269,7 @@ export const EditorToolbar = ({
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent>
-                <DropdownMenuItem
-                  onClick={() => setFontFamily("Arial")}
-                >
+                <DropdownMenuItem onClick={() => setFontFamily("Arial")}>
                   Arial
                 </DropdownMenuItem>
                 <DropdownMenuItem
@@ -285,19 +277,13 @@ export const EditorToolbar = ({
                 >
                   Times New Roman
                 </DropdownMenuItem>
-                <DropdownMenuItem
-                  onClick={() => setFontFamily("Courier New")}
-                >
+                <DropdownMenuItem onClick={() => setFontFamily("Courier New")}>
                   Courier New
                 </DropdownMenuItem>
-                <DropdownMenuItem
-                  onClick={() => setFontFamily("Georgia")}
-                >
+                <DropdownMenuItem onClick={() => setFontFamily("Georgia")}>
                   Georgia
                 </DropdownMenuItem>
-                <DropdownMenuItem
-                  onClick={() => setFontFamily("Verdana")}
-                >
+                <DropdownMenuItem onClick={() => setFontFamily("Verdana")}>
                   Verdana
                 </DropdownMenuItem>
               </DropdownMenuContent>
@@ -315,7 +301,22 @@ export const EditorToolbar = ({
           >
             <Minus className="h-3 w-3" />
           </Button>
-          <span className="px-1.5 text-xs">{fontSize}</span>
+          <Input
+            value={fontSize}
+            onChange={(e) => {
+              const size = parseInt(e.target.value, 10);
+              if (!isNaN(size)) {
+                setFontSize(size);
+              }
+            }}
+            onBlur={(e) => {
+              const size = parseInt(e.target.value, 10);
+              if (isNaN(size)) {
+                e.target.value = fontSize.toString();
+              }
+            }}
+            className="w-10 h-6 px-1 text-center text-xs border rounded mx-1"
+          />
           <Button
             variant="ghost"
             size="icon"
@@ -341,78 +342,114 @@ export const EditorToolbar = ({
                 <ChevronDown className="h-3.5 w-3.5 opacity-50" />
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="flex flex-wrap gap-1 p-2">
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => editor.chain().focus().toggleBold().run()}
-                className={cn(
-                  "h-7 w-7 rounded text-gray-700 hover:bg-gray-100",
-                  editor.isActive("bold") && "bg-gray-200"
-                )}
-              >
-                <Bold className="h-3.5 w-3.5" />
-              </Button>
+            <DropdownMenuContent className="p-2">
+              <div className="flex flex-wrap gap-1 mb-2">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => editor.chain().focus().toggleBold().run()}
+                  className={cn(
+                    "h-7 w-7 rounded text-gray-700 hover:bg-gray-100",
+                    editor.isActive("bold") && "bg-gray-200"
+                  )}
+                >
+                  <Bold className="h-3.5 w-3.5" />
+                </Button>
 
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => editor.chain().focus().toggleItalic().run()}
-                className={cn(
-                  "h-7 w-7 rounded text-gray-700 hover:bg-gray-100",
-                  editor.isActive("italic") && "bg-gray-200"
-                )}
-              >
-                <Italic className="h-3.5 w-3.5" />
-              </Button>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => editor.chain().focus().toggleItalic().run()}
+                  className={cn(
+                    "h-7 w-7 rounded text-gray-700 hover:bg-gray-100",
+                    editor.isActive("italic") && "bg-gray-200"
+                  )}
+                >
+                  <Italic className="h-3.5 w-3.5" />
+                </Button>
 
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => editor.chain().focus().toggleUnderline().run()}
-                className={cn(
-                  "h-7 w-7 rounded text-gray-700 hover:bg-gray-100",
-                  editor.isActive("underline") && "bg-gray-200"
-                )}
-              >
-                <UnderlineIcon className="h-3.5 w-3.5" />
-              </Button>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => editor.chain().focus().toggleUnderline().run()}
+                  className={cn(
+                    "h-7 w-7 rounded text-gray-700 hover:bg-gray-100",
+                    editor.isActive("underline") && "bg-gray-200"
+                  )}
+                >
+                  <UnderlineIcon className="h-3.5 w-3.5" />
+                </Button>
 
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => editor.chain().focus().toggleStrike().run()}
-                className={cn(
-                  "h-7 w-7 rounded text-gray-700 hover:bg-gray-100",
-                  editor.isActive("strike") && "bg-gray-200"
-                )}
-              >
-                <Strikethrough className="h-3.5 w-3.5" />
-              </Button>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => editor.chain().focus().toggleStrike().run()}
+                  className={cn(
+                    "h-7 w-7 rounded text-gray-700 hover:bg-gray-100",
+                    editor.isActive("strike") && "bg-gray-200"
+                  )}
+                >
+                  <Strikethrough className="h-3.5 w-3.5" />
+                </Button>
 
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => editor.chain().focus().toggleSuperscript().run()}
-                className={cn(
-                  "h-7 w-7 rounded text-gray-700 hover:bg-gray-100",
-                  editor.isActive("superscript") && "bg-gray-200"
-                )}
-              >
-                <SuperscriptIcon className="h-3.5 w-3.5" />
-              </Button>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() =>
+                    editor.chain().focus().toggleSuperscript().run()
+                  }
+                  className={cn(
+                    "h-7 w-7 rounded text-gray-700 hover:bg-gray-100",
+                    editor.isActive("superscript") && "bg-gray-200"
+                  )}
+                >
+                  <SuperscriptIcon className="h-3.5 w-3.5" />
+                </Button>
 
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => editor.chain().focus().toggleSubscript().run()}
-                className={cn(
-                  "h-7 w-7 rounded text-gray-700 hover:bg-gray-100",
-                  editor.isActive("subscript") && "bg-gray-200"
-                )}
-              >
-                <SubscriptIcon className="h-3.5 w-3.5" />
-              </Button>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => editor.chain().focus().toggleSubscript().run()}
+                  className={cn(
+                    "h-7 w-7 rounded text-gray-700 hover:bg-gray-100",
+                    editor.isActive("subscript") && "bg-gray-200"
+                  )}
+                >
+                  <SubscriptIcon className="h-3.5 w-3.5" />
+                </Button>
+              </div>
+
+              <div className="border-t pt-2 mt-1">
+                <div className="flex gap-1">
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={() =>
+                      editor.chain().focus().toggleBulletList().run()
+                    }
+                    className={cn(
+                      "h-7 w-7 rounded text-gray-700 hover:bg-gray-100",
+                      editor.isActive("bulletList") && "bg-gray-200"
+                    )}
+                  >
+                    <List className="h-3.5 w-3.5" />
+                  </Button>
+
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={() =>
+                      editor.chain().focus().toggleOrderedList().run()
+                    }
+                    className={cn(
+                      "h-7 w-7 rounded text-gray-700 hover:bg-gray-100",
+                      editor.isActive("orderedList") && "bg-gray-200"
+                    )}
+                  >
+                    <ListOrdered className="h-3.5 w-3.5" />
+                  </Button>
+                </div>
+              </div>
             </DropdownMenuContent>
           </DropdownMenu>
         </TooltipTrigger>
@@ -510,7 +547,9 @@ export const EditorToolbar = ({
               <Button
                 variant="ghost"
                 size="icon"
-                onClick={() => editor.chain().focus().setTextAlign("left").run()}
+                onClick={() =>
+                  editor.chain().focus().setTextAlign("left").run()
+                }
                 className={cn(
                   "h-7 w-7 rounded text-gray-700 hover:bg-gray-100",
                   editor.isActive({ textAlign: "left" }) && "bg-gray-200"
@@ -536,7 +575,9 @@ export const EditorToolbar = ({
               <Button
                 variant="ghost"
                 size="icon"
-                onClick={() => editor.chain().focus().setTextAlign("right").run()}
+                onClick={() =>
+                  editor.chain().focus().setTextAlign("right").run()
+                }
                 className={cn(
                   "h-7 w-7 rounded text-gray-700 hover:bg-gray-100",
                   editor.isActive({ textAlign: "right" }) && "bg-gray-200"
@@ -564,100 +605,7 @@ export const EditorToolbar = ({
         <TooltipContent>Text alignment</TooltipContent>
       </Tooltip>
 
-      {/* Group 7: Lists */}
-      <div className="flex items-center gap-0.5 bg-background rounded-md h-8 overflow-hidden border">
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Toggle
-              onClick={() => editor.chain().focus().toggleBulletList().run()}
-              className={cn("h-8 w-8", editor.isActive("bulletList") && "bg-muted")}
-            >
-              <List className="h-3.5 w-3.5" />
-            </Toggle>
-          </TooltipTrigger>
-          <TooltipContent>Bullet list</TooltipContent>
-        </Tooltip>
-
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Toggle
-              onClick={() => editor.chain().focus().toggleOrderedList().run()}
-              className={cn(
-                "h-8 w-8",
-                editor.isActive("orderedList") && "bg-muted"
-              )}
-            >
-              <ListOrdered className="h-3.5 w-3.5" />
-            </Toggle>
-          </TooltipTrigger>
-          <TooltipContent>Numbered list</TooltipContent>
-        </Tooltip>
-      </div>
-
-      {/* Group 8: Links */}
-      <div className="flex items-center gap-0.5 bg-background rounded-md h-8 overflow-hidden border">
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Dialog>
-              <DialogTrigger asChild>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className={cn("h-8 w-8", editor.isActive("link") && "bg-muted")}
-                >
-                  <LinkIcon className="h-3.5 w-3.5" />
-                </Button>
-              </DialogTrigger>
-              <DialogContent className="sm:max-w-md">
-                <DialogHeader>
-                  <DialogTitle>Insert Link</DialogTitle>
-                </DialogHeader>
-                <div className="grid gap-4 py-4">
-                  <div className="grid gap-2">
-                    <Label htmlFor="url">URL</Label>
-                    <Input
-                      id="url"
-                      placeholder="https://example.com"
-                      value={linkUrl}
-                      onChange={(e) => setLinkUrl(e.target.value)}
-                    />
-                  </div>
-                </div>
-                <DialogFooter>
-                  <DialogClose asChild>
-                    <Button type="button" variant="secondary">
-                      Cancel
-                    </Button>
-                  </DialogClose>
-                  <DialogClose asChild>
-                    <Button type="button" onClick={setLink}>
-                      Save
-                    </Button>
-                  </DialogClose>
-                </DialogFooter>
-              </DialogContent>
-            </Dialog>
-          </TooltipTrigger>
-          <TooltipContent>Insert link</TooltipContent>
-        </Tooltip>
-
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => editor.chain().focus().unsetLink().run()}
-              disabled={!editor.isActive("link")}
-              className="h-8 w-8"
-            >
-              <Unlink className="h-3.5 w-3.5" />
-            </Button>
-          </TooltipTrigger>
-          <TooltipContent>Remove link</TooltipContent>
-        </Tooltip>
-      </div>
-
-      {/* Group 9: Insert */}
+      {/* Group 7: Insert */}
       <div className="flex items-center gap-0.5 bg-background rounded-md h-8 overflow-hidden border">
         <Tooltip>
           <TooltipTrigger asChild>
@@ -745,35 +693,7 @@ export const EditorToolbar = ({
           </TooltipTrigger>
           <TooltipContent>Upload image</TooltipContent>
         </Tooltip>
-
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={addTable}
-              className="h-8 w-8"
-            >
-              <TableIcon className="h-3.5 w-3.5" />
-            </Button>
-          </TooltipTrigger>
-          <TooltipContent>Insert table</TooltipContent>
-        </Tooltip>
-
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Button
-              variant="ghost"
-              size="icon" 
-              onClick={() => setIsExcalidrawDialogOpen(true)}
-              className="h-8 w-8"
-            >
-              <PenTool className="h-3.5 w-3.5" />
-            </Button>
-          </TooltipTrigger>
-          <TooltipContent>Draw with Excalidraw</TooltipContent>
-        </Tooltip>
       </div>
     </div>
   );
-}; 
+};
