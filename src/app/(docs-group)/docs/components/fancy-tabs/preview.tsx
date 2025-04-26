@@ -57,7 +57,7 @@ export const PreviewTabs = () => {
           className="p-6 border rounded-md mt-2 relative min-h-[300px]"
         >
           <div className="absolute inset-0 bg-[radial-gradient(#80808080_1px,transparent_1px)] [background-size:16px_16px] opacity-50 "></div>
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 bg-background border p-8 rounded-md">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 p-4 rounded-md">
             <Tabs key={key} defaultValue="account">
               <TabsList>
                 <TabsTrigger value="account">Account</TabsTrigger>
@@ -66,19 +66,19 @@ export const PreviewTabs = () => {
               </TabsList>
               <TabsContent
                 value="account"
-                className="p-4 mt-4 border rounded-md"
+                className="p-4 border rounded-md"
               >
                 Account tab content
               </TabsContent>
               <TabsContent
                 value="password"
-                className="p-4 mt-4 border rounded-md"
+                className="p-4 border rounded-md"
               >
                 Password tab content
               </TabsContent>
               <TabsContent
                 value="settings"
-                className="p-4 mt-4 border rounded-md"
+                className="p-4 border rounded-md"
               >
                 Settings tab content
               </TabsContent>
