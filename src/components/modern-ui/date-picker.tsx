@@ -125,22 +125,8 @@ export function DateRangePicker({
         <div className="flex flex-col">
           <Calendar
             mode="range"
-            {...(selectedDateRange
-              ? { defaultSelected: selectedDateRange }
-              : {})}
-            onDayClick={(date) => {
-              if (!selectedDateRange?.from) {
-                handleDateRangeChange({ from: date, to: undefined });
-              } else if (selectedDateRange.from && !selectedDateRange.to) {
-                const to =
-                  date > selectedDateRange.from ? date : selectedDateRange.from;
-                const from =
-                  date > selectedDateRange.from ? selectedDateRange.from : date;
-                handleDateRangeChange({ from, to });
-              } else {
-                handleDateRangeChange({ from: date, to: undefined });
-              }
-            }}
+            selected={selectedDateRange}
+            onSelect={handleDateRangeChange}
             numberOfMonths={numberOfMonths}
             initialView="days"
             autoFocus
