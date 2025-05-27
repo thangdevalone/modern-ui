@@ -1,6 +1,6 @@
 "use client";
 
-import { format } from "date-fns";
+import { format, set } from "date-fns";
 import * as React from "react";
 import { DateRange } from "react-day-picker";
 
@@ -13,6 +13,8 @@ import {
 } from "@/components/modern-ui/popover";
 import { cn } from "@/lib/utils";
 import { CalendarIcon, ChevronLeft, ChevronRight } from "lucide-react";
+import { date } from "zod";
+import { da } from "date-fns/locale";
 
 export interface DatePickerProps {
   date?: Date;
@@ -89,8 +91,42 @@ export function DateRangePicker({
 
   const handleDateRangeChange = React.useCallback(
     (range: DateRange | undefined) => {
-      const handler = setDateRange || _setDateRange;
-      handler(range);
+      const isSameDay = (date1?: Date, date2?: Date) => {
+        if (!date1 || !date2) return false;
+        return (
+          date1.getFullYear() === date2.getFullYear() &&
+          date1.getMonth() === date2.getMonth() &&
+          date1.getDate() === date2.getDate()
+        );
+      };
+
+      if (setDateRange) {
+        if (dateRange && !dateRange.from && !dateRange.to && range && range.from && range.to && isSameDay(range.from, range.to)) {
+          setDateRange({ from: range.from, to: undefined });
+        } else if (!range && dateRange && !dateRange.to && dateRange.from) {
+          setDateRange({ from: dateRange.from, to: dateRange.from });
+        } else if (!range && dateRange && dateRange.to && dateRange.from && isSameDay(dateRange.from, dateRange.to)) {
+          setDateRange({ from: undefined, to: undefined });
+        } else if(dateRange && !isSameDay(dateRange.from, dateRange.to) && range && isSameDay(range.from, range.to) && (isSameDay(range.from, dateRange.from) || isSameDay(range.from, dateRange.to))) {
+          setDateRange({ from: range.from, to: undefined });
+        } else if (range && range.from && range.to && range.from !== range.to) {
+          setDateRange(range);
+        }
+      }
+
+      if (_setDateRange) {
+        if (dateRange && !dateRange.from && !dateRange.to && range && range.from && range.to && isSameDay(range.from, range.to)) {
+          _setDateRange({ from: range.from, to: undefined });
+        } else if (!range && dateRange && !dateRange.to && dateRange.from) {
+          _setDateRange({ from: dateRange.from, to: dateRange.from });
+        } else if (!range && dateRange && dateRange.to && dateRange.from && isSameDay(dateRange.from, dateRange.to)) {
+          _setDateRange({ from: undefined, to: undefined });
+        } else if(dateRange && !isSameDay(dateRange.from, dateRange.to) && range && isSameDay(range.from, range.to) && (isSameDay(range.from, dateRange.from) || isSameDay(range.from, dateRange.to))) {
+          _setDateRange({ from: range.from, to: undefined });
+        } else if (range && range.from && range.to && range.from !== range.to) {
+          _setDateRange(range);
+        }
+      }
     },
     [setDateRange, _setDateRange]
   );
@@ -125,22 +161,8 @@ export function DateRangePicker({
         <div className="flex flex-col">
           <Calendar
             mode="range"
-            {...(selectedDateRange
-              ? { defaultSelected: selectedDateRange }
-              : {})}
-            onDayClick={(date) => {
-              if (!selectedDateRange?.from) {
-                handleDateRangeChange({ from: date, to: undefined });
-              } else if (selectedDateRange.from && !selectedDateRange.to) {
-                const to =
-                  date > selectedDateRange.from ? date : selectedDateRange.from;
-                const from =
-                  date > selectedDateRange.from ? selectedDateRange.from : date;
-                handleDateRangeChange({ from, to });
-              } else {
-                handleDateRangeChange({ from: date, to: undefined });
-              }
-            }}
+            selected={selectedDateRange}
+            onSelect={handleDateRangeChange}
             numberOfMonths={numberOfMonths}
             initialView="days"
             autoFocus
